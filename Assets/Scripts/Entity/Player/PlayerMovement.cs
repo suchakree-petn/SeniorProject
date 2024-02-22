@@ -159,7 +159,6 @@ public class PlayerMovementConfig
     [HideInInspector] public float _defaultWalkSpeed;
     public float MoveSpeed = 6f;
     public float jumpPower = 7f;
-    [Range(1, 20)] public float lookSpeed = 2f;
     [Range(0, 4)] public float groundDistance = 0.4f;
     [Range(0, 10)] public float groundDrag = 0f;
     [Range(1, 3)] public float gravityMultiplier = 1f;

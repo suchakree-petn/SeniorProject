@@ -138,13 +138,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7cabdb414269a64cac4da56f42018bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraMode: 1
-  FPS_X_Axis_Sensitive: 10
-  FPS_Y_Axis_Sensitive: 6
-  TPS_X_Axis_Sensitive: 15
-  TPS_Y_Axis_Sensitive: 12
+  mouseMovementConfig:
+    cameraMode: 0
+    FPS_X_Axis_Sensitive: 18
+    FPS_Y_Axis_Sensitive: 10
+    TPS_X_Axis_Sensitive: 15
+    TPS_Y_Axis_Sensitive: 12
+  FPS_MainCamCullingMask:
+    serializedVersion: 2
+    m_Bits: 63
+  TPS_MainCamCullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
   playerView: {fileID: 3419173878677083267}
-  mainCamera: {fileID: 0}
   vcam: {fileID: 4997035843530935921}
   FPSCameraTransform: {fileID: 5564576862536547779}
   TPSCameraTransform: {fileID: 8699625459939253185}
@@ -165,7 +171,6 @@ MonoBehaviour:
     _defaultWalkSpeed: 7
     MoveSpeed: 7
     jumpPower: 20
-    lookSpeed: 2
     groundDistance: 0.4
     groundDrag: 5
     gravityMultiplier: 3
@@ -614,7 +619,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8699625459939253185
 Transform:
   m_ObjectHideFlags: 0
@@ -704,7 +709,7 @@ MonoBehaviour:
   m_IgnoreTag: 
   m_TransparentLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   m_MinimumDistanceFromTarget: 0.1
   m_AvoidObstacles: 1
   m_DistanceLimit: 0
