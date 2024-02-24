@@ -40,7 +40,7 @@ public class MouseMovement : MonoBehaviour
         this.playerCameraMode = playerCameraMode;
 
     }
-    public void Init(PlayerCameraMode playerCameraMode)
+    public void SetCameraMode(PlayerCameraMode playerCameraMode)
     {
         this.playerCameraMode = playerCameraMode;
 
@@ -58,29 +58,18 @@ public class MouseMovement : MonoBehaviour
         Cursor.visible = false;
     }
 
-    [Command]
-    public void SetCameraMode(PlayerCameraMode newMode, bool isShowCrossHair = true)
-    {
-        switch (newMode)
-        {
-            case PlayerCameraMode.ThirdPerson:
-                SetThirdperson(isShowCrossHair);
-                break;
-            case PlayerCameraMode.Focus:
-                SetFocus(isShowCrossHair);
-                break;
-        }
-    }
 
-    private void SetFocus(bool isShowCrossHair = true)
+
+    public void SetFocus(bool isShowCrossHair = true)
     {
-        // FocusCameraTransform.SetParent(null);
+        playerCameraMode = PlayerCameraMode.Focus;
         FocusCameraTransform.gameObject.SetActive(true);
         ThirdPersonCameraTransform.gameObject.SetActive(false);
         PlayerUIManager.Instance.SetPlayerCrossHairState(isShowCrossHair);
     }
-    private void SetThirdperson(bool isShowCrossHair = false)
+    public void SetThirdperson(bool isShowCrossHair = false)
     {
+        playerCameraMode = PlayerCameraMode.ThirdPerson;
         FocusCameraTransform.gameObject.SetActive(false);
         ThirdPersonCameraTransform.gameObject.SetActive(true);
         PlayerUIManager.Instance.SetPlayerCrossHairState(isShowCrossHair);

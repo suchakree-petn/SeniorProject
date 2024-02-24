@@ -95,7 +95,7 @@ public class PlayerMovement : MonoBehaviour
         jumpAction = playerActions.PlayerCharacter.Jump;
         runAction = playerActions.PlayerCharacter.Run;
     }
-    public void InitCamera(PlayerCameraMode playerCameraMode)
+    public void SetCameraMode(PlayerCameraMode playerCameraMode)
     {
         this.playerCameraMode = playerCameraMode;
 

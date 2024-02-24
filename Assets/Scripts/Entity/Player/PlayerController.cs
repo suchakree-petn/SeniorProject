@@ -1,3 +1,4 @@
+using QFSW.QC;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -14,7 +15,7 @@ public class PlayerController : NetworkBehaviour
 
         playerMovement.CanMove = true;
         playerMovement.InitPlayerActions();
-        playerMovement.InitCamera(playerCameraMode);
+        playerMovement.SetCameraMode(playerCameraMode);
         playerMovement.jumpAction.performed += playerMovement.PlayerJump;
         playerMovement.runAction.performed += playerMovement.PlayerRun;
         playerMovement.movementAction.canceled += playerMovement.PlayerStopRun;
@@ -24,7 +25,7 @@ public class PlayerController : NetworkBehaviour
         mouseMovement.playerActions.PlayerCharacter.Look.canceled += mouseMovement.SetLook;
         mouseMovement.InitCameras(playerCameraMode);
         mouseMovement.LockMouseCursor();
-        mouseMovement.SetCameraMode(playerCameraMode, true);
+        SetCameraMode(playerCameraMode, true);
     }
 
     public override void OnNetworkDespawn()
@@ -46,6 +47,20 @@ public class PlayerController : NetworkBehaviour
         mouseMovement.RotateCamera();
 
     }
+    [Command]
+    public void SetCameraMode(PlayerCameraMode newMode, bool isShowCrossHair = true)
+    {
+        switch (newMode)
+        {
+            case PlayerCameraMode.ThirdPerson:
+                mouseMovement.SetThirdperson(isShowCrossHair);
+                break;
+            case PlayerCameraMode.Focus:
+                mouseMovement.SetFocus(isShowCrossHair);
 
+                break;
+        }
+        playerMovement.SetCameraMode(newMode);
+    }
 
 }
