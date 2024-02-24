@@ -7,100 +7,124 @@ using UnityEngine.InputSystem;
 public class MouseMovement : MonoBehaviour
 {
     [SerializeField] private MouseMovementConfig mouseMovementConfig;
-    [SerializeField] private LayerMask FPS_MainCamCullingMask;
-    [SerializeField] private LayerMask TPS_MainCamCullingMask;
-    public bool CanCameraMove { get; private set; }
-    private Vector2 lookInput = new();
+    public bool CanCameraMove = true;
+    [SerializeField] private Vector2 lookInput = new();
     private Vector2 _playerLookInput = new();
     private Vector2 _prevPlayerLookInput = new();
     private float cameraPitch;
-
-    private PlayerActions _playerAction;
+    public PlayerActions playerActions;
+    private PlayerCameraMode playerCameraMode;
 
     [Header("Reference")]
     [SerializeField] private Transform playerView;
-    [SerializeField] private CinemachineVirtualCamera vcam;
-    [SerializeField] private Transform FPSCameraTransform;
-    [SerializeField] private Transform TPSCameraTransform;
     [SerializeField] private Rigidbody rb;
+    private Transform FocusCameraTransform;
+    private Transform ThirdPersonCameraTransform;
     private Camera mainCam;
 
 
-    private void Awake()
+
+    public void InitCameras(PlayerCameraMode playerCameraMode)
     {
-        _playerAction = new();
-        _playerAction.Enable();
-        CanCameraMove = true;
         mainCam = Camera.main;
+
+        CinemachineVirtualCamera FocusVCam = CameraManager.Instance.GetFocusCamera();
+        FocusVCam.Follow = playerView;
+        FocusCameraTransform = FocusVCam.transform;
+
+        CinemachineFreeLook thirdPersonVCam = CameraManager.Instance.GetThirdPersonCamera();
+        thirdPersonVCam.Follow = transform;
+        thirdPersonVCam.LookAt = transform;
+        ThirdPersonCameraTransform = thirdPersonVCam.transform;
+
+        this.playerCameraMode = playerCameraMode;
+
     }
-    private void Start()
+    public void Init(PlayerCameraMode playerCameraMode)
     {
-        LockMouseCursor();
-        SetCameraMode(PlayerCameraMode.FirstPerson);
+        this.playerCameraMode = playerCameraMode;
+
     }
 
-    private static void LockMouseCursor()
+
+    public void InitPlayerActions()
+    {
+        playerActions = new();
+        playerActions.PlayerCharacter.Enable();
+    }
+    public void LockMouseCursor()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
 
     [Command]
-    private void SetCameraMode(PlayerCameraMode newMode)
+    public void SetCameraMode(PlayerCameraMode newMode, bool isShowCrossHair = true)
     {
-        Transform overlayCamParent = mainCam.transform.GetChild(0);
-
         switch (newMode)
         {
-            case PlayerCameraMode.FirstPerson:
-                FPSCameraTransform.SetParent(null);
-                FPSCameraTransform.gameObject.SetActive(true);
-                TPSCameraTransform.gameObject.SetActive(false);
-
-                mainCam.cullingMask = FPS_MainCamCullingMask;
-                overlayCamParent.gameObject.SetActive(true);
-
-                break;
             case PlayerCameraMode.ThirdPerson:
-                FPSCameraTransform.gameObject.SetActive(false);
-                TPSCameraTransform.gameObject.SetActive(true);
-
-                mainCam.cullingMask = TPS_MainCamCullingMask;
-                overlayCamParent.gameObject.SetActive(false);
+                SetThirdperson(isShowCrossHair);
+                break;
+            case PlayerCameraMode.Focus:
+                SetFocus(isShowCrossHair);
                 break;
         }
     }
 
-    private void FixedUpdate()
+    private void SetFocus(bool isShowCrossHair = true)
     {
+        // FocusCameraTransform.SetParent(null);
+        FocusCameraTransform.gameObject.SetActive(true);
+        ThirdPersonCameraTransform.gameObject.SetActive(false);
+        PlayerUIManager.Instance.SetPlayerCrossHairState(isShowCrossHair);
+    }
+    private void SetThirdperson(bool isShowCrossHair = false)
+    {
+        FocusCameraTransform.gameObject.SetActive(false);
+        ThirdPersonCameraTransform.gameObject.SetActive(true);
+        PlayerUIManager.Instance.SetPlayerCrossHairState(isShowCrossHair);
+    }
 
+
+    public void RotateCamera()
+    {
         if (CanCameraMove)
         {
             _playerLookInput = GetLookInput();
 
-            switch (mouseMovementConfig.cameraMode)
+            switch (playerCameraMode)
             {
-                case PlayerCameraMode.FirstPerson:
-                    PlayerLook_FPS();
+                case PlayerCameraMode.Focus:
+                    PlayerLook_Focus();
                     CameraLook_FPS();
                     break;
                 case PlayerCameraMode.ThirdPerson:
-                    PlayerLook_TPS();
+                    PlayerLook_ThirdPerson();
                     CameraLook_TPS();
                     break;
-
             }
         }
-
     }
 
-    private void PlayerLook_FPS()
+    private void PlayerLook_Focus()
     {
         rb.rotation = Quaternion.Euler(0f, rb.rotation.eulerAngles.y + (_playerLookInput.x * mouseMovementConfig.FPS_X_Axis_Sensitive), 0f);
     }
-    private void PlayerLook_TPS()
+    private void PlayerLook_ThirdPerson()
     {
-        rb.rotation = Quaternion.Euler(0f, rb.rotation.eulerAngles.y + (_playerLookInput.x * mouseMovementConfig.TPS_X_Axis_Sensitive), 0f);
+        // CinemachineFreeLook thirdPersonCam = CameraManager.Instance.GetThirdPersonCamera();
+        // float inputXValue = thirdPersonCam.m_XAxis.m_InputAxisValue;
+        // float inputYValue = thirdPersonCam.m_YAxis.m_InputAxisValue;
+        // if (playerActions.PlayerCharacter.Movement.IsPressed())
+        // {
+        //     float rotationAngle = Mathf.Atan2(inputXValue, inputYValue) * Mathf.Rad2Deg ;
+        //     Debug.Log(rotationAngle);
+        //     Quaternion rotation = Quaternion.Euler(0f, rotationAngle, 0f);
+
+        //     transform.rotation = rotation;
+        // }
+
     }
     private void CameraLook_FPS()
     {
@@ -111,10 +135,10 @@ public class MouseMovement : MonoBehaviour
     }
     private void CameraLook_TPS()
     {
-        cameraPitch -= _playerLookInput.y * mouseMovementConfig.TPS_Y_Axis_Sensitive;
-        cameraPitch = Mathf.Clamp(cameraPitch, -90f, 90f);
+        // cameraPitch -= _playerLookInput.y * mouseMovementConfig.TPS_Y_Axis_Sensitive;
+        // cameraPitch = Mathf.Clamp(cameraPitch, -90f, 90f);
 
-        playerView.rotation = Quaternion.Euler(cameraPitch, playerView.rotation.eulerAngles.y, playerView.rotation.eulerAngles.z);
+        // playerView.rotation = Quaternion.Euler(cameraPitch, playerView.rotation.eulerAngles.y, playerView.rotation.eulerAngles.z);
     }
 
     private Vector2 GetLookInput()
@@ -123,32 +147,21 @@ public class MouseMovement : MonoBehaviour
         _playerLookInput = lookInput;
         return Vector2.Lerp(_prevPlayerLookInput, _playerLookInput * Time.deltaTime, 0.35f);
     }
-    private void SetLook(InputAction.CallbackContext context)
+    public void SetLook(InputAction.CallbackContext context)
     {
         lookInput = context.ReadValue<Vector2>();
-    }
-    private void OnEnable()
-    {
-        _playerAction.PlayerCharacter.Look.performed += SetLook;
-        _playerAction.PlayerCharacter.Look.canceled += SetLook;
-    }
-    private void OnDisable()
-    {
-        _playerAction.PlayerCharacter.Look.performed -= SetLook;
-        _playerAction.PlayerCharacter.Look.canceled -= SetLook;
     }
 
 }
 public enum PlayerCameraMode
 {
-    FirstPerson = 0,
-    ThirdPerson = 1
+    ThirdPerson = 0,
+    Focus = 1
 }
 
 [Serializable]
 public class MouseMovementConfig
 {
-    [ReadOnlyGUI] public PlayerCameraMode cameraMode = PlayerCameraMode.FirstPerson;
     [Range(1, 100)] public float FPS_X_Axis_Sensitive;
     [Range(1, 100)] public float FPS_Y_Axis_Sensitive;
     [Range(1, 100)] public float TPS_X_Axis_Sensitive;

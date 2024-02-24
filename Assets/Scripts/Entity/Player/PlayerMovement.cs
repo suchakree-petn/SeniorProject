@@ -8,27 +8,19 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private PlayerMovementConfig playerMovementConfig;
     [SerializeField, ReadOnlyGUI] private bool isGrounded;
     [SerializeField, ReadOnlyGUI] private bool isRunning;
-    [SerializeField, ReadOnlyGUI] private bool canMove = true;
+    [ReadOnlyGUI] public bool CanMove;
     [SerializeField, ReadOnlyGUI] private Vector3 moveDirection = Vector3.zero;
-
     private PlayerActions playerActions;
-    private InputAction movementAction;
-    private InputAction jumpAction;
-    private InputAction runAction;
+    public InputAction movementAction;
+    public InputAction jumpAction;
+    public InputAction runAction;
+    private PlayerCameraMode playerCameraMode;
 
     [Header("Reference")]
     [SerializeField] private Transform groundCheck;
     [SerializeField] private Rigidbody playerRb;
 
-    private void Awake()
-    {
-        playerActions = new();
-        playerActions.PlayerCharacter.Enable();
-        movementAction = playerActions.PlayerCharacter.Movement;
-        jumpAction = playerActions.PlayerCharacter.Jump;
-        runAction = playerActions.PlayerCharacter.Run;
 
-    }
 
     private void OnDrawGizmos()
     {
@@ -41,13 +33,34 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         MoveSpeedCalc();
+        CheckGround();
+        DragProcess();
+        MovementProcess();
+        LimitVelocity();
+    }
+    private void FixedUpdate()
+    {
+        ApplyGravity();
 
+    }
+    private void ApplyGravity()
+    {
+        if (!isGrounded)
+        {
+            playerRb.AddForce(-Physics.gravity.y * playerMovementConfig.gravityMultiplier * Vector3.down, ForceMode.Force);
+        }
+    }
+
+    private void CheckGround()
+    {
         isGrounded = Physics.CheckSphere(
             groundCheck.position,
             playerMovementConfig.groundDistance,
             playerMovementConfig.groundMask);
+    }
 
-        Vector2 movementInput = movementAction.ReadValue<Vector2>();
+    private void DragProcess()
+    {
         if (!isGrounded)
         {
             playerRb.drag = 0;
@@ -56,20 +69,67 @@ public class PlayerMovement : MonoBehaviour
         {
             playerRb.drag = playerMovementConfig.groundDrag;
         }
-
-        moveDirection = ((transform.forward * movementInput.y) + (transform.right * movementInput.x)).normalized;
-        LimitVelocity();
     }
-    private void FixedUpdate()
+
+    private void MovementProcess()
     {
-        // Move player
-        playerRb.AddForce(10 * playerMovementConfig.MoveSpeed * moveDirection, ForceMode.Force);
-
-        if (!isGrounded)
+        Vector2 movementInput = movementAction.ReadValue<Vector2>();
+        switch (playerCameraMode)
         {
-            playerRb.AddForce(-Physics.gravity.y * playerMovementConfig.gravityMultiplier * Vector3.down, ForceMode.Force);
-
+            case PlayerCameraMode.ThirdPerson:
+                Transform mainCamTransform = Camera.main.transform;
+                moveDirection = ((mainCamTransform.forward * movementInput.y) + (mainCamTransform.right * movementInput.x)).normalized;
+                moveDirection = Vector3.ProjectOnPlane(moveDirection, Vector3.up).normalized;
+                break;
+            case PlayerCameraMode.Focus:
+                moveDirection = ((transform.forward * movementInput.y) + (transform.right * movementInput.x)).normalized;
+                break;
         }
+    }
+
+    public void InitPlayerActions()
+    {
+        playerActions = new();
+        playerActions.PlayerCharacter.Enable();
+        movementAction = playerActions.PlayerCharacter.Movement;
+        jumpAction = playerActions.PlayerCharacter.Jump;
+        runAction = playerActions.PlayerCharacter.Run;
+    }
+    public void InitCamera(PlayerCameraMode playerCameraMode)
+    {
+        this.playerCameraMode = playerCameraMode;
+
+    }
+    public void MoveCharactorThirdPerson()
+    {
+        if (movementAction.IsPressed())
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(moveDirection, Vector3.up);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation,500 * Time.deltaTime);
+        }
+
+        playerRb.AddForce(10 * playerMovementConfig.MoveSpeed * moveDirection, ForceMode.Force);
+    }
+    public void MoveCharactorFocus()
+    {
+
+        playerRb.AddForce(10 * playerMovementConfig.MoveSpeed * moveDirection, ForceMode.Force);
+    }
+    public void MoveCharactor()
+    {
+        if (CanMove)
+        {
+            switch (playerCameraMode)
+            {
+                case PlayerCameraMode.ThirdPerson:
+                    MoveCharactorThirdPerson();
+                    break;
+                case PlayerCameraMode.Focus:
+                    MoveCharactorFocus();
+                    break;
+            }
+        }
+
     }
 
     private void LimitVelocity()
@@ -101,9 +161,9 @@ public class PlayerMovement : MonoBehaviour
         playerMovementConfig.MoveSpeed = playerMovementConfig._defaultWalkSpeed * ratio;
     }
 
-    private void PlayerJump(InputAction.CallbackContext context)
+    public void PlayerJump(InputAction.CallbackContext context)
     {
-        if (context.performed && isGrounded)
+        if (context.performed && isGrounded && CanMove)
         {
             playerRb.velocity = new(playerRb.velocity.x, 0, playerRb.velocity.z);
             playerRb.AddForce(transform.up * playerMovementConfig.jumpPower, ForceMode.Impulse);
@@ -111,38 +171,22 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void PlayerRun(InputAction.CallbackContext context)
+    public void PlayerRun(InputAction.CallbackContext context)
     {
-        Debug.Log("Run");
-
         if (!isRunning && Input.GetKey(KeyCode.W))
         {
             isRunning = true;
         }
     }
-    private void PlayerStopRun(InputAction.CallbackContext context)
+    public void PlayerStopRun(InputAction.CallbackContext context)
     {
-        Debug.Log("Stop run");
         if (isRunning && !Input.GetKey(KeyCode.W))
         {
             isRunning = false;
         }
     }
 
-    private void OnEnable()
-    {
-        jumpAction.performed += PlayerJump;
-        runAction.performed += PlayerRun;
-        movementAction.canceled += PlayerStopRun;
-    }
 
-    private void OnDisable()
-    {
-        jumpAction.performed -= PlayerJump;
-        runAction.performed -= PlayerRun;
-        movementAction.canceled -= PlayerStopRun;
-
-    }
 
 #if UNITY_EDITOR
     public void OnValidate()
