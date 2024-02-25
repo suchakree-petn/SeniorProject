@@ -3,7 +3,22 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - PlayerCanvas
+  - Ground
+  - eq
+  - wood
+  - stone
+  - fireball
+  - blood
+  - body
+  - glass
+  - metall_door
+  - wood_door
+  - dirt
+  - metall
+  - wood_door_glass
+  - petrol
   layers:
   - Default
   - TransparentFX

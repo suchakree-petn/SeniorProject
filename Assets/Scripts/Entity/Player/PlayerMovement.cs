@@ -6,48 +6,100 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private PlayerMovementConfig playerMovementConfig;
+    public PlayerMovementConfig PlayerMovementConfig => playerMovementConfig;
     [SerializeField, ReadOnlyGUI] private bool isGrounded;
+    [SerializeField, ReadOnlyGUI] private bool isOnSlope;
     [SerializeField, ReadOnlyGUI] private bool isRunning;
-    [SerializeField, ReadOnlyGUI] private bool canMove = true;
+    [ReadOnlyGUI] public bool CanMove;
     [SerializeField, ReadOnlyGUI] private Vector3 moveDirection = Vector3.zero;
+    public Rigidbody PlayerRigidbody => playerRb;
 
-    private PlayerActions playerActions;
-    private InputAction movementAction;
-    private InputAction jumpAction;
-    private InputAction runAction;
+    private PlayerCameraMode playerCameraMode;
+    private RaycastHit slopeHit;
 
     [Header("Reference")]
     [SerializeField] private Transform groundCheck;
     [SerializeField] private Rigidbody playerRb;
 
-    private void Awake()
-    {
-        playerActions = new();
-        playerActions.PlayerCharacter.Enable();
-        movementAction = playerActions.PlayerCharacter.Movement;
-        jumpAction = playerActions.PlayerCharacter.Jump;
-        runAction = playerActions.PlayerCharacter.Run;
 
-    }
 
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.green;
-
         // Draw a wireframe sphere at the object's position with the specified radius
         Gizmos.DrawWireSphere(groundCheck.position,
             playerMovementConfig.groundDistance);
+
+        // Draw a line that check isOnSlope
+        Debug.DrawLine(groundCheck.position, groundCheck.position + Vector3.down * playerMovementConfig.groundDistance, Color.blue);
     }
     void Update()
     {
         MoveSpeedCalc();
+        CheckGround();
+        CheckSlope();
+        DragProcess();
+        MovementProcess();
+        LimitVelocity();
+    }
+    private void FixedUpdate()
+    {
+        ApplyGravity();
+    }
+    private void ApplyGravity()
+    {
+        if (!isGrounded && !isOnSlope)
+        {
+            playerRb.AddForce(-Physics.gravity.y * playerMovementConfig.gravityMultiplier * Vector3.down, ForceMode.Force);
+        }
+    }
 
+    public Vector3 GetMovementForce()
+    {
+        Rigidbody rb = PlayerRigidbody;
+        Vector3 initialVelocity = rb.velocity;
+        float mass = rb.mass;
+        Vector3 force = moveDirection;
+        Vector3 acceleration = force / mass;
+        float timeInterval = Time.fixedDeltaTime;
+        Vector3 velocityChange = acceleration * timeInterval;
+        Vector3 finalVelocity = initialVelocity + velocityChange;
+        return finalVelocity;
+    }
+
+    public Vector3 GetMoveDirection()
+    {
+        return moveDirection;
+    }
+    private void CheckGround()
+    {
         isGrounded = Physics.CheckSphere(
             groundCheck.position,
             playerMovementConfig.groundDistance,
             playerMovementConfig.groundMask);
+    }
+    private void CheckSlope()
+    {
+        if (Physics.Raycast(
+            groundCheck.position,
+            Vector3.down,
+            out slopeHit,
+            playerMovementConfig.groundDistance,
+            playerMovementConfig.groundMask))
+        {
+            float angle = Vector3.Angle(Vector3.up, slopeHit.normal);
+            isOnSlope = angle < playerMovementConfig.maxSlope && angle != 0 && isGrounded;
+            return;
+        }
+        isOnSlope = false;
+    }
 
-        Vector2 movementInput = movementAction.ReadValue<Vector2>();
+    private Vector3 GetSlopeMoveDirection()
+    {
+        return Vector3.ProjectOnPlane(moveDirection, slopeHit.normal).normalized;
+    }
+    private void DragProcess()
+    {
         if (!isGrounded)
         {
             playerRb.drag = 0;
@@ -56,20 +108,67 @@ public class PlayerMovement : MonoBehaviour
         {
             playerRb.drag = playerMovementConfig.groundDrag;
         }
-
-        moveDirection = ((transform.forward * movementInput.y) + (transform.right * movementInput.x)).normalized;
-        LimitVelocity();
     }
-    private void FixedUpdate()
+
+    private void MovementProcess()
     {
-        // Move player
-        playerRb.AddForce(10 * playerMovementConfig.MoveSpeed * moveDirection, ForceMode.Force);
-
-        if (!isGrounded)
+        InputAction movementAction = PlayerInputManager.Instance.MovementAction;
+        Vector2 movementInput = movementAction.ReadValue<Vector2>();
+        switch (playerCameraMode)
         {
-            playerRb.AddForce(-Physics.gravity.y * playerMovementConfig.gravityMultiplier * Vector3.down, ForceMode.Force);
-
+            case PlayerCameraMode.ThirdPerson:
+                Transform mainCamTransform = Camera.main.transform;
+                moveDirection = ((mainCamTransform.forward * movementInput.y) + (mainCamTransform.right * movementInput.x)).normalized;
+                if (isOnSlope)
+                    moveDirection = GetSlopeMoveDirection();
+                else
+                    moveDirection = Vector3.ProjectOnPlane(moveDirection, Vector3.up).normalized;
+                break;
+            case PlayerCameraMode.Focus:
+                moveDirection = ((transform.forward * movementInput.y) + (transform.right * movementInput.x)).normalized;
+                if (isOnSlope)
+                    moveDirection = GetSlopeMoveDirection();
+                break;
         }
+    }
+
+    public void SetCameraMode(PlayerCameraMode playerCameraMode)
+    {
+        this.playerCameraMode = playerCameraMode;
+
+    }
+    public void MoveCharactorThirdPerson()
+    {
+        InputAction movementAction = PlayerInputManager.Instance.MovementAction;
+        if (movementAction.IsPressed()&& playerCameraMode == PlayerCameraMode.ThirdPerson)
+        {
+            Vector3 moveDirOnPlane = Vector3.ProjectOnPlane(moveDirection, Vector3.up);
+            Quaternion targetRotation = Quaternion.LookRotation(moveDirOnPlane, Vector3.up);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 500 * Time.deltaTime);
+        }
+
+        playerRb.AddForce(10 * playerMovementConfig.MoveSpeed * moveDirection, ForceMode.Force);
+    }
+    public void MoveCharactorFocus()
+    {
+
+        playerRb.AddForce(10 * playerMovementConfig.MoveSpeed * moveDirection, ForceMode.Force);
+    }
+    public void MoveCharactor()
+    {
+        if (CanMove)
+        {
+            switch (playerCameraMode)
+            {
+                case PlayerCameraMode.ThirdPerson:
+                    MoveCharactorThirdPerson();
+                    break;
+                case PlayerCameraMode.Focus:
+                    MoveCharactorFocus();
+                    break;
+            }
+        }
+
     }
 
     private void LimitVelocity()
@@ -98,12 +197,12 @@ public class PlayerMovement : MonoBehaviour
         }
 
         float ratio = 1 + (playerMovementConfig.MovementBonusPercentage - playerMovementConfig.MovementPenaltyPercentage) / 100f;
-        playerMovementConfig.MoveSpeed = playerMovementConfig._defaultWalkSpeed * ratio;
+        playerMovementConfig.MoveSpeed = playerMovementConfig._defaultMoveSpeed * ratio;
     }
 
-    private void PlayerJump(InputAction.CallbackContext context)
+    public void PlayerJump(InputAction.CallbackContext context)
     {
-        if (context.performed && isGrounded)
+        if (context.performed && isGrounded && CanMove)
         {
             playerRb.velocity = new(playerRb.velocity.x, 0, playerRb.velocity.z);
             playerRb.AddForce(transform.up * playerMovementConfig.jumpPower, ForceMode.Impulse);
@@ -111,43 +210,27 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void PlayerRun(InputAction.CallbackContext context)
+    public void PlayerRun(InputAction.CallbackContext context)
     {
-        Debug.Log("Run");
-
-        if (!isRunning && Input.GetKey(KeyCode.W))
+        if (!isRunning)
         {
             isRunning = true;
         }
     }
-    private void PlayerStopRun(InputAction.CallbackContext context)
+    public void PlayerStopRun(InputAction.CallbackContext context)
     {
-        Debug.Log("Stop run");
-        if (isRunning && !Input.GetKey(KeyCode.W))
+        if (isRunning)
         {
             isRunning = false;
         }
     }
 
-    private void OnEnable()
-    {
-        jumpAction.performed += PlayerJump;
-        runAction.performed += PlayerRun;
-        movementAction.canceled += PlayerStopRun;
-    }
 
-    private void OnDisable()
-    {
-        jumpAction.performed -= PlayerJump;
-        runAction.performed -= PlayerRun;
-        movementAction.canceled -= PlayerStopRun;
-
-    }
 
 #if UNITY_EDITOR
     public void OnValidate()
     {
-        playerMovementConfig._defaultWalkSpeed = playerMovementConfig.MoveSpeed;
+        playerMovementConfig._defaultMoveSpeed = playerMovementConfig.MoveSpeed;
 
     }
 #endif
@@ -156,13 +239,13 @@ public class PlayerMovement : MonoBehaviour
 [Serializable]
 public class PlayerMovementConfig
 {
-    [HideInInspector] public float _defaultWalkSpeed;
+    [HideInInspector] public float _defaultMoveSpeed;
     public float MoveSpeed = 6f;
     public float jumpPower = 7f;
-    [Range(1, 20)] public float lookSpeed = 2f;
     [Range(0, 4)] public float groundDistance = 0.4f;
     [Range(0, 10)] public float groundDrag = 0f;
-    [Range(1, 3)] public float gravityMultiplier = 1f;
+    [Range(1, 10)] public float gravityMultiplier = 1f;
+    [Range(0.01f, 90f)] public float maxSlope = 45f;
     public LayerMask groundMask;
 
     [Header("Speed Bonus & Penalty")]
@@ -174,7 +257,7 @@ public class PlayerMovementConfig
 
     public PlayerMovementConfig()
     {
-        _defaultWalkSpeed = MoveSpeed;
+        _defaultMoveSpeed = MoveSpeed;
     }
 
 }
