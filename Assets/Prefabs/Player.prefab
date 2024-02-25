@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6382834473896356910}
   - component: {fileID: -4688518117121886091}
   - component: {fileID: 718783139652034944}
+  - component: {fileID: 4411531184656165764}
   - component: {fileID: 146460124112808650}
   m_Layer: 0
   m_Name: Player
@@ -52,7 +53,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 1014897120
+  GlobalObjectIdHash: 1420385798
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
   ActiveSceneSynchronization: 0
@@ -73,8 +74,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCameraMode: 0
+  OuterForce: {x: 0, y: 0, z: 0}
   playerMovement: {fileID: 718783139652034944}
   mouseMovement: {fileID: -4688518117121886091}
+  playerAnimation: {fileID: 4411531184656165764}
 --- !u!114 &-4688518117121886091
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -112,9 +115,10 @@ MonoBehaviour:
     _defaultWalkSpeed: 7
     MoveSpeed: 7
     jumpPower: 20
-    groundDistance: 0.4
+    groundDistance: 0.21
     groundDrag: 5
-    gravityMultiplier: 3
+    gravityMultiplier: 4.5
+    maxSlope: 45
     groundMask:
       serializedVersion: 2
       m_Bits: 8
@@ -123,6 +127,7 @@ MonoBehaviour:
     MovementBonusPercentage: 0
     MovementPenaltyPercentage: 0
   isGrounded: 1
+  isOnSlope: 0
   isRunning: 0
   CanMove: 0
   moveDirection: {x: 0, y: 0, z: 0}
@@ -155,6 +160,19 @@ MonoBehaviour:
     m_Flags: 0
   groundCheck: {fileID: 1018075001130600856}
   playerRb: {fileID: 146460124112808650}
+--- !u!114 &4411531184656165764
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 712881128543300860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2bf8eb8c76d56fb4e9bdea9dba6d4e77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 1930297397796399302}
 --- !u!54 &146460124112808650
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -177,7 +195,7 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
@@ -286,7 +304,7 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.50000006
-  m_Height: 2
+  m_Height: 1.94
   m_Direction: 1
   m_Center: {x: 0.00000005960464, y: 0, z: -0.00000008940696}
 --- !u!1 &6641258170229694490
@@ -345,7 +363,7 @@ Transform:
   m_GameObject: {fileID: 9096556299037838410}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.82, z: 0}
+  m_LocalPosition: {x: 0, y: -1.733, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -638,6 +656,11 @@ PrefabInstance:
       objectReference: {fileID: 9000000, guid: 2dc7b382d25903545b405802eb2198ab, type: 3}
     - target: {fileID: 95389170962898660, guid: f11fc98cf1e8d5547a9b2ec85cc9c664,
         type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 95389170962898660, guid: f11fc98cf1e8d5547a9b2ec85cc9c664,
+        type: 3}
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 07af7232de3067e4b848af24969c5eec, type: 2}
@@ -660,6 +683,12 @@ PrefabInstance:
       addedObject: {fileID: 5852783686958487167}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f11fc98cf1e8d5547a9b2ec85cc9c664, type: 3}
+--- !u!95 &1930297397796399302 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 95389170962898660, guid: f11fc98cf1e8d5547a9b2ec85cc9c664,
+    type: 3}
+  m_PrefabInstance: {fileID: 1989228411828729378}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1987639658252900286 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4128732659769756, guid: f11fc98cf1e8d5547a9b2ec85cc9c664,

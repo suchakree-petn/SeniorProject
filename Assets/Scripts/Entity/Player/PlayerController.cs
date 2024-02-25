@@ -5,10 +5,12 @@ using UnityEngine;
 public class PlayerController : NetworkBehaviour
 {
     [SerializeField] private PlayerCameraMode playerCameraMode;
+    public Vector3 OuterForce;
 
     [Header("Reference")]
     [SerializeField] private PlayerMovement playerMovement;
     [SerializeField] private MouseMovement mouseMovement;
+    [SerializeField] private PlayerAnimation playerAnimation;
     public override void OnNetworkSpawn()
     {
         if (!IsOwner) return;
@@ -45,6 +47,21 @@ public class PlayerController : NetworkBehaviour
 
         playerMovement.MoveCharactor();
         mouseMovement.RotateCamera();
+
+        Vector3 finalVelocity = playerMovement.GetMovementForce();
+        finalVelocity = Vector3.ClampMagnitude(finalVelocity, playerMovement.PlayerMovementConfig.MoveSpeed);
+        finalVelocity = transform.InverseTransformDirection(finalVelocity); // Convert to local space
+        if (playerMovement.movementAction.IsPressed())
+        {
+            playerAnimation.SetMoveVelocityX(finalVelocity.x);
+            playerAnimation.SetMoveVelocityZ(finalVelocity.z);
+        }
+        else
+        {
+            finalVelocity -= playerMovement.PlayerMovementConfig.groundDrag * Time.fixedDeltaTime * finalVelocity;
+            playerAnimation.SetMoveVelocityX(finalVelocity.x);
+            playerAnimation.SetMoveVelocityZ(finalVelocity.z);
+        }
 
     }
     [Command]
