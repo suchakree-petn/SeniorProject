@@ -6,8 +6,9 @@ using UnityEngine;
 
 public class PlayerManager : NetworkSingleton<PlayerManager>
 {
+    public float currentHp;
     // public NetworkList<PlayerData> AllPlayerDatas;
-    // public PlayerData OwnerPlayerData;
+    public PlayerData OwnerPlayerData;
 
     // public Action OnFinishInitAllPlayerData;
     // protected override void InitAfterAwake()
@@ -49,6 +50,27 @@ public class PlayerManager : NetworkSingleton<PlayerManager>
     // public static ulong GetPlayerId(int playerOrderIndex)
     // {
     //     return playerOrderIndex == 1 ? Instance.playerData_1.PlayerId : Instance.playerData_2.PlayerId;
+    // }
+    public void TakeDamage(DamageDeal damage)
+    {
+        float damageDeal = 0;
+        if (currentHp > 0)
+        {
+            damageDeal = CalcDamageRecieve(OwnerPlayerData, damage);
+            currentHp -= damageDeal;
+        }
+    }
+    public float CalcDamageRecieve(PlayerData target, DamageDeal damage)
+    {
+        return damage._damage - CalcDefense(target);
+    }
+    float CalcDefense(PlayerData target)
+    {
+        return target._defenseBase + target._defenseBonus;
+    }
+    // public override void InitHp()
+    // {
+    //     currentHp = GetCharactorData().GetMaxHp();
     // }
     protected override void InitAfterAwake()
     {
