@@ -62,6 +62,15 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""SwitchViewMode"",
+                    ""type"": ""Value"",
+                    ""id"": ""241d048c-df7d-4470-91e3-53a5b62baeca"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -152,6 +161,17 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                     ""action"": ""Look"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""67bfe961-1dda-44ed-bf0d-dcf749ae0f89"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwitchViewMode"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -192,6 +212,7 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
         m_PlayerCharacter_Movement = m_PlayerCharacter.FindAction("Movement", throwIfNotFound: true);
         m_PlayerCharacter_Run = m_PlayerCharacter.FindAction("Run", throwIfNotFound: true);
         m_PlayerCharacter_Look = m_PlayerCharacter.FindAction("Look", throwIfNotFound: true);
+        m_PlayerCharacter_SwitchViewMode = m_PlayerCharacter.FindAction("SwitchViewMode", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_PauseMenu = m_UI.FindAction("PauseMenu", throwIfNotFound: true);
@@ -260,6 +281,7 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerCharacter_Movement;
     private readonly InputAction m_PlayerCharacter_Run;
     private readonly InputAction m_PlayerCharacter_Look;
+    private readonly InputAction m_PlayerCharacter_SwitchViewMode;
     public struct PlayerCharacterActions
     {
         private @PlayerActions m_Wrapper;
@@ -268,6 +290,7 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
         public InputAction @Movement => m_Wrapper.m_PlayerCharacter_Movement;
         public InputAction @Run => m_Wrapper.m_PlayerCharacter_Run;
         public InputAction @Look => m_Wrapper.m_PlayerCharacter_Look;
+        public InputAction @SwitchViewMode => m_Wrapper.m_PlayerCharacter_SwitchViewMode;
         public InputActionMap Get() { return m_Wrapper.m_PlayerCharacter; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -289,6 +312,9 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
             @Look.started += instance.OnLook;
             @Look.performed += instance.OnLook;
             @Look.canceled += instance.OnLook;
+            @SwitchViewMode.started += instance.OnSwitchViewMode;
+            @SwitchViewMode.performed += instance.OnSwitchViewMode;
+            @SwitchViewMode.canceled += instance.OnSwitchViewMode;
         }
 
         private void UnregisterCallbacks(IPlayerCharacterActions instance)
@@ -305,6 +331,9 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
             @Look.started -= instance.OnLook;
             @Look.performed -= instance.OnLook;
             @Look.canceled -= instance.OnLook;
+            @SwitchViewMode.started -= instance.OnSwitchViewMode;
+            @SwitchViewMode.performed -= instance.OnSwitchViewMode;
+            @SwitchViewMode.canceled -= instance.OnSwitchViewMode;
         }
 
         public void RemoveCallbacks(IPlayerCharacterActions instance)
@@ -374,6 +403,7 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
         void OnMovement(InputAction.CallbackContext context);
         void OnRun(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
+        void OnSwitchViewMode(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

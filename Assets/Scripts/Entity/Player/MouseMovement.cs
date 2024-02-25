@@ -12,7 +12,6 @@ public class MouseMovement : MonoBehaviour
     private Vector2 _playerLookInput = new();
     private Vector2 _prevPlayerLookInput = new();
     private float cameraPitch;
-    public PlayerActions playerActions;
     private PlayerCameraMode playerCameraMode;
 
     [Header("Reference")]
@@ -31,11 +30,14 @@ public class MouseMovement : MonoBehaviour
         CinemachineVirtualCamera FocusVCam = CameraManager.Instance.GetFocusCamera();
         FocusVCam.Follow = playerView;
         FocusCameraTransform = FocusVCam.transform;
+        FocusVCam.gameObject.SetActive(true);
 
         CinemachineFreeLook thirdPersonVCam = CameraManager.Instance.GetThirdPersonCamera();
         thirdPersonVCam.Follow = transform;
         thirdPersonVCam.LookAt = transform;
         ThirdPersonCameraTransform = thirdPersonVCam.transform;
+        thirdPersonVCam.gameObject.SetActive(true);
+
 
         this.playerCameraMode = playerCameraMode;
 
@@ -47,11 +49,7 @@ public class MouseMovement : MonoBehaviour
     }
 
 
-    public void InitPlayerActions()
-    {
-        playerActions = new();
-        playerActions.PlayerCharacter.Enable();
-    }
+
     public void LockMouseCursor()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -62,16 +60,21 @@ public class MouseMovement : MonoBehaviour
 
     public void SetFocus(bool isShowCrossHair = true)
     {
-        playerCameraMode = PlayerCameraMode.Focus;
-        FocusCameraTransform.gameObject.SetActive(true);
-        ThirdPersonCameraTransform.gameObject.SetActive(false);
+        // FocusCameraTransform.gameObject.SetActive(true);
+        // ThirdPersonCameraTransform.gameObject.SetActive(false);
+        CameraManager.Instance.GetThirdPersonCamera().Priority = 0;
+        CameraManager.Instance.GetFocusCamera().Priority = 10;
+        transform.rotation = Quaternion.Euler(0f, mainCam.transform.rotation.eulerAngles.y, 0f);
+
         PlayerUIManager.Instance.SetPlayerCrossHairState(isShowCrossHair);
     }
     public void SetThirdperson(bool isShowCrossHair = false)
     {
-        playerCameraMode = PlayerCameraMode.ThirdPerson;
-        FocusCameraTransform.gameObject.SetActive(false);
-        ThirdPersonCameraTransform.gameObject.SetActive(true);
+        // FocusCameraTransform.gameObject.SetActive(false);
+        // ThirdPersonCameraTransform.gameObject.SetActive(true);
+        CameraManager.Instance.GetThirdPersonCamera().m_XAxis.Value = 360;
+        CameraManager.Instance.GetThirdPersonCamera().Priority = 10;
+        CameraManager.Instance.GetFocusCamera().Priority = 0;
         PlayerUIManager.Instance.SetPlayerCrossHairState(isShowCrossHair);
     }
 
@@ -140,7 +143,6 @@ public class MouseMovement : MonoBehaviour
     {
         lookInput = context.ReadValue<Vector2>();
     }
-
 }
 public enum PlayerCameraMode
 {

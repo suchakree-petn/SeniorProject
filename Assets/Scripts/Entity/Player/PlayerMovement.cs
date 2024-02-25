@@ -13,10 +13,7 @@ public class PlayerMovement : MonoBehaviour
     [ReadOnlyGUI] public bool CanMove;
     [SerializeField, ReadOnlyGUI] private Vector3 moveDirection = Vector3.zero;
     public Rigidbody PlayerRigidbody => playerRb;
-    private PlayerActions playerActions;
-    public InputAction movementAction;
-    public InputAction jumpAction;
-    public InputAction runAction;
+
     private PlayerCameraMode playerCameraMode;
     private RaycastHit slopeHit;
 
@@ -115,6 +112,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void MovementProcess()
     {
+        InputAction movementAction = PlayerInputManager.Instance.MovementAction;
         Vector2 movementInput = movementAction.ReadValue<Vector2>();
         switch (playerCameraMode)
         {
@@ -134,14 +132,6 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    public void InitPlayerActions()
-    {
-        playerActions = new();
-        playerActions.PlayerCharacter.Enable();
-        movementAction = playerActions.PlayerCharacter.Movement;
-        jumpAction = playerActions.PlayerCharacter.Jump;
-        runAction = playerActions.PlayerCharacter.Run;
-    }
     public void SetCameraMode(PlayerCameraMode playerCameraMode)
     {
         this.playerCameraMode = playerCameraMode;
@@ -149,7 +139,8 @@ public class PlayerMovement : MonoBehaviour
     }
     public void MoveCharactorThirdPerson()
     {
-        if (movementAction.IsPressed())
+        InputAction movementAction = PlayerInputManager.Instance.MovementAction;
+        if (movementAction.IsPressed()&& playerCameraMode == PlayerCameraMode.ThirdPerson)
         {
             Vector3 moveDirOnPlane = Vector3.ProjectOnPlane(moveDirection, Vector3.up);
             Quaternion targetRotation = Quaternion.LookRotation(moveDirOnPlane, Vector3.up);

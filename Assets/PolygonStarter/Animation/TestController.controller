@@ -37,7 +37,7 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: -7717018434326511732}
-    m_Position: {x: 350, y: 110, z: 0}
+    m_Position: {x: 290, y: 120, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -121,7 +121,7 @@ BlendTree:
   - serializedVersion: 2
     m_Motion: {fileID: -203655887218126122, guid: 4aa1a1cd3e09b8d409d1e84c7182ce98,
       type: 3}
-    m_Threshold: 0.25
+    m_Threshold: 0.1
     m_Position: {x: 0, y: 5}
     m_TimeScale: 1.4
     m_CycleOffset: 0
@@ -130,12 +130,39 @@ BlendTree:
   - serializedVersion: 2
     m_Motion: {fileID: -203655887218126122, guid: 5e7afd6dfaf47b2438b702ff277e07a0,
       type: 3}
-    m_Threshold: 0.5
+    m_Threshold: 0.2
     m_Position: {x: 0, y: 10.5}
     m_TimeScale: 1
     m_CycleOffset: 0
     m_DirectBlendParameter: MoveVelocityX
     m_Mirror: 0
+  - serializedVersion: 2
+    m_Motion: {fileID: -203655887218126122, guid: d2ac92668383dc3438bc710c33e0c5ac,
+      type: 3}
+    m_Threshold: 0.3
+    m_Position: {x: 0, y: -3}
+    m_TimeScale: 1
+    m_CycleOffset: 0
+    m_DirectBlendParameter: MoveVelocityX
+    m_Mirror: 0
+  - serializedVersion: 2
+    m_Motion: {fileID: -203655887218126122, guid: d39121ec86b6fb441af3ebed09f835d7,
+      type: 3}
+    m_Threshold: 0.4
+    m_Position: {x: -10.5, y: 0}
+    m_TimeScale: 1
+    m_CycleOffset: 0
+    m_DirectBlendParameter: MoveVelocityX
+    m_Mirror: 0
+  - serializedVersion: 2
+    m_Motion: {fileID: -203655887218126122, guid: d39121ec86b6fb441af3ebed09f835d7,
+      type: 3}
+    m_Threshold: 0.5
+    m_Position: {x: 10.5, y: 0}
+    m_TimeScale: 1
+    m_CycleOffset: 0.5
+    m_DirectBlendParameter: MoveVelocityX
+    m_Mirror: 1
   m_BlendParameter: MoveVelocityX
   m_BlendParameterY: MoveVelocityZ
   m_MinThreshold: 0
@@ -157,19 +184,19 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: MoveVelocityX
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: MoveVelocityZ
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -184,7 +211,7 @@ AnimatorController:
     m_SyncedLayerAffectsTiming: 0
     m_Controller: {fileID: 9100000}
   - serializedVersion: 5
-    m_Name: Shoot
+    m_Name: FocusView
     m_StateMachine: {fileID: 1355433561738865802}
     m_Mask: {fileID: 31900000, guid: 68e5b96e161552e42a4c693ceac21fc3, type: 2}
     m_Motions: []
@@ -202,7 +229,7 @@ AnimatorStateMachine:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Shoot
+  m_Name: FocusView
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: -2685757453989869088}
