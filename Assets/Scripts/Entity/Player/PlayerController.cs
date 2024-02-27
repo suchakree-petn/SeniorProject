@@ -55,6 +55,13 @@ public class PlayerController : NetworkBehaviour
 
 
     }
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.F) && IsOwner)
+        {
+            EnemyManager.Instance.Spawn(2000, transform.position);
+        }
+    }
 
     private void FixedUpdate()
     {

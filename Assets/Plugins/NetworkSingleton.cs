@@ -2,7 +2,7 @@ using Unity.Netcode;
 
 public abstract class NetworkSingleton<T> : NetworkBehaviour where T : NetworkBehaviour
 {
-    public bool CarryToOtherScene;
+ public bool CarryToOtherScene;
     static T instance;
     public static T Instance
     {
@@ -26,7 +26,7 @@ public abstract class NetworkSingleton<T> : NetworkBehaviour where T : NetworkBe
         if (CarryToOtherScene)
         {
             transform.SetParent(null);
-            DontDestroyOnLoad(gameObject.transform.root.gameObject);
+            DontDestroyOnLoad(transform.root);
         }
 
         instance = GetComponent<T>();

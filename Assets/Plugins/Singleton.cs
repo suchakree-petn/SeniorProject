@@ -2,7 +2,7 @@ using UnityEngine;
 
 public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 {
-    public bool CarryToOtherScene = true;
+    public bool CarryToOtherScene;
     static T instance;
     public static T Instance
     {
@@ -23,12 +23,14 @@ public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour
             DestroyImmediate(gameObject);
             return;
         }
-
-        instance = GetComponent<T>();
         if (CarryToOtherScene)
         {
-            DontDestroyOnLoad(gameObject.transform.root.gameObject);
+            Debug.Log(gameObject.name + ";" +transform.parent.name);
+            transform.SetParent(null);
+            DontDestroyOnLoad(transform.root);
         }
+
+        instance = GetComponent<T>();
         InitAfterAwake();
     }
 

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 
-public class PlayerManager : NetworkSingleton<PlayerManager>
+public class PlayerManager : Singleton<PlayerManager>
 {
     public float currentHp;
     // public NetworkList<PlayerData> AllPlayerDatas;
