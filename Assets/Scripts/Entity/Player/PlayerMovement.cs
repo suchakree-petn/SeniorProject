@@ -114,10 +114,10 @@ public class PlayerMovement : MonoBehaviour
     {
         InputAction movementAction = PlayerInputManager.Instance.MovementAction;
         Vector2 movementInput = movementAction.ReadValue<Vector2>();
+        Transform mainCamTransform = Camera.main.transform;
         switch (playerCameraMode)
         {
             case PlayerCameraMode.ThirdPerson:
-                Transform mainCamTransform = Camera.main.transform;
                 moveDirection = ((mainCamTransform.forward * movementInput.y) + (mainCamTransform.right * movementInput.x)).normalized;
                 if (isOnSlope)
                     moveDirection = GetSlopeMoveDirection();
@@ -125,7 +125,8 @@ public class PlayerMovement : MonoBehaviour
                     moveDirection = Vector3.ProjectOnPlane(moveDirection, Vector3.up).normalized;
                 break;
             case PlayerCameraMode.Focus:
-                moveDirection = ((transform.forward * movementInput.y) + (transform.right * movementInput.x)).normalized;
+                Vector3 camForward = Vector3.ProjectOnPlane(mainCamTransform.forward, Vector3.up).normalized;
+                moveDirection = ((camForward * movementInput.y) + (mainCamTransform.right * movementInput.x)).normalized;
                 if (isOnSlope)
                     moveDirection = GetSlopeMoveDirection();
                 break;
@@ -140,7 +141,7 @@ public class PlayerMovement : MonoBehaviour
     public void MoveCharactorThirdPerson()
     {
         InputAction movementAction = PlayerInputManager.Instance.MovementAction;
-        if (movementAction.IsPressed()&& playerCameraMode == PlayerCameraMode.ThirdPerson)
+        if (movementAction.IsPressed() && playerCameraMode == PlayerCameraMode.ThirdPerson)
         {
             Vector3 moveDirOnPlane = Vector3.ProjectOnPlane(moveDirection, Vector3.up);
             Quaternion targetRotation = Quaternion.LookRotation(moveDirOnPlane, Vector3.up);

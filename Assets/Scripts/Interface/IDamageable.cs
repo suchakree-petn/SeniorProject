@@ -1,7 +1,5 @@
-using UnityEngine;
-
 public interface IDamageable
 {
-    public void TakeDamage(DamageDeal elementalDamage);
-    public void InitHp();
+    public void TakeDamage(Damage damage,EntityCharacterData attackerData);
+    public void InitHp(EntityCharacterData attackerData);
 }

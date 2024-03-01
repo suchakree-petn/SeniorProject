@@ -183,6 +183,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 712881128543300860, guid: b116f61db08cf6f49b80c75bfc0b419c,
         type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 712881128543300860, guid: b116f61db08cf6f49b80c75bfc0b419c,
+        type: 3}
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
@@ -289,6 +294,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 712881128543300860, guid: b116f61db08cf6f49b80c75bfc0b419c,
         type: 3}
       insertIndex: -1
+      addedObject: {fileID: 5083907570352594326}
+    - targetCorrespondingSourceObject: {fileID: 712881128543300860, guid: b116f61db08cf6f49b80c75bfc0b419c,
+        type: 3}
+      insertIndex: -1
       addedObject: {fileID: 1381651189975890070}
     - targetCorrespondingSourceObject: {fileID: 712881128543300860, guid: b116f61db08cf6f49b80c75bfc0b419c,
         type: 3}
@@ -344,13 +353,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCameraMode: 1
+  _playerCharacterData: {fileID: 11400000, guid: dc71539b9cfcab4418d31da4b305ae0d,
+    type: 2}
   OuterForce: {x: 0, y: 0, z: 0}
-  playerMovement: {fileID: 718783139652034944, guid: d50b196a120678d438ce37deb667e36d,
-    type: 3}
-  mouseMovement: {fileID: -4688518117121886091, guid: d50b196a120678d438ce37deb667e36d,
-    type: 3}
-  playerAnimation: {fileID: 4411531184656165764, guid: d50b196a120678d438ce37deb667e36d,
-    type: 3}
+  playerMovement: {fileID: 7454716787649179170}
+  mouseMovement: {fileID: 4816892444990670128}
+  playerAnimation: {fileID: 2715002087184860313}
+  playerHealth: {fileID: 5083907570352594326}
 --- !u!114 &4816892444990670128
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -364,15 +373,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mouseMovementConfig:
-    FPS_X_Axis_Sensitive: 18
-    FPS_Y_Axis_Sensitive: 10
-    TPS_X_Axis_Sensitive: 15
-    TPS_Y_Axis_Sensitive: 12
+    Focus_X_Axis_Sensitive: 20
+    Focus_Y_Axis_Sensitive: 20
+    ThirdPerson_X_Axis_Sensitive: 20
+    ThirdPerson_Y_Axis_Sensitive: 20
   CanCameraMove: 1
   lookInput: {x: 0, y: 0}
-  playerView: {fileID: 3419173878677083267, guid: d50b196a120678d438ce37deb667e36d,
-    type: 3}
-  rb: {fileID: 146460124112808650, guid: d50b196a120678d438ce37deb667e36d, type: 3}
+  rotateOffset: 12
+  playerView: {fileID: 8089698333217440013}
+  rb: {fileID: 1041791184314300143}
+  characterModel: {fileID: 134936832183649871}
 --- !u!54 &1041791184314300143
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -432,9 +442,8 @@ MonoBehaviour:
   isRunning: 0
   CanMove: 0
   moveDirection: {x: 0, y: 0, z: 0}
-  groundCheck: {fileID: 1018075001130600856, guid: d50b196a120678d438ce37deb667e36d,
-    type: 3}
-  playerRb: {fileID: 146460124112808650, guid: d50b196a120678d438ce37deb667e36d, type: 3}
+  groundCheck: {fileID: 8541470699786124171}
+  playerRb: {fileID: 1041791184314300143}
 --- !u!114 &2715002087184860313
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -447,8 +456,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bf8eb8c76d56fb4e9bdea9dba6d4e77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 2196799426255209386, guid: d50b196a120678d438ce37deb667e36d,
-    type: 3}
+  animator: {fileID: 8259970286364744643}
 --- !u!95 &8259970286364744643
 Animator:
   serializedVersion: 5
@@ -470,6 +478,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &5083907570352594326
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8164219173163491055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f1a4f9c8eed7ba44b5e35d94f2dd0e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1381651189975890070
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -483,8 +503,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TransitionStateInfoList: []
-  m_Animator: {fileID: 2196799426255209386, guid: d50b196a120678d438ce37deb667e36d,
-    type: 3}
+  m_Animator: {fileID: 8259970286364744643}
 --- !u!114 &8119709586941592544
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -527,3 +546,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6c0be61502bb534f922ebb746851216, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &8541470699786124171 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1018075001130600856, guid: b116f61db08cf6f49b80c75bfc0b419c,
+    type: 3}
+  m_PrefabInstance: {fileID: 8694633976229327379}
+  m_PrefabAsset: {fileID: 0}

@@ -8,6 +8,8 @@ using UnityEngine.InputSystem;
 public class PlayerController : NetworkBehaviour
 {
     [SerializeField] private PlayerCameraMode playerCameraMode;
+    [SerializeField] private PlayerCharacterData _playerCharacterData;
+    public PlayerCharacterData PlayerCharacterData => _playerCharacterData;
     public Vector3 OuterForce;
 
 
@@ -15,20 +17,16 @@ public class PlayerController : NetworkBehaviour
     [SerializeField] private PlayerMovement playerMovement;
     [SerializeField] private MouseMovement mouseMovement;
     [SerializeField] private PlayerAnimation playerAnimation;
+    [SerializeField] private PlayerHealth playerHealth;
 
 
     public override void OnNetworkSpawn()
     {
         if (!IsOwner) return;
-        playerMovement.CanMove = true;
+        InitPlayerCharacter();
+
         PlayerInputManager playerInputManager = PlayerInputManager.Instance;
         playerInputManager.InitPlayerActions();
-        playerMovement.SetCameraMode(playerCameraMode);
-
-        mouseMovement.InitCameras(playerCameraMode);
-        mouseMovement.LockMouseCursor();
-        SetCameraMode(playerCameraMode, true);
-
         playerInputManager.JumpAction.performed += playerMovement.PlayerJump;
         playerInputManager.RunAction.performed += playerMovement.PlayerRun;
         playerInputManager.MovementAction.canceled += playerMovement.PlayerStopRun;
@@ -37,6 +35,18 @@ public class PlayerController : NetworkBehaviour
         playerInputManager.Look.canceled += mouseMovement.SetLook;
         playerInputManager.SwitchViewMode.performed += SwitchViewMode;
         playerInputManager.SwitchViewMode.canceled += SwitchViewMode;
+    }
+
+    private void InitPlayerCharacter()
+    {
+        playerMovement.CanMove = true;
+        playerMovement.SetCameraMode(playerCameraMode);
+
+        mouseMovement.InitCameras(playerCameraMode);
+        mouseMovement.LockMouseCursor();
+        SetCameraMode(playerCameraMode, true);
+
+        playerHealth.InitHp(PlayerCharacterData);
     }
 
     public override void OnNetworkDespawn()
@@ -87,6 +97,10 @@ public class PlayerController : NetworkBehaviour
         }
 
     }
+    private void LateUpdate()
+    {
+
+    }
     [Command]
     public void SetCameraMode(PlayerCameraMode newMode, bool isShowCrossHair = true)
     {
@@ -124,5 +138,10 @@ public class PlayerController : NetworkBehaviour
                 SetCameraMode(PlayerCameraMode.ThirdPerson);
                 break;
         }
+    }
+
+    public float GetCurrentHp()
+    {
+        return playerHealth.CurrentHealth;
     }
 }
