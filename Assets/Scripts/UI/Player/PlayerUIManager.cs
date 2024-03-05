@@ -54,6 +54,9 @@ public class PlayerUIManager : NetworkSingleton<PlayerUIManager>
         PlayerManager.Instance.OnAfterClientConnect += SetSelectCharacter;
 
     }
+
+
+
     public override void OnNetworkDespawn()
     {
 

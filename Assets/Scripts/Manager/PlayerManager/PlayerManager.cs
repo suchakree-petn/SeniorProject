@@ -44,6 +44,7 @@ public partial class PlayerManager : NetworkSingleton<PlayerManager>
         {
             NetworkManager.OnClientConnectedCallback += PlayerManager_OnClientConnectedHandler;
             NetworkManager.OnClientDisconnectCallback += PlayerManager_OnClientDisconnectHandler;
+            PlayerManager_OnServerStartedHandler();
         }
 
     }
@@ -58,6 +59,9 @@ public partial class PlayerManager : NetworkSingleton<PlayerManager>
     }
     private void PlayerManager_OnClientConnectedHandler(ulong clientId)
     {
+        Transform playerChar = Instantiate(PlayerCharacterPrefab[1001]);
+        playerChar.GetComponent<NetworkObject>().SpawnAsPlayerObject(clientId,true);
+
         Debug.Log("Client Connected");
         PlayerController[] allPlayers = FindObjectsOfType(typeof(PlayerController)) as PlayerController[];
         Debug.Log("Current player amount: " + allPlayers.Length);
@@ -79,6 +83,10 @@ public partial class PlayerManager : NetworkSingleton<PlayerManager>
             Debug.LogWarning("Already has this clientId");
         }
         OnAfterClientConnect_ClientRpc(clientId);
+    }
+    private void PlayerManager_OnServerStartedHandler()
+    {
+        PlayerManager_OnClientConnectedHandler(0);
     }
     [ClientRpc]
     private void OnAfterClientConnect_ClientRpc(ulong clientId)
@@ -112,7 +120,7 @@ public partial class PlayerManager : NetworkSingleton<PlayerManager>
 
         PlayerGameObjects[clientId] = newPlayerGO;
 
-        newPlayerGO.GetComponent<NetworkObject>().SpawnWithOwnership(clientId,true);
+        newPlayerGO.GetComponent<NetworkObject>().SpawnWithOwnership(clientId, true);
     }
     private void Update()
     {
