@@ -23,6 +23,8 @@ public class PlayerController : NetworkBehaviour
     public override void OnNetworkSpawn()
     {
         if (!IsOwner) return;
+        Debug.Log("spawn");
+
         InitPlayerCharacter();
 
         PlayerInputManager playerInputManager = PlayerInputManager.Instance;
@@ -49,9 +51,11 @@ public class PlayerController : NetworkBehaviour
         playerHealth.InitHp(PlayerCharacterData);
     }
 
+
     public override void OnNetworkDespawn()
     {
         if (!IsOwner) return;
+        Debug.Log("Despawn");
         PlayerInputManager playerInputManager = PlayerInputManager.Instance;
 
         playerInputManager.JumpAction.performed -= playerMovement.PlayerJump;
@@ -62,7 +66,6 @@ public class PlayerController : NetworkBehaviour
         playerInputManager.Look.canceled -= mouseMovement.SetLook;
         playerInputManager.SwitchViewMode.performed -= SwitchViewMode;
         playerInputManager.SwitchViewMode.canceled -= SwitchViewMode;
-
 
     }
     private void Update()

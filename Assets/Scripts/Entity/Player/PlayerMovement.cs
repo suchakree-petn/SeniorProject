@@ -205,6 +205,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (context.performed && isGrounded && CanMove)
         {
+            Debug.Log(playerRb.GetInstanceID());
             playerRb.velocity = new(playerRb.velocity.x, 0, playerRb.velocity.z);
             playerRb.AddForce(transform.up * playerMovementConfig.jumpPower, ForceMode.Impulse);
 

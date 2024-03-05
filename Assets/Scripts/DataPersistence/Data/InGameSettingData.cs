@@ -3,11 +3,11 @@ public class InGameSettingData : ISaveData
 {
     public MouseSensitive MouseSensitive;
 
+
     public InGameSettingData()
     {
         MouseSensitive = new(2, 2);
     }
-
 }
 [System.Serializable]
 public struct MouseSensitive

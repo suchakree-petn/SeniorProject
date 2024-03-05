@@ -25,7 +25,6 @@ public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour
         }
         if (CarryToOtherScene)
         {
-            Debug.Log(gameObject.name + ";" +transform.parent.name);
             transform.SetParent(null);
             DontDestroyOnLoad(transform.root);
         }

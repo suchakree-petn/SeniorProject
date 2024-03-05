@@ -41,6 +41,10 @@ namespace DataPersistence
                     Debug.LogError("Error while trying to load data from file" + fullPath + "\n" + e);
                 }
             }
+            else
+            {
+                Debug.LogWarning("Path not exist");
+            }
             return loadedData;
         }
         public void Save(T data)

@@ -13,10 +13,10 @@ namespace DataPersistence
         public static Action OnLoadSuccess;
 
 
-        public DataPersistence(string fileName, string fileExtension, T defaultData)
+        public DataPersistence(string fileName, T defaultData)
         {
             gameData = defaultData;
-            dataHandler = new(Application.persistentDataPath, fileName + "." + fileExtension);
+            dataHandler = new(Application.persistentDataPath, fileName + "." + "SAVE");
         }
 
         public void NewData()
@@ -29,14 +29,17 @@ namespace DataPersistence
             List<IDataPersistence<T>> dataPersistencesObjects = FindAllDataPersistenceObjects();
 
             // load saved data
-            gameData = dataHandler.Load();
-            bool isSaved = true;
+            T _gameData = dataHandler.Load();
+
 
             // if no data can be loaded, init a new game data
-            if (gameData == null)
+            if (_gameData == null)
             {
                 Debug.LogWarning("No data was found");
-                isSaved = false;
+            }
+            else
+            {
+                gameData = _gameData;
             }
 
             //push loaded data to other scripts that need
@@ -47,11 +50,10 @@ namespace DataPersistence
             Debug.Log("Loaded Player data");
             OnLoadSuccess?.Invoke();
 
-            // Save game if file is not existed 
-            if (!isSaved)
-            {
+            if(_gameData == null){
                 SaveData();
             }
+
         }
 
         public void SaveData()

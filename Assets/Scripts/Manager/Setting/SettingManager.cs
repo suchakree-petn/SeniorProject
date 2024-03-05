@@ -4,7 +4,7 @@ using UnityEngine;
 
 public partial class SettingManager : Singleton<SettingManager>
 {
-    [SerializeField] private InGameSettingData inGameSettingData;
+    [SerializeField] private InGameSettingData _inGameSettingData;
     public DataPersistence<InGameSettingData> dataPersistenceInGameSetting;
     private bool isInitSetting;
 
@@ -15,7 +15,8 @@ public partial class SettingManager : Singleton<SettingManager>
     protected override void InitAfterAwake()
     {
         OnSettingInit += () => isInitSetting = true;
-        dataPersistenceInGameSetting = new("InGameSetting", "SAVE", new());
+        _inGameSettingData = new();
+        dataPersistenceInGameSetting = new("InGameSetting",_inGameSettingData);
     }
 
     private void Start()

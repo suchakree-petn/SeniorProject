@@ -1,2 +1,3 @@
-public interface ISaveData{
+public interface ISaveData
+{
 }

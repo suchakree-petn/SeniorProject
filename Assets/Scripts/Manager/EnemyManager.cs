@@ -18,7 +18,6 @@ public class EnemyManager : NetworkSingleton<EnemyManager>
             return _enemies;
         }
     }
-    public List<GameObject> gameObjects;
     private void Start()
     {
 

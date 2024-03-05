@@ -19,8 +19,9 @@ TagManager:
   - metall
   - wood_door_glass
   - petrol
-  - Hitbox
   - Enemy
+  - DamageHitbox
+  - Hitbox
   layers:
   - Default
   - TransparentFX
