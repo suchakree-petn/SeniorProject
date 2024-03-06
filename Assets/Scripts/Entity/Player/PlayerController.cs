@@ -70,10 +70,14 @@ public class PlayerController : NetworkBehaviour
     }
     private void Update()
     {
+
+        // Test spawn enemy entity
         if (Input.GetKeyDown(KeyCode.F) && IsOwner)
         {
             EnemyManager.Instance.Spawn(2000, transform.position);
         }
+
+
     }
 
     private void FixedUpdate()
@@ -82,6 +86,11 @@ public class PlayerController : NetworkBehaviour
 
         playerMovement.MoveCharactor();
 
+
+    }
+
+    private void MovementAnimation()
+    {
         Vector3 finalVelocity = playerMovement.GetMovementForce();
         finalVelocity = new(finalVelocity.x, 0f, finalVelocity.z);
         finalVelocity = Vector3.ClampMagnitude(finalVelocity, playerMovement.PlayerMovementConfig.MoveSpeed);
@@ -97,12 +106,13 @@ public class PlayerController : NetworkBehaviour
             playerAnimation.SetMoveVelocityX(finalVelocity.x);
             playerAnimation.SetMoveVelocityZ(finalVelocity.z);
         }
-
     }
+
     private void LateUpdate()
     {
         if (!IsOwner) return;
         mouseMovement.RotateCamera();
+        MovementAnimation();
 
     }
     [Command]
