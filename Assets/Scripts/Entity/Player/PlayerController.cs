@@ -22,7 +22,10 @@ public class PlayerController : NetworkBehaviour
 
     public override void OnNetworkSpawn()
     {
-        if (!IsOwner) return;
+        if (!IsOwner)
+        {
+            return;
+        }
         Debug.Log("spawn");
 
         InitPlayerCharacter();
@@ -51,7 +54,6 @@ public class PlayerController : NetworkBehaviour
         playerHealth.InitHp(PlayerCharacterData);
     }
 
-
     public override void OnNetworkDespawn()
     {
         if (!IsOwner) return;
@@ -74,7 +76,7 @@ public class PlayerController : NetworkBehaviour
         // Test spawn enemy entity
         if (Input.GetKeyDown(KeyCode.F) && IsOwner)
         {
-            EnemyManager.Instance.Spawn(2000, transform.position);
+            EnemyManager.Instance.Spawn(2001, transform.position);
         }
 
 

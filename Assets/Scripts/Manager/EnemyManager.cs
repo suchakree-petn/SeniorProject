@@ -5,18 +5,23 @@ using UnityEngine;
 
 public class EnemyManager : NetworkSingleton<EnemyManager>
 {
-    private Dictionary<ulong, GameObject> _enemies;
-    public Dictionary<ulong, GameObject> Enemies
+    private static Dictionary<ulong, Transform> _enemyCharacterPrefab;
+    public static Dictionary<ulong, Transform> EnemyCharacterPrefab
     {
         get
         {
-            if (_enemies == null)
+            if (_enemyCharacterPrefab == null)
             {
-                Init_Enemies_Dictionary();
-                return _enemies;
+                _enemyCharacterPrefab = new();
+                Transform[] enemyChar = Resources.LoadAll<Transform>("Entity/Enemy/Prefab");
+                _enemyCharacterPrefab = enemyChar.ToDictionary(keys => ulong.Parse(keys.name.Split("_")[0]), val => val);
             }
-            return _enemies;
+            return _enemyCharacterPrefab;
         }
+    }
+
+    protected override void InitAfterAwake()
+    {
     }
     private void Start()
     {
@@ -36,24 +41,9 @@ public class EnemyManager : NetworkSingleton<EnemyManager>
     [ServerRpc(RequireOwnership = false)]
     public void Spawn_ServerRpc(ulong id, Vector3 position = default)
     {
-        GameObject gameObject = Instantiate(Instance.Enemies[id], position, Quaternion.identity);
+        GameObject gameObject = Instantiate(EnemyCharacterPrefab[id], position, Quaternion.identity).gameObject;
         gameObject.GetComponent<NetworkObject>().Spawn(true);
-
     }
-    protected override void InitAfterAwake()
-    {
-    }
-    private void Init_Enemies_Dictionary()
-    {
-        _enemies = new();
-        GameObject[] enemies_prf = Resources.LoadAll<GameObject>("Entity/Enemy/Prefab");
-        foreach (var e in enemies_prf)
-        {
-            Debug.Log(ulong.Parse(e.name.Split("_")[0]));
-        }
-        _enemies = enemies_prf.ToDictionary((key) => ulong.Parse(key.name.Split("_")[0]), value => value);
-    }
-
 
 }
 // public float currentHp;
