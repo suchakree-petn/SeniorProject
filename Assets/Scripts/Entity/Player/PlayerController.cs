@@ -81,7 +81,6 @@ public class PlayerController : NetworkBehaviour
         if (!IsOwner) return;
 
         playerMovement.MoveCharactor();
-        mouseMovement.RotateCamera();
 
         Vector3 finalVelocity = playerMovement.GetMovementForce();
         finalVelocity = new(finalVelocity.x, 0f, finalVelocity.z);
@@ -102,6 +101,8 @@ public class PlayerController : NetworkBehaviour
     }
     private void LateUpdate()
     {
+        if (!IsOwner) return;
+        mouseMovement.RotateCamera();
 
     }
     [Command]
