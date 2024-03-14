@@ -6,16 +6,16 @@ public abstract class EntityHealth : MonoBehaviour
 {
     private float currentHealth;
     public float CurrentHealth => currentHealth;
-    public virtual void TakeDamage(Damage damage,EntityCharacterData target)
+    public virtual void TakeDamage(AttackDamage damage,EntityCharacterData target)
     {
         if (currentHealth > 0)
         {
             currentHealth -= CalcDamageRecieve(damage,target);
         }
     }
-    public virtual float CalcDamageRecieve(Damage damage,EntityCharacterData target)
+    public virtual float CalcDamageRecieve(AttackDamage damage,EntityCharacterData target)
     {
-        return damage.damage - CalcDefense(target);
+        return damage.Damage - CalcDefense(target);
     }
     public virtual float CalcDefense(EntityCharacterData target)
     {

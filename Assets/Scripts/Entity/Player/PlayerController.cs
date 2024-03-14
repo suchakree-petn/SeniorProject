@@ -18,6 +18,7 @@ public class PlayerController : NetworkBehaviour
     [SerializeField] private MouseMovement mouseMovement;
     [SerializeField] private PlayerAnimation playerAnimation;
     [SerializeField] private PlayerHealth playerHealth;
+    [SerializeField] private PlayerWeapon playerWeapon;
 
 
     public override void OnNetworkSpawn()
@@ -27,7 +28,6 @@ public class PlayerController : NetworkBehaviour
             return;
         }
         Debug.Log("spawn");
-
         InitPlayerCharacter();
 
         PlayerInputManager playerInputManager = PlayerInputManager.Instance;
@@ -40,6 +40,9 @@ public class PlayerController : NetworkBehaviour
         playerInputManager.Look.canceled += mouseMovement.SetLook;
         playerInputManager.SwitchViewMode.performed += SwitchViewMode;
         playerInputManager.SwitchViewMode.canceled += SwitchViewMode;
+
+        playerInputManager.Attack.performed += playerWeapon.UseWeapon;
+
     }
 
     private void InitPlayerCharacter()
@@ -69,6 +72,8 @@ public class PlayerController : NetworkBehaviour
         playerInputManager.SwitchViewMode.performed -= SwitchViewMode;
         playerInputManager.SwitchViewMode.canceled -= SwitchViewMode;
 
+        playerInputManager.Attack.performed -= playerWeapon.UseWeapon;
+
     }
     private void Update()
     {
@@ -79,7 +84,9 @@ public class PlayerController : NetworkBehaviour
             EnemyManager.Instance.Spawn(2001, transform.position);
         }
 
-
+        if (IsOwner)
+        {
+        }
     }
 
     private void FixedUpdate()
@@ -87,9 +94,11 @@ public class PlayerController : NetworkBehaviour
         if (!IsOwner) return;
 
         playerMovement.MoveCharactor();
+        mouseMovement.RotatePlayer();
 
 
     }
+
 
     private void MovementAnimation()
     {
@@ -113,8 +122,8 @@ public class PlayerController : NetworkBehaviour
     private void LateUpdate()
     {
         if (!IsOwner) return;
-        mouseMovement.RotateCamera();
         MovementAnimation();
+        mouseMovement.RotateCamera();
 
     }
     [Command]
@@ -143,15 +152,13 @@ public class PlayerController : NetworkBehaviour
     }
     private void SwitchViewMode(InputAction.CallbackContext context)
     {
-        if (context.canceled && context.duration < Camera.main.GetComponent<CinemachineBrain>().m_DefaultBlend.m_Time) return;
-
         switch (playerCameraMode)
         {
             case PlayerCameraMode.ThirdPerson:
-                SetCameraMode(PlayerCameraMode.Focus);
+                SetCameraMode(PlayerCameraMode.Focus, true);
                 break;
             case PlayerCameraMode.Focus:
-                SetCameraMode(PlayerCameraMode.ThirdPerson);
+                SetCameraMode(PlayerCameraMode.ThirdPerson, false);
                 break;
         }
     }

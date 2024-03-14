@@ -1,5 +1,5 @@
 public interface IDamageable
 {
-    public void TakeDamage(Damage damage,EntityCharacterData attackerData);
+    public void TakeDamage(AttackDamage damage,EntityCharacterData attackerData);
     public void InitHp(EntityCharacterData attackerData);
 }

@@ -12,6 +12,8 @@ public partial class InGameManager : Singleton<InGameManager>
 
     protected override void InitAfterAwake()
     {
+        Application.targetFrameRate = Mathf.RoundToInt((float)Screen.currentResolution.refreshRateRatio.value);
+
     }
 
     public void ChangeState(InGameState newState)

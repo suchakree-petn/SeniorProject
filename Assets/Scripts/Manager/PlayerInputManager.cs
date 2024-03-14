@@ -8,6 +8,7 @@ public class PlayerInputManager : Singleton<PlayerInputManager>
     public InputAction RunAction;
     public InputAction Look;
     public InputAction SwitchViewMode;
+    public InputAction Attack;
 
     protected override void InitAfterAwake()
     {
@@ -22,7 +23,7 @@ public class PlayerInputManager : Singleton<PlayerInputManager>
         RunAction = PlayerActions.PlayerCharacter.Run;
         Look = PlayerActions.PlayerCharacter.Look;
         SwitchViewMode = PlayerActions.PlayerCharacter.SwitchViewMode;
-
+        Attack = PlayerActions.PlayerCharacter.Attack;
     }
 
 }

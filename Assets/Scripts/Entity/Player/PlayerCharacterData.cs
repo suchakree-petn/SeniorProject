@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "PlayerCharacterData_" , menuName ="EntityCharacterData/PlayerCharacterData")]
+[CreateAssetMenu(fileName = "PlayerCharacterData_", menuName = "EntityCharacterData/PlayerCharacterData")]
 public class PlayerCharacterData : EntityCharacterData
 {
-
+    public PlayerRole PlayerRole;
     public override float GetMaxHp()
     {
         return HpBase + HpBonus;
@@ -14,4 +14,10 @@ public class PlayerCharacterData : EntityCharacterData
     {
         return AttackBase + AttackBonus;
     }
+}
+public enum PlayerRole
+{
+    FrontLine,
+    DamageDealer,
+    Supporter
 }

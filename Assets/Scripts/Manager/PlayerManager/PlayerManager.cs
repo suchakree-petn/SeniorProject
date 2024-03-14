@@ -15,7 +15,7 @@ public partial class PlayerManager : NetworkSingleton<PlayerManager>
             if (_playerCharacterPrefab == null)
             {
                 _playerCharacterPrefab = new();
-                Transform[] playerChar = Resources.LoadAll<Transform>("Entity/Player/Prefab");
+                Transform[] playerChar = Resources.LoadAll<Transform>("Prefab/Entity/Player");
                 _playerCharacterPrefab = playerChar.ToDictionary(keys => ulong.Parse(keys.name.Split("_")[0]), val => val);
             }
             return _playerCharacterPrefab;
@@ -44,7 +44,7 @@ public partial class PlayerManager : NetworkSingleton<PlayerManager>
         {
             NetworkManager.OnClientConnectedCallback += PlayerManager_OnClientConnectedHandler;
             NetworkManager.OnClientDisconnectCallback += PlayerManager_OnClientDisconnectHandler;
-            PlayerManager_OnServerStartedHandler();
+            // PlayerManager_OnServerStartedHandler();
         }
 
     }

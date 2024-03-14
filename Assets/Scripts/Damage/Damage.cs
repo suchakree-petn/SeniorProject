@@ -1,15 +1,28 @@
-public class Damage : AttackerBase
+public class AttackDamage
 {
-   public float damage { get; private set; }
+   public DamageType Type;
+   public bool IsCriticalable;
+   public float Damage { get; private set; }
    public EntityCharacterData AttackerData { get; private set; }
-   public Damage(float damageMultiplier, EntityCharacterData attackerData)
+
+   public AttackDamage(float damageMultiplier, EntityCharacterData attackerData, DamageType damageType = DamageType.Default,bool isCriticalable = false)
    {
-      damage = DamageCalculation(damageMultiplier, attackerData);
+      Type = damageType;
+      IsCriticalable = isCriticalable;
+      Damage = DamageCalculation(damageMultiplier, attackerData);
       AttackerData = attackerData;
    }
+
    private float DamageCalculation(float damageMultiplier, EntityCharacterData attackerData)
    {
       return (attackerData.AttackBase + attackerData.AttackBonus) * damageMultiplier;
    }
 
 }
+public enum DamageType
+   {
+      Default,
+      HitScan,
+      Projectile,
+      Melee
+   }

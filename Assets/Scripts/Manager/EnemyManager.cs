@@ -13,7 +13,7 @@ public class EnemyManager : NetworkSingleton<EnemyManager>
             if (_enemyCharacterPrefab == null)
             {
                 _enemyCharacterPrefab = new();
-                Transform[] enemyChar = Resources.LoadAll<Transform>("Entity/Enemy/Prefab");
+                Transform[] enemyChar = Resources.LoadAll<Transform>("Prefab/Entity/Enemy");
                 _enemyCharacterPrefab = enemyChar.ToDictionary(keys => ulong.Parse(keys.name.Split("_")[0]), val => val);
             }
             return _enemyCharacterPrefab;

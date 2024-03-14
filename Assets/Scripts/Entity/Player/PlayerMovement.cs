@@ -2,7 +2,6 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(Rigidbody))]
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private PlayerMovementConfig playerMovementConfig;
@@ -145,7 +144,7 @@ public class PlayerMovement : MonoBehaviour
         {
             Vector3 moveDirOnPlane = Vector3.ProjectOnPlane(moveDirection, Vector3.up);
             Quaternion targetRotation = Quaternion.LookRotation(moveDirOnPlane, Vector3.up);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 500 * Time.deltaTime);
+            playerRb.rotation = Quaternion.RotateTowards(playerRb.rotation, targetRotation, 500 * Time.deltaTime);
         }
 
         playerRb.AddForce(10 * playerMovementConfig.MoveSpeed * moveDirection, ForceMode.Force);
