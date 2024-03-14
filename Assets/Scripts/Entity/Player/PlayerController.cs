@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using Cinemachine;
 using QFSW.QC;
@@ -12,14 +13,19 @@ public class PlayerController : NetworkBehaviour
     public PlayerCharacterData PlayerCharacterData => _playerCharacterData;
     public Vector3 OuterForce;
 
+    public Action<PlayerCameraMode, PlayerCameraMode> OnPlayerCameraModeChanged;
+
 
     [Header("Reference")]
     [SerializeField] private PlayerMovement playerMovement;
     [SerializeField] private MouseMovement mouseMovement;
     [SerializeField] private PlayerAnimation playerAnimation;
     [SerializeField] private PlayerHealth playerHealth;
-    [SerializeField] private PlayerWeapon playerWeapon;
 
+    protected virtual void Start()
+    {
+
+    }
 
     public override void OnNetworkSpawn()
     {
@@ -41,11 +47,10 @@ public class PlayerController : NetworkBehaviour
         playerInputManager.SwitchViewMode.performed += SwitchViewMode;
         playerInputManager.SwitchViewMode.canceled += SwitchViewMode;
 
-        playerInputManager.Attack.performed += playerWeapon.UseWeapon;
 
     }
 
-    private void InitPlayerCharacter()
+    protected virtual void InitPlayerCharacter()
     {
         playerMovement.CanMove = true;
         playerMovement.SetCameraMode(playerCameraMode);
@@ -72,10 +77,9 @@ public class PlayerController : NetworkBehaviour
         playerInputManager.SwitchViewMode.performed -= SwitchViewMode;
         playerInputManager.SwitchViewMode.canceled -= SwitchViewMode;
 
-        playerInputManager.Attack.performed -= playerWeapon.UseWeapon;
 
     }
-    private void Update()
+    protected virtual void Update()
     {
 
         // Test spawn enemy entity
@@ -84,12 +88,9 @@ public class PlayerController : NetworkBehaviour
             EnemyManager.Instance.Spawn(2001, transform.position);
         }
 
-        if (IsOwner)
-        {
-        }
     }
 
-    private void FixedUpdate()
+    protected virtual void FixedUpdate()
     {
         if (!IsOwner) return;
 
@@ -100,7 +101,7 @@ public class PlayerController : NetworkBehaviour
     }
 
 
-    private void MovementAnimation()
+    protected virtual void MovementAnimation()
     {
         Vector3 finalVelocity = playerMovement.GetMovementForce();
         finalVelocity = new(finalVelocity.x, 0f, finalVelocity.z);
@@ -119,7 +120,7 @@ public class PlayerController : NetworkBehaviour
         }
     }
 
-    private void LateUpdate()
+    protected virtual void LateUpdate()
     {
         if (!IsOwner) return;
         MovementAnimation();
@@ -127,7 +128,7 @@ public class PlayerController : NetworkBehaviour
 
     }
     [Command]
-    public void SetCameraMode(PlayerCameraMode newMode, bool isShowCrossHair = true)
+    protected virtual void SetCameraMode(PlayerCameraMode newMode, bool isShowCrossHair = true)
     {
         playerCameraMode = newMode;
         switch (newMode)
@@ -150,21 +151,37 @@ public class PlayerController : NetworkBehaviour
         playerMovement.SetCameraMode(playerCameraMode);
         mouseMovement.SetCameraMode(playerCameraMode);
     }
-    private void SwitchViewMode(InputAction.CallbackContext context)
+    protected virtual void SwitchViewMode(InputAction.CallbackContext context)
     {
         switch (playerCameraMode)
         {
             case PlayerCameraMode.ThirdPerson:
                 SetCameraMode(PlayerCameraMode.Focus, true);
+                OnPlayerCameraModeChanged?.Invoke(PlayerCameraMode.ThirdPerson, PlayerCameraMode.Focus);
                 break;
             case PlayerCameraMode.Focus:
                 SetCameraMode(PlayerCameraMode.ThirdPerson, false);
+                OnPlayerCameraModeChanged?.Invoke(PlayerCameraMode.Focus, PlayerCameraMode.ThirdPerson);
                 break;
         }
+        Debug.Log($"Switch to {playerCameraMode}");
+
     }
 
-    public float GetCurrentHp()
+    public virtual float GetCurrentHp()
     {
         return playerHealth.CurrentHealth;
+    }
+
+    public virtual void InitWeapon()
+    {
+
+    }
+
+    protected virtual void OnEnable()
+    {
+    }
+    protected virtual void OnDisable()
+    {
     }
 }

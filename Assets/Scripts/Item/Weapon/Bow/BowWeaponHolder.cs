@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BowWeaponHolder : WeaponHolder<BowBase>
@@ -10,7 +8,12 @@ public class BowWeaponHolder : WeaponHolder<BowBase>
     [SerializeField] private Transform firePointTransform;
     public override void UseWeapon()
     {
-        Transform arrow = Weapon.GetArrow(position:firePointTransform.position);
+        if (firePointTransform == null)
+        {
+            Debug.LogWarning($"No Fire Point transform");
+            return;
+        }
+        Transform arrow = Weapon.GetArrow(position: firePointTransform.position);
 
         FireArrow(arrow.GetComponent<Rigidbody>());
 
@@ -39,10 +42,10 @@ public class BowWeaponHolder : WeaponHolder<BowBase>
 
 }
 
-[System.Serializable]
-public class BowConfig
-{
-    public float ArrowSpeed;
-    public float MaxRaycastDistance;
-    public LayerMask targetMask;
-}
+// [System.Serializable]
+// public class BowConfig
+// {
+//     public float ArrowSpeed;
+//     public float MaxRaycastDistance;
+//     public LayerMask targetMask;
+// }

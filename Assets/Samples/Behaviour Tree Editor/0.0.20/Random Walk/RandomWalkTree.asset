@@ -22,13 +22,12 @@ MonoBehaviour:
   - rid: 1704181477311250437
   - rid: 1704181477311250438
   - rid: 1704181477311250439
-  - rid: 7794261097235349504
   treeState: 0
   blackboard:
     keys:
     - rid: 1704181477311250435
-  viewPosition: {x: 145.6, y: 36.8, z: 0}
-  viewScale: {x: 0.32690176, y: 0.32690176, z: 1}
+  viewPosition: {x: 171.2, y: -29.6, z: 0}
+  viewScale: {x: 0.43232757, y: 0.43232757, z: 1}
   references:
     version: 2
     RefIds:
@@ -157,7 +156,7 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: 7878aa645a1c4404281f4cfb04dae4f2
-        position: {x: -105, y: 540}
+        position: {x: -75, y: 540}
         blackboard:
           keys: []
         description: 
@@ -166,14 +165,3 @@ MonoBehaviour:
           reference:
             rid: -2
           defaultValue: Moving...
-    - rid: 7794261097235349504
-      type: {class: Attack, ns: , asm: Assembly-CSharp}
-      data:
-        state: 0
-        started: 0
-        guid: 66c4586e7bf83da4b955c7f6985cdfea
-        position: {x: -240, y: 675}
-        blackboard:
-          keys: []
-        description: 
-        drawGizmos: 0

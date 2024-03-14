@@ -56,7 +56,6 @@ public class MouseMovement : MonoBehaviour
         playerTransform.rotation = Quaternion.Euler(0f, mainCam.transform.rotation.eulerAngles.y, 0f);
         PlayerUIManager.Instance.SetPlayerCrossHairState(isShowCrossHair);
         characterModel.localRotation = Quaternion.Euler(0, characterModel.rotation.y + rotateOffset, 0);
-        Debug.Log("MouseMovement: Set camera mode: Focus");
     }
     public void SetThirdperson(bool isShowCrossHair = false)
     {

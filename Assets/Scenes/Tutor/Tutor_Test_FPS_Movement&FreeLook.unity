@@ -1579,10 +1579,12 @@ MonoBehaviour:
   m_Placeholder: {fileID: 0}
   m_ItemText: {fileID: 757334930}
   m_ItemImage: {fileID: 0}
-  m_Value: 0
+  m_Value: 1
   m_Options:
     m_Options:
     - m_Text: Caster
+      m_Image: {fileID: 0}
+    - m_Text: Archer
       m_Image: {fileID: 0}
     - m_Text: Dummy
       m_Image: {fileID: 0}
@@ -2894,7 +2896,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Caster
+  m_text: Archer
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3729,7 +3731,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 0, y: 7.049059, z: -12.79351}
+  m_FollowOffset: {x: 0, y: 4.127875, z: -11.28043}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -4866,7 +4868,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 0, y: 7.049059, z: -12.79351}
+  m_FollowOffset: {x: 0, y: 4.127875, z: -11.28043}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -6046,7 +6048,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 0, y: 7.049059, z: -12.79351}
+  m_FollowOffset: {x: 0, y: 4.127875, z: -11.28043}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1

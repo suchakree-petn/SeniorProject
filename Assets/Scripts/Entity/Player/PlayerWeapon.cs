@@ -1,28 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerWeapon : MonoBehaviour
+public abstract class PlayerWeapon : MonoBehaviour
 {
-    public BowWeaponHolder BowWeapon;
 
-
-    public void UseWeapon(InputAction.CallbackContext context)
+    public abstract void UseWeapon(InputAction.CallbackContext context);
+    public GameObject GetWeaponInHand()
     {
-        switch (playerController.PlayerCharacterData.PlayerRole)
-        {
-            case PlayerRole.FrontLine:
-                break;
-            case PlayerRole.DamageDealer:
-                BowWeapon.UseWeapon();
-                break;
-            case PlayerRole.Supporter:
-                break;
-        }
+        Transform weapon = InHand_weaponHolderTransform.GetChild(0);
+        // weapon.SetLocalPositionAndRotation(default, default);
+        return weapon.gameObject;
     }
 
-    [Header("Reference")]
-    [SerializeField] private Transform weaponHolderTransform;
-    [SerializeField] private PlayerController playerController;
+    [Header("Base Reference")]
+    [SerializeField] protected Transform InHand_weaponHolderTransform;
+    [SerializeField] protected PlayerController playerController;
 }
