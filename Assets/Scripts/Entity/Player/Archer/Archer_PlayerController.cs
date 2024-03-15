@@ -1,9 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
-public class Archer_PlayerController : PlayerController
+public partial class Archer_PlayerController : PlayerController
 {
     [Header("Archer Reference")]
     [SerializeField] private Transform firePointTransform;
@@ -110,7 +111,6 @@ public class Archer_PlayerController : PlayerController
         playerAnimation.SetFloat("DrawPower", drawPowerRatio);
     }
 
-    public float LayerWeightLerpSpeed;
 
     protected override void OnEnable()
     {

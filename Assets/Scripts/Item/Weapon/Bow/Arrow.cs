@@ -1,6 +1,7 @@
+using Unity.Netcode;
 using UnityEngine;
 
-public abstract class Arrow : MonoBehaviour
+public abstract class Arrow : NetworkBehaviour
 {
     [Header("Base Reference")]
     [SerializeField] private Rigidbody arrowRb;
@@ -20,6 +21,8 @@ public abstract class Arrow : MonoBehaviour
 
     public virtual void SetParent(Transform newParent)
     {
+        if (!newParent.TryGetComponent<NetworkObject>(out _)) return;
+        
         arrowRb.transform.SetParent(newParent);
     }
 }

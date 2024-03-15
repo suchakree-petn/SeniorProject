@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -16,6 +17,7 @@ public class Archer_PlayerWeapon : PlayerWeapon
     [SerializeField] private Transform OnBack_weaponHolderTransform;
     [SerializeField] private Transform firePointHolderTransform;
     [SerializeField] private Transform firePointTransform;
+    [SerializeField] private Archer_PlayerController archer_PlayerController;
 
     public override void UseWeapon(InputAction.CallbackContext context)
     {
@@ -33,8 +35,7 @@ public class Archer_PlayerWeapon : PlayerWeapon
 
         if (context.canceled)
         {
-            Transform arrow = BowWeaponData.GetArrow(position: firePointTransform.position);
-            FireArrow(arrow.GetComponent<Rigidbody>());
+            archer_PlayerController.FireArrow_ServerRpc();
             IsDrawing = false;
             DrawPower = 0;
         }
@@ -69,11 +70,14 @@ public class Archer_PlayerWeapon : PlayerWeapon
             DrawPower = BowConfig.MaxDrawPower;
         }
     }
-    private void FireArrow(Rigidbody arrowRb)
+    public void FireArrow(NetworkObjectReference arrowNetworkObjectReference)
     {
+        if (!arrowNetworkObjectReference.TryGet(out NetworkObject arrowNetworkObject)) return;
+
+        Rigidbody arrowRb = arrowNetworkObject.GetComponent<Rigidbody>();
         Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
         Vector3 direction;
-        if (Physics.Raycast(ray, out RaycastHit hit, BowConfig.MaxRaycastDistance, BowConfig.targetMask))
+        if (Physics.Raycast(ray, out RaycastHit hit, BowConfig.MaxRaycastDistance, BowConfig.targetMask) && hit.distance > Vector3.Distance(hit.point, firePointTransform.position))
         {
             // Calculate direction towards the hit point
             direction = (hit.point - firePointTransform.position).normalized;
@@ -116,6 +120,8 @@ public class Archer_PlayerWeapon : PlayerWeapon
     {
         firePointHolderTransform.forward = Camera.main.transform.forward;
     }
+
+
 
     private void OnDrawGizmosSelected()
     {
