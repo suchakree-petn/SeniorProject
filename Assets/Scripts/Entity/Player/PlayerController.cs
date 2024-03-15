@@ -17,10 +17,10 @@ public class PlayerController : NetworkBehaviour
 
 
     [Header("Reference")]
-    [SerializeField] private PlayerMovement playerMovement;
-    [SerializeField] private MouseMovement mouseMovement;
-    [SerializeField] private PlayerAnimation playerAnimation;
-    [SerializeField] private PlayerHealth playerHealth;
+    [SerializeField] protected PlayerMovement playerMovement;
+    [SerializeField] protected MouseMovement mouseMovement;
+    [SerializeField] protected PlayerAnimation playerAnimation;
+    [SerializeField] protected PlayerHealth playerHealth;
 
     protected virtual void Start()
     {
@@ -44,7 +44,7 @@ public class PlayerController : NetworkBehaviour
 
         playerInputManager.Look.performed += mouseMovement.SetLook;
         playerInputManager.Look.canceled += mouseMovement.SetLook;
-        playerInputManager.SwitchViewMode.performed += SwitchViewMode;
+        // playerInputManager.SwitchViewMode.performed += SwitchViewMode;
         playerInputManager.SwitchViewMode.canceled += SwitchViewMode;
 
 
@@ -74,7 +74,7 @@ public class PlayerController : NetworkBehaviour
 
         playerInputManager.Look.performed -= mouseMovement.SetLook;
         playerInputManager.Look.canceled -= mouseMovement.SetLook;
-        playerInputManager.SwitchViewMode.performed -= SwitchViewMode;
+        // playerInputManager.SwitchViewMode.performed -= SwitchViewMode;
         playerInputManager.SwitchViewMode.canceled -= SwitchViewMode;
 
 
@@ -107,6 +107,7 @@ public class PlayerController : NetworkBehaviour
         finalVelocity = new(finalVelocity.x, 0f, finalVelocity.z);
         finalVelocity = Vector3.ClampMagnitude(finalVelocity, playerMovement.PlayerMovementConfig.MoveSpeed);
         finalVelocity = transform.InverseTransformDirection(finalVelocity); // Convert to local space
+        finalVelocity = playerMovement.GetMoveSpeedRatioOfMaxMoveSpeed(finalVelocity);
         if (PlayerInputManager.Instance.MovementAction.IsPressed())
         {
             playerAnimation.SetMoveVelocityX(finalVelocity.x);

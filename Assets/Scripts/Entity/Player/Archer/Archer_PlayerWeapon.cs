@@ -14,6 +14,7 @@ public class Archer_PlayerWeapon : PlayerWeapon
 
     [Header("Archer Reference")]
     [SerializeField] private Transform OnBack_weaponHolderTransform;
+    [SerializeField] private Transform firePointHolderTransform;
     [SerializeField] private Transform firePointTransform;
 
     public override void UseWeapon(InputAction.CallbackContext context)
@@ -47,14 +48,17 @@ public class Archer_PlayerWeapon : PlayerWeapon
             DrawBow();
         }
 
-
+        if (WeaponHolderState == Archer_WeaponHolderState.InHand)
+        {
+            RotateFirePointHolder();
+        }
     }
     private void DrawBow()
     {
 
         if (DrawPower < BowConfig.MaxDrawPower)
         {
-            DrawPower += Time.deltaTime;
+            DrawPower += Time.deltaTime * BowConfig.DrawSpeed;
             if (DrawPower >= BowConfig.MaxDrawPower)
             {
                 DrawPower = BowConfig.MaxDrawPower;
@@ -62,28 +66,28 @@ public class Archer_PlayerWeapon : PlayerWeapon
         }
         else
         {
-            DrawPower = 0;
+            DrawPower = BowConfig.MaxDrawPower;
         }
     }
     private void FireArrow(Rigidbody arrowRb)
     {
         Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
+        Vector3 direction;
         if (Physics.Raycast(ray, out RaycastHit hit, BowConfig.MaxRaycastDistance, BowConfig.targetMask))
         {
             // Calculate direction towards the hit point
-            Vector3 direction = (hit.point - firePointTransform.position).normalized;
+            direction = (hit.point - firePointTransform.position).normalized;
             // Rotate arrow to face the hit point
             arrowRb.transform.forward = direction;
             // Apply force in the direction of the hit point
-            arrowRb.AddForce(direction * BowConfig.ArrowSpeed, ForceMode.Impulse);
         }
         else
         {
             // If ray doesn't hit anything, use the default direction
             arrowRb.transform.forward = firePointTransform.forward.normalized;
-            // Apply force in the default direction
-            arrowRb.AddForce(arrowRb.transform.forward * BowConfig.ArrowSpeed, ForceMode.Impulse);
+            direction = arrowRb.transform.forward;
         }
+        arrowRb.AddForce(DrawPower / BowConfig.MaxDrawPower * BowConfig.ArrowSpeed * direction, ForceMode.Impulse);
     }
     public GameObject GetWeaponOnBack()
     {
@@ -107,6 +111,16 @@ public class Archer_PlayerWeapon : PlayerWeapon
         Debug.Log($"Switch Weapon to {newState}");
 
     }
+
+    private void RotateFirePointHolder()
+    {
+        firePointHolderTransform.forward = Camera.main.transform.forward;
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Debug.DrawLine(firePointHolderTransform.position, firePointTransform.position);
+    }
 }
 [System.Serializable]
 public class BowConfig
@@ -114,6 +128,7 @@ public class BowConfig
     public float ArrowSpeed;
     public float DrawSpeed;
     public float MaxDrawPower;
+    public float MinDrawPower;
     public float MaxRaycastDistance;
     public LayerMask targetMask;
 }

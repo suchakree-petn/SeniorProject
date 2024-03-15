@@ -195,7 +195,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8671422499957816472}
   - component: {fileID: 4238448583515551294}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DamageHitbox
   m_TagString: Hitbox
   m_Icon: {fileID: 0}
@@ -555,6 +555,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: 1000_PlayerEntity_Dummy
+      objectReference: {fileID: 0}
+    - target: {fileID: 712881128543300860, guid: b116f61db08cf6f49b80c75bfc0b419c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 712881128543300860, guid: b116f61db08cf6f49b80c75bfc0b419c,
         type: 3}

@@ -226,7 +226,19 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-
+    public Vector3 GetMoveSpeedRatioOfMaxMoveSpeed(Vector3 moveVelocity)
+    {
+        float ratioMoveBonus = 1 + playerMovementConfig.RunSpeedBonusPercentage / 100f;
+        float maxMoveSpeed = playerMovementConfig._defaultMoveSpeed * ratioMoveBonus;
+        Vector3 ratio = new(moveVelocity.x / maxMoveSpeed, moveVelocity.y / maxMoveSpeed, moveVelocity.z / maxMoveSpeed);
+        return ratio;
+    }
+    public Vector3 GetMoveSpeedRatioOfNormalMoveSpeed(Vector3 moveVelocity)
+    {
+        float maxMoveSpeed = playerMovementConfig._defaultMoveSpeed;
+        Vector3 ratio = new(moveVelocity.x / maxMoveSpeed, moveVelocity.y / maxMoveSpeed, moveVelocity.z / maxMoveSpeed);
+        return ratio;
+    }
 
 #if UNITY_EDITOR
     public void OnValidate()

@@ -15,4 +15,19 @@ public class PlayerAnimation : MonoBehaviour
         animator.SetFloat("MoveVelocityZ", velocityZ);
     }
 
+    public void SetLayerWeight(int layerIndex, float weight)
+    {
+        animator.SetLayerWeight(layerIndex, weight);
+    }
+
+    public float GetLayerWeight(int layerIndex)
+    {
+        return animator.GetLayerWeight(layerIndex);
+    }
+
+    public void SetFloat(string name, float value)
+    {
+        animator.SetFloat(name, value);
+    }
 }
+

@@ -2,9 +2,8 @@ using UnityEngine;
 
 public class DefaultArrow : Arrow
 {
-    public override void OnCollisionEnter(Collision other)
+    public override void OnTriggerEnter(Collider other)
     {
-        Debug.Log($"Arrow {name} collide with {other.gameObject.name}");
-        SetKinematic();
+        base.OnTriggerEnter(other);
     }
 }

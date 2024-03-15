@@ -147,7 +147,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5852199005278207131}
   - component: {fileID: 2385862875820891651}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: DamageHitbox
   m_TagString: Hitbox
   m_Icon: {fileID: 0}
@@ -317,7 +317,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 2328778544
+  GlobalObjectIdHash: 156021223
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
   ActiveSceneSynchronization: 0
