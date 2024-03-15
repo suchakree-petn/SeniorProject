@@ -35,7 +35,7 @@ public class Archer_PlayerWeapon : PlayerWeapon
 
         if (context.canceled)
         {
-            archer_PlayerController.FireArrow_ServerRpc();
+            FireArrow_ServerRpc(DrawPower);
             IsDrawing = false;
             DrawPower = 0;
         }
@@ -44,6 +44,8 @@ public class Archer_PlayerWeapon : PlayerWeapon
 
     private void Update()
     {
+        if (!IsOwner) return;
+
         if (IsDrawing)
         {
             DrawBow();
@@ -70,11 +72,22 @@ public class Archer_PlayerWeapon : PlayerWeapon
             DrawPower = BowConfig.MaxDrawPower;
         }
     }
-    public void FireArrow(NetworkObjectReference arrowNetworkObjectReference)
+    [ServerRpc(RequireOwnership = false)]
+    public void FireArrow_ServerRpc(float drawPower, ServerRpcParams serverRpcParams = default)
     {
-        if (!arrowNetworkObjectReference.TryGet(out NetworkObject arrowNetworkObject)) return;
+        ulong clientId = serverRpcParams.Receive.SenderClientId;
+        Transform arrow = BowWeaponData.GetArrow(position: firePointTransform.position);
+        NetworkObject arrowNetworkObject = arrow.GetComponent<NetworkObject>();
+        arrowNetworkObject.SpawnWithOwnership(clientId, true);
+        FireArrow_ClientRpc(drawPower, clientId, arrowNetworkObject);
+    }
 
-        Rigidbody arrowRb = arrowNetworkObject.GetComponent<Rigidbody>();
+    [ClientRpc]
+    public void FireArrow_ClientRpc(float drawPower, ulong clientId, NetworkObjectReference arrowObjRef)
+    {
+        if (!arrowObjRef.TryGet(out NetworkObject arrowNetObj) || clientId != NetworkManager.LocalClientId) return;
+
+        Rigidbody arrowRb = arrowNetObj.GetComponent<Rigidbody>();
         Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
         Vector3 direction;
         if (Physics.Raycast(ray, out RaycastHit hit, BowConfig.MaxRaycastDistance, BowConfig.targetMask) && hit.distance > Vector3.Distance(hit.point, firePointTransform.position))
@@ -91,7 +104,8 @@ public class Archer_PlayerWeapon : PlayerWeapon
             arrowRb.transform.forward = firePointTransform.forward.normalized;
             direction = arrowRb.transform.forward;
         }
-        arrowRb.AddForce(DrawPower / BowConfig.MaxDrawPower * BowConfig.ArrowSpeed * direction, ForceMode.Impulse);
+        Debug.Log($"{drawPower} / {BowConfig.MaxDrawPower} * {BowConfig.ArrowSpeed}");
+        arrowRb.AddForce(drawPower / BowConfig.MaxDrawPower * BowConfig.ArrowSpeed * direction, ForceMode.Impulse);
     }
     public GameObject GetWeaponOnBack()
     {

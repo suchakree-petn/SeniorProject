@@ -8,9 +8,14 @@ public abstract class Arrow : NetworkBehaviour
     [SerializeField] private Collider hitBox;
     public virtual void OnTriggerEnter(Collider other)
     {
+        if (!IsOwner || !IsSpawned) return;
+
         Debug.Log($"Arrow {name} collide with {other.gameObject.name}");
         SetKinematic();
-        SetParent(other.transform);
+        if (other.TryGetComponent<NetworkObject>(out NetworkObject otherNetObj))
+        {
+            SetParent_ServerRpc(otherNetObj);
+        }
     }
 
     public virtual void SetKinematic(bool isActive = true)
@@ -19,10 +24,11 @@ public abstract class Arrow : NetworkBehaviour
         hitBox.enabled = !isActive;
     }
 
-    public virtual void SetParent(Transform newParent)
+    [ServerRpc(RequireOwnership = false)]
+    public virtual void SetParent_ServerRpc(NetworkObjectReference newParentNetObjRef)
     {
-        if (!newParent.TryGetComponent<NetworkObject>(out _)) return;
-        
-        arrowRb.transform.SetParent(newParent);
+        if (!newParentNetObjRef.TryGet(out NetworkObject newParentNetObj)) return;
+
+        arrowRb.transform.SetParent(newParentNetObj.transform);
     }
 }

@@ -1,8 +1,9 @@
 using System;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public abstract class PlayerWeapon : MonoBehaviour
+public abstract class PlayerWeapon : NetworkBehaviour
 {
 
     public abstract void UseWeapon(InputAction.CallbackContext context);

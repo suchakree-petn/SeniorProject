@@ -18,6 +18,7 @@ public partial class Archer_PlayerController : PlayerController
 
     protected override void Update()
     {
+        if (!IsOwner) return;
         base.Update();
 
         ArcherAnimation();
@@ -26,8 +27,9 @@ public partial class Archer_PlayerController : PlayerController
 
     public override void OnNetworkSpawn()
     {
-        base.OnNetworkSpawn();
+        if (!IsOwner) return;
 
+        base.OnNetworkSpawn();
         PlayerInputManager playerInputManager = PlayerInputManager.Instance;
         playerInputManager.Attack.performed += archer_playerWeapon.UseWeapon;
         playerInputManager.Attack.canceled += archer_playerWeapon.UseWeapon;
@@ -36,8 +38,9 @@ public partial class Archer_PlayerController : PlayerController
 
     public override void OnNetworkDespawn()
     {
-        base.OnNetworkDespawn();
+        if (!IsOwner) return;
 
+        base.OnNetworkDespawn();
         PlayerInputManager playerInputManager = PlayerInputManager.Instance;
         playerInputManager.Attack.performed -= archer_playerWeapon.UseWeapon;
         playerInputManager.Attack.canceled -= archer_playerWeapon.UseWeapon;

@@ -181,6 +181,8 @@ GameObject:
   - component: {fileID: 6851957407499613674}
   - component: {fileID: 6014971450291398019}
   - component: {fileID: 7712574691992090605}
+  - component: {fileID: 3141610665910564191}
+  - component: {fileID: 7354336074906850380}
   m_Layer: 0
   m_Name: DefaultArrow
   m_TagString: Untagged
@@ -288,6 +290,48 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   arrowRb: {fileID: 4269340218531131940}
   hitBox: {fileID: 6851957407499613674}
+--- !u!114 &3141610665910564191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6938922321965922709}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0e170b2b8f4e804f9553e10f3cd1d4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SyncPositionX: 1
+  SyncPositionY: 1
+  SyncPositionZ: 1
+  SyncRotAngleX: 1
+  SyncRotAngleY: 1
+  SyncRotAngleZ: 1
+  SyncScaleX: 0
+  SyncScaleY: 0
+  SyncScaleZ: 0
+  PositionThreshold: 0.001
+  RotAngleThreshold: 0.01
+  ScaleThreshold: 0.01
+  UseQuaternionSynchronization: 0
+  UseQuaternionCompression: 0
+  UseHalfFloatPrecision: 0
+  InLocalSpace: 0
+  Interpolate: 1
+  SlerpPosition: 0
+--- !u!114 &7354336074906850380
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6938922321965922709}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6c0be61502bb534f922ebb746851216, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &6252754250030322407
 PrefabInstance:
   m_ObjectHideFlags: 0
