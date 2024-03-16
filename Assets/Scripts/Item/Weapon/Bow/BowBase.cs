@@ -4,7 +4,8 @@ using UnityEngine;
 
 public abstract class BowBase : WeaponBase
 {
-    public float chargeDuration;
+    public float NormalAttack_DamageMultiplier;
+    public float NormalAttack_DrawSpeed;
 
     [Header("Bow Weapon References")]
     [SerializeField] private Transform arrow_prf;

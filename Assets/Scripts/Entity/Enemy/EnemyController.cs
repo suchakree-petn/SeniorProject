@@ -3,7 +3,7 @@ using TheKiwiCoder;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.AI;
-public class EnemyController : NetworkBehaviour
+public class EnemyController : NetworkBehaviour,IDamageable
 {
     [SerializeField] private EnemyCharacterData _enemyCharacterData;
     public EnemyCharacterData EnemyCharacterData => _enemyCharacterData;
@@ -15,7 +15,7 @@ public class EnemyController : NetworkBehaviour
     public float Radius_Z;
     public float toleranceValue = 1;
     public float acceleration = 60;
-
+    public float CurrentHealth;
     public float maxSpeed = 20;
     public bool IsNavAgent;
 
@@ -58,4 +58,14 @@ public class EnemyController : NetworkBehaviour
         
     }
 
+    [ServerRpc(RequireOwnership =false)]
+    public void TakeDamage_ServerRpc(float damage)
+    {
+        CurrentHealth -= damage;
+    }
+
+    public void InitHp(EntityCharacterData attackerData)
+    {
+        CurrentHealth = 10000;
+    }
 }

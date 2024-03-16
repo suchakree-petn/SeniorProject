@@ -5,6 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "PlayerCharacterData_", menuName = "EntityCharacterData/PlayerCharacterData")]
 public class PlayerCharacterData : EntityCharacterData
 {
+    public ulong OwnerUserId;
     public PlayerRole PlayerRole;
     public override float GetMaxHp()
     {

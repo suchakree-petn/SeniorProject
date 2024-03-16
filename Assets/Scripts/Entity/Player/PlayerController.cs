@@ -100,6 +100,11 @@ public class PlayerController : NetworkBehaviour
 
     }
 
+    public bool SetPlayerCharacterData(PlayerCharacterData playerCharacterData)
+    {
+        _playerCharacterData = playerCharacterData;
+        return true;
+    }
 
     protected virtual void MovementAnimation()
     {

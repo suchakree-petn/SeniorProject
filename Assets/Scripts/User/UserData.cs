@@ -11,12 +11,12 @@ public class UserData : ISaveData
     {
 
         UserId = userId;
-        UserName = userName + " " + userId;
+        UserName = userName + "_" + userId;
     }
     public static UserData NewData()
     {
         ulong userId = (ulong)Random.Range(ulong.MinValue, ulong.MaxValue);
-        string userName = "User_";
+        string userName = "User";
         return new(userName, userId);
     }
 

@@ -35,7 +35,7 @@ public class Archer_PlayerWeapon : PlayerWeapon
 
         if (context.canceled)
         {
-            FireArrow_ServerRpc(DrawPower);
+            NormalAttack();
             IsDrawing = false;
             DrawPower = 0;
         }
@@ -72,20 +72,30 @@ public class Archer_PlayerWeapon : PlayerWeapon
             DrawPower = BowConfig.MaxDrawPower;
         }
     }
-    [ServerRpc(RequireOwnership = false)]
-    public void FireArrow_ServerRpc(float drawPower, ServerRpcParams serverRpcParams = default)
+    public override void NormalAttack()
     {
-        ulong clientId = serverRpcParams.Receive.SenderClientId;
-        Transform arrow = BowWeaponData.GetArrow(position: firePointTransform.position);
-        NetworkObject arrowNetworkObject = arrow.GetComponent<NetworkObject>();
-        arrowNetworkObject.SpawnWithOwnership(clientId, true);
-        FireArrow_ClientRpc(drawPower, clientId, arrowNetworkObject);
+        FireArrow_ServerRpc(BowWeaponData.NormalAttack_DamageMultiplier, DrawPower);
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    public void FireArrow_ServerRpc(float damageMultiplier, float drawPower, ServerRpcParams serverRpcParams = default)
+    {
+        ulong OwnerClientId = serverRpcParams.Receive.SenderClientId;
+        Transform arrowTransform = BowWeaponData.GetArrow(position: firePointTransform.position);
+        NetworkObject arrowNetworkObject = arrowTransform.GetComponent<NetworkObject>();
+        arrowNetworkObject.SpawnWithOwnership(OwnerClientId, true);
+
+        FireArrow_ClientRpc(damageMultiplier, drawPower, OwnerClientId, arrowNetworkObject);
     }
 
     [ClientRpc]
-    public void FireArrow_ClientRpc(float drawPower, ulong clientId, NetworkObjectReference arrowObjRef)
+    public void FireArrow_ClientRpc(float damageMultiplier, float drawPower, ulong OwnerClientId, NetworkObjectReference arrowObjRef)
     {
-        if (!arrowObjRef.TryGet(out NetworkObject arrowNetObj) || clientId != NetworkManager.LocalClientId) return;
+        if (!arrowObjRef.TryGet(out NetworkObject arrowNetObj) || OwnerClientId != NetworkManager.LocalClientId) return;
+        
+        AttackDamage attackDamage = BowWeaponData.GetDamage(damageMultiplier, playerController.PlayerCharacterData,(long)OwnerClientId);
+        Arrow arrow = arrowNetObj.GetComponent<Arrow>();
+        arrow.AttackDamage = attackDamage;
 
         Rigidbody arrowRb = arrowNetObj.GetComponent<Rigidbody>();
         Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
@@ -141,6 +151,8 @@ public class Archer_PlayerWeapon : PlayerWeapon
     {
         Debug.DrawLine(firePointHolderTransform.position, firePointTransform.position);
     }
+
+
 }
 [System.Serializable]
 public class BowConfig

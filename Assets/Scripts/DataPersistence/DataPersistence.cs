@@ -50,7 +50,8 @@ namespace DataPersistence
             Debug.Log("Loaded Player data");
             OnLoadSuccess?.Invoke();
 
-            if(_gameData == null){
+            if (_gameData == null)
+            {
                 SaveData();
             }
 

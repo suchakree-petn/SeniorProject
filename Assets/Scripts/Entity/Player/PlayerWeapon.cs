@@ -14,6 +14,8 @@ public abstract class PlayerWeapon : NetworkBehaviour
         return weapon.gameObject;
     }
 
+    public abstract void NormalAttack();
+
     [Header("Base Reference")]
     [SerializeField] protected Transform InHand_weaponHolderTransform;
     [SerializeField] protected PlayerController playerController;
