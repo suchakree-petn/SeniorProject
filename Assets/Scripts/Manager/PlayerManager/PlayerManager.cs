@@ -21,7 +21,9 @@ public partial class PlayerManager : NetworkSingleton<PlayerManager>
             return _playerCharacterPrefab;
         }
     }
-    public Dictionary<ulong, UserData> PlayerDatas { get; private set; } = new();
+    // public Dictionary<ulong, UserData> UserDatas { get; private set; } = new();
+    public Dictionary<ulong, PlayerCharacterData> PlayerCharacterDatas { get; private set; } = new();
+
     public Dictionary<ulong, GameObject> PlayerGameObjects { get; private set; } = new();
     public Dictionary<ulong, Vector3> PlayerPos
     {
@@ -30,12 +32,13 @@ public partial class PlayerManager : NetworkSingleton<PlayerManager>
             return PlayerGameObjects.ToDictionary(key => key.Key, val => val.Value.transform.position);
         }
     }
-    // public UserData OwnerPlayerData;
 
+    public Action<ulong> OnClientConnect;
     public Action<ulong> OnAfterClientConnect;
 
     protected override void InitAfterAwake()
     {
+
     }
 
     public override void OnNetworkSpawn()
@@ -59,47 +62,76 @@ public partial class PlayerManager : NetworkSingleton<PlayerManager>
     }
     private void PlayerManager_OnClientConnectedHandler(ulong clientId)
     {
-        Transform playerChar = Instantiate(PlayerCharacterPrefab[1001]);
-        playerChar.GetComponent<NetworkObject>().SpawnAsPlayerObject(clientId,true);
+        OnClientConnect?.Invoke(clientId);
+
+        Transform playerChar = Instantiate(PlayerCharacterPrefab[1002]);
+        playerChar.GetComponent<NetworkObject>().SpawnAsPlayerObject(clientId, true);
 
         Debug.Log("Client Connected");
         PlayerController[] allPlayers = FindObjectsOfType(typeof(PlayerController)) as PlayerController[];
         Debug.Log("Current player amount: " + allPlayers.Length);
-        bool isAdd = false;
+        // bool isAddUserData = false;
+        bool isAddPlayerCharacterData = false;
+        bool isAddAll = isAddPlayerCharacterData;
+
         foreach (PlayerController player in allPlayers)
         {
-            Debug.Log(player.OwnerClientId);
             if (clientId == player.OwnerClientId)
             {
+                // if (UserDatas.TryAdd(clientId, UserManager.Instance.UserData))
+                // {
+                //     isAddUserData = true;
+                // }
+                // else
+                // {
+                //     Debug.LogWarning($"Already contain this userId");
+                // }
+                if (PlayerCharacterDatas.TryAdd(clientId, player.PlayerCharacterData))
+                {
+                    isAddPlayerCharacterData = true;
+                }
+                else
+                {
+                    Debug.LogWarning($"Already contain this clientId");
+                }
+
                 if (PlayerGameObjects.TryAdd(clientId, player.gameObject))
                 {
-                    isAdd = true;
-                    break;
+                    isAddAll = true;
+                }
+                else
+                {
+                    Debug.LogWarning($"Already contain this clientId");
                 }
             }
         }
-        if (!isAdd)
+        if (!isAddAll)
         {
             Debug.LogWarning("Already has this clientId");
         }
         OnAfterClientConnect_ClientRpc(clientId);
     }
+
     private void PlayerManager_OnServerStartedHandler()
     {
         PlayerManager_OnClientConnectedHandler(0);
     }
+
     [ClientRpc]
     private void OnAfterClientConnect_ClientRpc(ulong clientId)
     {
         if (clientId != NetworkManager.LocalClientId) return;
         OnAfterClientConnect?.Invoke(clientId);
     }
+
     private void PlayerManager_OnClientDisconnectHandler(ulong clientId)
     {
         Debug.Log("Client Disconnected");
-
+        // UserDatas.Remove(clientId);
+        PlayerCharacterDatas.Remove(clientId);
         PlayerGameObjects.Remove(clientId);
     }
+
     public static Transform GetPlayerCharacterPrefab(ulong characterId)
     {
         return PlayerCharacterPrefab[characterId];
@@ -122,56 +154,7 @@ public partial class PlayerManager : NetworkSingleton<PlayerManager>
 
         newPlayerGO.GetComponent<NetworkObject>().SpawnWithOwnership(clientId, true);
     }
-    private void Update()
-    {
-        // For test
-        // GameObject playerGO = GameObject.FindGameObjectWithTag("Player");
-        // PlayerGameObjects.TryAdd(0, playerGO);
-        // if (PlayerGameObjects.TryGetValue(0, out GameObject gameObject)) if (gameObject == null) PlayerGameObjects = new(); ;
-    }
 
 
-    // private void Start()
-    // {
-    //     playerData_1 = ScriptableObject.CreateInstance<PlayerData>();
-    //     playerData_2 = ScriptableObject.CreateInstance<PlayerData>();
-    //     if (playerData_1 != null || playerData_2 != null)
-    //     {
-    //         InitOwnerPlayerData();
-    //         OnFinishInitAllPlayerData?.Invoke();
-    //     }
-    // }
 
-    // [ClientRpc]
-    // public void InitPlayerData_ClientRpc(ulong playerId)
-    // {
-    //     PlayerData data = PlayerData.Cache[playerId];
-    //     if (playerData_1 == null)
-    //     {
-    //         playerData_1 = data;
-    //     }
-    //     else
-    //     {
-    //         playerData_2 = data;
-    //     }
-    // }
-    // private void InitOwnerPlayerData()
-    // {
-    //     OwnerPlayerData = IsServer ? playerData_1 : playerData_2;
-    // }
-    // public static ulong GetOwnerPlayerId()
-    // {
-    //     return Instance.OwnerPlayerData.PlayerId;
-    // }
-    // public static ulong GetPlayerId(int playerOrderIndex)
-    // {
-    //     return playerOrderIndex == 1 ? Instance.playerData_1.PlayerId : Instance.playerData_2.PlayerId;
-    // }
-
-}
-public enum CharacterType
-{
-    Supporter,
-    FrontLine,
-    DamageDealer
 }

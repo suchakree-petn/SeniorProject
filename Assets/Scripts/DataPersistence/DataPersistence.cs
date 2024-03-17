@@ -10,7 +10,7 @@ namespace DataPersistence
         private T gameData;
         public FileDataHandler<T> dataHandler;
 
-        public static Action OnLoadSuccess;
+        public Action OnLoadSuccess;
 
 
         public DataPersistence(string fileName, T defaultData)
@@ -47,10 +47,10 @@ namespace DataPersistence
             {
                 dataPersistenceObj.LoadData(gameData);
             }
-            Debug.Log("Loaded Player data");
+            Debug.Log($"Loaded {gameData} data");
             OnLoadSuccess?.Invoke();
-
-            if(_gameData == null){
+            if (_gameData == null)
+            {
                 SaveData();
             }
 
@@ -69,7 +69,7 @@ namespace DataPersistence
 
             //save data to file using data handler
             dataHandler.Save(gameData);
-            Debug.Log("Saved Player data");
+            Debug.Log($"Saved {gameData} data");
 
         }
 

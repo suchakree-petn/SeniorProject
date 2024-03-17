@@ -1,22 +1,31 @@
+using System;
+using System.Collections.Generic;
 using DataPersistence;
+using Unity.Netcode;
 using UnityEngine;
 
-public partial class UserManager : Singleton<UserManager>
+public partial class UserManager : NetworkSingleton<UserManager>
 {
-    [SerializeField,ReadOnlyGUI] private UserData _userData;
+    [SerializeField, ReadOnlyGUI] private UserData _userData;
     public UserData UserData => _userData;
     public DataPersistence<UserData> UserDataPersistence { get; internal set; }
 
+    // [SerializeField] private NetworkList<UserData> AllUserData;
     protected override void InitAfterAwake()
     {
-        _userData = UserData.NewData();
-        UserDataPersistence = new("UserData",_userData);
+        UserDataPersistence = new("UserData", UserData.NewData());
+        UserDataPersistence.LoadData();
+
+        // AllUserData = new NetworkList<UserData>(null, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     }
 
-    private void Start()
+    public override void OnNetworkSpawn()
     {
-        // UserDataPersistence.SaveData();
-        UserDataPersistence.LoadData();
+
+    }
+    public override void OnNetworkDespawn()
+    {
+
     }
 
 }

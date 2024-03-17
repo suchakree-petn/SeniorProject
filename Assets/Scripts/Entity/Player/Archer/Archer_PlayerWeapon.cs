@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -16,6 +17,7 @@ public class Archer_PlayerWeapon : PlayerWeapon
     [SerializeField] private Transform OnBack_weaponHolderTransform;
     [SerializeField] private Transform firePointHolderTransform;
     [SerializeField] private Transform firePointTransform;
+    [SerializeField] private Archer_PlayerController archer_PlayerController;
 
     public override void UseWeapon(InputAction.CallbackContext context)
     {
@@ -33,8 +35,7 @@ public class Archer_PlayerWeapon : PlayerWeapon
 
         if (context.canceled)
         {
-            Transform arrow = BowWeaponData.GetArrow(position: firePointTransform.position);
-            FireArrow(arrow.GetComponent<Rigidbody>());
+            NormalAttack();
             IsDrawing = false;
             DrawPower = 0;
         }
@@ -43,6 +44,8 @@ public class Archer_PlayerWeapon : PlayerWeapon
 
     private void Update()
     {
+        if (!IsOwner) return;
+
         if (IsDrawing)
         {
             DrawBow();
@@ -69,11 +72,35 @@ public class Archer_PlayerWeapon : PlayerWeapon
             DrawPower = BowConfig.MaxDrawPower;
         }
     }
-    private void FireArrow(Rigidbody arrowRb)
+    public override void NormalAttack()
     {
+        FireArrow_ServerRpc(BowWeaponData.NormalAttack_DamageMultiplier, DrawPower);
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    public void FireArrow_ServerRpc(float damageMultiplier, float drawPower, ServerRpcParams serverRpcParams = default)
+    {
+        ulong OwnerClientId = serverRpcParams.Receive.SenderClientId;
+        Transform arrowTransform = BowWeaponData.GetArrow(position: firePointTransform.position);
+        NetworkObject arrowNetworkObject = arrowTransform.GetComponent<NetworkObject>();
+        arrowNetworkObject.SpawnWithOwnership(OwnerClientId, true);
+
+        FireArrow_ClientRpc(damageMultiplier, drawPower, OwnerClientId, arrowNetworkObject);
+    }
+
+    [ClientRpc]
+    public void FireArrow_ClientRpc(float damageMultiplier, float drawPower, ulong OwnerClientId, NetworkObjectReference arrowObjRef)
+    {
+        if (!arrowObjRef.TryGet(out NetworkObject arrowNetObj) || OwnerClientId != NetworkManager.LocalClientId) return;
+        
+        AttackDamage attackDamage = BowWeaponData.GetDamage(damageMultiplier, playerController.PlayerCharacterData,(long)OwnerClientId);
+        Arrow arrow = arrowNetObj.GetComponent<Arrow>();
+        arrow.AttackDamage = attackDamage;
+
+        Rigidbody arrowRb = arrowNetObj.GetComponent<Rigidbody>();
         Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
         Vector3 direction;
-        if (Physics.Raycast(ray, out RaycastHit hit, BowConfig.MaxRaycastDistance, BowConfig.targetMask))
+        if (Physics.Raycast(ray, out RaycastHit hit, BowConfig.MaxRaycastDistance, BowConfig.targetMask) && hit.distance > Vector3.Distance(hit.point, firePointTransform.position))
         {
             // Calculate direction towards the hit point
             direction = (hit.point - firePointTransform.position).normalized;
@@ -87,7 +114,8 @@ public class Archer_PlayerWeapon : PlayerWeapon
             arrowRb.transform.forward = firePointTransform.forward.normalized;
             direction = arrowRb.transform.forward;
         }
-        arrowRb.AddForce(DrawPower / BowConfig.MaxDrawPower * BowConfig.ArrowSpeed * direction, ForceMode.Impulse);
+        Debug.Log($"{drawPower} / {BowConfig.MaxDrawPower} * {BowConfig.ArrowSpeed}");
+        arrowRb.AddForce(drawPower / BowConfig.MaxDrawPower * BowConfig.ArrowSpeed * direction, ForceMode.Impulse);
     }
     public GameObject GetWeaponOnBack()
     {
@@ -117,10 +145,14 @@ public class Archer_PlayerWeapon : PlayerWeapon
         firePointHolderTransform.forward = Camera.main.transform.forward;
     }
 
+
+
     private void OnDrawGizmosSelected()
     {
         Debug.DrawLine(firePointHolderTransform.position, firePointTransform.position);
     }
+
+
 }
 [System.Serializable]
 public class BowConfig

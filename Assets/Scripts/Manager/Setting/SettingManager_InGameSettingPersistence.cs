@@ -4,11 +4,13 @@ public partial class SettingManager : IDataPersistence<InGameSettingData>
 {
     public void LoadData(InGameSettingData data)
     {
-        _inGameSettingData.MouseSensitive = data.MouseSensitive;
+        InGameSettingData.MouseSensitive_ThirdPerson = data.MouseSensitive_ThirdPerson;
+        InGameSettingData.MouseSensitive_Focus = data.MouseSensitive_Focus;
     }
 
     public void SaveData(ref InGameSettingData data)
     {
-        data.MouseSensitive = _inGameSettingData.MouseSensitive;
+        data.MouseSensitive_ThirdPerson = InGameSettingData.MouseSensitive_ThirdPerson;
+        data.MouseSensitive_Focus = InGameSettingData.MouseSensitive_Focus;
     }
 }

@@ -1,45 +1,53 @@
 using System;
+using Mono.CSharp;
+using Unity.Collections;
+using Unity.Netcode;
+using UnityEngine;
 using Random = UnityEngine.Random;
 
 [Serializable]
-public class UserData : ISaveData
+public struct UserData : ISaveData, INetworkSerializable, IEquatable<UserData>
 {
-    public string UserName;
+    const ulong DEFAULT_PLAYER_CHARACTER_ID = 1002;
+    const ulong DEFAULT_WEAPON_ID = 200;
+    public FixedString32Bytes UserName;
     public ulong UserId;
+    public ulong PlayerCharacterId;
 
-    public UserData(string userName, ulong userId)
+    [Header("In-Game Equipment Data")]
+    public ulong WeaponId;
+
+    public UserData(string userName, ulong userId, ulong playerCharacterId, ulong weaponId)
     {
 
         UserId = userId;
-        UserName = userName + " " + userId;
+        UserName = (userName + "_" + userId).ToString();
+        PlayerCharacterId = playerCharacterId;
+        WeaponId = weaponId;
     }
     public static UserData NewData()
     {
         ulong userId = (ulong)Random.Range(ulong.MinValue, ulong.MaxValue);
-        string userName = "User_";
-        return new(userName, userId);
+        string userName = "User";
+        ulong playerCharacterDataId = DEFAULT_PLAYER_CHARACTER_ID;
+        ulong weaponId = DEFAULT_WEAPON_ID;
+        return new(userName, userId, playerCharacterDataId, weaponId);
     }
 
+    public bool Equals(UserData other)
+    {
+        return UserId == other.UserId &&
+        UserName == other.UserName &&
+        PlayerCharacterId == other.PlayerCharacterId &&
+        WeaponId == other.WeaponId;
+    }
 
-    // private static Dictionary<ulong, UserData> _cache;
-    // public static Dictionary<ulong, UserData> Cache
-    // {
-    //     get
-    //     {
-    //         if (_cache == null)
-    //         {
-    //             _cache = new();
-    //             UserData[] UserDatas = Resources.LoadAll<UserData>("UserDatas");
-    //             _cache = UserDatas.ToDictionary(x => x.UserId, x => x);
-    //         }
-    //         return _cache;
-    //     }
-    // }
-
-    // public void NetworkSerialize<T>(BufferSerializer<T> serializer) where T : IReaderWriter
-    // {
-    //     serializer.SerializeValue(ref UserName);
-    //     serializer.SerializeValue(ref UserId);
-    // }
+    public void NetworkSerialize<T>(BufferSerializer<T> serializer) where T : IReaderWriter
+    {
+        serializer.SerializeValue(ref UserName);
+        serializer.SerializeValue(ref UserId);
+        serializer.SerializeValue(ref PlayerCharacterId);
+        serializer.SerializeValue(ref WeaponId);
+    }
 
 }

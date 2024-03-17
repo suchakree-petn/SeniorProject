@@ -10,9 +10,10 @@ public abstract class WeaponBase : ScriptableObject
     public float AttackPoint;
     public WeaponType WeaponType;
     public bool IsReadyToAttack;
+    public bool IsCriticalable;
     public float AttackTimeInterval;
 
-    public abstract AttackDamage GetDamage(float damageMultiplier);
+    public abstract AttackDamage GetDamage(float damageMultiplier, PlayerCharacterData HolderCharacterDatalong, long clientId = -1);
     public void EquipWeaponTo(PlayerCharacterData holder)
     {
         HolderCharacterData = holder;
