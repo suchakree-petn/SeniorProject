@@ -4,23 +4,24 @@ using UnityEngine;
 
 public partial class SettingManager : Singleton<SettingManager>
 {
-    [SerializeField] private InGameSettingData _inGameSettingData;
+    public InGameSettingData InGameSettingData;
     public DataPersistence<InGameSettingData> dataPersistenceInGameSetting;
-    private bool isInitSetting;
 
-    public Action OnSettingInit;
     public Action<InGameSettingData, InGameSettingData> OnSettingChanged;
 
-
+    public bool IsDataLoaded;
     protected override void InitAfterAwake()
     {
-        OnSettingInit += () => isInitSetting = true;
-        _inGameSettingData = new();
-        dataPersistenceInGameSetting = new("InGameSetting",_inGameSettingData);
+        InGameSettingData = new();
+        dataPersistenceInGameSetting = new("InGameSetting", InGameSettingData);
+
+        dataPersistenceInGameSetting.OnLoadSuccess += () => IsDataLoaded = true;
     }
 
     private void Start()
     {
-        // dataPersistenceInGameSetting.LoadData();
+        dataPersistenceInGameSetting.LoadData();
     }
+
+
 }

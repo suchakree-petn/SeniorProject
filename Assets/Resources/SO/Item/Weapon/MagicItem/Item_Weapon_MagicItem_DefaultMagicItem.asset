@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55275b77658e77e49b4353749a522529, type: 3}
+  m_Name: Item_Weapon_MagicItem_DefaultMagicItem
+  m_EditorClassIdentifier: 
+  WeaponId: 100
+  AttackPoint: 0
+  WeaponType: 2
+  IsReadyToAttack: 1
+  IsCriticalable: 0
+  AttackTimeInterval: 0
+  NormalAttack_HealMultiplier: 0
+  healOrb_prf: {fileID: 4667868370430098, guid: 00360aba13218b6438040a622fe38edb,
+    type: 3}

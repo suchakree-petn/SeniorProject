@@ -15,6 +15,7 @@ public class MouseMovement : MonoBehaviour
     private PlayerCameraMode playerCameraMode;
 
     [Header("Reference")]
+    [SerializeField] private PlayerController playerController;
     [SerializeField] private Transform playerTransform;
     [SerializeField] private Transform thirdPersonView;
     [SerializeField] private Transform focusView;
@@ -22,7 +23,17 @@ public class MouseMovement : MonoBehaviour
     [SerializeField] private Transform characterModel;
     private Camera mainCam;
 
-
+    private void Awake()
+    {
+        if (SettingManager.Instance.IsDataLoaded)
+        {
+            InitCameraSensitive();
+        }
+        else
+        {
+            Debug.LogWarning($"No data to load");
+        }
+    }
     public void InitCameras(PlayerCameraMode playerCameraMode)
     {
         mainCam = Camera.main;
@@ -36,8 +47,21 @@ public class MouseMovement : MonoBehaviour
         thirdPersonVCam.LookAt = thirdPersonView;
         thirdPersonVCam.gameObject.SetActive(true);
 
+
         this.playerCameraMode = playerCameraMode;
     }
+
+    private void InitCameraSensitive()
+    {
+        MouseSensitive_ThirdPerson mouseSensitive_ThirdPerson = SettingManager.Instance.InGameSettingData.MouseSensitive_ThirdPerson;
+        MouseSensitive_Focus mouseSensitive_Focus = SettingManager.Instance.InGameSettingData.MouseSensitive_Focus;
+        SetCameraSensitive(PlayerCameraMode.ThirdPerson, 'x', mouseSensitive_ThirdPerson.x);
+        SetCameraSensitive(PlayerCameraMode.Focus, 'x', mouseSensitive_Focus.x);
+        SetCameraSensitive(PlayerCameraMode.ThirdPerson, 'y', mouseSensitive_ThirdPerson.y);
+        SetCameraSensitive(PlayerCameraMode.Focus, 'y', mouseSensitive_Focus.y);
+        Debug.Log("Init cam sensitive");
+    }
+
     public void SetCameraMode(PlayerCameraMode playerCameraMode)
     {
         this.playerCameraMode = playerCameraMode;
@@ -155,17 +179,60 @@ public class MouseMovement : MonoBehaviour
     {
 
     }
-
+    private void SetCameraSensitive(PlayerCameraMode playerCameraMode, char axis, float value)
+    {
+        switch (playerCameraMode)
+        {
+            case PlayerCameraMode.ThirdPerson:
+                if (axis == 'x')
+                {
+                    mouseMovementConfig.ThirdPerson_X_Axis_Sensitive = value;
+                }
+                else
+                {
+                    mouseMovementConfig.ThirdPerson_Y_Axis_Sensitive = value;
+                }
+                break;
+            case PlayerCameraMode.Focus:
+                if (axis == 'x')
+                {
+                    mouseMovementConfig.Focus_X_Axis_Sensitive = value;
+                }
+                else
+                {
+                    mouseMovementConfig.Focus_Y_Axis_Sensitive = value;
+                }
+                break;
+            default:
+                Debug.LogWarning($"Unable to set {playerCameraMode} on Axis: {axis} with Value: {value}");
+                break;
+        }
+    }
     private Vector2 GetLookInput()
     {
         _prevPlayerLookInput = _playerLookInput;
         _playerLookInput = lookInput;
         return Vector2.Lerp(_prevPlayerLookInput, _playerLookInput * Time.deltaTime, 0.35f);
     }
+
     public void SetLook(InputAction.CallbackContext context)
     {
         lookInput = context.ReadValue<Vector2>();
     }
+    private void OnDestroy()
+    {
+        SaveCameraSensitive();
+    }
+
+    private void SaveCameraSensitive()
+    {
+        MouseSensitive_ThirdPerson mouseSensitive_ThirdPerson = new(mouseMovementConfig.ThirdPerson_X_Axis_Sensitive, mouseMovementConfig.ThirdPerson_Y_Axis_Sensitive);
+        MouseSensitive_Focus mouseSensitive_Focus = new(mouseMovementConfig.Focus_X_Axis_Sensitive, mouseMovementConfig.Focus_Y_Axis_Sensitive);
+        SettingManager.Instance.InGameSettingData.MouseSensitive_ThirdPerson = mouseSensitive_ThirdPerson;
+        SettingManager.Instance.InGameSettingData.MouseSensitive_Focus = mouseSensitive_Focus;
+        SettingManager.Instance.dataPersistenceInGameSetting.SaveData();
+    }
+    
 #if UNITY_EDITOR
     public void OnValidate()
     {

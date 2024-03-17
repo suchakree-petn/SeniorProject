@@ -9,6 +9,7 @@ using UnityEngine.InputSystem;
 public class PlayerController : NetworkBehaviour
 {
     [SerializeField] private PlayerCameraMode playerCameraMode;
+    public PlayerCameraMode PlayerCameraMode => playerCameraMode;
     [SerializeField] private PlayerCharacterData _playerCharacterData;
     public PlayerCharacterData PlayerCharacterData => _playerCharacterData;
     public Vector3 OuterForce;
