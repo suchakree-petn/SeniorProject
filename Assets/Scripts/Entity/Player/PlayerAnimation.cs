@@ -29,5 +29,13 @@ public class PlayerAnimation : MonoBehaviour
     {
         animator.SetFloat(name, value);
     }
+    public void SetBool(string name, bool value)
+    {
+        animator.SetBool(name, value);
+    }
+    public void SetTrigger(string name)
+    {
+        animator.SetTrigger(name);
+    }
 }
 
