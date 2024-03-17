@@ -43,6 +43,6 @@ public abstract class Arrow : NetworkBehaviour
 
         if (!entityNetObjRef.TryGet(out NetworkObject entityNetObj)) return;
 
-        entityNetObj.GetComponent<IDamageable>().TakeDamage_ServerRpc(AttackDamage.Damage);
+        entityNetObj.GetComponent<IDamageable>().TakeDamage_ClientRpc(AttackDamage);
     }
 }

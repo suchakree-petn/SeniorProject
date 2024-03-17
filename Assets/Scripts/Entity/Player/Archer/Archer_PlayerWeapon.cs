@@ -92,15 +92,15 @@ public class Archer_PlayerWeapon : PlayerWeapon
     public void FireArrow_ClientRpc(float damageMultiplier, float drawPower, ulong OwnerClientId, NetworkObjectReference arrowObjRef)
     {
         if (!arrowObjRef.TryGet(out NetworkObject arrowNetObj) || OwnerClientId != NetworkManager.LocalClientId) return;
-        
-        AttackDamage attackDamage = BowWeaponData.GetDamage(damageMultiplier, playerController.PlayerCharacterData,(long)OwnerClientId);
+
+        AttackDamage attackDamage = BowWeaponData.GetDamage(damageMultiplier, playerController.PlayerCharacterData, (long)OwnerClientId);
         Arrow arrow = arrowNetObj.GetComponent<Arrow>();
         arrow.AttackDamage = attackDamage;
 
         Rigidbody arrowRb = arrowNetObj.GetComponent<Rigidbody>();
         Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
         Vector3 direction;
-        if (Physics.Raycast(ray, out RaycastHit hit, BowConfig.MaxRaycastDistance, BowConfig.targetMask) && hit.distance > Vector3.Distance(hit.point, firePointTransform.position))
+        if (Physics.Raycast(ray, out RaycastHit hit, BowConfig.MaxRaycastDistance, playerController.PlayerCharacterData.TargetLayer) && hit.distance > Vector3.Distance(hit.point, firePointTransform.position))
         {
             // Calculate direction towards the hit point
             direction = (hit.point - firePointTransform.position).normalized;
@@ -162,7 +162,6 @@ public class BowConfig
     public float MaxDrawPower;
     public float MinDrawPower;
     public float MaxRaycastDistance;
-    public LayerMask targetMask;
 }
 public enum Archer_WeaponHolderState
 {

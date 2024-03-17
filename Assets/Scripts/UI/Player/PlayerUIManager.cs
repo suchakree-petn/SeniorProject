@@ -11,6 +11,8 @@ public class PlayerUIManager : NetworkSingleton<PlayerUIManager>
     [Header("Reference")]
     public GameObject PlayerCanvas;
     [SerializeField] private GameObject crossHair;
+    [SerializeField] private GameObject lockTarget;
+
     [Header("Reference select UI")]
     [SerializeField] private GameObject selectCharacterMenu;
     [SerializeField] private TMP_Dropdown selectCharacterDropdown;
@@ -70,9 +72,25 @@ public class PlayerUIManager : NetworkSingleton<PlayerUIManager>
         PlayerManager.Instance.OnAfterClientConnect -= SetSelectCharacter;
 
     }
-    public void SetPlayerCrossHairState(bool active)
+    public void SetPlayerCrossHairState(bool isActive)
     {
-        crossHair.SetActive(active);
+        crossHair.SetActive(isActive);
     }
 
+    public void SetLockTargetPosition(Vector3 worldPos, bool isScreenPos = false)
+    {
+        if (isScreenPos)
+        {
+            lockTarget.transform.position = worldPos;
+        }
+        else
+        {
+            lockTarget.transform.position = Camera.main.WorldToScreenPoint(worldPos);
+        }
+    }
+
+    public void SetLockTargetState(bool isActive)
+    {
+        lockTarget.SetActive(isActive);
+    }
 }

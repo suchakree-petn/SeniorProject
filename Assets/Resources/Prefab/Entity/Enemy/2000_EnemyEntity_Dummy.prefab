@@ -285,6 +285,14 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 712881128543300860, guid: b116f61db08cf6f49b80c75bfc0b419c,
         type: 3}
       insertIndex: -1
+      addedObject: {fileID: 9194189276094814113}
+    - targetCorrespondingSourceObject: {fileID: 712881128543300860, guid: b116f61db08cf6f49b80c75bfc0b419c,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1251622043368636751}
+    - targetCorrespondingSourceObject: {fileID: 712881128543300860, guid: b116f61db08cf6f49b80c75bfc0b419c,
+        type: 3}
+      insertIndex: -1
       addedObject: {fileID: -5498905166417494909}
     - targetCorrespondingSourceObject: {fileID: 712881128543300860, guid: b116f61db08cf6f49b80c75bfc0b419c,
         type: 3}
@@ -294,10 +302,6 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: -9096503597814934226}
-    - targetCorrespondingSourceObject: {fileID: 712881128543300860, guid: b116f61db08cf6f49b80c75bfc0b419c,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 9194189276094814113}
   m_SourcePrefab: {fileID: 100100000, guid: b116f61db08cf6f49b80c75bfc0b419c, type: 3}
 --- !u!1 &3991757503176248713 stripped
 GameObject:
@@ -325,6 +329,46 @@ MonoBehaviour:
   SpawnWithObservers: 1
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
+--- !u!114 &9194189276094814113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3991757503176248713}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e117cce7db6bedd48ab8ba3f1f9f6d25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemyCharacterData: {fileID: 0}
+  agent: {fileID: 0}
+  behaviourTreeInstance: {fileID: 0}
+  Radius_X: 0
+  Radius_Y: 0
+  Radius_Z: 0
+  toleranceValue: 1
+  acceleration: 60
+  maxSpeed: 20
+  IsNavAgent: 0
+  targetGroup: []
+  enemyHealth: {fileID: 1251622043368636751}
+  enemyRb: {fileID: 6618734251774362899}
+--- !u!114 &1251622043368636751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3991757503176248713}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47f74f49e0aed3049b428784eb46e8d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentHealth:
+    m_InternalValue: 0
+  enemyController: {fileID: 9194189276094814113}
 --- !u!114 &-5498905166417494909
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -394,30 +438,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6c0be61502bb534f922ebb746851216, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &9194189276094814113
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3991757503176248713}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e117cce7db6bedd48ab8ba3f1f9f6d25, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _enemyCharacterData: {fileID: 0}
-  agent: {fileID: 0}
-  behaviourTreeInstance: {fileID: 0}
-  Radius_X: 0
-  Radius_Y: 0
-  Radius_Z: 0
-  toleranceValue: 1
-  acceleration: 60
-  maxSpeed: 20
-  IsNavAgent: 0
-  targetGroup: []
-  rb: {fileID: 0}
 --- !u!4 &4592054655671717637 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 88799522247470704, guid: b116f61db08cf6f49b80c75bfc0b419c,

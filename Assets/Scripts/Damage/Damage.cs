@@ -15,6 +15,13 @@ public class AttackDamage : INetworkSerializable
       Damage = DamageCalculation(damageMultiplier, attack);
       AttackerClientId = attackerClientId;
    }
+   public AttackDamage()
+   {
+      Type = DamageType.Default;
+      IsCriticalable = false;
+      Damage = 19;
+      AttackerClientId = 11;
+   }
 
    private float DamageCalculation(float damageMultiplier, float attack)
    {

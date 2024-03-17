@@ -6,7 +6,7 @@ using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerController : NetworkBehaviour
+public class PlayerController : NetworkBehaviour, IDamageable
 {
     [SerializeField] private PlayerCameraMode playerCameraMode;
     public PlayerCameraMode PlayerCameraMode => playerCameraMode;
@@ -22,6 +22,8 @@ public class PlayerController : NetworkBehaviour
     [SerializeField] protected MouseMovement mouseMovement;
     [SerializeField] protected PlayerAnimation playerAnimation;
     [SerializeField] protected PlayerHealth playerHealth;
+    public Collider HitboxCollider;
+
 
     protected virtual void Start()
     {
@@ -60,7 +62,6 @@ public class PlayerController : NetworkBehaviour
         mouseMovement.LockMouseCursor();
         SetCameraMode(playerCameraMode, true);
 
-        playerHealth.InitHp(PlayerCharacterData);
     }
 
     public override void OnNetworkDespawn()
@@ -187,8 +188,28 @@ public class PlayerController : NetworkBehaviour
 
     protected virtual void OnEnable()
     {
+        playerHealth.InitHp(PlayerCharacterData);
     }
     protected virtual void OnDisable()
     {
+    }
+
+    [ClientRpc]
+    public void TakeDamage_ClientRpc(AttackDamage damage)
+    {
+        if(!IsOwner) return;
+        playerHealth.TakeDamage(damage, PlayerCharacterData.GetDefense());
+    }
+
+    public void InitHp(EntityCharacterData chacterData)
+    {
+        playerHealth.InitHp(chacterData);
+    }
+    [ClientRpc]
+    public void TakeHeal_ClientRpc(AttackDamage damage)
+    {
+        if(!IsOwner) return;
+
+        playerHealth.TakeHeal(damage);
     }
 }
