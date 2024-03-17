@@ -8,10 +8,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Tutor/Tutor_MainMenu_UserDataPersistence.unity
     guid: 5eaf429340441554780b550615aee7b5
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Tutor/Tutor_Test_FPS_Movement&FreeLook.unity
     guid: bf71d0fe907d96b4f80a99d42669e84f
   - enabled: 1

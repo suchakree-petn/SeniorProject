@@ -2601,6 +2601,11 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: d3267fd6735c32448b0e856f83612af9, type: 2}
+    - target: {fileID: 3755565199410241642, guid: 8468fa4c8e09695459a2f7572471e55b,
+        type: 3}
+      propertyPath: playerController
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 4421562747518347658, guid: 8468fa4c8e09695459a2f7572471e55b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2694,7 +2699,7 @@ PrefabInstance:
     - target: {fileID: 8174493298335311036, guid: 8468fa4c8e09695459a2f7572471e55b,
         type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 86899938
+      value: 3483765102
       objectReference: {fileID: 0}
     - target: {fileID: 8251370818320174555, guid: 8468fa4c8e09695459a2f7572471e55b,
         type: 3}
@@ -2709,7 +2714,7 @@ PrefabInstance:
     - target: {fileID: 8410790543009126724, guid: 8468fa4c8e09695459a2f7572471e55b,
         type: 3}
       propertyPath: TransitionStateInfoList.Array.size
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8410790543009126724, guid: 8468fa4c8e09695459a2f7572471e55b,
         type: 3}
@@ -2855,6 +2860,7 @@ MonoBehaviour:
   mouseMovement: {fileID: 831939996720355351}
   playerAnimation: {fileID: 8920344854508572487}
   playerHealth: {fileID: 1673985521950328931}
+  HitboxCollider: {fileID: 0}
   tank_playerWeapon: {fileID: 7727020092802202058}
 --- !u!114 &7727020092802202058
 MonoBehaviour:
@@ -2871,22 +2877,9 @@ MonoBehaviour:
   InHand_weaponHolderTransform: {fileID: 5623424579041576080}
   playerController: {fileID: 5698460776653806195}
   WeaponHolderState: 0
-  BowWeaponData: {fileID: 11400000, guid: 50fcec4f70232c945beb54d5e87f3e11, type: 2}
-  BowConfig:
-    ArrowSpeed: 0
-    DrawSpeed: 0
-    MaxDrawPower: 0
-    MinDrawPower: 0
-    MaxRaycastDistance: 0
-    targetMask:
-      serializedVersion: 2
-      m_Bits: 0
+  SwordWeaponData: {fileID: 0}
   IsSlash: 0
   DrawPower: 0
-  OnBack_weaponHolderTransform: {fileID: 2972822406335611147}
-  firePointHolderTransform: {fileID: 2569282347464046112}
-  firePointTransform: {fileID: 3217049965075251255}
-  archer_PlayerController: {fileID: 5698460776653806195}
 --- !u!114 &6192920143298601696 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8562730884081978089, guid: 8468fa4c8e09695459a2f7572471e55b,
@@ -3156,6 +3149,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5623424579041576080}
     m_Modifications:
+    - target: {fileID: -6208735949160969458, guid: 1a8f8dad25e41c84880d285d901df16b,
+        type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 2878086456
+      objectReference: {fileID: 0}
     - target: {fileID: 4549382077319179045, guid: 1a8f8dad25e41c84880d285d901df16b,
         type: 3}
       propertyPath: m_Name

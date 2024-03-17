@@ -3913,6 +3913,7 @@ MonoBehaviour:
   CarryToOtherScene: 0
   PlayerCanvas: {fileID: 1691021602}
   crossHair: {fileID: 734741502}
+  lockTarget: {fileID: 0}
   selectCharacterMenu: {fileID: 1772974689}
   selectCharacterDropdown: {fileID: 518735807}
   selectCharacterButton_Host: {fileID: 1479823240}
