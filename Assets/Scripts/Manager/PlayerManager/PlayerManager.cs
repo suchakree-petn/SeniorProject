@@ -21,9 +21,8 @@ public partial class PlayerManager : NetworkSingleton<PlayerManager>
             return _playerCharacterPrefab;
         }
     }
-    public Dictionary<ulong, UserData> UserDatas { get; private set; } = new();
-    private Dictionary<ulong, PlayerCharacterData> _playerCharacterDatas;
-    public Dictionary<ulong, PlayerCharacterData> PlayerCharacterDatas => _playerCharacterDatas;
+    // public Dictionary<ulong, UserData> UserDatas { get; private set; } = new();
+    public Dictionary<ulong, PlayerCharacterData> PlayerCharacterDatas { get; private set; } = new();
 
     public Dictionary<ulong, GameObject> PlayerGameObjects { get; private set; } = new();
     public Dictionary<ulong, Vector3> PlayerPos
@@ -33,8 +32,8 @@ public partial class PlayerManager : NetworkSingleton<PlayerManager>
             return PlayerGameObjects.ToDictionary(key => key.Key, val => val.Value.transform.position);
         }
     }
-    // public UserData OwnerPlayerData;
 
+    public Action<ulong> OnClientConnect;
     public Action<ulong> OnAfterClientConnect;
 
     protected override void InitAfterAwake()
@@ -63,50 +62,50 @@ public partial class PlayerManager : NetworkSingleton<PlayerManager>
     }
     private void PlayerManager_OnClientConnectedHandler(ulong clientId)
     {
-        Transform playerChar = Instantiate(PlayerCharacterPrefab[1001]);
+        OnClientConnect?.Invoke(clientId);
+
+        Transform playerChar = Instantiate(PlayerCharacterPrefab[1002]);
         playerChar.GetComponent<NetworkObject>().SpawnAsPlayerObject(clientId, true);
 
         Debug.Log("Client Connected");
         PlayerController[] allPlayers = FindObjectsOfType(typeof(PlayerController)) as PlayerController[];
         Debug.Log("Current player amount: " + allPlayers.Length);
-        bool isAdd = false;
+        // bool isAddUserData = false;
+        bool isAddPlayerCharacterData = false;
+        bool isAddAll = isAddPlayerCharacterData;
+
         foreach (PlayerController player in allPlayers)
         {
-            Debug.Log(player.OwnerClientId);
             if (clientId == player.OwnerClientId)
             {
-                PlayerCharacterData[] playerCharDatas = Resources.LoadAll<PlayerCharacterData>("SO/Entity/Player");
-
-                ulong userId = UserManager.Instance.UserData.UserId;
-
-                if (UserDatas.TryAdd(userId, UserManager.Instance.UserData))
+                // if (UserDatas.TryAdd(clientId, UserManager.Instance.UserData))
+                // {
+                //     isAddUserData = true;
+                // }
+                // else
+                // {
+                //     Debug.LogWarning($"Already contain this userId");
+                // }
+                if (PlayerCharacterDatas.TryAdd(clientId, player.PlayerCharacterData))
                 {
-                    foreach (PlayerCharacterData playerCharacterData in playerCharDatas)
-                    {
-                        if (playerCharacterData.OwnerUserId == userId)
-                        {
-                            _playerCharacterDatas = new();
-                            if (_playerCharacterDatas.TryAdd(clientId, playerCharacterData))
-                            {
-                                player.SetPlayerCharacterData(playerCharacterData);
-                                Debug.Log($"Add {playerCharacterData.OwnerUserId} with ClientId: {clientId}");
-                                break;
-                            }
-                        }
-                    }
+                    isAddPlayerCharacterData = true;
                 }
                 else
                 {
-                    Debug.LogWarning($"Already contain this userId");
+                    Debug.LogWarning($"Already contain this clientId");
                 }
 
                 if (PlayerGameObjects.TryAdd(clientId, player.gameObject))
                 {
-                    isAdd = true;
+                    isAddAll = true;
+                }
+                else
+                {
+                    Debug.LogWarning($"Already contain this clientId");
                 }
             }
         }
-        if (!isAdd)
+        if (!isAddAll)
         {
             Debug.LogWarning("Already has this clientId");
         }
@@ -128,7 +127,8 @@ public partial class PlayerManager : NetworkSingleton<PlayerManager>
     private void PlayerManager_OnClientDisconnectHandler(ulong clientId)
     {
         Debug.Log("Client Disconnected");
-
+        // UserDatas.Remove(clientId);
+        PlayerCharacterDatas.Remove(clientId);
         PlayerGameObjects.Remove(clientId);
     }
 

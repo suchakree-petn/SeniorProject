@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1dd342e069dbdf3428fb4ec5d5a16578, type: 3}
   m_Name: Item_Weapon_Bow_TestBow
   m_EditorClassIdentifier: 
-  WeaponId: 100
+  WeaponId: 200
   AttackPoint: 10
   WeaponType: 1
   IsReadyToAttack: 1

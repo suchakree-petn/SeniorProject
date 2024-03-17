@@ -7,7 +7,6 @@ using UnityEngine;
 public partial class Archer_PlayerController : PlayerController
 {
     [Header("Archer Reference")]
-    [SerializeField] private Transform firePointTransform;
     [SerializeField] protected Archer_PlayerWeapon archer_playerWeapon;
 
 

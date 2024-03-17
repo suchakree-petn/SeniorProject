@@ -41,6 +41,7 @@ public class PlayerUIManager : NetworkSingleton<PlayerUIManager>
                 PlayerManager.Instance.SwitchPlayerCharacter_ServerRpc(PLAYER_CHAR_ID);
                 break;
         }
+        // PlayerManager.Instance.SwitchPlayerCharacter_ServerRpc(UserManager.Instance.UserData.PlayerCharacterId);
     }
     protected override void InitAfterAwake()
     {
