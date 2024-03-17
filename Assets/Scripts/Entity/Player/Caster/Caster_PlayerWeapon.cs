@@ -1,4 +1,7 @@
+using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -8,7 +11,9 @@ public class Caster_PlayerWeapon : PlayerWeapon
 
     public MagicItemBase MagicItemWeaponData;
     public MagicItemConfig MagicItemConfig = new();
-
+    private bool isHasLockTarget;
+    private ulong currentLockTargetClientId;
+    private Vector3 currentLockTargetPosition;
 
     [Header("Caster Reference")]
     [SerializeField] private Transform firePointHolderTransform;
@@ -40,65 +45,81 @@ public class Caster_PlayerWeapon : PlayerWeapon
         {
             RotateFirePointHolder();
         }
+
+
+    }
+
+    private void LateUpdate()
+    {
+        if (!IsOwner) return;
+
+        if (GetLockTarget())
+        {
+            isHasLockTarget = true;
+            PlayerUIManager.Instance.SetLockTargetState(true);
+            PlayerUIManager.Instance.SetLockTargetPosition(currentLockTargetPosition);
+        }
+        else
+        {
+            isHasLockTarget = false;
+            PlayerUIManager.Instance.SetLockTargetState(false);
+        }
+    }
+    private bool GetLockTarget()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
+        RaycastHit[] hits = Physics.SphereCastAll(ray, MagicItemConfig.SphereCastRadius, MagicItemConfig.MaxSphereCastDistance, playerController.PlayerCharacterData.TargetLayer);
+        foreach (RaycastHit hit in hits)
+        {
+            if (hit.transform.root.TryGetComponent(out PlayerController playerController) && !playerController.IsOwner && hit.collider.isTrigger)
+            {
+                currentLockTargetClientId = playerController.OwnerClientId;
+                currentLockTargetPosition = hit.collider.bounds.center;
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public override void NormalAttack()
     {
-        LaunchHealOrb_ServerRpc(MagicItemWeaponData.NormalAttack_HealMultiplier,0);
+        AttackDamage attackDamage = MagicItemWeaponData.GetDamage(MagicItemWeaponData.NormalAttack_HealMultiplier, playerController.PlayerCharacterData, (long)OwnerClientId);
+
+        LaunchHealOrb_ServerRpc(attackDamage, currentLockTargetClientId, isHasLockTarget);
     }
 
     [ServerRpc(RequireOwnership = false)]
-    public void LaunchHealOrb_ServerRpc(float healMultiplier,ulong targetClientId, ServerRpcParams serverRpcParams = default)
+    public void LaunchHealOrb_ServerRpc(AttackDamage attackDamage, ulong targetClientId, bool isHasLockTarget, ServerRpcParams serverRpcParams = default)
     {
-        ulong OwnerClientId = serverRpcParams.Receive.SenderClientId;
+        // ulong OwnerClientId = serverRpcParams.Receive.SenderClientId;
         Transform healOrbTransform = MagicItemWeaponData.GetHealOrb(position: firePointTransform.position);
         NetworkObject healOrbNetworkObject = healOrbTransform.GetComponent<NetworkObject>();
         healOrbNetworkObject.Spawn(true);
-        healOrbTransform.GetComponent<HealOrb>().target = PlayerManager.Instance.PlayerGameObjects[targetClientId].transform;
+        healOrbTransform.transform.forward = Camera.main.transform.forward;
+        HealOrb healOrb = healOrbTransform.GetComponent<HealOrb>();
+        if (isHasLockTarget)
+        {
+            healOrb.target = PlayerManager.Instance.PlayerGameObjects[targetClientId].transform;
+        }
+        healOrb.AttackDamage = attackDamage;
 
-        // FireArrow_ClientRpc(damageMultiplier, drawPower, OwnerClientId, arrowNetworkObject);
     }
-
-    // [ClientRpc]
-    // // public void FireArrow_ClientRpc(float damageMultiplier, float drawPower, ulong OwnerClientId, NetworkObjectReference arrowObjRef)
-    // // {
-    // //     if (!arrowObjRef.TryGet(out NetworkObject arrowNetObj) || OwnerClientId != NetworkManager.LocalClientId) return;
-
-    // //     AttackDamage attackDamage = BowWeaponData.GetDamage(damageMultiplier, playerController.PlayerCharacterData,(long)OwnerClientId);
-    // //     Arrow arrow = arrowNetObj.GetComponent<Arrow>();
-    // //     arrow.AttackDamage = attackDamage;
-
-    // //     Rigidbody arrowRb = arrowNetObj.GetComponent<Rigidbody>();
-    // //     Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
-    // //     Vector3 direction;
-    // //     if (Physics.Raycast(ray, out RaycastHit hit, BowConfig.MaxRaycastDistance, BowConfig.targetMask) && hit.distance > Vector3.Distance(hit.point, firePointTransform.position))
-    // //     {
-    // //         // Calculate direction towards the hit point
-    // //         direction = (hit.point - firePointTransform.position).normalized;
-    // //         // Rotate arrow to face the hit point
-    // //         arrowRb.transform.forward = direction;
-    // //         // Apply force in the direction of the hit point
-    // //     }
-    // //     else
-    // //     {
-    // //         // If ray doesn't hit anything, use the default direction
-    // //         arrowRb.transform.forward = firePointTransform.forward.normalized;
-    // //         direction = arrowRb.transform.forward;
-    // //     }
-    // //     Debug.Log($"{drawPower} / {BowConfig.MaxDrawPower} * {BowConfig.ArrowSpeed}");
-    // //     arrowRb.AddForce(drawPower / BowConfig.MaxDrawPower * BowConfig.ArrowSpeed * direction, ForceMode.Impulse);
-    // // }
 
     private void RotateFirePointHolder()
     {
         firePointHolderTransform.forward = Camera.main.transform.forward;
     }
 
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(currentLockTargetPosition, MagicItemConfig.SphereCastRadius);
+    }
 
 }
-[System.Serializable]
+[Serializable]
 public class MagicItemConfig
 {
-    public float MaxRaycastDistance;
-    public LayerMask targetMask;
+    public float MaxSphereCastDistance;
+    public float SphereCastRadius;
 }

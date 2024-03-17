@@ -522,6 +522,7 @@ MonoBehaviour:
   mouseMovement: {fileID: 2931534758810841118}
   playerAnimation: {fileID: 6408107913954600782}
   playerHealth: {fileID: 3755565199410241642}
+  HitboxCollider: {fileID: 4238448583515551294}
 --- !u!54 &1041791184314300143
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -668,6 +669,7 @@ MonoBehaviour:
   CanCameraMove: 1
   lookInput: {x: 0, y: 0}
   rotateOffset: 12
+  playerController: {fileID: 0}
   playerTransform: {fileID: 4421562747518347658}
   thirdPersonView: {fileID: 5522633715227809858}
   focusView: {fileID: 8089698333217440013}
@@ -698,6 +700,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f1a4f9c8eed7ba44b5e35d94f2dd0e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentHealth:
+    m_InternalValue: 0
+  playerController: {fileID: -3906203105981109117}
 --- !u!4 &8541470699786124171 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1018075001130600856, guid: b116f61db08cf6f49b80c75bfc0b419c,

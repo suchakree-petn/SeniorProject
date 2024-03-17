@@ -13,7 +13,7 @@ public abstract class WeaponBase : ScriptableObject
     public bool IsCriticalable;
     public float AttackTimeInterval;
 
-    public abstract AttackDamage GetDamage(float damageMultiplier, PlayerCharacterData HolderCharacterDatalong, long clientId = -1);
+    public abstract AttackDamage GetDamage(float damageMultiplier, PlayerCharacterData HolderCharacterData, long clientId = -1);
     public void EquipWeaponTo(PlayerCharacterData holder)
     {
         HolderCharacterData = holder;

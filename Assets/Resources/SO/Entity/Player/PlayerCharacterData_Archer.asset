@@ -16,7 +16,7 @@ MonoBehaviour:
   Level: 1
   TargetLayer:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 128
   MoveSpeed: 0
   HpBase: 1000
   HpBonus: 3.04
@@ -24,5 +24,4 @@ MonoBehaviour:
   AttackBonus: 3
   DefenseBase: 5
   DefenseBonus: 1
-  OwnerUserId: 9552626291350437888
   PlayerRole: 1

@@ -3,7 +3,7 @@ using TheKiwiCoder;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.AI;
-public class EnemyController : NetworkBehaviour,IDamageable
+public class EnemyController : NetworkBehaviour, IDamageable
 {
     [SerializeField] private EnemyCharacterData _enemyCharacterData;
     public EnemyCharacterData EnemyCharacterData => _enemyCharacterData;
@@ -15,16 +15,28 @@ public class EnemyController : NetworkBehaviour,IDamageable
     public float Radius_Z;
     public float toleranceValue = 1;
     public float acceleration = 60;
-    public float CurrentHealth;
     public float maxSpeed = 20;
     public bool IsNavAgent;
 
     public List<Transform> targetGroup = new();
-    public Rigidbody rb;
+
+    [Header("Reference")]
+    public EnemyHealth enemyHealth;
+    public Rigidbody enemyRb;
     private void Awake()
     {
-        rb = GetComponent<Rigidbody>();
+        enemyRb = GetComponent<Rigidbody>();
+
     }
+
+    public override void OnNetworkSpawn()
+    {
+    }
+
+    public override void OnNetworkDespawn()
+    {
+    }
+
     private void FixedUpdate()
     {
         if (targetGroup.Count == 0)
@@ -37,7 +49,7 @@ public class EnemyController : NetworkBehaviour,IDamageable
         if (Vector3.Distance(transform.position, targetGroup[0].position) > 1f)
         {
             Vector3 direction = targetGroup[0].position - transform.position;
-            rb.AddForce(direction.normalized * maxSpeed, ForceMode.Force);
+            enemyRb.AddForce(direction.normalized * maxSpeed, ForceMode.Force);
         }
         else
         {
@@ -51,21 +63,34 @@ public class EnemyController : NetworkBehaviour,IDamageable
 
     }
 
-    private void LateUpdate() {
+    private void LateUpdate()
+    {
         Vector3 direction = targetGroup[0].position - transform.position;
-        rb.transform.rotation = Quaternion.LookRotation(direction);
+        enemyRb.transform.rotation = Quaternion.LookRotation(direction);
         // rb.transform.rotation = Quaternion.LookRotation(rb.transform.rotation.eulerAngles.x, rb.transform.rotation.eulerAngles.y + 1, rb.transform.rotation.eulerAngles.z);
-        
+
+    }
+    [ClientRpc]
+    public void TakeDamage_ClientRpc(AttackDamage damage)
+    {
+        if(!IsOwner) return;
+
+        enemyHealth.TakeDamage(damage, EnemyCharacterData.GetDefense());
     }
 
-    [ServerRpc(RequireOwnership =false)]
-    public void TakeDamage_ServerRpc(float damage)
+    public void InitHp(EntityCharacterData characterData)
     {
-        CurrentHealth -= damage;
+        enemyHealth.InitHp(characterData);
+    }
+    protected virtual void OnEnable()
+    {
+        InitHp(EnemyCharacterData);
     }
 
-    public void InitHp(EntityCharacterData attackerData)
+    [ClientRpc]
+    public void TakeHeal_ClientRpc(AttackDamage damage)
     {
-        CurrentHealth = 10000;
+        if(!IsOwner) return;
+        enemyHealth.TakeHeal(damage);
     }
 }

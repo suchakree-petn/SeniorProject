@@ -14,6 +14,11 @@ public class PlayerCharacterData : EntityCharacterData
     {
         return AttackBase + AttackBonus;
     }
+
+    public override float GetDefense()
+    {
+        return DefenseBase + DefenseBonus;
+    }
 }
 public enum PlayerRole
 {

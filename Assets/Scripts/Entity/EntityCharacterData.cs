@@ -24,5 +24,6 @@ public abstract class EntityCharacterData : ScriptableObject
 
     public abstract float GetMaxHp();
     public abstract float GetAttack();
+    public abstract float GetDefense();
 
 }

@@ -10,6 +10,11 @@ public class EnemyCharacterData : EntityCharacterData
         return AttackBase + AttackBonus;
     }
 
+    public override float GetDefense()
+    {
+        return DefenseBase + DefenseBonus;
+    }
+
     public override float GetMaxHp()
     {
         return HpBase + HpBonus;

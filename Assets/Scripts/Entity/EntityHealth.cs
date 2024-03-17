@@ -1,28 +1,34 @@
-using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
-public abstract class EntityHealth : MonoBehaviour
+public abstract class EntityHealth : NetworkBehaviour
 {
-    private float currentHealth;
-    public float CurrentHealth => currentHealth;
-    public virtual void TakeDamage(AttackDamage damage,EntityCharacterData target)
+    [SerializeField] protected NetworkVariable<float> currentHealth;
+    public float CurrentHealth => currentHealth.Value;
+
+
+
+    public virtual void TakeDamage(AttackDamage damage, float defense)
     {
-        if (currentHealth > 0)
-        {
-            currentHealth -= CalcDamageRecieve(damage,target);
-        }
+
+        float damageTook = CalcDamageRecieve(damage, defense);
+        currentHealth.Value -= damageTook;
+        Debug.Log($"Entity {name} took {damageTook} damage");
     }
-    public virtual float CalcDamageRecieve(AttackDamage damage,EntityCharacterData target)
+    public virtual void TakeHeal(AttackDamage damage)
     {
-        return damage.Damage - CalcDefense(target);
+        currentHealth.Value += damage.Damage;
+        Debug.Log($"Entity {name} took {damage.Damage} heal");
     }
-    public virtual float CalcDefense(EntityCharacterData target)
+    public virtual float CalcDamageRecieve(AttackDamage damage, float defense)
     {
-        return target.DefenseBase + target.DefenseBonus;
+        return damage.Damage - defense;
     }
+
     public virtual void InitHp(EntityCharacterData target)
     {
-        currentHealth = target.GetMaxHp();
+        currentHealth = new(1, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     }
+
 }
