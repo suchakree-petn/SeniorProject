@@ -44,7 +44,7 @@ public class Caster_PlayerWeapon : PlayerWeapon
 
     public override void NormalAttack()
     {
-        LaunchHealOrb_ServerRpc(MagicItemWeaponData.NormalAttack_HealMultiplier);
+        LaunchHealOrb_ServerRpc(MagicItemWeaponData.NormalAttack_HealMultiplier,0);
     }
 
     [ServerRpc(RequireOwnership = false)]
