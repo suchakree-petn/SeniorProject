@@ -9,7 +9,6 @@ public abstract class WeaponBase : ScriptableObject
     [Header("Attack Config")]
     public float AttackPoint;
     public WeaponType WeaponType;
-    public bool IsReadyToAttack;
     public bool IsCriticalable;
     public float AttackTimeInterval;
 
