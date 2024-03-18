@@ -18,4 +18,4 @@ MonoBehaviour:
   IsCriticalable: 0
   AttackTimeInterval: 0
   LightAttack_DamageMultiplier: 1
-  HeavyAttack_DamageMultiplier: 0
+  HeavyAttack_DamageMultiplier: 1.2

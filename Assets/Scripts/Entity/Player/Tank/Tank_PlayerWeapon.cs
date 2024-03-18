@@ -60,7 +60,14 @@ public class Tank_PlayerWeapon : PlayerWeapon
     }
     public override void NormalAttack()
     {
-        AttackDamage attackDamage = SwordWeaponData.GetDamage(SwordWeaponData.LightAttack_DamageMultiplier, playerController.PlayerCharacterData, (long)OwnerClientId);
+        AttackDamage attackDamage;
+        if(WeaponHolderState == Tank_WeaponHolderState.InHand){
+            attackDamage =  SwordWeaponData.GetDamage(SwordWeaponData.LightAttack_DamageMultiplier, 
+                            playerController.PlayerCharacterData, (long)OwnerClientId);
+        }else{
+            attackDamage =  SwordWeaponData.GetDamage(SwordWeaponData.HeavyAttack_DamageMultiplier, 
+                            playerController.PlayerCharacterData, (long)OwnerClientId);
+        }
         Debug.Log("NAttack");
         SlashAttack_ServerRpc(attackDamage);
     }
