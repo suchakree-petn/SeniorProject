@@ -344,14 +344,8 @@ MonoBehaviour:
   _enemyCharacterData: {fileID: 0}
   agent: {fileID: 0}
   behaviourTreeInstance: {fileID: 0}
-  Radius_X: 0
-  Radius_Y: 0
-  Radius_Z: 0
-  toleranceValue: 1
-  acceleration: 60
-  maxSpeed: 20
-  IsNavAgent: 0
-  targetGroup: []
+  target: {fileID: 0}
+  moveSpeed: 10
   enemyHealth: {fileID: 1251622043368636751}
   enemyRb: {fileID: 6618734251774362899}
 --- !u!114 &1251622043368636751

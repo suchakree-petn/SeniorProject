@@ -91,7 +91,7 @@ PrefabInstance:
         type: 3}
       propertyPath: enemyController
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 5023896876588504443}
     - target: {fileID: 2385862875820891651, guid: 58437a38aec03b4478d7fdb505663dec,
         type: 3}
       propertyPath: m_Height

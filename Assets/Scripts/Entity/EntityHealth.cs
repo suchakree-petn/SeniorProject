@@ -28,7 +28,7 @@ public abstract class EntityHealth : NetworkBehaviour
 
     public virtual void InitHp(EntityCharacterData target)
     {
-        currentHealth = new(1, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+        currentHealth = new(target.GetMaxHp(), NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     }
 
 }
