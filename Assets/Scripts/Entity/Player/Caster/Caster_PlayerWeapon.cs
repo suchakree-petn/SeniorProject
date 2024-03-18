@@ -87,7 +87,6 @@ public class Caster_PlayerWeapon : PlayerWeapon
     public override void NormalAttack()
     {
         AttackDamage attackDamage = MagicItemWeaponData.GetDamage(MagicItemWeaponData.NormalAttack_HealMultiplier, playerController.PlayerCharacterData, (long)OwnerClientId);
-
         LaunchHealOrb_ServerRpc(attackDamage, currentLockTargetClientId, isHasLockTarget);
     }
 

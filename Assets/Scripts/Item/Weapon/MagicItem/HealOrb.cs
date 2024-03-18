@@ -15,7 +15,7 @@ public class HealOrb : NetworkBehaviour
 
     public override void OnNetworkSpawn()
     {
-        if (!IsOwner) return;
+        if (!IsServer) return;
         Invoke(nameof(SelfDestroy), 5);
     }
     private void FixedUpdate()
