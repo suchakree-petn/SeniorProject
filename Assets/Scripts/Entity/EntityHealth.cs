@@ -23,6 +23,7 @@ public abstract class EntityHealth : NetworkBehaviour
     }
     public virtual float CalcDamageRecieve(AttackDamage damage, float defense)
     {
+        if(damage.Damage - defense < 0)return 0;
         return damage.Damage - defense;
     }
 

@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ebc0d2b37514664386201b2c0b00a5f, type: 3}
   m_Name: SwordData
   m_EditorClassIdentifier: 
-  WeaponId: 0
-  AttackPoint: 0
+  WeaponId: 103
+  AttackPoint: 100
   WeaponType: 0
   IsCriticalable: 0
   AttackTimeInterval: 0
-  LightAttack_DamageMultiplier: 0
+  LightAttack_DamageMultiplier: 1
   HeavyAttack_DamageMultiplier: 0

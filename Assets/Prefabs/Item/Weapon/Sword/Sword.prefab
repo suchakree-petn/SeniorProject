@@ -11,8 +11,6 @@ GameObject:
   - component: {fileID: 4554592163799560397}
   - component: {fileID: 4565617640191769909}
   - component: {fileID: 4573297967738330309}
-  - component: {fileID: 6853376215729801766}
-  - component: {fileID: -8923228721814746633}
   m_Layer: 0
   m_Name: Sword
   m_TagString: Untagged
@@ -85,42 +83,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &6853376215729801766
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4549382077319179045}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.21501338, y: 0.98, z: 0.05397043}
-  m_Center: {x: -0.0000001307723, y: 0.67, z: -0.00000017034444}
---- !u!114 &-8923228721814746633
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4549382077319179045}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 24a8ef0dff9f8ff4f93d7dcd5d38545f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  AttackDamage:
-    Type: 0
-    IsCriticalable: 0
-    Damage: 19
-    AttackerClientId: 11
-  isHit: 1
