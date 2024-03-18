@@ -8,19 +8,47 @@ public abstract class Arrow : NetworkBehaviour
     [Header("Base Reference")]
     [SerializeField] private Rigidbody arrowRb;
     [SerializeField] private Collider hitBox;
+
+    public override void OnNetworkSpawn()
+    {
+        if (!IsOwner) return;
+        Invoke(nameof(SelfDestroy), 5);
+    }
     public virtual void OnTriggerEnter(Collider other)
     {
         if (!IsOwner || !IsSpawned) return;
 
-        Debug.Log($"Arrow {name} collide with {other.gameObject.name}");
-        SetKinematic();
-        if (other.transform.root.TryGetComponent(out NetworkObject otherNetObj))
+        if (other.gameObject.layer == 3)
         {
-            SetParent_ServerRpc(otherNetObj);
-            DoDamage(otherNetObj);
+            SetKinematic();
+            return;
+        }
+        if (other.transform.root.TryGetComponent<PlayerController>(out _) || !other.isTrigger) return;
+
+        Debug.Log($"Arrow {name} collide with {other.gameObject.name}");
+        Transform root = other.transform.root;
+        if (root.TryGetComponent(out IDamageable damageable)
+            && root.TryGetComponent(out EnemyController enemyController)
+            && other.CompareTag("Hitbox")
+            || other.CompareTag("CriticalHitbox"))
+        {
+            if (other.CompareTag("CriticalHitbox"))
+            {
+                AttackDamage.Damage *= 1.5f;
+                Debug.LogWarning("Critical");
+            }
+            NetworkObject networkObject = root.GetComponent<NetworkObject>();
+            SetParent_ServerRpc(networkObject);
+            DoDamage(networkObject);
+            Invoke(nameof(SelfDestroy), 0.5f);
         }
     }
-
+    private void SelfDestroy()
+    {
+        if (!IsSpawned) return;
+        gameObject.GetComponent<NetworkObject>().Despawn();
+        Destroy(gameObject);
+    }
     public virtual void SetKinematic(bool isActive = true)
     {
         arrowRb.isKinematic = isActive;

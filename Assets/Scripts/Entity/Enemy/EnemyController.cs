@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using TheKiwiCoder;
 using Unity.Netcode;
@@ -9,76 +10,97 @@ public class EnemyController : NetworkBehaviour, IDamageable
     public EnemyCharacterData EnemyCharacterData => _enemyCharacterData;
 
     [SerializeField] private NavMeshAgent agent;
+    [SerializeField] private NavMeshPath path;
+    [SerializeField] private NavMeshTriangulation Triangulation;
     [SerializeField] private BehaviourTreeInstance behaviourTreeInstance;
-    public float Radius_X;
-    public float Radius_Y;
-    public float Radius_Z;
-    public float toleranceValue = 1;
-    public float acceleration = 60;
-    public float maxSpeed = 20;
-    public bool IsNavAgent;
 
-    public List<Transform> targetGroup = new();
+    public Transform target;
+    private Vector3[] nextTargetPos;
+    public float moveSpeed = 10;
+    private Coroutine findPathToTarget;
 
     [Header("Reference")]
     public EnemyHealth enemyHealth;
     public Rigidbody enemyRb;
-    private void Awake()
+    protected virtual void Awake()
     {
         enemyRb = GetComponent<Rigidbody>();
-
+        // Triangulation = NavMesh.CalculateTriangulation();
     }
 
     public override void OnNetworkSpawn()
     {
+        if (!IsOwner || !IsServer) return;
+        target = PlayerManager.Instance.PlayerGameObjects[0].transform;
+        if (findPathToTarget != null)
+        {
+            StopCoroutine(findPathToTarget);
+        }
+
+        findPathToTarget = StartCoroutine(CalcPathToTartget());
     }
 
     public override void OnNetworkDespawn()
     {
     }
 
-    private void FixedUpdate()
+    protected virtual void FixedUpdate()
     {
-        if (targetGroup.Count == 0)
+        if (!IsOwner || !IsServer || !IsSpawned) return;
+
+        if (Vector3.Distance(transform.position, target.position) > 3f)
         {
-            foreach (Transform child in GameObject.Find("TargetGroup").transform)
-            {
-                targetGroup.Add(child);
-            }
-        }
-        if (Vector3.Distance(transform.position, targetGroup[0].position) > 1f)
-        {
-            Vector3 direction = targetGroup[0].position - transform.position;
-            enemyRb.AddForce(direction.normalized * maxSpeed, ForceMode.Force);
+            Vector3 direction = nextTargetPos[0] - transform.position;
+            enemyRb.velocity = direction.normalized * moveSpeed;
         }
         else
         {
-            List<Transform> newTargetGroup = new();
-            newTargetGroup = targetGroup;
-
-            Transform firstTransform = newTargetGroup[0];
-            newTargetGroup.Add(firstTransform);
-            newTargetGroup.RemoveAt(0);
+            // Attack
         }
 
     }
 
-    private void LateUpdate()
+    protected virtual void LateUpdate()
     {
-        Vector3 direction = targetGroup[0].position - transform.position;
+        if (!IsOwner || !IsServer || !IsSpawned) return;
+        Debug.Log(path.corners.Length);
+        for (int i = 0; i < path.corners.Length - 1; i++)
+        {
+            Debug.DrawLine(path.corners[i], path.corners[i + 1], Color.red);
+        }
+        Vector3 direction = nextTargetPos[0] - transform.position;
         enemyRb.transform.rotation = Quaternion.LookRotation(direction);
-        // rb.transform.rotation = Quaternion.LookRotation(rb.transform.rotation.eulerAngles.x, rb.transform.rotation.eulerAngles.y + 1, rb.transform.rotation.eulerAngles.z);
 
     }
-    [ClientRpc]
-    public void TakeDamage_ClientRpc(AttackDamage damage)
+
+    private IEnumerator CalcPathToTartget()
     {
-        if(!IsOwner) return;
+        WaitForSeconds wait = new(0.3f);
+        UpdateNextPosition();
+
+        yield return wait;
+    }
+
+    public void UpdateNextPosition()
+    {
+        NavMeshPath path = new();
+        if (NavMesh.CalculatePath(transform.position, target.position, NavMesh.AllAreas, path))
+        {
+            nextTargetPos = path.corners;
+            this.path = path;
+        }
+        Debug.LogWarning("No path");
+    }
+
+    [ClientRpc]
+    public virtual void TakeDamage_ClientRpc(AttackDamage damage)
+    {
+        if (!IsOwner) return;
 
         enemyHealth.TakeDamage(damage, EnemyCharacterData.GetDefense());
     }
 
-    public void InitHp(EntityCharacterData characterData)
+    public virtual void InitHp(EntityCharacterData characterData)
     {
         enemyHealth.InitHp(characterData);
     }
@@ -88,9 +110,9 @@ public class EnemyController : NetworkBehaviour, IDamageable
     }
 
     [ClientRpc]
-    public void TakeHeal_ClientRpc(AttackDamage damage)
+    public virtual void TakeHeal_ClientRpc(AttackDamage damage)
     {
-        if(!IsOwner) return;
+        if (!IsOwner) return;
         enemyHealth.TakeHeal(damage);
     }
 }

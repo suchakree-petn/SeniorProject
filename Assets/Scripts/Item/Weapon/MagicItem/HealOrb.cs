@@ -13,7 +13,11 @@ public class HealOrb : NetworkBehaviour
     [Header("Reference")]
     public Rigidbody healOrbRb;
 
-
+    public override void OnNetworkSpawn()
+    {
+        if (!IsOwner) return;
+        Invoke(nameof(SelfDestroy), 5);
+    }
     private void FixedUpdate()
     {
         if (IsSpawned && IsServer)
@@ -37,14 +41,21 @@ public class HealOrb : NetworkBehaviour
         if (!IsServer) return;
 
         Transform root = other.transform.root;
-        if (root.TryGetComponent(out IDamageable damageable) 
-            && root.TryGetComponent(out PlayerController playerController) 
-            && (long)playerController.OwnerClientId != AttackDamage.AttackerClientId 
+        if (root.TryGetComponent(out IDamageable damageable)
+            && root.TryGetComponent(out PlayerController playerController)
+            && (long)playerController.OwnerClientId != AttackDamage.AttackerClientId
             && other.CompareTag("Hitbox"))
         {
             Debug.Log($"Orb enter {root.name}");
             damageable.TakeHeal_ClientRpc(AttackDamage);
             Debug.Log($"{other.transform.root.name} took {AttackDamage.Damage} damages");
+            Invoke(nameof(SelfDestroy), 0.5f);
         }
+    }
+    private void SelfDestroy()
+    {
+        if (!IsSpawned) return;
+        gameObject.GetComponent<NetworkObject>().Despawn();
+        Destroy(gameObject);
     }
 }

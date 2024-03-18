@@ -23,7 +23,7 @@ public class Archer_PlayerWeapon : PlayerWeapon
     {
         if (WeaponHolderState == Archer_WeaponHolderState.OnBack) return;
         Debug.Log("Ready");
-        if(!IsReadyToUse) return;
+        if (!IsReadyToUse) return;
 
         if (firePointTransform == null)
         {
@@ -97,13 +97,14 @@ public class Archer_PlayerWeapon : PlayerWeapon
         if (!arrowObjRef.TryGet(out NetworkObject arrowNetObj) || OwnerClientId != NetworkManager.LocalClientId) return;
 
         AttackDamage attackDamage = BowWeaponData.GetDamage(damageMultiplier, playerController.PlayerCharacterData, (long)OwnerClientId);
+        attackDamage.Damage = attackDamage.Damage / drawPower * BowConfig.MaxDrawPower;
         Arrow arrow = arrowNetObj.GetComponent<Arrow>();
         arrow.AttackDamage = attackDamage;
 
         Rigidbody arrowRb = arrowNetObj.GetComponent<Rigidbody>();
         Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
         Vector3 direction;
-        if (Physics.Raycast(ray, out RaycastHit hit, BowConfig.MaxRaycastDistance, playerController.PlayerCharacterData.TargetLayer) && hit.distance > Vector3.Distance(hit.point, firePointTransform.position))
+        if (Physics.Raycast(ray, out RaycastHit hit, BowConfig.MaxRaycastDistance) && hit.distance > Vector3.Distance(hit.point, firePointTransform.position))
         {
             // Calculate direction towards the hit point
             direction = (hit.point - firePointTransform.position).normalized;
@@ -113,6 +114,7 @@ public class Archer_PlayerWeapon : PlayerWeapon
         }
         else
         {
+            Debug.Log("Not hit");
             // If ray doesn't hit anything, use the default direction
             arrowRb.transform.forward = firePointTransform.forward.normalized;
             direction = arrowRb.transform.forward;
@@ -150,9 +152,10 @@ public class Archer_PlayerWeapon : PlayerWeapon
 
 
 
-    private void OnDrawGizmosSelected()
+    private void OnDrawGizmos()
     {
         Debug.DrawLine(firePointHolderTransform.position, firePointTransform.position);
+        Debug.DrawLine(firePointHolderTransform.position, firePointHolderTransform.forward * BowConfig.MaxRaycastDistance);
     }
 
 

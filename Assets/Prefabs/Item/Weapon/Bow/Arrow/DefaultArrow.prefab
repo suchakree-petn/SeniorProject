@@ -245,10 +245,10 @@ SphereCollider:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 65
+    m_Bits: 0
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
@@ -288,6 +288,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ed8dad0775183343b09c86398bfdb5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AttackDamage:
+    Type: 0
+    IsCriticalable: 0
+    Damage: 19
+    AttackerClientId: 11
   arrowRb: {fileID: 4269340218531131940}
   hitBox: {fileID: 6851957407499613674}
 --- !u!114 &3141610665910564191

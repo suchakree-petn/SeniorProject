@@ -2620,6 +2620,41 @@ PrefabInstance:
       propertyPath: m_Center.z
       value: -0.00000005921728
       objectReference: {fileID: 0}
+    - target: {fileID: 8089698333217440013, guid: 8468fa4c8e09695459a2f7572471e55b,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8089698333217440013, guid: 8468fa4c8e09695459a2f7572471e55b,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.99
+      objectReference: {fileID: 0}
+    - target: {fileID: 8089698333217440013, guid: 8468fa4c8e09695459a2f7572471e55b,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8089698333217440013, guid: 8468fa4c8e09695459a2f7572471e55b,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.99856466
+      objectReference: {fileID: 0}
+    - target: {fileID: 8089698333217440013, guid: 8468fa4c8e09695459a2f7572471e55b,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.05356001
+      objectReference: {fileID: 0}
+    - target: {fileID: 8089698333217440013, guid: 8468fa4c8e09695459a2f7572471e55b,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.00008863211
+      objectReference: {fileID: 0}
+    - target: {fileID: 8089698333217440013, guid: 8468fa4c8e09695459a2f7572471e55b,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.0000033425167
+      objectReference: {fileID: 0}
     - target: {fileID: 8164219173163491055, guid: 8468fa4c8e09695459a2f7572471e55b,
         type: 3}
       propertyPath: m_Name
@@ -2640,6 +2675,31 @@ PrefabInstance:
       propertyPath: m_Avatar
       value: 
       objectReference: {fileID: 9000000, guid: 400ff1074cbaaa640ac7bd5f12bb4fcf, type: 3}
+    - target: {fileID: 8410790543009126724, guid: 8468fa4c8e09695459a2f7572471e55b,
+        type: 3}
+      propertyPath: TransitionStateInfoList.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8410790543009126724, guid: 8468fa4c8e09695459a2f7572471e55b,
+        type: 3}
+      propertyPath: TransitionStateInfoList.Array.data[0].Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8410790543009126724, guid: 8468fa4c8e09695459a2f7572471e55b,
+        type: 3}
+      propertyPath: TransitionStateInfoList.Array.data[0].TriggerNameHash
+      value: -1570718414
+      objectReference: {fileID: 0}
+    - target: {fileID: 8410790543009126724, guid: 8468fa4c8e09695459a2f7572471e55b,
+        type: 3}
+      propertyPath: TransitionStateInfoList.Array.data[0].DestinationState
+      value: -799213269
+      objectReference: {fileID: 0}
+    - target: {fileID: 8410790543009126724, guid: 8468fa4c8e09695459a2f7572471e55b,
+        type: 3}
+      propertyPath: TransitionStateInfoList.Array.data[0].OriginatingState
+      value: -601574123
+      objectReference: {fileID: 0}
     - target: {fileID: 8541470699786124171, guid: 8468fa4c8e09695459a2f7572471e55b,
         type: 3}
       propertyPath: m_LocalPosition.y
@@ -2758,6 +2818,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e2b0250b0198884d859d59031dc83cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsReadyToUse: 1
   InHand_weaponHolderTransform: {fileID: 1092399764360655114}
   playerController: {fileID: 7802546280471116810}
   MagicItemWeaponData: {fileID: 11400000, guid: cbd1597b919f422438ef8d645ce9a5f9,

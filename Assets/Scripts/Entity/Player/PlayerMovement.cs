@@ -43,9 +43,9 @@ public class PlayerMovement : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        ApplyGravity();
+        // ApplyGravity();
     }
-    private void ApplyGravity()
+    public void ApplyGravity()
     {
         if (!isGrounded && !isOnSlope)
         {
