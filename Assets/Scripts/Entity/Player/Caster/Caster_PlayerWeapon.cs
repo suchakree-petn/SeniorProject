@@ -22,13 +22,14 @@ public class Caster_PlayerWeapon : PlayerWeapon
 
     public override void UseWeapon(InputAction.CallbackContext context)
     {
+        if (!IsReadyToUse) return;
 
         if (firePointTransform == null)
         {
             Debug.LogWarning($"No Fire Point transform");
             return;
         }
-        if (context.performed && IsReadyToUse)
+        if (context.performed)
         {
             NormalAttack();
             OnUseWeapon?.Invoke();

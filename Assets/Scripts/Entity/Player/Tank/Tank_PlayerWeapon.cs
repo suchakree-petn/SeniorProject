@@ -21,6 +21,8 @@ public class Tank_PlayerWeapon : PlayerWeapon
 
     public override void UseWeapon(InputAction.CallbackContext context)
     {
+        if(!IsReadyToUse) return;
+
         if (context.performed)
         {
             IsSlash = true;
@@ -29,6 +31,7 @@ public class Tank_PlayerWeapon : PlayerWeapon
         if (context.canceled)
         {
             IsSlash = false;
+            OnUseWeapon?.Invoke();
         }
 
     }
@@ -46,6 +49,8 @@ public class Tank_PlayerWeapon : PlayerWeapon
 
     protected override void OnEnable()
     {
+        if(!IsOwner) return;
+
         OnUseWeapon += () => StartWeaponCooldown(SwordWeaponData.AttackTimeInterval);
     }
 

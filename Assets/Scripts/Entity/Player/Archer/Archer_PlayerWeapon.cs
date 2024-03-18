@@ -23,17 +23,19 @@ public class Archer_PlayerWeapon : PlayerWeapon
     {
         if (WeaponHolderState == Archer_WeaponHolderState.OnBack) return;
 
+        if(!IsReadyToUse) return;
+
         if (firePointTransform == null)
         {
             Debug.LogWarning($"No Fire Point transform");
             return;
         }
-        if (context.performed && IsReadyToUse)
+        if (context.performed)
         {
             IsDrawing = true;
         }
 
-        if (context.canceled && IsReadyToUse)
+        if (context.canceled)
         {
             NormalAttack();
             IsDrawing = false;

@@ -58,6 +58,7 @@ public partial class Caster_PlayerController : PlayerController
     private void HealOrbAnimation()
     {
         playerAnimation.SetTriggerNetworkAnimation("HealOrb");
+        Debug.Log("Heal orb anim");
         // if (caster_playerWeapon.WeaponHolderState == Archer_WeaponHolderState.InHand)
         // {
         //     playerAnimation.SetLayerWeight(1, Mathf.Lerp(playerAnimation.GetLayerWeight(1), 1, Time.deltaTime * 10));
@@ -107,6 +108,7 @@ public partial class Caster_PlayerController : PlayerController
 
     protected override void OnEnable()
     {
+        if(!IsOwner) return;
         base.OnEnable();
         caster_playerWeapon.OnUseWeapon += HealOrbAnimation;
 
@@ -114,6 +116,8 @@ public partial class Caster_PlayerController : PlayerController
 
     protected override void OnDisable()
     {
+        if(!IsOwner) return;
+
         base.OnDisable();
         caster_playerWeapon.OnUseWeapon -= HealOrbAnimation;
     }
