@@ -19,8 +19,14 @@ public partial class Caster_PlayerController : PlayerController
     {
         if (!IsOwner) return;
         base.Update();
-
-        // CasterAnimation();
+        if (PlayerCameraMode == PlayerCameraMode.Focus)
+        {
+            WalkAnimationWhileFocus();
+        }
+        else if (playerAnimation.GetLayerWeight(1) > 0)
+        {
+            playerAnimation.SetLayerWeight(1, Mathf.Lerp(playerAnimation.GetLayerWeight(1), 0, Time.deltaTime * 10));
+        }
     }
 
 
@@ -51,7 +57,7 @@ public partial class Caster_PlayerController : PlayerController
 
     private void HealOrbAnimation()
     {
-        playerAnimation.SetTriggerNetworkAnimation("Heal Orb");
+        playerAnimation.SetTriggerNetworkAnimation("HealOrb");
         // if (caster_playerWeapon.WeaponHolderState == Archer_WeaponHolderState.InHand)
         // {
         //     playerAnimation.SetLayerWeight(1, Mathf.Lerp(playerAnimation.GetLayerWeight(1), 1, Time.deltaTime * 10));
