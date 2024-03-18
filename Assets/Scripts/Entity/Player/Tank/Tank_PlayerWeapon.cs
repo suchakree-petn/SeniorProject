@@ -49,7 +49,7 @@ public class Tank_PlayerWeapon : PlayerWeapon
 
     protected override void OnEnable()
     {
-        if(!IsOwner) return;
+        // if(!IsOwner) return;
 
         OnUseWeapon += () => StartWeaponCooldown(SwordWeaponData.AttackTimeInterval);
     }

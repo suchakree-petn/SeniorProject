@@ -19,7 +19,6 @@ public partial class Archer_PlayerController : PlayerController
     {
         if (!IsOwner) return;
         base.Update();
-
         ArcherAnimation();
     }
 
@@ -116,7 +115,7 @@ public partial class Archer_PlayerController : PlayerController
 
     protected override void OnEnable()
     {
-        if(!IsOwner) return;
+        // if(!IsOwner) return;
 
         base.OnEnable();
         OnPlayerCameraModeChanged += SetWeaponHolderPosition;
@@ -125,7 +124,7 @@ public partial class Archer_PlayerController : PlayerController
 
     protected override void OnDisable()
     {
-        if(!IsOwner) return;
+        // if(!IsOwner) return;
 
         base.OnDisable();
         OnPlayerCameraModeChanged -= SetWeaponHolderPosition;

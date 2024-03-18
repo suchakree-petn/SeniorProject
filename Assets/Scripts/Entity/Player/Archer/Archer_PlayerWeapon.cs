@@ -22,7 +22,7 @@ public class Archer_PlayerWeapon : PlayerWeapon
     public override void UseWeapon(InputAction.CallbackContext context)
     {
         if (WeaponHolderState == Archer_WeaponHolderState.OnBack) return;
-
+        Debug.Log("Ready");
         if(!IsReadyToUse) return;
 
         if (firePointTransform == null)

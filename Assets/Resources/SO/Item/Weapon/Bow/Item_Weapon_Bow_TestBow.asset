@@ -18,6 +18,6 @@ MonoBehaviour:
   IsCriticalable: 1
   AttackTimeInterval: 0.2
   NormalAttack_DamageMultiplier: 10
-  NormalAttack_DrawSpeed: 0
+  NormalAttack_DrawSpeed: 0.84
   arrow_prf: {fileID: 4010580131365827827, guid: 849c39f219f0730498e338d46b9b8283,
     type: 3}

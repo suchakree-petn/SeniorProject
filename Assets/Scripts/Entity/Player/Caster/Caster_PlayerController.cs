@@ -32,7 +32,7 @@ public partial class Caster_PlayerController : PlayerController
 
     public override void OnNetworkSpawn()
     {
-        if (!IsOwner) return;
+        // if (!IsOwner) return;
 
         base.OnNetworkSpawn();
         PlayerInputManager playerInputManager = PlayerInputManager.Instance;
@@ -42,7 +42,7 @@ public partial class Caster_PlayerController : PlayerController
 
     public override void OnNetworkDespawn()
     {
-        if (!IsOwner) return;
+        // if (!IsOwner) return;
 
         base.OnNetworkDespawn();
         PlayerInputManager playerInputManager = PlayerInputManager.Instance;

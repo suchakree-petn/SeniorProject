@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18385726, g: 0.22905919, b: 0.3034431, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -167,7 +167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98972d078301dab47ac9a75f47665523, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CarryToOtherScene: 1
+  CarryToOtherScene: 0
   cinemachineBrain: {fileID: 330585549}
   thirdPersonVCam: {fileID: 1762129663}
   focusVCam: {fileID: 1177019912}
@@ -3836,7 +3836,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 0, y: 0.3108411, z: -5.586252}
+  m_FollowOffset: {x: 0, y: 7.933486, z: -9.223682}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -4974,7 +4974,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 0, y: 0.3108411, z: -5.586252}
+  m_FollowOffset: {x: 0, y: 7.933486, z: -9.223682}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -6259,7 +6259,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 0, y: 0.3108411, z: -5.586252}
+  m_FollowOffset: {x: 0, y: 7.933486, z: -9.223682}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -6356,7 +6356,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 597f1e9b79297074c9daa17ebd6457d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CarryToOtherScene: 1
+  CarryToOtherScene: 0
   MovementAction:
     m_Name: Movement
     m_Type: 0
