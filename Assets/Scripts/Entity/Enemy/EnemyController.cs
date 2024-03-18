@@ -65,8 +65,8 @@ public class EnemyController : NetworkBehaviour, IDamageable
 
     private void LateUpdate()
     {
-        Vector3 direction = targetGroup[0].position - transform.position;
-        enemyRb.transform.rotation = Quaternion.LookRotation(direction);
+        // Vector3 direction = targetGroup[0].position - transform.position;
+        // enemyRb.transform.rotation = Quaternion.LookRotation(direction);
         // rb.transform.rotation = Quaternion.LookRotation(rb.transform.rotation.eulerAngles.x, rb.transform.rotation.eulerAngles.y + 1, rb.transform.rotation.eulerAngles.z);
 
     }

@@ -1,5 +1,7 @@
 using System.Collections;
+using Mono.CSharp;
 using Unity.Netcode;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -8,6 +10,7 @@ public class Tank_PlayerWeapon : PlayerWeapon
     public Tank_WeaponHolderState WeaponHolderState = Tank_WeaponHolderState.OnBack;
 
     public SwordBase SwordWeaponData;
+    public SwordDamageDealer swordPrefab;
     // public BowConfig BowConfig = new();
 
     public bool IsSlash;
@@ -26,6 +29,7 @@ public class Tank_PlayerWeapon : PlayerWeapon
         if (context.performed)
         {
             IsSlash = true;
+            NormalAttack();
         }
 
         if (context.canceled)
@@ -44,14 +48,32 @@ public class Tank_PlayerWeapon : PlayerWeapon
 
     public override void NormalAttack()
     {
-        // FireArrow_ServerRpc(SwordWeaponData.NormalAttack_DamageMultiplier, DrawPower);
+        AttackDamage attackDamage = SwordWeaponData.GetDamage(SwordWeaponData.LightAttack_DamageMultiplier, playerController.PlayerCharacterData, (long)OwnerClientId);
+        Debug.Log("NAttack");
+        SlashAttack_ServerRpc(attackDamage);
+    }
+    [ServerRpc(RequireOwnership = false)]
+    public void SlashAttack_ServerRpc(AttackDamage attackDamage, ServerRpcParams serverRpcParams = default){
+        SwordDamageDealer swordDamage = swordPrefab.GetComponent<SwordDamageDealer>();
+        swordDamage.AttackDamage = attackDamage;
+        // ulong OwnerClientId = serverRpcParams.Receive.SenderClientId;
+        // Transform healOrbTransform = MagicItemWeaponData.GetHealOrb(position: firePointTransform.position);
+        // NetworkObject healOrbNetworkObject = healOrbTransform.GetComponent<NetworkObject>();
+        // healOrbNetworkObject.Spawn(true);
+        // healOrbTransform.transform.forward = Camera.main.transform.forward;
+        // HealOrb healOrb = healOrbTransform.GetComponent<HealOrb>();
+        // if (isHasLockTarget)
+        // {
+        //     healOrb.target = PlayerManager.Instance.PlayerGameObjects[targetClientId].transform;
+        // }
+        // healOrb.AttackDamage = attackDamage;
     }
 
     protected override void OnEnable()
     {
         // if(!IsOwner) return;
 
-        OnUseWeapon += () => StartWeaponCooldown(SwordWeaponData.AttackTimeInterval);
+        // OnUseWeapon += () => StartWeaponCooldown(SwordWeaponData.AttackTimeInterval);
     }
 
 
@@ -95,7 +117,27 @@ public class Tank_PlayerWeapon : PlayerWeapon
     //         Debug.Log($"{drawPower} / {BowConfig.MaxDrawPower} * {BowConfig.ArrowSpeed}");
     //         arrowRb.AddForce(drawPower / BowConfig.MaxDrawPower * BowConfig.ArrowSpeed * direction, ForceMode.Impulse);
     //     }
+    
+    void OnDrawGizmos()
+    {
+        float maxDistance = 3f;
 
+        RaycastHit[] hits = Physics.BoxCastAll(transform.position, transform.lossyScale / 2, transform.forward);
+        foreach(RaycastHit hit in hits){
+            if (hit.transform.root.TryGetComponent(out IDamageable damageable) && hit.transform.root.TryGetComponent(out PlayerController playerController))
+            {
+                Gizmos.color = Color.red;
+                Gizmos.DrawRay(transform.position, transform.forward * hit.distance);
+                Gizmos.DrawWireCube(transform.position + transform.forward * hit.distance, transform.lossyScale);
+            }
+            else
+            {
+                Gizmos.color = Color.green;
+                Gizmos.DrawRay(transform.position, transform.forward * maxDistance);
+            }
+        }
+        
+    }
 }
 // [System.Serializable]
 // public class BowConfig

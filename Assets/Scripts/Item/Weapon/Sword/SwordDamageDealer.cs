@@ -3,17 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
 
-public class SwordDamageDealer : NetworkBehaviour
+public class SwordDamageDealer : MonoBehaviour
 {
     public AttackDamage AttackDamage;
 
 
     // [SerializeField] private Collider hitBox;
-    public bool isHit = false;
+    public bool isHit = true;
     public void OnTriggerEnter(Collider other)
     {
-        if (!IsOwner || !IsSpawned) return;
-
         // Debug.Log($"Arrow {name} collide with {other.gameObject.name}");
         // SetKinematic();
         if (other.transform.root.TryGetComponent(out NetworkObject otherNetObj) && isHit)
@@ -45,6 +43,6 @@ public class SwordDamageDealer : NetworkBehaviour
 
         if (!entityNetObjRef.TryGet(out NetworkObject entityNetObj)) return;
 
-        // entityNetObj.GetComponent<IDamageable>().TakeDamage_ServerRpc(AttackDamage.Damage);
+        entityNetObj.GetComponent<IDamageable>().TakeDamage_ClientRpc(AttackDamage);
     }
 }
