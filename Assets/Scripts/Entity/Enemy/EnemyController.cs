@@ -35,7 +35,7 @@ public class EnemyController : NetworkBehaviour, IDamageable
     public override void OnNetworkSpawn()
     {
         if (!IsOwner || !IsServer) return;
-        target = PlayerManager.Instance.PlayerGameObjects[0].transform;
+        target = PlayerManager.Instance.GetClosestPlayerFrom(transform.position);
 
     }
 
