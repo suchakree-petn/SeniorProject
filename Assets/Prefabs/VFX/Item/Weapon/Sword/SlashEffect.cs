@@ -1,13 +1,8 @@
 using Unity.Netcode;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class SlashEffect : NetworkBehaviour 
 {
-    public Transform _position;
-    private void Update() {
-        transform.position = _position.position;
-    }
     public override void OnNetworkSpawn()
     {
         if (!IsServer) return;

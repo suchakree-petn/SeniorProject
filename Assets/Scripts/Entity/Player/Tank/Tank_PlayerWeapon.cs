@@ -1,7 +1,6 @@
 using System.Collections;
 using Mono.CSharp;
 using Unity.Netcode;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -80,7 +79,6 @@ public class Tank_PlayerWeapon : PlayerWeapon
         }else{
             effect = Instantiate(slashEffectPrefab2, effectpos.position, attackRange.rotation);
         }
-        effect.GetComponent<SlashEffect>()._position = effectpos;
         effect.GetComponent<NetworkObject>().Spawn(true);
 
         RaycastHit[] hits = Physics.BoxCastAll(attackRange.position, new Vector3(4, 1, 2), transform.forward, transform.rotation, 3f);

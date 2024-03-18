@@ -8,7 +8,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Tutor/Tutor_MainMenu_UserDataPersistence.unity
     guid: 5eaf429340441554780b550615aee7b5
   - enabled: 1
@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Pond/Map_Tester.unity
     guid: b3331a446a460534096fb759b58ffeff
+  - enabled: 1
+    path: Assets/Scenes/Thanva/Thanva_Map_Tester.unity
+    guid: 341d6855baf7af24db797783e8516ce2
   m_configObjects: {}
