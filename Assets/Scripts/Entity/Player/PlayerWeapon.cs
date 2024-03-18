@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 
 public abstract class PlayerWeapon : NetworkBehaviour
 {
+    public Action OnUseWeapon;
 
     public abstract void UseWeapon(InputAction.CallbackContext context);
     public GameObject GetWeaponInHand()

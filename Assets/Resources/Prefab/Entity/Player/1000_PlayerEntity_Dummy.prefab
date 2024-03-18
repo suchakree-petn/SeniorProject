@@ -688,6 +688,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 1924667045707628834}
+  networkAnimator: {fileID: 8410790543009126724}
 --- !u!114 &3755565199410241642
 MonoBehaviour:
   m_ObjectHideFlags: 0

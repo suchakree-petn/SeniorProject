@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode.Components;
 using UnityEngine;
 
 public class PlayerAnimation : MonoBehaviour
 {
     [Header("Reference")]
     [SerializeField] private Animator animator;
+    [SerializeField] private NetworkAnimator networkAnimator;
     public void SetMoveVelocityX(float velocityX)
     {
         animator.SetFloat("MoveVelocityX", velocityX);
@@ -28,6 +30,11 @@ public class PlayerAnimation : MonoBehaviour
     public void SetFloat(string name, float value)
     {
         animator.SetFloat(name, value);
+    }
+
+    public void SetTriggerNetworkAnimation(string name)
+    {
+        networkAnimator.SetTrigger(name);
     }
 }
 

@@ -31,6 +31,7 @@ public class Caster_PlayerWeapon : PlayerWeapon
         if (context.performed)
         {
             NormalAttack();
+            OnUseWeapon?.Invoke();
         }
 
 
