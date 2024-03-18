@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.Netcode;
+using UnityEditor.Networking.PlayerConnection;
 using UnityEngine;
 
 public partial class PlayerManager : NetworkSingleton<PlayerManager>
@@ -136,7 +137,21 @@ public partial class PlayerManager : NetworkSingleton<PlayerManager>
     {
         return PlayerCharacterPrefab[characterId];
     }
-
+    public Transform GetClosestPlayerFrom(Vector3 position)
+    {
+        float closestDistant = float.MaxValue;
+        ulong clientId = default;
+        foreach (NetworkClient item in NetworkManager.ConnectedClientsList)
+        {
+            float distant = Vector3.Distance(position, PlayerPos[item.ClientId]);
+            if (distant < closestDistant)
+            {
+                closestDistant = distant;
+                clientId = item.ClientId;
+            }
+        }
+        return PlayerGameObjects[clientId].transform;
+    }
     [ServerRpc(RequireOwnership = false)]
     public void SwitchPlayerCharacter_ServerRpc(ulong charId, ServerRpcParams serverRpcParams = default)
     {

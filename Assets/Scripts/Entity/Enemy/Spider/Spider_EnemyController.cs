@@ -17,10 +17,11 @@ public class Spider_EnemyController : EnemyController
     [SerializeField] private Transform attackPointTransform;
     private void Update()
     {
-        if (!IsServer) return;
+        if (!IsServer || !IsSpawned) return;
         if (Vector3.Distance(transform.position, target.position) > attackRange + 2)
         {
             agent.isStopped = false;
+            target = PlayerManager.Instance.GetClosestPlayerFrom(transform.position);
             animator.SetFloat("VelocityZ", Mathf.Lerp(animator.GetFloat("VelocityZ"), 1, Time.deltaTime * 5));
         }
         else
