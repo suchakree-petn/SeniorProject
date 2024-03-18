@@ -32,5 +32,8 @@ public class EnemyHealth : EntityHealth
             }
         }
     }
-
+    private void OnEnable()
+    {
+        InitHp(enemyController.EnemyCharacterData);
+    }
 }

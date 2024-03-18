@@ -12,6 +12,8 @@ public partial class Caster_PlayerController : PlayerController
 
     protected override void Start()
     {
+        if(!IsOwner) return;
+
         base.Start();
     }
 
@@ -32,7 +34,7 @@ public partial class Caster_PlayerController : PlayerController
 
     public override void OnNetworkSpawn()
     {
-        // if (!IsOwner) return;
+        if (!IsOwner) return;
 
         base.OnNetworkSpawn();
         PlayerInputManager playerInputManager = PlayerInputManager.Instance;
@@ -42,7 +44,7 @@ public partial class Caster_PlayerController : PlayerController
 
     public override void OnNetworkDespawn()
     {
-        // if (!IsOwner) return;
+        if (!IsOwner) return;
 
         base.OnNetworkDespawn();
         PlayerInputManager playerInputManager = PlayerInputManager.Instance;
@@ -109,6 +111,7 @@ public partial class Caster_PlayerController : PlayerController
     protected override void OnEnable()
     {
         base.OnEnable();
+        if(!IsOwner) return;
         caster_playerWeapon.OnUseWeapon += HealOrbAnimation;
 
     }
@@ -117,6 +120,7 @@ public partial class Caster_PlayerController : PlayerController
     {
 
         base.OnDisable();
+        if(!IsOwner) return;
         caster_playerWeapon.OnUseWeapon -= HealOrbAnimation;
     }
 }

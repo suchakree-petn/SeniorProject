@@ -32,10 +32,6 @@ public class PlayerController : NetworkBehaviour, IDamageable
 
     public override void OnNetworkSpawn()
     {
-        if (!IsOwner)
-        {
-            return;
-        }
         Debug.Log("spawn");
         InitPlayerCharacter();
 
@@ -94,7 +90,6 @@ public class PlayerController : NetworkBehaviour, IDamageable
 
     protected virtual void FixedUpdate()
     {
-        if (!IsOwner) return;
 
         playerMovement.ApplyGravity();
         playerMovement.MoveCharactor();
@@ -131,7 +126,6 @@ public class PlayerController : NetworkBehaviour, IDamageable
 
     protected virtual void LateUpdate()
     {
-        if (!IsOwner) return;
         MovementAnimation();
         mouseMovement.RotateCamera();
 
@@ -189,7 +183,6 @@ public class PlayerController : NetworkBehaviour, IDamageable
 
     protected virtual void OnEnable()
     {
-        playerHealth.InitHp(PlayerCharacterData);
     }
     protected virtual void OnDisable()
     {

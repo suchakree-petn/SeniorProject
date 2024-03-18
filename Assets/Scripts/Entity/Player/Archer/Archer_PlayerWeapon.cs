@@ -21,7 +21,9 @@ public class Archer_PlayerWeapon : PlayerWeapon
 
     public override void UseWeapon(InputAction.CallbackContext context)
     {
-        if (WeaponHolderState == Archer_WeaponHolderState.OnBack) return;
+        if (!IsOwner) return;
+
+        if (PlayerCameraMode.Focus != playerController.PlayerCameraMode) return;
         Debug.Log("Ready");
         if (!IsReadyToUse) return;
 
@@ -161,6 +163,8 @@ public class Archer_PlayerWeapon : PlayerWeapon
 
     protected override void OnEnable()
     {
+        if (!IsOwner) return;
+
         OnUseWeapon += () => StartWeaponCooldown(BowWeaponData.AttackTimeInterval);
     }
 

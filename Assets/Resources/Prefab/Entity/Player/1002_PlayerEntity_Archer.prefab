@@ -2901,6 +2901,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bow_OnBack
       objectReference: {fileID: 0}
+    - target: {fileID: 9214517534020980606, guid: 929b2c9e52c3dcd48aad22d0dea60456,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

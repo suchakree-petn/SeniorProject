@@ -27,6 +27,7 @@ public class EnemyController : NetworkBehaviour, IDamageable
 
     protected virtual void Awake()
     {
+        if(!IsOwner) return;
         enemyRb = GetComponent<Rigidbody>();
         agent.speed = moveSpeed;
     }
@@ -110,11 +111,11 @@ public class EnemyController : NetworkBehaviour, IDamageable
 
     public virtual void InitHp(EntityCharacterData characterData)
     {
-        enemyHealth.InitHp(characterData);
+        // enemyHealth.InitHp(characterData);
     }
     protected virtual void OnEnable()
     {
-        InitHp(EnemyCharacterData);
+        // InitHp(EnemyCharacterData);
     }
 
     [ClientRpc]

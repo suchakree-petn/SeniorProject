@@ -22,6 +22,7 @@ public class Caster_PlayerWeapon : PlayerWeapon
 
     public override void UseWeapon(InputAction.CallbackContext context)
     {
+        if(!IsOwner) return;
         if (!IsReadyToUse) return;
 
         if (firePointTransform == null)
@@ -119,6 +120,7 @@ public class Caster_PlayerWeapon : PlayerWeapon
 
     protected override void OnEnable()
     {
+        if (!IsOwner) return;
         OnUseWeapon += () => StartWeaponCooldown(MagicItemWeaponData.AttackTimeInterval);
     }
 }

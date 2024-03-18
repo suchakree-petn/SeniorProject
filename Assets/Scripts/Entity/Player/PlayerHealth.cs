@@ -32,4 +32,8 @@ public class PlayerHealth : EntityHealth
             }
         }
     }
+    private void OnEnable()
+    {
+        InitHp(playerController.PlayerCharacterData);
+    }
 }

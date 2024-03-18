@@ -12,6 +12,8 @@ public partial class Archer_PlayerController : PlayerController
 
     protected override void Start()
     {
+        if (!IsOwner) return;
+
         base.Start();
     }
 
@@ -25,8 +27,8 @@ public partial class Archer_PlayerController : PlayerController
 
     public override void OnNetworkSpawn()
     {
-        if (!IsOwner) return;
 
+        if (!IsOwner) return;
         base.OnNetworkSpawn();
         PlayerInputManager playerInputManager = PlayerInputManager.Instance;
         playerInputManager.Attack.performed += archer_playerWeapon.UseWeapon;
@@ -36,8 +38,8 @@ public partial class Archer_PlayerController : PlayerController
 
     public override void OnNetworkDespawn()
     {
-        if (!IsOwner) return;
 
+        if (!IsOwner) return;
         base.OnNetworkDespawn();
         PlayerInputManager playerInputManager = PlayerInputManager.Instance;
         playerInputManager.Attack.performed -= archer_playerWeapon.UseWeapon;
@@ -65,7 +67,7 @@ public partial class Archer_PlayerController : PlayerController
 
     private void ArcherAnimation()
     {
-        if (archer_playerWeapon.WeaponHolderState == Archer_WeaponHolderState.InHand)
+        if (PlayerCameraMode.Focus == PlayerCameraMode)
         {
             playerAnimation.SetLayerWeight(1, Mathf.Lerp(playerAnimation.GetLayerWeight(1), 1, Time.deltaTime * 10));
             WalkAnimationWhileFocus();
@@ -115,18 +117,17 @@ public partial class Archer_PlayerController : PlayerController
 
     protected override void OnEnable()
     {
-        // if(!IsOwner) return;
-
         base.OnEnable();
+        if (!IsOwner) return;
         OnPlayerCameraModeChanged += SetWeaponHolderPosition;
 
     }
 
     protected override void OnDisable()
     {
-        // if(!IsOwner) return;
 
         base.OnDisable();
+        if (!IsOwner) return;
         OnPlayerCameraModeChanged -= SetWeaponHolderPosition;
     }
 }
