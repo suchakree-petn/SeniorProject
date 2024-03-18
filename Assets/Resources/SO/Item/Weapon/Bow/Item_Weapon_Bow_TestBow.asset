@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Item_Weapon_Bow_TestBow
   m_EditorClassIdentifier: 
   WeaponId: 200
-  AttackPoint: 10
+  AttackPoint: 1
   WeaponType: 1
   IsCriticalable: 1
   AttackTimeInterval: 0
