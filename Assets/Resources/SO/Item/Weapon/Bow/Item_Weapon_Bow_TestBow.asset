@@ -15,9 +15,8 @@ MonoBehaviour:
   WeaponId: 200
   AttackPoint: 10
   WeaponType: 1
-  IsReadyToAttack: 1
   IsCriticalable: 1
-  AttackTimeInterval: 0.1
+  AttackTimeInterval: 0.2
   NormalAttack_DamageMultiplier: 10
   NormalAttack_DrawSpeed: 0
   arrow_prf: {fileID: 4010580131365827827, guid: 849c39f219f0730498e338d46b9b8283,

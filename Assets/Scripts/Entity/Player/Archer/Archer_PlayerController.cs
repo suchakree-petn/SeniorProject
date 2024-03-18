@@ -116,12 +116,17 @@ public partial class Archer_PlayerController : PlayerController
 
     protected override void OnEnable()
     {
+        if(!IsOwner) return;
+
         base.OnEnable();
         OnPlayerCameraModeChanged += SetWeaponHolderPosition;
+
     }
 
     protected override void OnDisable()
     {
+        if(!IsOwner) return;
+
         base.OnDisable();
         OnPlayerCameraModeChanged -= SetWeaponHolderPosition;
     }

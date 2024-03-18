@@ -2605,7 +2605,7 @@ PrefabInstance:
         type: 3}
       propertyPath: playerController
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 5698460776653806195}
     - target: {fileID: 4421562747518347658, guid: 8468fa4c8e09695459a2f7572471e55b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2874,6 +2874,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2484782fb4905f34d8a12c30517edced, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsReadyToUse: 1
   InHand_weaponHolderTransform: {fileID: 5623424579041576080}
   playerController: {fileID: 5698460776653806195}
   WeaponHolderState: 0
