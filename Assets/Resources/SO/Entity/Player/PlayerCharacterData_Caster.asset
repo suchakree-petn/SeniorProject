@@ -18,10 +18,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 192
   MoveSpeed: 0
-  HpBase: 1000
-  HpBonus: 3.04
-  AttackBase: 10
-  AttackBonus: 3
-  DefenseBase: 5
-  DefenseBonus: 1
+  HpBase: 900
+  HpBonus: 0
+  AttackBase: 200
+  AttackBonus: 0
+  DefenseBase: 100
+  DefenseBonus: 0
   PlayerRole: 2

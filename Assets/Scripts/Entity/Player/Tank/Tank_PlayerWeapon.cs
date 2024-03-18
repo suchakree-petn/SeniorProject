@@ -1,5 +1,7 @@
 using System.Collections;
+using Mono.CSharp;
 using Unity.Netcode;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -8,24 +10,24 @@ public class Tank_PlayerWeapon : PlayerWeapon
     public Tank_WeaponHolderState WeaponHolderState = Tank_WeaponHolderState.OnBack;
 
     public SwordBase SwordWeaponData;
-    // public BowConfig BowConfig = new();
-
+    [SerializeField] Transform effectpos;
+    [SerializeField] Transform attackRange;
+    [SerializeField] Transform attackRangeHolder;
+    [SerializeField] GameObject slashEffectPrefab;
+    [SerializeField] GameObject slashEffectPrefab2;
     public bool IsSlash;
     public float DrawPower;
 
-    // [Header("Tank Reference")]
-    // [SerializeField] private Transform OnBack_weaponHolderTransform;
-    // [SerializeField] private Transform firePointHolderTransform;
-    // [SerializeField] private Transform firePointTransform;
-    // [SerializeField] private Tank_PlayerController archer_PlayerController;
+
 
     public override void UseWeapon(InputAction.CallbackContext context)
     {
-        if(!IsReadyToUse) return;
+        if (!IsReadyToUse) return;
 
         if (context.performed)
         {
             IsSlash = true;
+            NormalAttack();
         }
 
         if (context.canceled)
@@ -39,62 +41,83 @@ public class Tank_PlayerWeapon : PlayerWeapon
     private void Update()
     {
         if (!IsOwner) return;
-
+        if (playerController.PlayerCameraMode == PlayerCameraMode.Focus)
+        {
+            RotatePointHolder();
+        }
+        else
+        {
+            SetPointHolder();
+        }
     }
-
+    private void RotatePointHolder()
+    {
+        attackRangeHolder.forward = Camera.main.transform.forward;
+    }
+    private void SetPointHolder()
+    {
+        attackRangeHolder.forward = transform.forward;
+    }
     public override void NormalAttack()
     {
-        // FireArrow_ServerRpc(SwordWeaponData.NormalAttack_DamageMultiplier, DrawPower);
+        AttackDamage attackDamage;
+        if(WeaponHolderState == Tank_WeaponHolderState.InHand){
+            attackDamage =  SwordWeaponData.GetDamage(SwordWeaponData.LightAttack_DamageMultiplier, 
+                            playerController.PlayerCharacterData, (long)OwnerClientId);
+        }else{
+            attackDamage =  SwordWeaponData.GetDamage(SwordWeaponData.HeavyAttack_DamageMultiplier, 
+                            playerController.PlayerCharacterData, (long)OwnerClientId);
+        }
+        Debug.Log("NAttack");
+        SlashAttack_ServerRpc(attackDamage);
+    }
+    [ServerRpc(RequireOwnership = false)]
+    public void SlashAttack_ServerRpc(AttackDamage attackDamage, ServerRpcParams serverRpcParams = default)
+    {
+        GameObject effect;
+        if(WeaponHolderState == Tank_WeaponHolderState.InHand){
+            effect = Instantiate(slashEffectPrefab, effectpos.position, attackRange.rotation);
+        }else{
+            effect = Instantiate(slashEffectPrefab2, effectpos.position, attackRange.rotation);
+        }
+        effect.GetComponent<SlashEffect>()._position = effectpos;
+        effect.GetComponent<NetworkObject>().Spawn(true);
+
+        RaycastHit[] hits = Physics.BoxCastAll(attackRange.position, new Vector3(4, 1, 2), transform.forward, transform.rotation, 3f);
+
+        foreach (RaycastHit hit in hits)
+        {
+            Debug.Log("outif" + hit.transform.gameObject.name);
+
+            if (hit.collider.transform.root.TryGetComponent(out IDamageable damageable)
+            && hit.collider.transform.root.TryGetComponent(out EnemyController _)
+            && hit.collider.CompareTag("Hitbox"))
+            {
+                Debug.Log("inif" + hit.transform.root.gameObject.name);
+                damageable.TakeDamage_ClientRpc(attackDamage);
+            }
+        }
+    }
+
+    void OnDrawGizmos()
+    {
+        float maxDistance = 3f;
+
+        RaycastHit[] hits = Physics.BoxCastAll(attackRange.position, new Vector3(4, 1, 2), transform.forward, transform.rotation, maxDistance);
+        foreach (RaycastHit hit in hits)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireCube(attackRange.position, new Vector3(4, 1, 2));
+        }
+
     }
 
     protected override void OnEnable()
     {
-        // if(!IsOwner) return;
 
-        OnUseWeapon += () => StartWeaponCooldown(SwordWeaponData.AttackTimeInterval);
     }
 
 
-    //     [ServerRpc(RequireOwnership = false)]
-    //     public void SlashAttack_ServerRpc(float damageMultiplier, float drawPower, ServerRpcParams serverRpcParams = default)
-    //     {
-    //         ulong OwnerClientId = serverRpcParams.Receive.SenderClientId;
-    //         Transform arrowTransform = SwordWeaponData.GetArrow(position: firePointTransform.position);
-    //         NetworkObject arrowNetworkObject = arrowTransform.GetComponent<NetworkObject>();
-    //         arrowNetworkObject.SpawnWithOwnership(OwnerClientId, true);
-
-    //         SlashAttack_ClientRpc(damageMultiplier, drawPower, OwnerClientId, arrowNetworkObject);
-    //     }
-
-    //     [ClientRpc]
-    //     public void SlashAttack_ClientRpc(float damageMultiplier, float drawPower, ulong OwnerClientId, NetworkObjectReference swordObjRef)
-    //     {
-    //         if (!swordObjRef.TryGet(out NetworkObject arrowNetObj) || OwnerClientId != NetworkManager.LocalClientId) return;
-
-    //         AttackDamage attackDamage = SwordWeaponData.GetDamage(damageMultiplier, playerController.PlayerCharacterData,(long)OwnerClientId);
-    //         SwordDamageDealer sword = arrowNetObj.GetComponent<SwordDamageDealer>();
-    //         sword.AttackDamage = attackDamage;
-
-    //         // Rigidbody arrowRb = swordObjRef.GetComponent<Rigidbody>();
-    //         Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
-    //         Vector3 direction;
-    //         if (Physics.Raycast(ray, out RaycastHit hit, BowConfig.MaxRaycastDistance, BowConfig.targetMask) && hit.distance > Vector3.Distance(hit.point, firePointTransform.position))
-    //         {
-    //             // Calculate direction towards the hit point
-    //             direction = (hit.point - firePointTransform.position).normalized;
-    //             // Rotate arrow to face the hit point
-    //             arrowRb.transform.forward = direction;
-    //             // Apply force in the direction of the hit point
-    //         }
-    //         else
-    //         {
-    //             // If ray doesn't hit anything, use the default direction
-    //             arrowRb.transform.forward = firePointTransform.forward.normalized;
-    //             direction = arrowRb.transform.forward;
-    //         }
-    //         Debug.Log($"{drawPower} / {BowConfig.MaxDrawPower} * {BowConfig.ArrowSpeed}");
-    //         arrowRb.AddForce(drawPower / BowConfig.MaxDrawPower * BowConfig.ArrowSpeed * direction, ForceMode.Impulse);
-    //     }
 
 }
 // [System.Serializable]

@@ -6,4 +6,5 @@ public abstract class SwordBase : WeaponBase
 {
     public float LightAttack_DamageMultiplier;
     public float HeavyAttack_DamageMultiplier;
+    
 }
