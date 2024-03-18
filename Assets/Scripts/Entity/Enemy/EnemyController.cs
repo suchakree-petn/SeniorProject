@@ -15,7 +15,7 @@ public class EnemyController : NetworkBehaviour, IDamageable
     [SerializeField] private BehaviourTreeInstance behaviourTreeInstance;
 
     public Transform target;
-    private Vector3[] nextTargetPos;
+    private Vector3[] nextTargetPos = new Vector3[20];
     public float moveSpeed = 10;
     private Coroutine findPathToTarget;
 
@@ -32,12 +32,12 @@ public class EnemyController : NetworkBehaviour, IDamageable
     {
         if (!IsOwner || !IsServer) return;
         target = PlayerManager.Instance.PlayerGameObjects[0].transform;
-        if (findPathToTarget != null)
-        {
-            StopCoroutine(findPathToTarget);
-        }
+        // if (findPathToTarget != null)
+        // {
+        //     StopCoroutine(findPathToTarget);
+        // }
 
-        findPathToTarget = StartCoroutine(CalcPathToTartget());
+        // findPathToTarget = StartCoroutine(CalcPathToTartget());
     }
 
     public override void OnNetworkDespawn()
@@ -47,27 +47,25 @@ public class EnemyController : NetworkBehaviour, IDamageable
     protected virtual void FixedUpdate()
     {
         if (!IsOwner || !IsServer || !IsSpawned) return;
-
-        if (Vector3.Distance(transform.position, target.position) > 3f)
-        {
-            Vector3 direction = nextTargetPos[0] - transform.position;
-            enemyRb.velocity = direction.normalized * moveSpeed;
-        }
-        else
-        {
-            // Attack
-        }
+        path = new();
+        agent.CalculatePath(target.position, path);
+        agent.SetPath(path);
+        // if (Vector3.Distance(transform.position, target.position) > 3f)
+        // {
+        //     Vector3 direction = nextTargetPos[0] - transform.position;
+        //     enemyRb.velocity = direction.normalized * moveSpeed;
+        // }
+        // else
+        // {
+        //     // Attack
+        // }
 
     }
 
     protected virtual void LateUpdate()
     {
         if (!IsOwner || !IsServer || !IsSpawned) return;
-        Debug.Log(path.corners.Length);
-        for (int i = 0; i < path.corners.Length - 1; i++)
-        {
-            Debug.DrawLine(path.corners[i], path.corners[i + 1], Color.red);
-        }
+
         Vector3 direction = nextTargetPos[0] - transform.position;
         enemyRb.transform.rotation = Quaternion.LookRotation(direction);
 
@@ -76,18 +74,29 @@ public class EnemyController : NetworkBehaviour, IDamageable
     private IEnumerator CalcPathToTartget()
     {
         WaitForSeconds wait = new(0.3f);
-        UpdateNextPosition();
+        path = new();
+        Debug.Log("asdasdasd");
+
+        while (Vector3.Distance(transform.position, target.position) > 3f)
+        {
+            Debug.Log("Calc");
+            UpdateNextPosition();
+        }
 
         yield return wait;
+        findPathToTarget = StartCoroutine(CalcPathToTartget());
     }
 
     public void UpdateNextPosition()
     {
-        NavMeshPath path = new();
         if (NavMesh.CalculatePath(transform.position, target.position, NavMesh.AllAreas, path))
         {
             nextTargetPos = path.corners;
-            this.path = path;
+            Debug.Log(path.corners[0]);
+            for (int i = 0; i < path.corners.Length - 1; i++)
+            {
+                Debug.DrawLine(path.corners[i], path.corners[i + 1], Color.red);
+            }
         }
         Debug.LogWarning("No path");
     }
