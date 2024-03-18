@@ -28,16 +28,17 @@ public class Archer_PlayerWeapon : PlayerWeapon
             Debug.LogWarning($"No Fire Point transform");
             return;
         }
-        if (context.performed)
+        if (context.performed && IsReadyToUse)
         {
             IsDrawing = true;
         }
 
-        if (context.canceled)
+        if (context.canceled && IsReadyToUse)
         {
             NormalAttack();
             IsDrawing = false;
             DrawPower = 0;
+            OnUseWeapon?.Invoke();
         }
 
     }
@@ -150,6 +151,12 @@ public class Archer_PlayerWeapon : PlayerWeapon
     private void OnDrawGizmosSelected()
     {
         Debug.DrawLine(firePointHolderTransform.position, firePointTransform.position);
+    }
+
+
+    protected override void OnEnable()
+    {
+        OnUseWeapon += () => StartWeaponCooldown(BowWeaponData.AttackTimeInterval);
     }
 
 

@@ -28,7 +28,7 @@ public class Caster_PlayerWeapon : PlayerWeapon
             Debug.LogWarning($"No Fire Point transform");
             return;
         }
-        if (context.performed)
+        if (context.performed && IsReadyToUse)
         {
             NormalAttack();
             OnUseWeapon?.Invoke();
@@ -117,6 +117,10 @@ public class Caster_PlayerWeapon : PlayerWeapon
         Gizmos.DrawWireSphere(currentLockTargetPosition, MagicItemConfig.SphereCastRadius);
     }
 
+    protected override void OnEnable()
+    {
+        OnUseWeapon += () => StartWeaponCooldown(MagicItemWeaponData.AttackTimeInterval);
+    }
 }
 [Serializable]
 public class MagicItemConfig

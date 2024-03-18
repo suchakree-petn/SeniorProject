@@ -15,9 +15,8 @@ MonoBehaviour:
   WeaponId: 100
   AttackPoint: 3
   WeaponType: 2
-  IsReadyToAttack: 1
   IsCriticalable: 0
-  AttackTimeInterval: 0
+  AttackTimeInterval: 2
   NormalAttack_HealMultiplier: 3
   healOrb_prf: {fileID: 4667868370430098, guid: 00360aba13218b6438040a622fe38edb,
     type: 3}
