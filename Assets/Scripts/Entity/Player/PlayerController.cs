@@ -90,6 +90,7 @@ public class PlayerController : NetworkBehaviour, IDamageable
 
     protected virtual void FixedUpdate()
     {
+        if (!IsOwner) return;
 
         playerMovement.ApplyGravity();
         playerMovement.MoveCharactor();
@@ -183,6 +184,7 @@ public class PlayerController : NetworkBehaviour, IDamageable
 
     protected virtual void OnEnable()
     {
+        playerHealth.InitHp(PlayerCharacterData);
     }
     protected virtual void OnDisable()
     {
