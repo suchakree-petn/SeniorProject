@@ -29,6 +29,7 @@ public class PlayerAnimation : MonoBehaviour
     {
         animator.SetFloat(name, value);
     }
+<<<<<<< HEAD
     public void SetBool(string name, bool value)
     {
         animator.SetBool(name, value);
@@ -36,6 +37,16 @@ public class PlayerAnimation : MonoBehaviour
     public void SetTrigger(string name)
     {
         animator.SetTrigger(name);
+=======
+
+    public void SetTriggerNetworkAnimation(string name)
+    {
+        networkAnimator.SetTrigger(name);
+    }
+    public void SetBool(string name,bool value)
+    {
+        animator.SetBool(name,value);
+>>>>>>> 29e8d0917925913c44b6a93cc245a254a455df27
     }
 }
 
