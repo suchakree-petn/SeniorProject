@@ -34,6 +34,10 @@ public class PlayerUIManager : NetworkSingleton<PlayerUIManager>
                 PLAYER_CHAR_ID = 1002;
                 PlayerManager.Instance.SwitchPlayerCharacter_ServerRpc(PLAYER_CHAR_ID);
                 break;
+            case 2:
+                PLAYER_CHAR_ID = 1003;
+                PlayerManager.Instance.SwitchPlayerCharacter_ServerRpc(PLAYER_CHAR_ID);
+                break;
             default:
                 PLAYER_CHAR_ID = 1000;
                 PlayerManager.Instance.SwitchPlayerCharacter_ServerRpc(PLAYER_CHAR_ID);

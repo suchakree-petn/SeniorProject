@@ -36,5 +36,9 @@ public class PlayerAnimation : MonoBehaviour
     {
         networkAnimator.SetTrigger(name);
     }
+    public void SetBool(string name,bool value)
+    {
+        animator.SetBool(name,value);
+    }
 }
 
