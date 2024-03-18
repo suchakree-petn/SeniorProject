@@ -19,13 +19,13 @@ public class EnemyManager : NetworkSingleton<EnemyManager>
             return _enemyCharacterPrefab;
         }
     }
-
+    
     protected override void InitAfterAwake()
     {
     }
     private void Start()
     {
-
+        
     }
 
     private void Update()

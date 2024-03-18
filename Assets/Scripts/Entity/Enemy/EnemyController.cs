@@ -105,7 +105,7 @@ public class EnemyController : NetworkBehaviour, IDamageable
     public virtual void TakeDamage_ClientRpc(AttackDamage damage)
     {
         if (!IsOwner) return;
-
+        
         enemyHealth.TakeDamage(damage, EnemyCharacterData.GetDefense());
     }
 

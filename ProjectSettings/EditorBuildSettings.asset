@@ -23,4 +23,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Tutor/Map_Tester_Tutor.unity
     guid: 65a9441704d1c9247912c2718a9a734a
+  - enabled: 1
+    path: Assets/Scenes/Thanva/Thanva_Map_Tester.unity
+    guid: 341d6855baf7af24db797783e8516ce2
   m_configObjects: {}
