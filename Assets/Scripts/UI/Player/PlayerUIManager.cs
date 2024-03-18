@@ -21,17 +21,17 @@ public class PlayerUIManager : NetworkSingleton<PlayerUIManager>
 
     public void SetSelectCharacter(ulong clientId)
     {
-        Debug.Log("Dropdown Value: " + selectCharacterDropdown.value);
+        // Debug.Log("Dropdown Value: " + selectCharacterDropdown.value);
         Debug.Log("Id Value: " + clientId);
         ulong PLAYER_CHAR_ID;
-        switch (selectCharacterDropdown.value)
+        switch (clientId)
         {
             case 0:
-                PLAYER_CHAR_ID = 1001;
+                PLAYER_CHAR_ID = 1002;
                 PlayerManager.Instance.SwitchPlayerCharacter_ServerRpc(PLAYER_CHAR_ID);
                 break;
             case 1:
-                PLAYER_CHAR_ID = 1002;
+                PLAYER_CHAR_ID = 1001;
                 PlayerManager.Instance.SwitchPlayerCharacter_ServerRpc(PLAYER_CHAR_ID);
                 break;
             case 2:
