@@ -1,11 +1,14 @@
 
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerHealth : EntityHealth
 {
     [Header("Player Reference")]
     [SerializeField] protected PlayerController playerController;
+    public Slider miniHpBar;
 
+  
     public override void TakeDamage(AttackDamage damage, float defense)
     {
         if (CurrentHealth > 0)
@@ -17,6 +20,7 @@ public class PlayerHealth : EntityHealth
                 currentHealth.Value = 0;
             }
         }
+        UIHPBar.Instance.SetHP_ServerRpc(NetworkManager.LocalClientId);
     }
 
     public override void TakeHeal(AttackDamage damage)
@@ -31,6 +35,8 @@ public class PlayerHealth : EntityHealth
                 currentHealth.Value = maxHp;
             }
         }
+        UIHPBar.Instance.SetHP_ServerRpc(NetworkManager.LocalClientId);
+
     }
     private void OnEnable()
     {

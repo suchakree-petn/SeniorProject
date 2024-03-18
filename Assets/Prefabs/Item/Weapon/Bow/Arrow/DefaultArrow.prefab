@@ -295,6 +295,7 @@ MonoBehaviour:
     AttackerClientId: 11
   arrowRb: {fileID: 4269340218531131940}
   hitBox: {fileID: 6851957407499613674}
+  vfx_Hit: {fileID: 2944396702758532163, guid: e190bf97c041e58448af6b043116cba0, type: 3}
 --- !u!114 &3141610665910564191
 MonoBehaviour:
   m_ObjectHideFlags: 0

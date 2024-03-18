@@ -56,8 +56,7 @@ public class PlayerController : NetworkBehaviour, IDamageable
 
         mouseMovement.InitCameras(playerCameraMode);
         mouseMovement.LockMouseCursor();
-        SetCameraMode(playerCameraMode, true);
-
+        SetCameraMode(playerCameraMode, false);
     }
 
     public override void OnNetworkDespawn()
@@ -193,8 +192,16 @@ public class PlayerController : NetworkBehaviour, IDamageable
     [ClientRpc]
     public void TakeDamage_ClientRpc(AttackDamage damage)
     {
-        if(!IsOwner) return;
-        playerHealth.TakeDamage(damage, PlayerCharacterData.GetDefense());
+
+        if (!IsOwner)
+        {
+            playerHealth.miniHpBar.maxValue = PlayerCharacterData.GetMaxHp();
+            playerHealth.miniHpBar.value = playerHealth.CurrentHealth;
+        }
+        else
+        {
+            playerHealth.TakeDamage(damage, PlayerCharacterData.GetDefense());
+        }
     }
 
     public void InitHp(EntityCharacterData chacterData)
@@ -204,8 +211,15 @@ public class PlayerController : NetworkBehaviour, IDamageable
     [ClientRpc]
     public void TakeHeal_ClientRpc(AttackDamage damage)
     {
-        if(!IsOwner) return;
+        if (!IsOwner)
+        {
+            playerHealth.miniHpBar.maxValue = PlayerCharacterData.GetMaxHp();
+            playerHealth.miniHpBar.value = playerHealth.CurrentHealth;
+        }
+        else
+        {
+            playerHealth.TakeHeal(damage);
+        }
 
-        playerHealth.TakeHeal(damage);
     }
 }

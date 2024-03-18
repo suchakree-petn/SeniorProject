@@ -12,13 +12,15 @@ public partial class Caster_PlayerController : PlayerController
 
     protected override void Start()
     {
-        if(!IsOwner) return;
+        if (!IsOwner) return;
 
         base.Start();
     }
 
     protected override void Update()
     {
+        playerHealth.miniHpBar.maxValue = PlayerCharacterData.GetMaxHp();
+        playerHealth.miniHpBar.value = playerHealth.CurrentHealth;
         if (!IsOwner) return;
         base.Update();
         if (PlayerCameraMode == PlayerCameraMode.Focus)
@@ -29,6 +31,15 @@ public partial class Caster_PlayerController : PlayerController
         {
             playerAnimation.SetLayerWeight(1, Mathf.Lerp(playerAnimation.GetLayerWeight(1), 0, Time.deltaTime * 10));
         }
+        if (playerHealth.CurrentHealth < PlayerCharacterData.GetMaxHp())
+        {
+            playerHealth.currentHealth.Value += Time.deltaTime * 20;
+        }
+        if (playerHealth.CurrentHealth > PlayerCharacterData.GetMaxHp())
+        {
+            playerHealth.currentHealth.Value = PlayerCharacterData.GetMaxHp();
+        }
+
     }
 
 
@@ -111,7 +122,7 @@ public partial class Caster_PlayerController : PlayerController
     protected override void OnEnable()
     {
         base.OnEnable();
-        if(!IsOwner) return;
+        if (!IsOwner) return;
         caster_playerWeapon.OnUseWeapon += HealOrbAnimation;
 
     }
@@ -120,7 +131,7 @@ public partial class Caster_PlayerController : PlayerController
     {
 
         base.OnDisable();
-        if(!IsOwner) return;
+        if (!IsOwner) return;
         caster_playerWeapon.OnUseWeapon -= HealOrbAnimation;
     }
 }

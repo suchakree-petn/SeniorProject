@@ -1,5 +1,6 @@
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public abstract class Arrow : NetworkBehaviour
 {
@@ -8,6 +9,8 @@ public abstract class Arrow : NetworkBehaviour
     [Header("Base Reference")]
     [SerializeField] private Rigidbody arrowRb;
     [SerializeField] private Collider hitBox;
+    [SerializeField] private GameObject vfx_Hit;
+    [SerializeField] private GameObject vfx_HitInstance;
 
     public override void OnNetworkSpawn()
     {
@@ -36,12 +39,18 @@ public abstract class Arrow : NetworkBehaviour
             {
                 AttackDamage.Damage *= 1.5f;
                 Debug.LogWarning("Critical");
+                vfx_HitInstance = Instantiate(vfx_Hit, transform.position, Quaternion.identity);
             }
             NetworkObject networkObject = root.GetComponent<NetworkObject>();
             SetParent_ServerRpc(networkObject);
             DoDamage(networkObject);
-            Invoke(nameof(SelfDestroy), 0.5f);
+            Invoke(nameof(DestroyVFX), 0.95f);
+            Invoke(nameof(SelfDestroy), 1);
         }
+    }
+    private void DestroyVFX()
+    {
+        Destroy(vfx_HitInstance);
     }
     private void SelfDestroy()
     {

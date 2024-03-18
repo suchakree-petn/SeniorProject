@@ -469,8 +469,8 @@ MonoBehaviour:
   enemyRb: {fileID: 3435360099078161397}
   networkAnimator: {fileID: 6322938050345439138}
   animator: {fileID: 5443892900808637861}
-  attackPower: 10
-  attackPower_Multiplier: 10
+  attackPower: 100
+  attackPower_Multiplier: 2
   attackRange: 1.67
   attackTimeInterval: 3
   isReadyToAttack: 1
