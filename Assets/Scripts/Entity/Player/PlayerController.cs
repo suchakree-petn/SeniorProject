@@ -96,6 +96,7 @@ public class PlayerController : NetworkBehaviour, IDamageable
     {
         if (!IsOwner) return;
 
+        playerMovement.ApplyGravity();
         playerMovement.MoveCharactor();
         mouseMovement.RotatePlayer();
 

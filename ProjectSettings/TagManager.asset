@@ -21,7 +21,7 @@ TagManager:
   - petrol
   - Enemy
   - Hitbox
-  - CiticalHitbox
+  - CriticalHitbox
   layers:
   - Default
   - TransparentFX

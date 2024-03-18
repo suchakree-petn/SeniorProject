@@ -2797,6 +2797,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19d9cada1c9915d49823756a9e0970c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsReadyToUse: 1
   InHand_weaponHolderTransform: {fileID: 2257371466793186}
   playerController: {fileID: 3491484360437324280}
   WeaponHolderState: 0
@@ -2806,7 +2807,7 @@ MonoBehaviour:
     DrawSpeed: 1
     MaxDrawPower: 0.7
     MinDrawPower: 0.2
-    MaxRaycastDistance: 100
+    MaxRaycastDistance: 400
   IsDrawing: 0
   DrawPower: 0
   OnBack_weaponHolderTransform: {fileID: 2972822406335611147}
