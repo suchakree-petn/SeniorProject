@@ -58,7 +58,7 @@ public partial class GameLobbyManager : NetworkSingleton<GameLobbyManager>
             });
             NetworkManager.GetComponent<UnityTransport>().SetRelayServerData(new RelayServerData(allocation, "dtls"));
             NetworkManager.StartHost();
-            NetworkManager.SceneManager.LoadScene("Tutor_Test_FPS_Movement&FreeLook", LoadSceneMode.Single);
+            NetworkManager.SceneManager.LoadScene("Tutor_Map_Tester", LoadSceneMode.Single);
         }
         catch (LobbyServiceException e)
         {

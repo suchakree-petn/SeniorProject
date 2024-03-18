@@ -322,7 +322,7 @@ PrefabInstance:
     - target: {fileID: 8964699346016857801, guid: 58437a38aec03b4478d7fdb505663dec,
         type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 352418138
+      value: 2007371242
       objectReference: {fileID: 0}
     - target: {fileID: 9006563807303963375, guid: 58437a38aec03b4478d7fdb505663dec,
         type: 3}
@@ -469,8 +469,8 @@ MonoBehaviour:
   enemyRb: {fileID: 3435360099078161397}
   networkAnimator: {fileID: 6322938050345439138}
   animator: {fileID: 5443892900808637861}
-  attackPower: 100
-  attackPower_Multiplier: 2
+  attackPower: 190
+  attackPower_Multiplier: 1
   attackRange: 1.67
   attackTimeInterval: 3
   isReadyToAttack: 1

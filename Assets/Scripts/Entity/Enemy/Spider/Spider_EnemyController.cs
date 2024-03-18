@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.AI;
 public class Spider_EnemyController : EnemyController
 {
+    
     [SerializeField] private float attackPower;
     [SerializeField] private float attackPower_Multiplier;
     [SerializeField] private float attackRange;
@@ -15,6 +16,10 @@ public class Spider_EnemyController : EnemyController
 
     [Header("Spider Reference")]
     [SerializeField] private Transform attackPointTransform;
+    
+    private void Start() {
+        
+    }
     private void Update()
     {
         if (!IsServer || !IsSpawned) return;
@@ -68,4 +73,20 @@ public class Spider_EnemyController : EnemyController
     {
         base.OnEnable();
     }
+    [ClientRpc]
+    public override void TakeDamage_ClientRpc(AttackDamage damage)
+    {
+        base.TakeDamage_ClientRpc(damage);
+        if(enemyHealth.CurrentHealth <= 0){
+            networkAnimator.SetTrigger("Death");
+            StartCoroutine(DelayDestroy(1.5f));
+        }
+    }
+    IEnumerator DelayDestroy(float time){
+        yield return new WaitForSeconds(time);
+        GetComponent<NetworkObject>().Despawn();
+        Destroy(gameObject);
+
+    }
+
 }

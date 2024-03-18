@@ -48,7 +48,7 @@ public partial class PlayerManager : NetworkSingleton<PlayerManager>
         {
             NetworkManager.OnClientConnectedCallback += PlayerManager_OnClientConnectedHandler;
             NetworkManager.OnClientDisconnectCallback += PlayerManager_OnClientDisconnectHandler;
-            // PlayerManager_OnServerStartedHandler();
+            PlayerManager_OnServerStartedHandler();
         }
 
     }
