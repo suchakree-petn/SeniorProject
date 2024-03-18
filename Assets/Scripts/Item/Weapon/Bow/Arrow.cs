@@ -11,7 +11,7 @@ public abstract class Arrow : NetworkBehaviour
 
     public override void OnNetworkSpawn()
     {
-        if (!IsOwner) return;
+        if (!IsServer) return;
         Invoke(nameof(SelfDestroy), 5);
     }
     public virtual void OnTriggerEnter(Collider other)

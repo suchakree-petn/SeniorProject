@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Thanva/Thanva_Test_FPS_Movement&FreeLook.unity
     guid: 29de48aa2184c824bb035b0273bf9d33
+  - enabled: 1
+    path: Assets/Scenes/Pond/Map_Tester.unity
+    guid: b3331a446a460534096fb759b58ffeff
   m_configObjects: {}
