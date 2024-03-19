@@ -9,20 +9,17 @@ public class SpawnEnemyWhenPlayerPass : NetworkBehaviour
     public virtual void OnTriggerEnter(Collider other)
     {
         if (!IsServer || !IsOwner) return;
-        if (other.transform.root.TryGetComponent<PlayerController>(out _))
-        {
+        if (other.transform.root.TryGetComponent<PlayerController>(out _)){
             gameObject.GetComponent<Collider>().enabled = false;
             Spawn_ServerRpc();
         }
-
+        
     }
     [ServerRpc(RequireOwnership = false)]
-    public void Spawn_ServerRpc()
-    {
-
-        if (enemys != null)
-            foreach (GameObject enemy in enemys)
-            {
+    public void Spawn_ServerRpc(){
+        
+        if(enemys != null)
+            foreach(GameObject enemy in enemys){
                 enemy.SetActive(true);
                 enemy.GetComponent<NetworkObject>().Spawn(true);
                 // StartCoroutine(DelayActiveObj(enemy,0.5f));
@@ -38,14 +35,13 @@ public class SpawnEnemyWhenPlayerPass : NetworkBehaviour
     //     }
     // }
     // private void Start() {
-
+        
     // }
-    IEnumerator DelayActiveObj(GameObject enemy, float time)
-    {
+    IEnumerator DelayActiveObj(GameObject enemy,float time){
         yield return new WaitForSeconds(time);
         enemy.SetActive(true);
         enemy.GetComponent<NetworkObject>().Spawn();
-
+        
     }
-
+    
 }
