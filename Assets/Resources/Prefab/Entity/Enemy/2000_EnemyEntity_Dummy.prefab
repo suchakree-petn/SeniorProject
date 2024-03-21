@@ -348,6 +348,8 @@ MonoBehaviour:
   moveSpeed: 10
   enemyHealth: {fileID: 1251622043368636751}
   enemyRb: {fileID: 6618734251774362899}
+  networkAnimator: {fileID: 0}
+  animator: {fileID: 0}
 --- !u!114 &1251622043368636751
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -384,7 +386,7 @@ MonoBehaviour:
   SyncScaleX: 0
   SyncScaleY: 0
   SyncScaleZ: 0
-  PositionThreshold: 0.1
+  PositionThreshold: 0.01
   RotAngleThreshold: 1
   ScaleThreshold: 0.01
   UseQuaternionSynchronization: 0

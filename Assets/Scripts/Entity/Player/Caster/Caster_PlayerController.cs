@@ -15,6 +15,8 @@ public partial class Caster_PlayerController : PlayerController
         if (!IsOwner) return;
 
         base.Start();
+        caster_playerWeapon.OnUseWeapon += HealOrbAnimation;
+
     }
 
     protected override void Update()
@@ -126,17 +128,15 @@ public partial class Caster_PlayerController : PlayerController
 
     protected override void OnEnable()
     {
-        base.OnEnable();
         if (!IsOwner) return;
-        caster_playerWeapon.OnUseWeapon += HealOrbAnimation;
+        base.OnEnable();
 
     }
 
     protected override void OnDisable()
     {
 
-        base.OnDisable();
         if (!IsOwner) return;
-        caster_playerWeapon.OnUseWeapon -= HealOrbAnimation;
+        base.OnDisable();
     }
 }

@@ -20,9 +20,14 @@ public partial class Tank_PlayerController : PlayerController
         if (!IsOwner) return;
         base.Update();
 
+    }
+    protected override void LateUpdate()
+    {
+        if (!IsOwner) return;
+        base.LateUpdate();
+
         TankAnimation();
     }
-
 
     public override void OnNetworkSpawn()
     {
@@ -66,29 +71,29 @@ public partial class Tank_PlayerController : PlayerController
 
     private void TankAnimation()
     {
-        
+
         if (tank_playerWeapon.WeaponHolderState == Tank_WeaponHolderState.InHand)
         {
             WalkAnimationWhileFocus();
 
             if (tank_playerWeapon.IsSlash)
             {
-                playerAnimation.SetBool("IsHSlash",true);
+                playerAnimation.SetBool("IsHSlash", true);
             }
             else
             {
-                playerAnimation.SetBool("IsHSlash",false);
+                playerAnimation.SetBool("IsHSlash", false);
             }
         }
         else
         {
             if (tank_playerWeapon.IsSlash)
             {
-                playerAnimation.SetBool("IsLSlash",true);
+                playerAnimation.SetBool("IsLSlash", true);
             }
             else
             {
-                playerAnimation.SetBool("IsLSlash",false);
+                playerAnimation.SetBool("IsLSlash", false);
             }
         }
     }
