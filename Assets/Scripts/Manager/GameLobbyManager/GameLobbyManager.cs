@@ -21,7 +21,13 @@ public partial class GameLobbyManager : NetworkSingleton<GameLobbyManager>
         InitializeUnityAuthentication();
 
     }
-
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            NetworkManager.SceneManager.LoadScene("Thanva_Map_Tester", LoadSceneMode.Single);
+        }
+    }
     private async void InitializeUnityAuthentication()
     {
         if (UnityServices.State != ServicesInitializationState.Initialized)
@@ -48,7 +54,7 @@ public partial class GameLobbyManager : NetworkSingleton<GameLobbyManager>
             });
             Allocation allocation = await AllocateRelay();
             string relayJoinCode = await GetRelayJoinCode(allocation);
-            Debug.Log("Create lobby code: "+relayJoinCode);
+            Debug.Log("Create lobby code: " + relayJoinCode);
 
             await LobbyService.Instance.UpdateLobbyAsync(joinedLobby.Id, new UpdateLobbyOptions()
             {
@@ -58,7 +64,7 @@ public partial class GameLobbyManager : NetworkSingleton<GameLobbyManager>
             });
             NetworkManager.GetComponent<UnityTransport>().SetRelayServerData(new RelayServerData(allocation, "dtls"));
             NetworkManager.StartHost();
-            NetworkManager.SceneManager.LoadScene("Thanva_Map_Tester", LoadSceneMode.Single);
+
         }
         catch (LobbyServiceException e)
         {
@@ -84,7 +90,7 @@ public partial class GameLobbyManager : NetworkSingleton<GameLobbyManager>
         {
             joinedLobby = await LobbyService.Instance.QuickJoinLobbyAsync();
             string relayJoinCode = joinedLobby.Data[KEY_RELAY_JOIN_CODE].Value;
-            Debug.Log("QJ code: "+relayJoinCode);
+            Debug.Log("QJ code: " + relayJoinCode);
             JoinAllocation joinAllocation = await JoinRelay(relayJoinCode);
             NetworkManager.GetComponent<UnityTransport>().SetRelayServerData(new RelayServerData(joinAllocation, "dtls"));
 
