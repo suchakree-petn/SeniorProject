@@ -21,9 +21,14 @@ public partial class Archer_PlayerController : PlayerController
     {
         if (!IsOwner) return;
         base.Update();
+        // ArcherAnimation();
+    }
+    protected override void LateUpdate()
+    {
+        if (!IsOwner) return;
+        base.LateUpdate();
         ArcherAnimation();
     }
-
 
     public override void OnNetworkSpawn()
     {

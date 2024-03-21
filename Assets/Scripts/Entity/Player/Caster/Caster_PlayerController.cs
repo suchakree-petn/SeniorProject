@@ -23,14 +23,7 @@ public partial class Caster_PlayerController : PlayerController
         playerHealth.miniHpBar.value = playerHealth.CurrentHealth;
         if (!IsOwner) return;
         base.Update();
-        if (PlayerCameraMode == PlayerCameraMode.Focus)
-        {
-            WalkAnimationWhileFocus();
-        }
-        else if (playerAnimation.GetLayerWeight(1) > 0)
-        {
-            playerAnimation.SetLayerWeight(1, Mathf.Lerp(playerAnimation.GetLayerWeight(1), 0, Time.deltaTime * 10));
-        }
+
         if (playerHealth.CurrentHealth < PlayerCharacterData.GetMaxHp())
         {
             playerHealth.currentHealth.Value += Time.deltaTime * 20;
@@ -41,7 +34,19 @@ public partial class Caster_PlayerController : PlayerController
         }
 
     }
-
+    protected override void LateUpdate()
+    {
+        if (!IsOwner) return;
+        base.LateUpdate();
+        if (PlayerCameraMode == PlayerCameraMode.Focus)
+        {
+            WalkAnimationWhileFocus();
+        }
+        else if (playerAnimation.GetLayerWeight(1) > 0)
+        {
+            playerAnimation.SetLayerWeight(1, Mathf.Lerp(playerAnimation.GetLayerWeight(1), 0, Time.deltaTime * 10));
+        }
+    }
 
     public override void OnNetworkSpawn()
     {
