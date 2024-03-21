@@ -38,8 +38,6 @@ public abstract class PlayerWeapon : NetworkBehaviour
     protected abstract void OnEnable();
     protected virtual void OnDisable()
     {
-        if(!IsOwner) return;
-
         OnUseWeapon = null;
         if (weaponCooldown != null)
         {
