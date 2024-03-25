@@ -1,3 +1,4 @@
+using TMPro;
 using Unity.Services.Authentication;
 using Unity.Services.Core;
 using Unity.Services.Lobbies;
@@ -9,6 +10,8 @@ using UnityEngine.UI;
 public partial class GameLobbyManager
 {
     [Header("Reference UI")]
-    [SerializeField] Button createLobbyButton;
-    [SerializeField] Button quickJoinLobbyButton;
+    [SerializeField] private Button createLobbyButton;
+    [SerializeField] private Button quickJoinLobbyButton;
+    [SerializeField] private Button codeJoinLobbyButton;
+    [SerializeField] private TMP_InputField codeJoinLobbyInputField;
 }

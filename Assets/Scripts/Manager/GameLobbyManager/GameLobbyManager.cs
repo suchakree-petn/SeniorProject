@@ -20,14 +20,11 @@ public partial class GameLobbyManager : NetworkSingleton<GameLobbyManager>
     {
         InitializeUnityAuthentication();
 
+        createLobbyButton.onClick.AddListener(() => CreateLobby("TestLobby", false));
+        quickJoinLobbyButton.onClick.AddListener(() => QuickJoin());
+        codeJoinLobbyButton.onClick.AddListener(() => JoinByCode(codeJoinLobbyInputField.text));
     }
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            NetworkManager.SceneManager.LoadScene("Thanva_Map_Tester", LoadSceneMode.Single);
-        }
-    }
+
     private async void InitializeUnityAuthentication()
     {
         if (UnityServices.State != ServicesInitializationState.Initialized)
@@ -38,9 +35,6 @@ public partial class GameLobbyManager : NetworkSingleton<GameLobbyManager>
             await UnityServices.InitializeAsync(initializationOptions);
 
             await AuthenticationService.Instance.SignInAnonymouslyAsync();
-
-            createLobbyButton.onClick.AddListener(() => CreateLobby("TestLobby", false));
-            quickJoinLobbyButton.onClick.AddListener(() => QuickJoin());
         }
     }
 
@@ -54,7 +48,6 @@ public partial class GameLobbyManager : NetworkSingleton<GameLobbyManager>
             });
             Allocation allocation = await AllocateRelay();
             string relayJoinCode = await GetRelayJoinCode(allocation);
-            Debug.Log("Create lobby code: " + relayJoinCode);
 
             await LobbyService.Instance.UpdateLobbyAsync(joinedLobby.Id, new UpdateLobbyOptions()
             {
@@ -63,8 +56,9 @@ public partial class GameLobbyManager : NetworkSingleton<GameLobbyManager>
                 }
             });
             NetworkManager.GetComponent<UnityTransport>().SetRelayServerData(new RelayServerData(allocation, "dtls"));
+            Debug.Log("Create lobby code: " + joinedLobby.LobbyCode);
             NetworkManager.StartHost();
-
+            NetworkManager.SceneManager.LoadScene("Thanva_Map_Tester", LoadSceneMode.Single);
         }
         catch (LobbyServiceException e)
         {
@@ -96,6 +90,25 @@ public partial class GameLobbyManager : NetworkSingleton<GameLobbyManager>
 
             NetworkManager.StartClient();
 
+        }
+        catch (LobbyServiceException e)
+        {
+            Debug.LogWarning(e);
+        }
+    }
+
+    public async void JoinByCode(string lobbyCode)
+    {
+        try
+        {
+            joinedLobby = await LobbyService.Instance.JoinLobbyByCodeAsync(lobbyCode);
+            Debug.Log("Join code: " + lobbyCode);
+
+            string relayJoinCode = joinedLobby.Data[KEY_RELAY_JOIN_CODE].Value;
+            JoinAllocation joinAllocation = await JoinRelay(relayJoinCode);
+            NetworkManager.GetComponent<UnityTransport>().SetRelayServerData(new RelayServerData(joinAllocation, "dtls"));
+
+            NetworkManager.StartClient();
         }
         catch (LobbyServiceException e)
         {
