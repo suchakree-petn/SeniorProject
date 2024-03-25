@@ -124,4 +124,16 @@ public class EnemyController : NetworkBehaviour, IDamageable
         if (!IsOwner) return;
         enemyHealth.TakeHeal(damage);
     }
+
+    [ServerRpc(RequireOwnership = false)]
+    public virtual void TakeDamage_ServerRpc(AttackDamage damage)
+    {
+        TakeDamage_ClientRpc(damage);
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    public virtual void TakeHeal_ServerRpc(AttackDamage damage)
+    {
+        TakeHeal_ClientRpc(damage);
+    }
 }

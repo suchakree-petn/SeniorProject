@@ -1,8 +1,5 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public partial class Archer_PlayerController : PlayerController
 {
@@ -55,21 +52,6 @@ public partial class Archer_PlayerController : PlayerController
     {
     }
 
-    public void SetWeaponHolderPosition(PlayerCameraMode prev, PlayerCameraMode current)
-    {
-        if (current == PlayerCameraMode.Focus)
-        {
-            archer_playerWeapon.SwitchWeaponHolderTo(Archer_WeaponHolderState.InHand);
-            archer_playerWeapon.WeaponHolderState = Archer_WeaponHolderState.InHand;
-        }
-        else
-        {
-            archer_playerWeapon.SwitchWeaponHolderTo(Archer_WeaponHolderState.OnBack);
-            archer_playerWeapon.WeaponHolderState = Archer_WeaponHolderState.OnBack;
-        }
-
-    }
-
     private void ArcherAnimation()
     {
         if (PlayerCameraMode.Focus == PlayerCameraMode)
@@ -90,6 +72,7 @@ public partial class Archer_PlayerController : PlayerController
         }
         else
         {
+            playerAnimation.SetLayerWeight(2, 0);
             playerAnimation.SetLayerWeight(1, Mathf.Lerp(playerAnimation.GetLayerWeight(1), 0, Time.deltaTime * 10));
         }
     }
@@ -124,7 +107,6 @@ public partial class Archer_PlayerController : PlayerController
     {
         base.OnEnable();
         if (!IsOwner) return;
-        OnPlayerCameraModeChanged += SetWeaponHolderPosition;
 
     }
 
@@ -133,6 +115,5 @@ public partial class Archer_PlayerController : PlayerController
 
         base.OnDisable();
         if (!IsOwner) return;
-        OnPlayerCameraModeChanged -= SetWeaponHolderPosition;
     }
 }

@@ -6,7 +6,7 @@ public abstract class EntityHealth : NetworkBehaviour
 {
     public NetworkVariable<float> currentHealth;
     public float CurrentHealth => currentHealth.Value;
-
+    public bool IsDead => CurrentHealth <= 0;
 
 
     public virtual void TakeDamage(AttackDamage damage, float defense)
@@ -23,7 +23,7 @@ public abstract class EntityHealth : NetworkBehaviour
     }
     public virtual float CalcDamageRecieve(AttackDamage damage, float defense)
     {
-        if(damage.Damage - defense < 0)return 0;
+        if (damage.Damage - defense < 0) return 0;
         return damage.Damage - defense;
     }
 

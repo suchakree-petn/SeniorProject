@@ -61,7 +61,6 @@ public class PlayerController : NetworkBehaviour, IDamageable
 
     public override void OnNetworkDespawn()
     {
-        if (!IsOwner) return;
         Debug.Log("Despawn");
         PlayerInputManager playerInputManager = PlayerInputManager.Instance;
 
@@ -221,5 +220,15 @@ public class PlayerController : NetworkBehaviour, IDamageable
             playerHealth.TakeHeal(damage);
         }
 
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    public void TakeDamage_ServerRpc(AttackDamage damage)
+    {
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    public void TakeHeal_ServerRpc(AttackDamage damage)
+    {
     }
 }

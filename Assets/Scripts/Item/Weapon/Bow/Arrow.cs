@@ -1,8 +1,7 @@
 using Unity.Netcode;
 using UnityEngine;
-using UnityEngine.Rendering.Universal;
 
-public abstract class Arrow : NetworkBehaviour
+public abstract class Arrow : MonoBehaviour
 {
     public AttackDamage AttackDamage;
 
@@ -10,22 +9,26 @@ public abstract class Arrow : NetworkBehaviour
     [SerializeField] private Rigidbody arrowRb;
     [SerializeField] private Collider hitBox;
     [SerializeField] private GameObject vfx_Hit;
-    [SerializeField] private GameObject vfx_HitInstance;
+    private GameObject vfx_HitInstance;
 
-    public override void OnNetworkSpawn()
+    protected virtual void Start()
     {
-        if (!IsServer) return;
         Invoke(nameof(SelfDestroy), 5);
     }
     public virtual void OnTriggerEnter(Collider other)
     {
-        if (!IsOwner || !IsSpawned) return;
-
         if (other.gameObject.layer == 3)
         {
+            gameObject.isStatic = true;
             SetKinematic();
             return;
         }
+        if ((ulong)AttackDamage.AttackerClientId != NetworkManager.Singleton.LocalClientId)
+        {
+            Debug.Log($"Not owner");
+            return;
+        }
+
         if (other.transform.root.TryGetComponent<PlayerController>(out _) || !other.isTrigger) return;
 
         Debug.Log($"Arrow {name} collide with {other.gameObject.name}");
@@ -41,9 +44,8 @@ public abstract class Arrow : NetworkBehaviour
                 Debug.LogWarning("Critical");
                 vfx_HitInstance = Instantiate(vfx_Hit, transform.position, Quaternion.identity);
             }
-            NetworkObject networkObject = root.GetComponent<NetworkObject>();
-            SetParent_ServerRpc(networkObject);
-            DoDamage(networkObject);
+            SetParent(other.transform);
+            DoDamage(damageable);
             Invoke(nameof(DestroyVFX), 0.95f);
             Invoke(nameof(SelfDestroy), 1);
         }
@@ -54,8 +56,6 @@ public abstract class Arrow : NetworkBehaviour
     }
     private void SelfDestroy()
     {
-        if (!IsSpawned) return;
-        gameObject.GetComponent<NetworkObject>().Despawn();
         Destroy(gameObject);
     }
     public virtual void SetKinematic(bool isActive = true)
@@ -64,22 +64,13 @@ public abstract class Arrow : NetworkBehaviour
         hitBox.enabled = !isActive;
     }
 
-    [ServerRpc(RequireOwnership = false)]
-    public virtual void SetParent_ServerRpc(NetworkObjectReference newParentNetObjRef)
+    public virtual void SetParent(Transform newParent)
     {
-        Debug.Log(newParentNetObjRef.TryGet(out NetworkObject _));
-
-        if (!newParentNetObjRef.TryGet(out NetworkObject newParentNetObj)) return;
-
-        arrowRb.transform.SetParent(newParentNetObj.transform);
+        arrowRb.transform.SetParent(newParent);
     }
 
-    public virtual void DoDamage(NetworkObjectReference entityNetObjRef)
+    public virtual void DoDamage(IDamageable damageable)
     {
-        Debug.Log(entityNetObjRef.TryGet(out NetworkObject _));
-
-        if (!entityNetObjRef.TryGet(out NetworkObject entityNetObj)) return;
-
-        entityNetObj.GetComponent<IDamageable>().TakeDamage_ClientRpc(AttackDamage);
+        damageable.TakeDamage_ServerRpc(AttackDamage);
     }
 }

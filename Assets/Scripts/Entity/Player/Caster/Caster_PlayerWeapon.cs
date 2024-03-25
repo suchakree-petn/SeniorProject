@@ -94,7 +94,6 @@ public class Caster_PlayerWeapon : PlayerWeapon
     [ServerRpc(RequireOwnership = false)]
     public void LaunchHealOrb_ServerRpc(AttackDamage attackDamage, ulong targetClientId, bool isHasLockTarget, ServerRpcParams serverRpcParams = default)
     {
-        // ulong OwnerClientId = serverRpcParams.Receive.SenderClientId;
         Transform healOrbTransform = MagicItemWeaponData.GetHealOrb(position: firePointTransform.position);
         NetworkObject healOrbNetworkObject = healOrbTransform.GetComponent<NetworkObject>();
         healOrbNetworkObject.Spawn(true);

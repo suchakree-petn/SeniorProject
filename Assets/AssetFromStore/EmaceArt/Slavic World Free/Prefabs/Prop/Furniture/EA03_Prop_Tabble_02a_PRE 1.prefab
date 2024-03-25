@@ -23,9 +23,11 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1977718090523085549}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3625053058588266995}
   - {fileID: 3745551623367070646}
@@ -41,13 +43,13 @@ Transform:
   - {fileID: 1485002601203995004}
   - {fileID: 2809813677424663729}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &529846290494258623
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 6387771783798098808}
     m_Modifications:
     - target: {fileID: 3002590458895548055, guid: f8868d156d26b1d49b08d99099e76ddc,
@@ -121,6 +123,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f8868d156d26b1d49b08d99099e76ddc, type: 3}
 --- !u!4 &3382551289648013064 stripped
 Transform:
@@ -133,6 +138,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 6387771783798098808}
     m_Modifications:
     - target: {fileID: 8972127499457743206, guid: 0bf5ee6af77635741b78819524c9ea8d,
@@ -196,6 +202,9 @@ PrefabInstance:
       value: EA_Items_House_pan_empty_01a_PRE
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0bf5ee6af77635741b78819524c9ea8d, type: 3}
 --- !u!4 &8340392567737071700 stripped
 Transform:
@@ -208,6 +217,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 6387771783798098808}
     m_Modifications:
     - target: {fileID: 8223760863875588507, guid: 37c5698a453a3b9489d364465122470b,
@@ -271,6 +281,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37c5698a453a3b9489d364465122470b, type: 3}
 --- !u!4 &7875384293171276168 stripped
 Transform:
@@ -283,6 +296,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 6387771783798098808}
     m_Modifications:
     - target: {fileID: 3228886597396240046, guid: 399f4a63d0bc1d949aaee33c9bdad9d9,
@@ -346,6 +360,9 @@ PrefabInstance:
       value: EA_Items_House_spoon_wooden_03_PRE
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 399f4a63d0bc1d949aaee33c9bdad9d9, type: 3}
 --- !u!4 &4185875522889437553 stripped
 Transform:
@@ -358,6 +375,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 6387771783798098808}
     m_Modifications:
     - target: {fileID: 2149305291181683040, guid: 102fd982bf89df0479b0f7ae49aa713b,
@@ -421,6 +439,9 @@ PrefabInstance:
       value: EA_Items_House_bowl_wod_2_PRE (2)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 102fd982bf89df0479b0f7ae49aa713b, type: 3}
 --- !u!4 &469579829084593734 stripped
 Transform:
@@ -433,6 +454,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 6387771783798098808}
     m_Modifications:
     - target: {fileID: 1408989384171906, guid: b2ebda948c9d90f40b799c15675df85f, type: 3}
@@ -492,6 +514,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b2ebda948c9d90f40b799c15675df85f, type: 3}
 --- !u!4 &2809813677424663729 stripped
 Transform:
@@ -504,6 +529,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 6387771783798098808}
     m_Modifications:
     - target: {fileID: 4305734348405556321, guid: 5951f971024a62945a70df5f4c2985e1,
@@ -567,6 +593,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5951f971024a62945a70df5f4c2985e1, type: 3}
 --- !u!4 &1485002601203995004 stripped
 Transform:
@@ -579,6 +608,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 6387771783798098808}
     m_Modifications:
     - target: {fileID: 1805663326507536, guid: 24a03f4ff6a389c4783be3862c88fc42, type: 3}
@@ -630,6 +660,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 24a03f4ff6a389c4783be3862c88fc42, type: 3}
 --- !u!4 &3625053058588266995 stripped
 Transform:
@@ -642,6 +675,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 6387771783798098808}
     m_Modifications:
     - target: {fileID: 1368467829612226, guid: 49cb1db37d2f2bf40947e40e03f795b0, type: 3}
@@ -693,6 +727,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 49cb1db37d2f2bf40947e40e03f795b0, type: 3}
 --- !u!4 &4327782671463561362 stripped
 Transform:
@@ -705,6 +742,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 6387771783798098808}
     m_Modifications:
     - target: {fileID: 7592081127316883375, guid: 383acf5e399e1874380ae8eb00a916d8,
@@ -778,6 +816,9 @@ PrefabInstance:
       value: EA_Items_House_spoon_wooden_PRE
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 383acf5e399e1874380ae8eb00a916d8, type: 3}
 --- !u!4 &3118717940648131563 stripped
 Transform:
@@ -790,6 +831,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 6387771783798098808}
     m_Modifications:
     - target: {fileID: 1913847481624044099, guid: 333fb13d0b193244a96f53a4fcebbb07,
@@ -853,6 +895,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 333fb13d0b193244a96f53a4fcebbb07, type: 3}
 --- !u!4 &5664099790892769082 stripped
 Transform:
@@ -865,6 +910,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 6387771783798098808}
     m_Modifications:
     - target: {fileID: 7178904403105675800, guid: 6c46120f03f89d34a9d24ec626e0bef3,
@@ -928,6 +974,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6c46120f03f89d34a9d24ec626e0bef3, type: 3}
 --- !u!4 &277152231753074856 stripped
 Transform:
@@ -940,6 +989,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 6387771783798098808}
     m_Modifications:
     - target: {fileID: 4707599955855421540, guid: 9bdc637fb8b469245bf2dcc990b26551,
@@ -1003,6 +1053,9 @@ PrefabInstance:
       value: EA_Items_House_bowl_metal_PRE (1)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9bdc637fb8b469245bf2dcc990b26551, type: 3}
 --- !u!4 &3745551623367070646 stripped
 Transform:

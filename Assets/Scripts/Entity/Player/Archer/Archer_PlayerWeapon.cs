@@ -23,8 +23,8 @@ public class Archer_PlayerWeapon : PlayerWeapon
     {
         if (!IsOwner) return;
 
-        if (PlayerCameraMode.Focus != playerController.PlayerCameraMode) return;
-        Debug.Log("Ready");
+        if (Archer_WeaponHolderState.InHand != WeaponHolderState) return;
+
         if (!IsReadyToUse) return;
 
         if (firePointTransform == null)
@@ -32,6 +32,7 @@ public class Archer_PlayerWeapon : PlayerWeapon
             Debug.LogWarning($"No Fire Point transform");
             return;
         }
+
         if (context.performed)
         {
             IsDrawing = true;
@@ -56,10 +57,11 @@ public class Archer_PlayerWeapon : PlayerWeapon
             DrawBow();
         }
 
-        if (WeaponHolderState == Archer_WeaponHolderState.InHand)
+        if (Archer_WeaponHolderState.InHand == WeaponHolderState)
         {
             RotateFirePointHolder();
         }
+
     }
     private void DrawBow()
     {
@@ -79,57 +81,62 @@ public class Archer_PlayerWeapon : PlayerWeapon
     }
     public override void NormalAttack()
     {
-        FireArrow_ServerRpc(BowWeaponData.NormalAttack_DamageMultiplier, DrawPower);
-    }
-
-    [ServerRpc(RequireOwnership = false)]
-    public void FireArrow_ServerRpc(float damageMultiplier, float drawPower, ServerRpcParams serverRpcParams = default)
-    {
-        ulong OwnerClientId = serverRpcParams.Receive.SenderClientId;
-        Transform arrowTransform = BowWeaponData.GetArrow(position: firePointTransform.position);
-        NetworkObject arrowNetworkObject = arrowTransform.GetComponent<NetworkObject>();
-        arrowNetworkObject.SpawnWithOwnership(OwnerClientId, true);
-
-        FireArrow_ClientRpc(damageMultiplier, drawPower, OwnerClientId, arrowNetworkObject);
-    }
-
-    [ClientRpc]
-    public void FireArrow_ClientRpc(float damageMultiplier, float drawPower, ulong OwnerClientId, NetworkObjectReference arrowObjRef)
-    {
-        if (!arrowObjRef.TryGet(out NetworkObject arrowNetObj) || OwnerClientId != NetworkManager.LocalClientId) return;
-
-        AttackDamage attackDamage = BowWeaponData.GetDamage(damageMultiplier, playerController.PlayerCharacterData, (long)OwnerClientId);
-        attackDamage.Damage = attackDamage.Damage / drawPower * BowConfig.MaxDrawPower;
-        Arrow arrow = arrowNetObj.GetComponent<Arrow>();
-        arrow.AttackDamage = attackDamage;
-
-        Rigidbody arrowRb = arrowNetObj.GetComponent<Rigidbody>();
         Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
         Vector3 direction;
-        if (Physics.Raycast(ray, out RaycastHit hit, BowConfig.MaxRaycastDistance) && hit.distance > Vector3.Distance(hit.point, firePointTransform.position))
+        if (Physics.Raycast(ray, out RaycastHit hit, BowConfig.MaxRaycastDistance, playerController.PlayerCharacterData.TargetLayer, QueryTriggerInteraction.Ignore))
         {
-            // Calculate direction towards the hit point
             direction = (hit.point - firePointTransform.position).normalized;
-            // Rotate arrow to face the hit point
-            arrowRb.transform.forward = direction;
-            // Apply force in the direction of the hit point
         }
         else
         {
-            Debug.Log("Not hit");
-            // If ray doesn't hit anything, use the default direction
-            arrowRb.transform.forward = firePointTransform.forward.normalized;
-            direction = arrowRb.transform.forward;
+            Vector3 endPoint = Camera.main.transform.position + Camera.main.transform.forward * BowConfig.MaxRaycastDistance;
+            direction = (endPoint - firePointTransform.position).normalized;
         }
-        Debug.Log($"{drawPower} / {BowConfig.MaxDrawPower} * {BowConfig.ArrowSpeed}");
-        arrowRb.AddForce(drawPower / BowConfig.MaxDrawPower * BowConfig.ArrowSpeed * direction, ForceMode.Impulse);
+        FireArrow(BowWeaponData.NormalAttack_DamageMultiplier, DrawPower, direction);
+        FireArrow_ServerRpc(DrawPower, direction);
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    public void FireArrow_ServerRpc(float drawPower, Vector3 arrowDirection, ServerRpcParams serverRpcParams = default)
+    {
+        ulong OwnerClientId = serverRpcParams.Receive.SenderClientId;
+        FireArrow_ClientRpc(drawPower, OwnerClientId, arrowDirection);
+    }
+
+    [ClientRpc]
+    public void FireArrow_ClientRpc(float drawPower, ulong OwnerClientId, Vector3 arrowDirection)
+    {
+        if (OwnerClientId == NetworkManager.LocalClientId)
+        {
+            Debug.Log($"Not shooter");
+            return;
+        }
+
+        Transform arrowTransform = BowWeaponData.GetArrow(firePointTransform.position);
+
+        Rigidbody arrowRb = arrowTransform.GetComponent<Rigidbody>();
+        arrowTransform.forward = arrowDirection;
+        arrowRb.AddForce(drawPower / BowConfig.MaxDrawPower * BowConfig.ArrowSpeed * arrowDirection, ForceMode.Impulse);
+    }
+    private void FireArrow(float damageMultiplier, float drawPower, Vector3 arrowDirection)
+    {
+        AttackDamage attackDamage = BowWeaponData.GetDamage(damageMultiplier, playerController.PlayerCharacterData, (long)NetworkManager.LocalClientId);
+        attackDamage.Damage = attackDamage.Damage / drawPower * BowConfig.MaxDrawPower;
+
+        Transform arrowTransform = BowWeaponData.GetArrow(firePointTransform.position);
+        Arrow arrow = arrowTransform.GetComponent<Arrow>();
+        arrow.AttackDamage = attackDamage;
+
+        Rigidbody arrowRb = arrowTransform.GetComponent<Rigidbody>();
+        arrowTransform.forward = arrowDirection;
+        arrowRb.AddForce(drawPower / BowConfig.MaxDrawPower * BowConfig.ArrowSpeed * arrowDirection, ForceMode.Impulse);
     }
     public GameObject GetWeaponOnBack()
     {
         Transform weapon = OnBack_weaponHolderTransform.GetChild(0);
-        // weapon.SetLocalPositionAndRotation(default, default);
         return weapon.gameObject;
     }
+
     public void SwitchWeaponHolderTo(Archer_WeaponHolderState newState)
     {
         switch (newState)
@@ -152,22 +159,41 @@ public class Archer_PlayerWeapon : PlayerWeapon
         firePointHolderTransform.forward = Camera.main.transform.forward;
     }
 
+    public void SetWeaponHolderPosition(PlayerCameraMode prev, PlayerCameraMode current)
+    {
+        if (current == PlayerCameraMode.Focus)
+        {
+            SwitchWeaponHolderTo(Archer_WeaponHolderState.InHand);
+            WeaponHolderState = Archer_WeaponHolderState.InHand;
+        }
+        else
+        {
+            SwitchWeaponHolderTo(Archer_WeaponHolderState.OnBack);
+            WeaponHolderState = Archer_WeaponHolderState.OnBack;
+        }
 
+    }
 
     private void OnDrawGizmos()
     {
-        Debug.DrawLine(firePointHolderTransform.position, firePointTransform.position);
-        Debug.DrawLine(firePointHolderTransform.position, firePointHolderTransform.forward * BowConfig.MaxRaycastDistance);
+        Debug.DrawLine(Camera.main.transform.position, Camera.main.transform.position + Camera.main.transform.forward * BowConfig.MaxRaycastDistance, Color.red);
     }
 
 
     protected override void OnEnable()
     {
+        playerController.OnPlayerCameraModeChanged += SetWeaponHolderPosition;
         if (!IsOwner) return;
+
 
         OnUseWeapon += () => StartWeaponCooldown(BowWeaponData.AttackTimeInterval);
     }
+    protected override void OnDisable()
+    {
+        playerController.OnPlayerCameraModeChanged -= SetWeaponHolderPosition;
+        if (!IsOwner) return;
 
+    }
 
 }
 [System.Serializable]

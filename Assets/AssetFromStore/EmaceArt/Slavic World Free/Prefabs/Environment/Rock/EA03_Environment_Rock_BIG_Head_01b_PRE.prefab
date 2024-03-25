@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8149441738955624975}
   - component: {fileID: 8177459871290448857}
   - component: {fileID: 8168168347347071255}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: EA03_Environment_Rock_Head_01a_LOD2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 8144211677921894899}
   - component: {fileID: 8177690285285549103}
   - component: {fileID: 8167347932165152753}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: EA03_Environment_Rock_Head_01a_LOD1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -177,7 +177,7 @@ GameObject:
   - component: {fileID: 8149650638859986467}
   - component: {fileID: 8346115967667237619}
   - component: {fileID: 3241499089271117457}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: EA03_Environment_Rock_BIG_Head_01b_PRE
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -262,7 +262,7 @@ GameObject:
   - component: {fileID: 8144550790116007409}
   - component: {fileID: 8177524137146891139}
   - component: {fileID: 8168561254603745829}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: EA03_Environment_Rock_Head_01a_LOD0
   m_TagString: Untagged
   m_Icon: {fileID: 0}

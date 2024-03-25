@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.AI;
 public class Spider_EnemyController : EnemyController
 {
-    
+
     [SerializeField] private float attackPower;
     [SerializeField] private float attackPower_Multiplier;
     [SerializeField] private float attackRange;
@@ -16,13 +16,14 @@ public class Spider_EnemyController : EnemyController
 
     [Header("Spider Reference")]
     [SerializeField] private Transform attackPointTransform;
-    
-    private void Start() {
-        
+
+    private void Start()
+    {
+
     }
     private void Update()
     {
-        if (!IsServer || !IsSpawned) return;
+        if (!IsServer || !IsSpawned || enemyHealth.IsDead) return;
         if (Vector3.Distance(transform.position, target.position) > attackRange + 2)
         {
             target = PlayerManager.Instance.GetClosestPlayerFrom(transform.position);
@@ -77,12 +78,20 @@ public class Spider_EnemyController : EnemyController
     public override void TakeDamage_ClientRpc(AttackDamage damage)
     {
         base.TakeDamage_ClientRpc(damage);
-        if(enemyHealth.CurrentHealth <= 0){
+
+    }
+    [ServerRpc(RequireOwnership = false)]
+    public override void TakeDamage_ServerRpc(AttackDamage damage)
+    {
+        base.TakeDamage_ServerRpc(damage);
+        if (enemyHealth.IsDead)
+        {
             networkAnimator.SetTrigger("Death");
             StartCoroutine(DelayDestroy(1.5f));
         }
     }
-    IEnumerator DelayDestroy(float time){
+    IEnumerator DelayDestroy(float time)
+    {
         yield return new WaitForSeconds(time);
         GetComponent<NetworkObject>().Despawn();
         Destroy(gameObject);

@@ -1279,7 +1279,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79cd15a1876f7c34a9dbc1687e16af39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CarryToOtherScene: 1
+  CarryToOtherScene: 0
   createLobbyButton: {fileID: 759640282}
   quickJoinLobbyButton: {fileID: 1476368464}
   codeJoinLobbyButton: {fileID: 1646352499}
@@ -2142,9 +2142,9 @@ SceneRoots:
   m_Roots:
   - {fileID: 1731082179}
   - {fileID: 1799966922}
+  - {fileID: 995610356}
+  - {fileID: 1145533613}
   - {fileID: 1856529021}
   - {fileID: 1278007882}
   - {fileID: 1449894191}
   - {fileID: 1675359931}
-  - {fileID: 1145533613}
-  - {fileID: 995610356}
