@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using DataPersistence;
 using Unity.Netcode;
 using UnityEngine;
@@ -13,7 +14,15 @@ public partial class UserManager : NetworkSingleton<UserManager>
     // [SerializeField] private NetworkList<UserData> AllUserData;
     protected override void InitAfterAwake()
     {
-        UserDataPersistence = new("UserData", UserData.NewData());
+        _userData = UserData.NewData();
+        UserDataPersistence = new("UserData", _userData);
+        string fullPath = Path.Combine(UserDataPersistence.dataHandler.dataDirPath, UserDataPersistence.dataHandler.dataFileName);
+
+        if (!File.Exists(fullPath))
+        {
+            Debug.Log("No data founddd");
+            UserDataPersistence.SaveData();
+        }
         UserDataPersistence.LoadData();
 
         // AllUserData = new NetworkList<UserData>(null, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);

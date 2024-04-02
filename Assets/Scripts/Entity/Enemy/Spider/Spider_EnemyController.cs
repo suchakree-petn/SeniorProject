@@ -12,6 +12,7 @@ public class Spider_EnemyController : EnemyController
     [SerializeField] private float attackRange;
     [SerializeField] private float attackTimeInterval;
     [SerializeField] private bool isReadyToAttack;
+    [SerializeField] private bool isFinishAttack;
 
 
     [Header("Spider Reference")]
@@ -23,8 +24,8 @@ public class Spider_EnemyController : EnemyController
     }
     private void Update()
     {
-        if (!IsServer || !IsSpawned || enemyHealth.IsDead) return;
-        if (Vector3.Distance(transform.position, target.position) > attackRange + 2)
+        if (!IsServer || !IsSpawned || enemyHealth.CurrentHealth <= 0) return;
+        if (Vector3.Distance(transform.position, target.position) > attackRange + 2 && isFinishAttack)
         {
             target = PlayerManager.Instance.GetClosestPlayerFrom(transform.position);
             agent.isStopped = false;
@@ -67,8 +68,10 @@ public class Spider_EnemyController : EnemyController
     private IEnumerator WaitForWeaponCooldown(float sec)
     {
         isReadyToAttack = false;
+        isFinishAttack = false;
         yield return new WaitForSeconds(sec);
         isReadyToAttack = true;
+        isFinishAttack = true;
     }
     protected override void OnEnable()
     {
@@ -77,25 +80,26 @@ public class Spider_EnemyController : EnemyController
     [ClientRpc]
     public override void TakeDamage_ClientRpc(AttackDamage damage)
     {
+        if (!IsOwner)
+        {
+            Debug.Log($"Not owner on take damage");
+            return;
+        }
         base.TakeDamage_ClientRpc(damage);
 
     }
-    [ServerRpc(RequireOwnership = false)]
+    [ServerRpc]
     public override void TakeDamage_ServerRpc(AttackDamage damage)
     {
+        Debug.Log($"Before: {enemyHealth.CurrentHealth}");
         base.TakeDamage_ServerRpc(damage);
-        if (enemyHealth.IsDead)
+        Debug.Log($"After: {enemyHealth.CurrentHealth}");
+
+        if (enemyHealth.CurrentHealth <= 0)
         {
             networkAnimator.SetTrigger("Death");
             StartCoroutine(DelayDestroy(1.5f));
         }
-    }
-    IEnumerator DelayDestroy(float time)
-    {
-        yield return new WaitForSeconds(time);
-        GetComponent<NetworkObject>().Despawn();
-        Destroy(gameObject);
-
     }
 
 }

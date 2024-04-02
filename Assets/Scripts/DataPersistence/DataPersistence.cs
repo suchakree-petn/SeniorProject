@@ -29,18 +29,19 @@ namespace DataPersistence
             List<IDataPersistence<T>> dataPersistencesObjects = FindAllDataPersistenceObjects();
 
             // load saved data
-            T _gameData = dataHandler.Load();
+            gameData = dataHandler.Load();
 
 
-            // if no data can be loaded, init a new game data
-            if (_gameData == null)
-            {
-                Debug.LogWarning("No data was found");
-            }
-            else
-            {
-                gameData = _gameData;
-            }
+            // // if no data can be loaded, init a new game data
+            // if (_gameData.Equals(gameData))
+            // {
+            //     Debug.LogWarning("No data was found");
+            //     SaveData();
+            // }
+            // else
+            // {
+            //     gameData = _gameData;
+            // }
 
             //push loaded data to other scripts that need
             foreach (IDataPersistence<T> dataPersistenceObj in dataPersistencesObjects)
@@ -49,10 +50,7 @@ namespace DataPersistence
             }
             Debug.Log($"Loaded {gameData} data");
             OnLoadSuccess?.Invoke();
-            if (_gameData == null)
-            {
-                SaveData();
-            }
+
 
         }
 

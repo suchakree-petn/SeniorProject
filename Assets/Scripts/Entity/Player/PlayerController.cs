@@ -203,10 +203,6 @@ public class PlayerController : NetworkBehaviour, IDamageable
         }
     }
 
-    public void InitHp(EntityCharacterData chacterData)
-    {
-        playerHealth.InitHp(chacterData);
-    }
     [ClientRpc]
     public void TakeHeal_ClientRpc(AttackDamage damage)
     {

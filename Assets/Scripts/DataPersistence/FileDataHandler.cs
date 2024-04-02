@@ -9,8 +9,8 @@ namespace DataPersistence
 
     public class FileDataHandler<T>
     {
-        private string dataDirPath = "";
-        private string dataFileName = "";
+        public string dataDirPath = "";
+        public string dataFileName = "";
 
         public FileDataHandler(string dataDirPath, string dataFileName)
         {

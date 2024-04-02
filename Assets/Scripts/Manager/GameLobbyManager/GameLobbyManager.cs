@@ -15,6 +15,8 @@ public partial class GameLobbyManager : NetworkSingleton<GameLobbyManager>
 {
     [SerializeField] private const int MAX_PLAYER = 3;
     [SerializeField] private const string KEY_RELAY_JOIN_CODE = "RelayJoinCode";
+    [SerializeField] private const string KEY_PLAYER_NAME = "PlayerName";
+    [SerializeField] private const string KEY_STAGE_ID = "StageId";
     private Lobby joinedLobby;
     protected override void InitAfterAwake()
     {
@@ -45,7 +47,26 @@ public partial class GameLobbyManager : NetworkSingleton<GameLobbyManager>
             joinedLobby = await LobbyService.Instance.CreateLobbyAsync(lobbyName, MAX_PLAYER, new()
             {
                 IsPrivate = isPrivate,
+                Player = new Player
+                {
+                    Data = new Dictionary<string, PlayerDataObject>
+                    {
+                        {KEY_PLAYER_NAME,new(PlayerDataObject.VisibilityOptions.Member,UserManager.Instance.UserData.UserName.ToString())}
+                    }
+                },
+                Data = new Dictionary<string, DataObject>
+                {
+                    {KEY_STAGE_ID,new(DataObject.VisibilityOptions.Public,"01")}
+                }
             });
+            Debug.Log("PlayerCount: " + joinedLobby.Players.Count);
+
+            Debug.Log("Stage ID: " + joinedLobby.Data[KEY_STAGE_ID].Value);
+
+            foreach (Player player in joinedLobby.Players)
+            {
+                Debug.Log("Player name: " + player.Data[KEY_PLAYER_NAME].Value);
+            }
             Allocation allocation = await AllocateRelay();
             string relayJoinCode = await GetRelayJoinCode(allocation);
 
@@ -82,8 +103,18 @@ public partial class GameLobbyManager : NetworkSingleton<GameLobbyManager>
     {
         try
         {
-            joinedLobby = await LobbyService.Instance.QuickJoinLobbyAsync();
+            joinedLobby = await LobbyService.Instance.QuickJoinLobbyAsync(new()
+            {
+                Player = new Player
+                {
+                    Data = new Dictionary<string, PlayerDataObject>
+                    {
+                        {KEY_PLAYER_NAME,new(PlayerDataObject.VisibilityOptions.Member,UserManager.Instance.UserData.UserName.ToString())}
+                    }
+                }
+            });
             string relayJoinCode = joinedLobby.Data[KEY_RELAY_JOIN_CODE].Value;
+            Debug.Log("Lobby Id: " + joinedLobby.Data[KEY_STAGE_ID].Value);
             Debug.Log("QJ code: " + relayJoinCode);
             JoinAllocation joinAllocation = await JoinRelay(relayJoinCode);
             NetworkManager.GetComponent<UnityTransport>().SetRelayServerData(new RelayServerData(joinAllocation, "dtls"));
@@ -101,7 +132,16 @@ public partial class GameLobbyManager : NetworkSingleton<GameLobbyManager>
     {
         try
         {
-            joinedLobby = await LobbyService.Instance.JoinLobbyByCodeAsync(lobbyCode);
+            joinedLobby = await LobbyService.Instance.JoinLobbyByCodeAsync(lobbyCode, new()
+            {
+                Player = new Player
+                {
+                    Data = new Dictionary<string, PlayerDataObject>
+                    {
+                        {KEY_PLAYER_NAME,new(PlayerDataObject.VisibilityOptions.Member,UserManager.Instance.UserData.UserName.ToString())}
+                    }
+                }
+            });
             Debug.Log("Join code: " + lobbyCode);
 
             string relayJoinCode = joinedLobby.Data[KEY_RELAY_JOIN_CODE].Value;

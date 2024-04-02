@@ -83,7 +83,7 @@ public class Archer_PlayerWeapon : PlayerWeapon
     {
         Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
         Vector3 direction;
-        if (Physics.Raycast(ray, out RaycastHit hit, BowConfig.MaxRaycastDistance, playerController.PlayerCharacterData.TargetLayer, QueryTriggerInteraction.Ignore))
+        if (Physics.Raycast(ray, out RaycastHit hit, BowConfig.MaxRaycastDistance, playerController.PlayerCharacterData.TargetLayer, QueryTriggerInteraction.Collide))
         {
             direction = (hit.point - firePointTransform.position).normalized;
         }
@@ -126,7 +126,7 @@ public class Archer_PlayerWeapon : PlayerWeapon
         Transform arrowTransform = BowWeaponData.GetArrow(firePointTransform.position);
         Arrow arrow = arrowTransform.GetComponent<Arrow>();
         arrow.AttackDamage = attackDamage;
-
+        arrow.TargetLayer = playerController.PlayerCharacterData.TargetLayer;
         Rigidbody arrowRb = arrowTransform.GetComponent<Rigidbody>();
         arrowTransform.forward = arrowDirection;
         arrowRb.AddForce(drawPower / BowConfig.MaxDrawPower * BowConfig.ArrowSpeed * arrowDirection, ForceMode.Impulse);

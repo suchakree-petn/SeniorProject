@@ -25,13 +25,14 @@ public class MouseMovement : MonoBehaviour
 
     private void Awake()
     {
-        if (SettingManager.Instance.IsDataLoaded)
+
+        SettingManager.Instance.dataPersistenceInGameSetting.OnLoadSuccess += InitCameraSensitive;
+    }
+    private void Update()
+    {
+        if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.S))
         {
-            InitCameraSensitive();
-        }
-        else
-        {
-            Debug.LogWarning($"No data to load");
+            SaveCameraSensitive();
         }
     }
     public void InitCameras(PlayerCameraMode playerCameraMode)
@@ -232,7 +233,7 @@ public class MouseMovement : MonoBehaviour
         SettingManager.Instance.InGameSettingData.MouseSensitive_Focus = mouseSensitive_Focus;
         SettingManager.Instance.dataPersistenceInGameSetting.SaveData();
     }
-    
+
 #if UNITY_EDITOR
     public void OnValidate()
     {

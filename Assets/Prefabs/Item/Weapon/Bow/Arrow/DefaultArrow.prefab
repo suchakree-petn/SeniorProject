@@ -230,7 +230,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 1
 --- !u!135 &6851957407499613674
 SphereCollider:
@@ -270,10 +270,12 @@ MonoBehaviour:
     IsCriticalable: 0
     Damage: 19
     AttackerClientId: 11
+  mask:
+    serializedVersion: 2
+    m_Bits: 1
   arrowRb: {fileID: 4269340218531131940}
   hitBox: {fileID: 6851957407499613674}
   vfx_Hit: {fileID: 2944396702758532163, guid: e190bf97c041e58448af6b043116cba0, type: 3}
-  vfx_HitInstance: {fileID: 0}
 --- !u!1001 &6252754250030322407
 PrefabInstance:
   m_ObjectHideFlags: 0

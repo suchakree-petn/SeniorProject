@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class EntityHealth : NetworkBehaviour
 {
-    public NetworkVariable<float> currentHealth;
+    public NetworkVariable<float> currentHealth = new(1337, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     public float CurrentHealth => currentHealth.Value;
     public bool IsDead => CurrentHealth <= 0;
 

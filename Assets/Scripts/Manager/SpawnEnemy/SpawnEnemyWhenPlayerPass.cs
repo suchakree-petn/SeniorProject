@@ -6,31 +6,39 @@ using Unity.Netcode;
 public class SpawnEnemyWhenPlayerPass : NetworkBehaviour
 {
     [SerializeField] GameObject[] enemys;
+    private bool isAlreadySpawned;
     public virtual void OnTriggerEnter(Collider other)
     {
-        if (!IsServer || !IsOwner) return;
-        if (other.transform.root.TryGetComponent<PlayerController>(out _)){
+        if (other.transform.root.TryGetComponent<PlayerController>(out _))
+        {
             gameObject.GetComponent<Collider>().enabled = false;
-            Spawn();
+            Spawn_ServerRpc();
         }
-        
+
     }
-    private void Update() {
-        if(Input.GetKeyDown(KeyCode.Alpha1)){
-            foreach(GameObject enemy in enemys){
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            foreach (GameObject enemy in enemys)
+            {
                 ulong id = ulong.Parse(enemy.name.Split("_")[0]);
-                EnemyManager.Instance.Spawn(id,enemy.transform.position);
+                EnemyManager.Instance.Spawn(id, enemy.transform.position);
             }
         }
     }
-    // [ServerRpc(RequireOwnership = false)]
-    public void Spawn(){
-        
-        if(enemys != null)
-            foreach(GameObject enemy in enemys){
+    [ServerRpc(RequireOwnership = false)]
+    public void Spawn_ServerRpc()
+    {
+        if (isAlreadySpawned) return;
+
+        if (enemys != null)
+            foreach (GameObject enemy in enemys)
+            {
                 ulong id = ulong.Parse(enemy.name.Split("_")[0]);
-                EnemyManager.Instance.Spawn(id,enemy.transform.position);
+                EnemyManager.Instance.Spawn(id, enemy.transform.position);
             }
+        isAlreadySpawned = true;
     }
-    
+
 }

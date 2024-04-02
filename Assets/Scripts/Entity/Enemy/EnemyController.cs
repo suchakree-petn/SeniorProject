@@ -16,20 +16,19 @@ public class EnemyController : NetworkBehaviour, IDamageable
     [SerializeField] protected BehaviourTreeInstance behaviourTreeInstance;
 
     public Transform target;
-    public float moveSpeed = 5;
-    protected Coroutine findPathToTarget;
 
     [Header("Reference")]
     public EnemyHealth enemyHealth;
     public Rigidbody enemyRb;
     public NetworkAnimator networkAnimator;
     public Animator animator;
+    public Collider hitBox;
+    public Collider critHitBox;
 
     protected virtual void Awake()
     {
-        if(!IsOwner) return;
+        if (!IsOwner) return;
         enemyRb = GetComponent<Rigidbody>();
-        agent.speed = moveSpeed;
     }
 
     public override void OnNetworkSpawn()
@@ -45,7 +44,7 @@ public class EnemyController : NetworkBehaviour, IDamageable
 
     protected virtual void FixedUpdate()
     {
-        if (!IsOwner || !IsServer || !IsSpawned) return;
+        if (!IsOwner || !IsServer || !IsSpawned || agent.pathStatus == NavMeshPathStatus.PathInvalid) return;
 
         if (!agent.isStopped)
         {
@@ -53,8 +52,10 @@ public class EnemyController : NetworkBehaviour, IDamageable
             agent.CalculatePath(target.position, path);
             agent.SetPath(path);
         }
-
-
+        else
+        {
+            agent.ResetPath();
+        }
 
     }
 
@@ -72,50 +73,16 @@ public class EnemyController : NetworkBehaviour, IDamageable
 
     }
 
-    // private IEnumerator CalcPathToTartget()
-    // {
-    //     WaitForSeconds wait = new(0.3f);
-    //     path = new();
-    //     Debug.Log("asdasdasd");
-
-    //     while (Vector3.Distance(transform.position, target.position) > 3f)
-    //     {
-    //         Debug.Log("Calc");
-    //         UpdateNextPosition();
-    //     }
-
-    //     yield return wait;
-    //     findPathToTarget = StartCoroutine(CalcPathToTartget());
-    // }
-
-    // public void UpdateNextPosition()
-    // {
-    //     if (NavMesh.CalculatePath(transform.position, target.position, NavMesh.AllAreas, path))
-    //     {
-    //         Debug.Log(path.corners[0]);
-    //         for (int i = 0; i < path.corners.Length - 1; i++)
-    //         {
-    //             Debug.DrawLine(path.corners[i], path.corners[i + 1], Color.red);
-    //         }
-    //     }
-    //     Debug.LogWarning("No path");
-    // }
+    protected virtual void OnEnable()
+    {
+    }
 
     [ClientRpc]
     public virtual void TakeDamage_ClientRpc(AttackDamage damage)
     {
         if (!IsOwner) return;
-        
         enemyHealth.TakeDamage(damage, EnemyCharacterData.GetDefense());
-    }
 
-    public virtual void InitHp(EntityCharacterData characterData)
-    {
-        // enemyHealth.InitHp(characterData);
-    }
-    protected virtual void OnEnable()
-    {
-        // InitHp(EnemyCharacterData);
     }
 
     [ClientRpc]
@@ -125,15 +92,27 @@ public class EnemyController : NetworkBehaviour, IDamageable
         enemyHealth.TakeHeal(damage);
     }
 
-    [ServerRpc(RequireOwnership = false)]
+    [ServerRpc]
     public virtual void TakeDamage_ServerRpc(AttackDamage damage)
     {
         TakeDamage_ClientRpc(damage);
+        if (enemyHealth.IsDead)
+        {
+            hitBox.enabled = false;
+            critHitBox.enabled = false;
+        }
     }
 
-    [ServerRpc(RequireOwnership = false)]
+    [ServerRpc]
     public virtual void TakeHeal_ServerRpc(AttackDamage damage)
     {
         TakeHeal_ClientRpc(damage);
+    }
+    public IEnumerator DelayDestroy(float time)
+    {
+        Debug.Log($"Start delay destroy");
+        yield return new WaitForSeconds(time);
+        GetComponent<NetworkObject>().Despawn();
+        Destroy(gameObject);
     }
 }

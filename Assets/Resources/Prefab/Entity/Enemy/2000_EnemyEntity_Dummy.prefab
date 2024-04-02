@@ -355,6 +355,8 @@ MonoBehaviour:
   enemyRb: {fileID: 6618734251774362899}
   networkAnimator: {fileID: 0}
   animator: {fileID: 0}
+  hitBox: {fileID: 0}
+  critHitBox: {fileID: 0}
 --- !u!114 &1251622043368636751
 MonoBehaviour:
   m_ObjectHideFlags: 0

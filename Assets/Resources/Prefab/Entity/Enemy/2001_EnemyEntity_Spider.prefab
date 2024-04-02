@@ -127,12 +127,12 @@ PrefabInstance:
     - target: {fileID: 2385862875820891651, guid: 58437a38aec03b4478d7fdb505663dec,
         type: 3}
       propertyPath: m_Height
-      value: 2.91
+      value: 3.93
       objectReference: {fileID: 0}
     - target: {fileID: 2385862875820891651, guid: 58437a38aec03b4478d7fdb505663dec,
         type: 3}
       propertyPath: m_Radius
-      value: 0.9
+      value: 1.14
       objectReference: {fileID: 0}
     - target: {fileID: 2385862875820891651, guid: 58437a38aec03b4478d7fdb505663dec,
         type: 3}
@@ -147,7 +147,7 @@ PrefabInstance:
     - target: {fileID: 2385862875820891651, guid: 58437a38aec03b4478d7fdb505663dec,
         type: 3}
       propertyPath: m_Center.z
-      value: 0.055018425
+      value: -0.16
       objectReference: {fileID: 0}
     - target: {fileID: 2385862875820891651, guid: 58437a38aec03b4478d7fdb505663dec,
         type: 3}
@@ -157,7 +157,7 @@ PrefabInstance:
     - target: {fileID: 2478320058894671773, guid: 58437a38aec03b4478d7fdb505663dec,
         type: 3}
       propertyPath: m_Radius
-      value: 0.72
+      value: 0.97535217
       objectReference: {fileID: 0}
     - target: {fileID: 2478320058894671773, guid: 58437a38aec03b4478d7fdb505663dec,
         type: 3}
@@ -268,6 +268,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6618734251774362899, guid: 58437a38aec03b4478d7fdb505663dec,
+        type: 3}
+      propertyPath: m_UseGravity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6618734251774362899, guid: 58437a38aec03b4478d7fdb505663dec,
+        type: 3}
+      propertyPath: m_CollisionDetection
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8895800849975720684, guid: 58437a38aec03b4478d7fdb505663dec,
         type: 3}
@@ -464,16 +474,19 @@ MonoBehaviour:
   agent: {fileID: 6001819275899621731}
   behaviourTreeInstance: {fileID: 1851742019605905526}
   target: {fileID: 0}
-  moveSpeed: 5
+  moveSpeed: 100
   enemyHealth: {fileID: 7289086918844434345}
   enemyRb: {fileID: 3435360099078161397}
   networkAnimator: {fileID: 6322938050345439138}
   animator: {fileID: 5443892900808637861}
+  hitBox: {fileID: 6154986747110004965}
+  critHitBox: {fileID: 6202138957216897403}
   attackPower: 190
   attackPower_Multiplier: 1
   attackRange: 1.67
   attackTimeInterval: 3
   isReadyToAttack: 1
+  isFinishAttack: 1
   attackPointTransform: {fileID: 8778368229035554971}
 --- !u!114 &1851742019605905526
 MonoBehaviour:
@@ -503,7 +516,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: -1372625422
   m_Radius: 1.42
-  m_Speed: 3.5
+  m_Speed: 5
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -514,7 +527,7 @@ NavMeshAgent:
   m_Height: 1.56
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
+  m_ObstacleAvoidanceType: 1
 --- !u!95 &5443892900808637861
 Animator:
   serializedVersion: 5
@@ -564,6 +577,18 @@ MonoBehaviour:
     TriggerNameHash: 646380074
     TransitionIndex: 1
   m_Animator: {fileID: 5443892900808637861}
+--- !u!136 &6154986747110004965 stripped
+CapsuleCollider:
+  m_CorrespondingSourceObject: {fileID: 2385862875820891651, guid: 58437a38aec03b4478d7fdb505663dec,
+    type: 3}
+  m_PrefabInstance: {fileID: 8392086764841469670}
+  m_PrefabAsset: {fileID: 0}
+--- !u!135 &6202138957216897403 stripped
+SphereCollider:
+  m_CorrespondingSourceObject: {fileID: 2478320058894671773, guid: 58437a38aec03b4478d7fdb505663dec,
+    type: 3}
+  m_PrefabInstance: {fileID: 8392086764841469670}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &7289086918844434345 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1251622043368636751, guid: 58437a38aec03b4478d7fdb505663dec,

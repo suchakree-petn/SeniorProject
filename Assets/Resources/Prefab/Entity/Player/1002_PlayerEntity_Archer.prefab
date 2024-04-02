@@ -2807,7 +2807,7 @@ MonoBehaviour:
     DrawSpeed: 1
     MaxDrawPower: 0.7
     MinDrawPower: 0.2
-    MaxRaycastDistance: 400
+    MaxRaycastDistance: 100
   IsDrawing: 0
   DrawPower: 0
   OnBack_weaponHolderTransform: {fileID: 2972822406335611147}

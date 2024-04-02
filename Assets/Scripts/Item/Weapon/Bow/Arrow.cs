@@ -4,22 +4,27 @@ using UnityEngine;
 public abstract class Arrow : MonoBehaviour
 {
     public AttackDamage AttackDamage;
+    public LayerMask TargetLayer;
 
     [Header("Base Reference")]
     [SerializeField] private Rigidbody arrowRb;
-    [SerializeField] private Collider hitBox;
+    [SerializeField] private SphereCollider hitBox;
     [SerializeField] private GameObject vfx_Hit;
     private GameObject vfx_HitInstance;
 
+    private void Awake()
+    {
+        hitBox.includeLayers = TargetLayer;
+    }
     protected virtual void Start()
     {
-        Invoke(nameof(SelfDestroy), 5);
+        Destroy(gameObject, 1);
     }
+
     public virtual void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.layer == 3)
         {
-            gameObject.isStatic = true;
             SetKinematic();
             return;
         }
@@ -34,7 +39,7 @@ public abstract class Arrow : MonoBehaviour
         Debug.Log($"Arrow {name} collide with {other.gameObject.name}");
         Transform root = other.transform.root;
         if (root.TryGetComponent(out IDamageable damageable)
-            && root.TryGetComponent(out EnemyController enemyController)
+            && other.TryGetComponent(out EnemyController enemyController)
             && other.CompareTag("Hitbox")
             || other.CompareTag("CriticalHitbox"))
         {
@@ -42,31 +47,27 @@ public abstract class Arrow : MonoBehaviour
             {
                 AttackDamage.Damage *= 1.5f;
                 Debug.LogWarning("Critical");
+                DoDamage(damageable);
+                hitBox.enabled = false;
                 vfx_HitInstance = Instantiate(vfx_Hit, transform.position, Quaternion.identity);
+
+                Destroy(vfx_HitInstance, 0.95f);
+                Destroy(gameObject, 1);
+                return;
+
             }
-            SetParent(other.transform);
             DoDamage(damageable);
-            Invoke(nameof(DestroyVFX), 0.95f);
-            Invoke(nameof(SelfDestroy), 1);
+            hitBox.enabled = false;
+            vfx_HitInstance = Instantiate(vfx_Hit, transform.position, Quaternion.identity);
+            Destroy(vfx_HitInstance, 0.95f);
+            Destroy(gameObject, 1);
+            return;
         }
-    }
-    private void DestroyVFX()
-    {
-        Destroy(vfx_HitInstance);
-    }
-    private void SelfDestroy()
-    {
-        Destroy(gameObject);
     }
     public virtual void SetKinematic(bool isActive = true)
     {
         arrowRb.isKinematic = isActive;
         hitBox.enabled = !isActive;
-    }
-
-    public virtual void SetParent(Transform newParent)
-    {
-        arrowRb.transform.SetParent(newParent);
     }
 
     public virtual void DoDamage(IDamageable damageable)
