@@ -57,6 +57,8 @@ public class PlayerController : NetworkBehaviour, IDamageable
         mouseMovement.InitCameras(playerCameraMode);
         mouseMovement.LockMouseCursor();
         SetCameraMode(playerCameraMode, false);
+
+
     }
 
     public override void OnNetworkDespawn()
@@ -175,19 +177,6 @@ public class PlayerController : NetworkBehaviour, IDamageable
         return playerHealth.CurrentHealth;
     }
 
-    public virtual void InitWeapon()
-    {
-
-    }
-
-    protected virtual void OnEnable()
-    {
-        playerHealth.InitHp(PlayerCharacterData);
-    }
-    protected virtual void OnDisable()
-    {
-    }
-
     [ClientRpc]
     public void TakeDamage_ClientRpc(AttackDamage damage)
     {
@@ -227,4 +216,18 @@ public class PlayerController : NetworkBehaviour, IDamageable
     public void TakeHeal_ServerRpc(AttackDamage damage)
     {
     }
+
+    public void SetCanPlayerMove(bool canMove)
+    {
+        playerMovement.CanMove = canMove;
+    }
+
+    protected virtual void OnEnable()
+    {
+        playerHealth.InitHp(PlayerCharacterData);
+    }
+    protected virtual void OnDisable()
+    {
+    }
+
 }

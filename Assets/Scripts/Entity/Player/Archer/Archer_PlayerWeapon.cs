@@ -38,7 +38,7 @@ public class Archer_PlayerWeapon : PlayerWeapon
             IsDrawing = true;
         }
 
-        if (context.canceled)
+        if (context.canceled && DrawPower > 0)
         {
             NormalAttack();
             IsDrawing = false;
@@ -108,7 +108,6 @@ public class Archer_PlayerWeapon : PlayerWeapon
     {
         if (OwnerClientId == NetworkManager.LocalClientId)
         {
-            Debug.Log($"Not shooter");
             return;
         }
 
@@ -121,7 +120,8 @@ public class Archer_PlayerWeapon : PlayerWeapon
     private void FireArrow(float damageMultiplier, float drawPower, Vector3 arrowDirection)
     {
         AttackDamage attackDamage = BowWeaponData.GetDamage(damageMultiplier, playerController.PlayerCharacterData, (long)NetworkManager.LocalClientId);
-        attackDamage.Damage = attackDamage.Damage / drawPower * BowConfig.MaxDrawPower;
+        drawPower = drawPower < 0.1f ? 0.1f : drawPower;
+        attackDamage.Damage = attackDamage.Damage * drawPower / BowConfig.MaxDrawPower;
 
         Transform arrowTransform = BowWeaponData.GetArrow(firePointTransform.position);
         Arrow arrow = arrowTransform.GetComponent<Arrow>();
@@ -150,7 +150,6 @@ public class Archer_PlayerWeapon : PlayerWeapon
                 GetWeaponInHand().SetActive(true);
                 break;
         }
-        Debug.Log($"Switch Weapon to {newState}");
 
     }
 
@@ -174,6 +173,11 @@ public class Archer_PlayerWeapon : PlayerWeapon
 
     }
 
+    public Transform GetFirePointTransform()
+    {
+        return firePointTransform;
+    }
+
     private void OnDrawGizmos()
     {
         Debug.DrawLine(Camera.main.transform.position, Camera.main.transform.position + Camera.main.transform.forward * BowConfig.MaxRaycastDistance, Color.red);
@@ -183,13 +187,15 @@ public class Archer_PlayerWeapon : PlayerWeapon
     protected override void OnEnable()
     {
         playerController.OnPlayerCameraModeChanged += SetWeaponHolderPosition;
+        OnUseWeapon += () => StartWeaponCooldown(BowWeaponData.AttackTimeInterval);
         if (!IsOwner) return;
 
 
-        OnUseWeapon += () => StartWeaponCooldown(BowWeaponData.AttackTimeInterval);
     }
     protected override void OnDisable()
     {
+        base.OnDisable();
+
         playerController.OnPlayerCameraModeChanged -= SetWeaponHolderPosition;
         if (!IsOwner) return;
 

@@ -30,13 +30,11 @@ public abstract class Arrow : MonoBehaviour
         }
         if ((ulong)AttackDamage.AttackerClientId != NetworkManager.Singleton.LocalClientId)
         {
-            Debug.Log($"Not owner");
             return;
         }
 
         if (other.transform.root.TryGetComponent<PlayerController>(out _) || !other.isTrigger) return;
 
-        Debug.Log($"Arrow {name} collide with {other.gameObject.name}");
         Transform root = other.transform.root;
         if (root.TryGetComponent(out IDamageable damageable)
             && other.TryGetComponent(out EnemyController enemyController)

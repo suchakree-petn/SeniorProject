@@ -6,6 +6,8 @@ public abstract class EntityHealth : NetworkBehaviour
 {
     public NetworkVariable<float> currentHealth = new(1337, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     public float CurrentHealth => currentHealth.Value;
+    private float maxHp;
+    public float MaxHp => maxHp;
     public bool IsDead => CurrentHealth <= 0;
 
 
@@ -29,7 +31,8 @@ public abstract class EntityHealth : NetworkBehaviour
 
     public virtual void InitHp(EntityCharacterData target)
     {
-        currentHealth = new(target.GetMaxHp(), NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+        maxHp = target.GetMaxHp();
+        currentHealth = new(MaxHp, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     }
 
 }

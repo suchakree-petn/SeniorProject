@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f2c716f98cd5f6428d26bdadcbd9c11, type: 3}
+  m_Name: ArrowManiac
+  m_EditorClassIdentifier: 
+  UserClientId: 0
+  Name: Arrow Maniac
+  Description: Rapidly shot follow-up arrow after player use normal attack.
+  Cooldown: 1
+  Icon: {fileID: -1180721212, guid: e6c754a4d66ab27408be1a826ebacdb3, type: 3}
+  ArrowManiac_prf: {fileID: 7167031637315580536, guid: 47c64f58a1dd3734c8e04009982cc7b4,
+    type: 3}
+  ArrowManiac_SpawnGroup: {fileID: 5533049506211706981, guid: c60e3d13ad80e5346906435a1e9227f9,
+    type: 3}
+  Duration: 7
+  Distance: 50
+  ArrowSpeed: 50

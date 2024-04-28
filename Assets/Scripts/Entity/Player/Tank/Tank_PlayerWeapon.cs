@@ -60,11 +60,14 @@ public class Tank_PlayerWeapon : PlayerWeapon
     public override void NormalAttack()
     {
         AttackDamage attackDamage;
-        if(WeaponHolderState == Tank_WeaponHolderState.InHand){
-            attackDamage =  SwordWeaponData.GetDamage(SwordWeaponData.LightAttack_DamageMultiplier, 
+        if (WeaponHolderState == Tank_WeaponHolderState.InHand)
+        {
+            attackDamage = SwordWeaponData.GetDamage(SwordWeaponData.LightAttack_DamageMultiplier,
                             playerController.PlayerCharacterData, (long)OwnerClientId);
-        }else{
-            attackDamage =  SwordWeaponData.GetDamage(SwordWeaponData.HeavyAttack_DamageMultiplier, 
+        }
+        else
+        {
+            attackDamage = SwordWeaponData.GetDamage(SwordWeaponData.HeavyAttack_DamageMultiplier,
                             playerController.PlayerCharacterData, (long)OwnerClientId);
         }
         Debug.Log("NAttack");
@@ -74,9 +77,12 @@ public class Tank_PlayerWeapon : PlayerWeapon
     public void SlashAttack_ServerRpc(AttackDamage attackDamage, ServerRpcParams serverRpcParams = default)
     {
         GameObject effect;
-        if(WeaponHolderState == Tank_WeaponHolderState.InHand){
+        if (WeaponHolderState == Tank_WeaponHolderState.InHand)
+        {
             effect = Instantiate(slashEffectPrefab, effectpos.position, attackRange.rotation);
-        }else{
+        }
+        else
+        {
             effect = Instantiate(slashEffectPrefab2, effectpos.position, attackRange.rotation);
         }
         effect.GetComponent<NetworkObject>().Spawn(true);
@@ -92,7 +98,7 @@ public class Tank_PlayerWeapon : PlayerWeapon
             && hit.collider.CompareTag("Hitbox"))
             {
                 Debug.Log("inif" + hit.transform.root.gameObject.name);
-                damageable.TakeDamage_ClientRpc(attackDamage);
+                damageable.TakeDamage_ServerRpc(attackDamage);
             }
         }
     }
@@ -112,7 +118,7 @@ public class Tank_PlayerWeapon : PlayerWeapon
 
     protected override void OnEnable()
     {
-
+        OnUseWeapon += () => StartWeaponCooldown(SwordWeaponData.AttackTimeInterval);
     }
 
 

@@ -124,6 +124,26 @@ PrefabInstance:
       propertyPath: enemyController
       value: 
       objectReference: {fileID: 5023896876588504443}
+    - target: {fileID: 2059451394939853948, guid: 58437a38aec03b4478d7fdb505663dec,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.32
+      objectReference: {fileID: 0}
+    - target: {fileID: 2059451394939853948, guid: 58437a38aec03b4478d7fdb505663dec,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.32
+      objectReference: {fileID: 0}
+    - target: {fileID: 2059451394939853948, guid: 58437a38aec03b4478d7fdb505663dec,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.32
+      objectReference: {fileID: 0}
+    - target: {fileID: 2059451394939853948, guid: 58437a38aec03b4478d7fdb505663dec,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 1.87
+      objectReference: {fileID: 0}
     - target: {fileID: 2385862875820891651, guid: 58437a38aec03b4478d7fdb505663dec,
         type: 3}
       propertyPath: m_Height
@@ -332,7 +352,7 @@ PrefabInstance:
     - target: {fileID: 8964699346016857801, guid: 58437a38aec03b4478d7fdb505663dec,
         type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 2007371242
+      value: 352418138
       objectReference: {fileID: 0}
     - target: {fileID: 9006563807303963375, guid: 58437a38aec03b4478d7fdb505663dec,
         type: 3}
@@ -474,7 +494,6 @@ MonoBehaviour:
   agent: {fileID: 6001819275899621731}
   behaviourTreeInstance: {fileID: 1851742019605905526}
   target: {fileID: 0}
-  moveSpeed: 100
   enemyHealth: {fileID: 7289086918844434345}
   enemyRb: {fileID: 3435360099078161397}
   networkAnimator: {fileID: 6322938050345439138}
