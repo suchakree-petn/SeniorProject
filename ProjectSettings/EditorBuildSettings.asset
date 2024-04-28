@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Thanva/Thanva_MainMenu_UserDataPersistence.unity
+    guid: f360811a0f163224f8a7d3b721cfabad
+  - enabled: 1
     path: Assets/Scenes/Tutor/Tutor_MainMenu_UserDataPersistence.unity
     guid: 5eaf429340441554780b550615aee7b5
   - enabled: 1
@@ -26,4 +29,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Tutor/Map_Tester_Tutor.unity
     guid: 65a9441704d1c9247912c2718a9a734a
+  - enabled: 1
+    path: Assets/Scenes/Thanva/Thanva_InLobby.unity
+    guid: 677f306f9f1d7ec49bc2a9f458257f44
   m_configObjects: {}

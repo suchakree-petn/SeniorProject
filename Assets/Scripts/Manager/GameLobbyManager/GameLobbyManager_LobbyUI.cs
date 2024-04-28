@@ -10,6 +10,7 @@ using UnityEngine.UI;
 public partial class GameLobbyManager
 {
     [Header("Reference UI")]
+    [SerializeField] private Button popUpCreateButton;
     [SerializeField] private Button createLobbyButton;
     [SerializeField] private Button quickJoinLobbyButton;
     [SerializeField] private Button codeJoinLobbyButton;

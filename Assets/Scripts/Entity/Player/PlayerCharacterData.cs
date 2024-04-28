@@ -22,7 +22,7 @@ public class PlayerCharacterData : EntityCharacterData
 }
 public enum PlayerRole
 {
-    FrontLine,
-    DamageDealer,
-    Supporter
+    Tank,
+    Archer,
+    Caster
 }
