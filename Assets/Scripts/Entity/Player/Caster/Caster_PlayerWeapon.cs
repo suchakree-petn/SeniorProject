@@ -1,7 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -60,7 +57,7 @@ public class Caster_PlayerWeapon : PlayerWeapon
         {
             isHasLockTarget = true;
             PlayerUIManager.Instance.SetLockTargetState(true);
-            PlayerUIManager.Instance.SetLockTargetPosition(currentLockTargetPosition);
+            PlayerUIManager.Instance.SetLockTargetPosition(currentLockTargetPosition,true);
         }
         else
         {
@@ -119,8 +116,8 @@ public class Caster_PlayerWeapon : PlayerWeapon
 
     protected override void OnEnable()
     {
-        if (!IsOwner) return;
         OnUseWeapon += () => StartWeaponCooldown(MagicItemWeaponData.AttackTimeInterval);
+        if (!IsOwner) return;
     }
 }
 [Serializable]

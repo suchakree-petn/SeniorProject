@@ -17,14 +17,26 @@ public abstract class PlayerWeapon : NetworkBehaviour
     public abstract void UseWeapon(InputAction.CallbackContext context);
     public virtual void StartWeaponCooldown(float sec)
     {
-        weaponCooldown = StartCoroutine(WaitForWeaponCooldown(sec));
+        if (weaponCooldown == null)
+        {
+            Debug.Log($"Start Cooldown");
+            weaponCooldown = StartCoroutine(WaitForWeaponCooldown(sec));
+        }
+        else
+        {
+            Debug.Log($"On Cooldown");
+        }
     }
 
     private IEnumerator WaitForWeaponCooldown(float sec)
     {
+        Debug.Log($"Start {sec} Cooldown");
+
         IsReadyToUse = false;
         yield return new WaitForSeconds(sec);
         IsReadyToUse = true;
+        weaponCooldown = null;
+        Debug.Log("Finish Cooldown");
     }
     public GameObject GetWeaponInHand()
     {

@@ -2663,7 +2663,7 @@ PrefabInstance:
     - target: {fileID: 8174493298335311036, guid: 8468fa4c8e09695459a2f7572471e55b,
         type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 2331542165
+      value: 2449191066
       objectReference: {fileID: 0}
     - target: {fileID: 8251370818320174555, guid: 8468fa4c8e09695459a2f7572471e55b,
         type: 3}
@@ -2825,7 +2825,7 @@ MonoBehaviour:
     type: 2}
   MagicItemConfig:
     MaxSphereCastDistance: 50
-    SphereCastRadius: 2
+    SphereCastRadius: 4
   firePointHolderTransform: {fileID: 7960326284791628561}
   firePointTransform: {fileID: 1984427601008815944}
   caster_PlayerController: {fileID: 7802546280471116810}

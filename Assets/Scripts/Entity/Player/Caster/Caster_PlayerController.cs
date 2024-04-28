@@ -76,8 +76,17 @@ public partial class Caster_PlayerController : PlayerController
 
     private void HealOrbAnimation()
     {
-        playerAnimation.SetTriggerNetworkAnimation("HealOrb");
-        Debug.Log("Heal orb anim");
+        if (caster_playerWeapon.IsReadyToUse)
+        {
+            playerAnimation.SetTriggerNetworkAnimation("HealOrb");
+            Debug.Log("Heal orb anim");
+        }
+        else
+        {
+            Debug.Log("Not ready Heal orb");
+
+        }
+
     }
 
     private void WalkAnimationWhileFocus()
