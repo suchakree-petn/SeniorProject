@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public partial class Archer_PlayerController : PlayerController
 {
@@ -48,9 +47,7 @@ public partial class Archer_PlayerController : PlayerController
         playerInputManager.Attack.canceled -= archer_playerWeapon.UseWeapon;
 
     }
-    public override void InitWeapon()
-    {
-    }
+
 
     private void ArcherAnimation()
     {
@@ -102,6 +99,10 @@ public partial class Archer_PlayerController : PlayerController
         playerAnimation.SetFloat("DrawPower", drawPowerRatio);
     }
 
+    public Archer_PlayerWeapon GetArcherWeapon()
+    {
+        return archer_playerWeapon;
+    }
 
     protected override void OnEnable()
     {

@@ -173,6 +173,10 @@ public class Archer_PlayerWeapon : PlayerWeapon
 
     }
 
+    public Transform GetFirePointTransform()
+    {
+        return firePointTransform;
+    }
 
     private void OnDrawGizmos()
     {

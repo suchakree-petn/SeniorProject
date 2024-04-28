@@ -50,10 +50,7 @@ public partial class Tank_PlayerController : PlayerController
         playerInputManager.Attack.canceled -= tank_playerWeapon.UseWeapon;
 
     }
-    public override void InitWeapon()
-    {
-    }
-
+    
     public void SetWeaponHolderPosition(PlayerCameraMode prev, PlayerCameraMode current)
     {
         if (current == PlayerCameraMode.Focus)

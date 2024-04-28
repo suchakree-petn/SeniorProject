@@ -68,9 +68,7 @@ public partial class Caster_PlayerController : PlayerController
         playerInputManager.Attack.performed -= caster_playerWeapon.UseWeapon;
 
     }
-    public override void InitWeapon()
-    {
-    }
+
 
 
 

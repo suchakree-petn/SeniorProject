@@ -21,10 +21,10 @@ public partial class PlayerManager : NetworkSingleton<PlayerManager>
             return _playerCharacterPrefab;
         }
     }
-    // public Dictionary<ulong, UserData> UserDatas { get; private set; } = new();
     public Dictionary<ulong, PlayerCharacterData> PlayerCharacterDatas { get; private set; } = new();
 
     public Dictionary<ulong, GameObject> PlayerGameObjects { get; private set; } = new();
+    public Dictionary<PlayerRole, GameObject> PlayerGameObjectsByRole { get; private set; } = new();
     public Dictionary<ulong, Vector3> PlayerPos
     {
         get
@@ -78,14 +78,8 @@ public partial class PlayerManager : NetworkSingleton<PlayerManager>
         {
             if (clientId == player.OwnerClientId)
             {
-                // if (UserDatas.TryAdd(clientId, UserManager.Instance.UserData))
-                // {
-                //     isAddUserData = true;
-                // }
-                // else
-                // {
-                //     Debug.LogWarning($"Already contain this userId");
-                // }
+                PlayerGameObjectsByRole.Add(player.PlayerCharacterData.PlayerRole, player.gameObject);
+                
                 if (PlayerCharacterDatas.TryAdd(clientId, player.PlayerCharacterData))
                 {
                     isAddPlayerCharacterData = true;
@@ -168,6 +162,7 @@ public partial class PlayerManager : NetworkSingleton<PlayerManager>
 
         newPlayerGO.GetComponent<NetworkObject>().SpawnWithOwnership(clientId, true);
     }
+
 
 
 

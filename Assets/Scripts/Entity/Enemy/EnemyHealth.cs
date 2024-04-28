@@ -1,11 +1,13 @@
-
+using System;
 using UnityEngine;
 
 public class EnemyHealth : EntityHealth
 {
     [Header("Enemy Reference")]
     [SerializeField] protected EnemyController enemyController;
+    [SerializeField] protected EnemyHealth_UI enemyHealth_UI;
 
+    public Action<AttackDamage> OnEnemyTakeDamage;
     public override void TakeDamage(AttackDamage damage, float defense)
     {
         if (CurrentHealth > 0)
@@ -16,24 +18,29 @@ public class EnemyHealth : EntityHealth
             {
                 currentHealth.Value = 0;
             }
+            OnEnemyTakeDamage?.Invoke(damage);
         }
     }
 
     public override void TakeHeal(AttackDamage damage)
     {
-        float maxHp = enemyController.EnemyCharacterData.GetMaxHp();
-        if (CurrentHealth < maxHp)
+        if (CurrentHealth < MaxHp)
         {
             base.TakeHeal(damage);
 
-            if (CurrentHealth > maxHp)
+            if (CurrentHealth > MaxHp)
             {
-                currentHealth.Value = maxHp;
+                currentHealth.Value = MaxHp;
             }
         }
     }
     private void OnEnable()
     {
         InitHp(enemyController.EnemyCharacterData);
+        OnEnemyTakeDamage += (AttackDamage attackDamage) => enemyHealth_UI.SetHpBar(CurrentHealth/MaxHp);
+    }
+    private void OnDisable()
+    {
+
     }
 }

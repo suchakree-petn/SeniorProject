@@ -1,4 +1,3 @@
-using Unity.Netcode;
 using UnityEngine;
 
 public class BillboardWorldSpaceUI : MonoBehaviour
@@ -7,15 +6,19 @@ public class BillboardWorldSpaceUI : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (!IsInit)
+        if (transform.root.TryGetComponent(out PlayerController playerController))
         {
-            if (transform.root.GetComponent<PlayerController>().IsOwner)
+            if (!IsInit)
             {
-                gameObject.SetActive(false);
-                IsInit = true;
-                return;
+                if (playerController.IsOwner)
+                {
+                    gameObject.SetActive(false);
+                    IsInit = true;
+                    return;
+                }
             }
         }
+
         transform.LookAt(Camera.main.transform);
         transform.Rotate(0, 180, 0);
     }
