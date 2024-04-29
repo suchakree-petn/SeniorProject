@@ -51,11 +51,10 @@ public class LobbyUI : MonoBehaviour
         {
             GameMultiplayerManager.Instance.SetPlayerName(newText);
         });
-
         GameLobbyManager.Instance.OnLobbyListChanged += GameLobby_OnLobbyListChanged;
         GameLobbyManager.Instance.OnKickedFromLobby += GameLobbyManager_OnKickedFromLobby;
 
-        UpdateLobbyList(new List<Lobby>());
+        // UpdateLobbyList(new List<Lobby>());
     }
 
     private void GameLobbyManager_OnKickedFromLobby(object sender, GameLobbyManager.LobbyEventArgs e)

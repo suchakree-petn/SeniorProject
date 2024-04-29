@@ -49,7 +49,6 @@ public class GameMultiplayerManager : NetworkSingleton<GameMultiplayerManager>
     //         Loader.LoadNetwork(Loader.Scene.GameScene);
     //     }
     // }
-
     public string GetPlayerName()
     {
         return playerName;
@@ -346,43 +345,6 @@ public class GameMultiplayerManager : NetworkSingleton<GameMultiplayerManager>
             }
 
         }
-
-        UpdateLobbyData_SelectedClass();
-
-    }
-
-    public async void UpdateLobbyData_SelectedClass()
-    {
-        UpdateLobbyOptions updateLobby = new()
-        {
-            Data = new Dictionary<string, DataObject>
-                {
-                    {GameLobbyManager.KEY_TANK_ID,new DataObject(DataObject.VisibilityOptions.Public,"false")},
-                    {GameLobbyManager.KEY_ARCHER_ID,new DataObject(DataObject.VisibilityOptions.Public,"false")},
-                    {GameLobbyManager.KEY_CASTER_ID,new DataObject(DataObject.VisibilityOptions.Public,"false")}
-
-                }
-        };
-        foreach (PlayerData playerData in playerDataNetworkList)
-        {
-            Debug.Log("foreach " + playerData);
-            if (playerData.classId == 0)
-            {
-                updateLobby.Data[GameLobbyManager.KEY_TANK_ID] = new DataObject(DataObject.VisibilityOptions.Public, "true");
-            }
-            if (playerData.classId == 1)
-            {
-                updateLobby.Data[GameLobbyManager.KEY_ARCHER_ID] = new DataObject(DataObject.VisibilityOptions.Public, "true");
-            }
-            if (playerData.classId == 2)
-            {
-                updateLobby.Data[GameLobbyManager.KEY_CASTER_ID] = new DataObject(DataObject.VisibilityOptions.Public, "true");
-            }
-
-        }
-        await LobbyService.Instance.UpdateLobbyAsync(GameLobbyManager.Instance.GetLobby().Id, updateLobby);
-        Debug.Log("Update Lobby");
-
     }
 
     private bool IsClassAvailable(int classId)

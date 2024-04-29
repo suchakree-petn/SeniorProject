@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Mono.CSharp;
 using Unity.Netcode.Transports.UTP;
 using Unity.Networking.Transport.Relay;
 using Unity.Services.Authentication;
@@ -24,6 +25,7 @@ public partial class GameLobbyManager : NetworkSingleton<GameLobbyManager>
     [SerializeField] public const string KEY_CASTER_ID = "CASTER";
     private float heartbeatTimer;
     private float refreshTimer;
+    private float refreshClassTimer;
     private float checkInLobbyTimer;
     private float listLobbiesTimer;
     // +_______________________________________________
@@ -58,6 +60,22 @@ public partial class GameLobbyManager : NetworkSingleton<GameLobbyManager>
         HandleLobbyHeartbeat();
         HandlePeriodicListLobbies();
         HandleCheckIsInLobby();
+        HandleUpdateLobbyData_SelectedClass();
+
+    }
+
+    private void HandleUpdateLobbyData_SelectedClass()
+    {
+        if (joinedLobby != null && IsServer)
+        {
+            refreshClassTimer -= Time.deltaTime;
+            if (refreshClassTimer < 0f)
+            {
+                float refreshClassTimerMax = 4f;
+                refreshClassTimer = refreshClassTimerMax;
+                UpdateLobbyData_SelectedClass();
+            }
+        }
     }
 
     private async void InitializeUnityAuthentication()
@@ -475,5 +493,37 @@ public partial class GameLobbyManager : NetworkSingleton<GameLobbyManager>
             }
         }
     }
+    public async void UpdateLobbyData_SelectedClass()
+    {
+        UpdateLobbyOptions updateLobby = new()
+        {
+            Data = new Dictionary<string, DataObject>
+                {
+                    {KEY_TANK_ID,new DataObject(DataObject.VisibilityOptions.Public,"false")},
+                    {KEY_ARCHER_ID,new DataObject(DataObject.VisibilityOptions.Public,"false")},
+                    {KEY_CASTER_ID,new DataObject(DataObject.VisibilityOptions.Public,"false")}
 
+                }
+        };
+        foreach (PlayerData playerData in GameMultiplayerManager.Instance.GetPlayerDataNetworkList())
+        {
+            Debug.Log("foreach " + playerData);
+            if (playerData.classId == 0)
+            {
+                updateLobby.Data[KEY_TANK_ID] = new DataObject(DataObject.VisibilityOptions.Public, "true");
+            }
+            if (playerData.classId == 1)
+            {
+                updateLobby.Data[KEY_ARCHER_ID] = new DataObject(DataObject.VisibilityOptions.Public, "true");
+            }
+            if (playerData.classId == 2)
+            {
+                updateLobby.Data[KEY_CASTER_ID] = new DataObject(DataObject.VisibilityOptions.Public, "true");
+            }
+
+        }
+        await LobbyService.Instance.UpdateLobbyAsync(GetLobby().Id, updateLobby);
+        Debug.Log("Update Lobby");
+
+    }
 }
