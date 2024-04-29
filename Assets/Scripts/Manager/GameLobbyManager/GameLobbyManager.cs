@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using TMPro;
 using Unity.Netcode.Transports.UTP;
 using Unity.Networking.Transport.Relay;
 using Unity.Services.Authentication;
@@ -23,20 +22,17 @@ public partial class GameLobbyManager : NetworkSingleton<GameLobbyManager>
     [SerializeField] public const string KEY_TANK_ID = "0";
     [SerializeField] public const string KEY_ARCHER_ID = "0";
     [SerializeField] public const string KEY_CASTER_ID = "0";
-    [SerializeField] private TMP_InputField lobbyname;
-    [SerializeField] private GameObject popUpCreateLobby;
-    [SerializeField] private TMP_Dropdown gameStage;
     private float heartbeatTimer;
+    private float listLobbiesTimer;
     // +_______________________________________________
-    public event EventHandler OnLeftLobby;
 
-    public event EventHandler<LobbyEventArgs> OnJoinedLobby;
-    public event EventHandler<LobbyEventArgs> OnJoinedLobbyUpdate;
-    public event EventHandler<LobbyEventArgs> OnKickedFromLobby;
-    public event EventHandler<LobbyEventArgs> OnLobbyGameModeChanged;
-    public class LobbyEventArgs : EventArgs {
-        public Lobby lobby;
-    }
+    
+    public event EventHandler OnCreateLobbyStarted;
+    public event EventHandler OnCreateLobbyFailed;
+    public event EventHandler OnJoinStarted;
+    public event EventHandler OnQuickJoinFailed;
+    public event EventHandler OnJoinFailed;
+
     public event EventHandler<OnLobbyListChangedEventArgs> OnLobbyListChanged;
     public class OnLobbyListChangedEventArgs : EventArgs {
         public List<Lobby> lobbyList;
@@ -46,17 +42,15 @@ public partial class GameLobbyManager : NetworkSingleton<GameLobbyManager>
     protected override void InitAfterAwake()
     {
         InitializeUnityAuthentication();
-        createLobbyButton.onClick.AddListener(() => popUpCreateLobby.SetActive(true));
-        popUpCreateButton.onClick.AddListener(() => {CreateLobby(lobbyname.text, false, gameStage.value+1);popUpCreateLobby.SetActive(false);});
-        quickJoinLobbyButton.onClick.AddListener(() => QuickJoin());
-        codeJoinLobbyButton.onClick.AddListener(() => JoinByCode(codeJoinLobbyInputField.text));
     }
+
     private void Update() {
         //HandleRefreshLobbyList(); // Disabled Auto Refresh for testing with multiple builds
-        // HandleLobbyHeartbeat();
-        // HandleLobbyPolling();
+        HandleLobbyHeartbeat();
+        HandlePeriodicListLobbies();
     
     }
+    
     private async void InitializeUnityAuthentication()
     {
         if (UnityServices.State != ServicesInitializationState.Initialized)
@@ -72,9 +66,10 @@ public partial class GameLobbyManager : NetworkSingleton<GameLobbyManager>
 
     public async void CreateLobby(string lobbyName, bool isPrivate, int stage)
     {
+        OnCreateLobbyStarted?.Invoke(this, EventArgs.Empty);
         try
         {
-            CreateLobbyOptions options = new CreateLobbyOptions {
+            var options = new CreateLobbyOptions {
             IsPrivate = isPrivate,
             Player = new Player
                 {
@@ -85,17 +80,19 @@ public partial class GameLobbyManager : NetworkSingleton<GameLobbyManager>
                 },
             Data = new Dictionary<string, DataObject>
                 {
-                    {KEY_STAGE_ID,new DataObject(DataObject.VisibilityOptions.Public,stage.ToString())}
-                    // {KEY_TANK_ID,new DataObject(DataObject.VisibilityOptions.Public,stage.ToString())},
-                    // {KEY_ARCHER_ID,new DataObject(DataObject.VisibilityOptions.Public,stage.ToString())},
-                    // {KEY_CASTER_ID,new DataObject(DataObject.VisibilityOptions.Public,stage.ToString())}
+                    {KEY_STAGE_ID,new DataObject(DataObject.VisibilityOptions.Public,stage.ToString())},
+                    {KEY_TANK_ID,new DataObject(DataObject.VisibilityOptions.Public,"0")},
+                    {KEY_ARCHER_ID,new DataObject(DataObject.VisibilityOptions.Public,"0")},
+                    {KEY_CASTER_ID,new DataObject(DataObject.VisibilityOptions.Public,"0")}
+                    
                 }
+                
             };
             Lobby lobby = await LobbyService.Instance.CreateLobbyAsync(lobbyName, MAX_PLAYER, options);
 
             joinedLobby = lobby;
 
-            OnJoinedLobby?.Invoke(this, new LobbyEventArgs { lobby = lobby });
+            OnJoinStarted?.Invoke(this, EventArgs.Empty);
             Debug.Log("PlayerCount: " + joinedLobby.Players.Count);
 
             Debug.Log("Stage ID: " + joinedLobby.Data[KEY_STAGE_ID].Value);
@@ -115,9 +112,10 @@ public partial class GameLobbyManager : NetworkSingleton<GameLobbyManager>
             });
             NetworkManager.GetComponent<UnityTransport>().SetRelayServerData(new RelayServerData(allocation, "dtls"));
             Debug.Log("Create lobby code: " + joinedLobby.LobbyCode);
-            NetworkManager.StartHost();
-            NetworkManager.SceneManager.LoadScene("Thanva_InLobby", LoadSceneMode.Single);
-            // Loader.LoadNetwork(Loader.Scene.Thanva_InLobby);
+            GameMultiplayerManager.Instance.StartHost();
+
+            // SceneManager.LoadScene("Thanva_InLobby");
+            Loader.LoadNetwork(Loader.Scene.CharacterSelectScene);
         }
         catch (LobbyServiceException e)
         {
@@ -186,7 +184,7 @@ public partial class GameLobbyManager : NetworkSingleton<GameLobbyManager>
             JoinAllocation joinAllocation = await JoinRelay(relayJoinCode);
             NetworkManager.GetComponent<UnityTransport>().SetRelayServerData(new RelayServerData(joinAllocation, "dtls"));
 
-            NetworkManager.StartClient();
+            GameMultiplayerManager.Instance.StartClient();
 
         }
         catch (LobbyServiceException e)
@@ -194,7 +192,23 @@ public partial class GameLobbyManager : NetworkSingleton<GameLobbyManager>
             Debug.LogWarning(e);
         }
     }
+    public async void JoinWithId(string lobbyId) {
+        OnJoinStarted?.Invoke(this, EventArgs.Empty);
+        try {
+            joinedLobby = await LobbyService.Instance.JoinLobbyByIdAsync(lobbyId);
 
+            string relayJoinCode = joinedLobby.Data[KEY_RELAY_JOIN_CODE].Value;
+
+            JoinAllocation joinAllocation = await JoinRelay(relayJoinCode);
+
+            NetworkManager.GetComponent<UnityTransport>().SetRelayServerData(new RelayServerData(joinAllocation, "dtls"));
+
+            GameMultiplayerManager.Instance.StartClient();
+        } catch (LobbyServiceException e) {
+            Debug.Log(e);
+            OnJoinFailed?.Invoke(this, EventArgs.Empty);
+        }
+    }
     public async void JoinByCode(string lobbyCode)
     {
         try
@@ -215,7 +229,7 @@ public partial class GameLobbyManager : NetworkSingleton<GameLobbyManager>
             JoinAllocation joinAllocation = await JoinRelay(relayJoinCode);
             NetworkManager.GetComponent<UnityTransport>().SetRelayServerData(new RelayServerData(joinAllocation, "dtls"));
 
-            NetworkManager.StartClient();
+            GameMultiplayerManager.Instance.StartClient();
         }
         catch (LobbyServiceException e)
         {
@@ -251,6 +265,29 @@ public partial class GameLobbyManager : NetworkSingleton<GameLobbyManager>
         }
 
     }
+    public async void LeaveLobby() {
+        if (joinedLobby != null) {
+            try {
+                await LobbyService.Instance.RemovePlayerAsync(joinedLobby.Id, AuthenticationService.Instance.PlayerId);
+
+                joinedLobby = null;
+            } catch (LobbyServiceException e) {
+                Debug.Log(e);
+            }
+        }
+    }
+    public async void KickPlayer(string playerId) {
+        if (IsLobbyHost()) {
+            try {
+                await LobbyService.Instance.RemovePlayerAsync(joinedLobby.Id, playerId);
+            } catch (LobbyServiceException e) {
+                Debug.Log(e);
+            }
+        }
+    }
+    public Lobby GetLobby() {
+        return joinedLobby;
+    }
     public async void RefreshLobbyList() {
         try {
             QueryLobbiesOptions options = new QueryLobbiesOptions();
@@ -276,6 +313,36 @@ public partial class GameLobbyManager : NetworkSingleton<GameLobbyManager>
             OnLobbyListChanged?.Invoke(this, new OnLobbyListChangedEventArgs { lobbyList = lobbyListQueryResponse.Results });
         } catch (LobbyServiceException e) {
             Debug.Log(e);
+        }
+    }
+    private async void ListLobbies() {
+        try {
+            QueryLobbiesOptions queryLobbiesOptions = new QueryLobbiesOptions {
+                Filters = new List<QueryFilter> {
+                  new QueryFilter(QueryFilter.FieldOptions.AvailableSlots, "0", QueryFilter.OpOptions.GT)
+             }
+            };
+            QueryResponse queryResponse = await LobbyService.Instance.QueryLobbiesAsync(queryLobbiesOptions);
+
+            OnLobbyListChanged?.Invoke(this, new OnLobbyListChangedEventArgs {
+                lobbyList = queryResponse.Results
+            });
+        } catch (LobbyServiceException e) {
+            Debug.Log(e);
+        }
+    }
+    private void HandlePeriodicListLobbies() {
+        if (joinedLobby == null &&
+            UnityServices.State == ServicesInitializationState.Initialized &&
+            AuthenticationService.Instance.IsSignedIn && 
+            SceneManager.GetActiveScene().name == "Thanva_MainMenu_UserDataPersistence") {
+
+            listLobbiesTimer -= Time.deltaTime;
+            if (listLobbiesTimer <= 0f) {
+                float listLobbiesTimerMax = 3f;
+                listLobbiesTimer = listLobbiesTimerMax;
+                ListLobbies();
+            }
         }
     }
 }

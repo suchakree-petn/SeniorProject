@@ -41,10 +41,10 @@ public class CharacterSelectReady : NetworkBehaviour {
                 break;
             }
         }
-
-        if (allClientsReady) {
+        Debug.Log("Players.Count "+GameLobbyManager.Instance.GetJoinedLobby().Players.Count);
+        if (allClientsReady && GameMultiplayerManager.Instance.GetPlayerDataNetworkList().Count == 3) {
             GameLobbyManager.Instance.DeleteLobby();
-            Loader.LoadNetwork(Loader.Scene.Thanva_Map_Tester);
+            Loader.LoadNetwork(Loader.Scene.GameScene);
         }
     }
 

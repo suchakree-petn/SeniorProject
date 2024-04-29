@@ -7,23 +7,33 @@ using UnityEngine.SceneManagement;
 public static class Loader 
 {
     public enum Scene{
-        Thanva_MainMenu_UserDataPersistence,
-        Thanva_Map_Tester,
+        LobbyScene,
+        GameScene,
         LoadingScene,
-        Thanva_InLobby
+        CharacterSelectScene
     }
-
+    static string TransScene(string scene){
+        string returnScene = "LoadingScene";
+        if(scene == "LobbyScene"){
+            returnScene = "Thanva_MainMenu_UserDataPersistence";
+        }else if(scene == "GameScene"){
+            returnScene = "Thanva_Map_Tester";
+        }else if(scene == "CharacterSelectScene"){
+            returnScene = "Thanva_InLobby";
+        }
+        return returnScene;
+    }
     private static Scene targetScene;
 
-    public static void Load(Scene targetScene){
-        Loader.targetScene = targetScene;
+    public static void Load(Scene _targetScene){
+        Loader.targetScene = _targetScene;
 
-        SceneManager.LoadScene(Scene.LoadingScene.ToString());
+        SceneManager.LoadScene(TransScene(Scene.LoadingScene.ToString()));
     }
     public static void LoadNetwork(Scene targetScene){
-        NetworkManager.Singleton.SceneManager.LoadScene(targetScene.ToString(),LoadSceneMode.Single);
+        NetworkManager.Singleton.SceneManager.LoadScene(TransScene(targetScene.ToString()),LoadSceneMode.Single);
     }
-    public static void Loadercallback(){
-        SceneManager.LoadScene(targetScene.ToString());
+    public static void LoaderCallback(){
+        SceneManager.LoadScene(TransScene(targetScene.ToString()));
     }
 }

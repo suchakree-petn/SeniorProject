@@ -17,9 +17,10 @@ public class LobbyListSingleUI : MonoBehaviour {
 
 
     private void Awake() {
-        // GetComponent<Button>().onClick.AddListener(() => {
-        //     GameLobbyManager.Instance.JoinLobby(lobby);
-        // });
+        GetComponent<Button>().onClick.AddListener(() => {
+            GameLobbyManager.Instance.JoinWithId(lobby.Id);
+            GetComponent<Button>().Select();
+        });
     }
 
     public void UpdateLobby(Lobby lobby) {
@@ -27,7 +28,7 @@ public class LobbyListSingleUI : MonoBehaviour {
 
         lobbyNameText.text = lobby.Name;
         playersText.text = lobby.Players.Count + "/" + lobby.MaxPlayers;
-        stageText.text = lobby.Data[GameLobbyManager.KEY_STAGE_ID].Value;;
+        stageText.text = lobby.Data[GameLobbyManager.KEY_STAGE_ID].Value;
     }
 
 

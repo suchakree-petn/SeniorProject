@@ -91,7 +91,7 @@ PlayerSettings:
   bakeCollisionMeshes: 0
   forceSingleInstance: 0
   useFlipModelSwapchain: 1
-  resizableWindow: 0
+  resizableWindow: 1
   useMacAppStoreValidation: 0
   macAppStoreCategory: public.app-category.games
   gpuSkinning: 1
@@ -927,11 +927,11 @@ PlayerSettings:
   apiCompatibilityLevel: 6
   activeInputHandler: 2
   windowsGamepadBackendHint: 0
-  cloudProjectId: c87d3660-bbdd-4d62-951e-6527d28fab18
+  cloudProjectId: 1652e7bf-71f3-47a3-97a4-e56cdace4733
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: SeniorProject
-  organizationId: tutor1010
+  projectName: SeniorProject (1)
+  organizationId: thanva1255
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   hmiLoadingImage: {fileID: 0}

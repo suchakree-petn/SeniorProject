@@ -4,7 +4,8 @@ using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CharacterSelectUI : MonoBehaviour {
+public class CharacterSelectUI : MonoBehaviour 
+{
 
 
     [SerializeField] private Button readyButton;
@@ -13,7 +14,7 @@ public class CharacterSelectUI : MonoBehaviour {
     private void Awake() {
         mainMenuButton.onClick.AddListener(() => {
             NetworkManager.Singleton.Shutdown();
-            Loader.Load(Loader.Scene.Thanva_MainMenu_UserDataPersistence);
+            Loader.Load(Loader.Scene.LobbyScene);
         });
         readyButton.onClick.AddListener(() => {
             CharacterSelectReady.Instance.SetPlayerReady();

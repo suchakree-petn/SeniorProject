@@ -16,7 +16,7 @@ public class ArcherAbility : PlayerAbility
     public override void ActivateAbility(ulong userClientId)
     {
         Debug.Log($"{archerAbilityData.Name} activated");
-        Archer_PlayerController playerController = PlayerManager.Instance.PlayerGameObjectsByRole[PlayerRole.DamageDealer].GetComponent<Archer_PlayerController>();
+        Archer_PlayerController playerController = PlayerManager.Instance.PlayerGameObjectsByRole[PlayerRole.Archer].GetComponent<Archer_PlayerController>();
         UserClientId = playerController.OwnerClientId;
         TargetLayer = playerController.PlayerCharacterData.TargetLayer;
         SpawnTransform = playerController.GetArcherWeapon().GetFirePointTransform();
