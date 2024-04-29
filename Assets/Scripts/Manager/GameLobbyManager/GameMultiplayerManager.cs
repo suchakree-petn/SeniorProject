@@ -1,8 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Unity.Netcode;
 using Unity.Services.Authentication;
+using Unity.Services.Lobbies;
+using Unity.Services.Lobbies.Models;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -35,7 +38,7 @@ public class GameMultiplayerManager : NetworkSingleton<GameMultiplayerManager>
     {
         playerName = PlayerPrefs.GetString(KEY_PLAYER_NAME, "PlayerName" + UnityEngine.Random.Range(100, 1000));
 
-        playerDataNetworkList = new NetworkList<PlayerData>(null,NetworkVariableReadPermission.Everyone,NetworkVariableWritePermission.Owner);
+        playerDataNetworkList = new NetworkList<PlayerData>(null, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
         playerDataNetworkList.OnListChanged += PlayerDataNetworkList_OnListChanged;
     }
 
@@ -306,6 +309,7 @@ public class GameMultiplayerManager : NetworkSingleton<GameMultiplayerManager>
     {
         if (!IsClassAvailable(classId))
         {
+            Debug.Log("Class " + classId + " is not available");
             // Color not available
             return;
         }
@@ -315,7 +319,6 @@ public class GameMultiplayerManager : NetworkSingleton<GameMultiplayerManager>
         PlayerData playerData = playerDataNetworkList[playerDataIndex];
 
         playerData.classId = classId;
-
         playerDataNetworkList[playerDataIndex] = playerData;
 
         List<int> classSum = new List<int>();
@@ -329,10 +332,56 @@ public class GameMultiplayerManager : NetworkSingleton<GameMultiplayerManager>
         foreach (int _classId in classSum)
         {
             Debug.Log("foreach " + _classId);
-            if (_classId == 0) { PlayerPrefs.SetString(GameLobbyManager.KEY_TANK_ID, "true"); }
-            if (_classId == 1) { PlayerPrefs.SetString(GameLobbyManager.KEY_ARCHER_ID, "true"); }
-            if (_classId == 2) { PlayerPrefs.SetString(GameLobbyManager.KEY_CASTER_ID, "true"); }
+            if (_classId == 0)
+            {
+                PlayerPrefs.SetString(GameLobbyManager.KEY_TANK_ID, "true");
+            }
+            if (_classId == 1)
+            {
+                PlayerPrefs.SetString(GameLobbyManager.KEY_ARCHER_ID, "true");
+            }
+            if (_classId == 2)
+            {
+                PlayerPrefs.SetString(GameLobbyManager.KEY_CASTER_ID, "true");
+            }
+
         }
+
+        UpdateLobbyData_SelectedClass();
+
+    }
+
+    public async void UpdateLobbyData_SelectedClass()
+    {
+        UpdateLobbyOptions updateLobby = new()
+        {
+            Data = new Dictionary<string, DataObject>
+                {
+                    {GameLobbyManager.KEY_TANK_ID,new DataObject(DataObject.VisibilityOptions.Public,"false")},
+                    {GameLobbyManager.KEY_ARCHER_ID,new DataObject(DataObject.VisibilityOptions.Public,"false")},
+                    {GameLobbyManager.KEY_CASTER_ID,new DataObject(DataObject.VisibilityOptions.Public,"false")}
+
+                }
+        };
+        foreach (PlayerData playerData in playerDataNetworkList)
+        {
+            Debug.Log("foreach " + playerData);
+            if (playerData.classId == 0)
+            {
+                updateLobby.Data[GameLobbyManager.KEY_TANK_ID] = new DataObject(DataObject.VisibilityOptions.Public, "true");
+            }
+            if (playerData.classId == 1)
+            {
+                updateLobby.Data[GameLobbyManager.KEY_ARCHER_ID] = new DataObject(DataObject.VisibilityOptions.Public, "true");
+            }
+            if (playerData.classId == 2)
+            {
+                updateLobby.Data[GameLobbyManager.KEY_CASTER_ID] = new DataObject(DataObject.VisibilityOptions.Public, "true");
+            }
+
+        }
+        await LobbyService.Instance.UpdateLobbyAsync(GameLobbyManager.Instance.GetLobby().Id, updateLobby);
+        Debug.Log("Update Lobby");
 
     }
 
@@ -358,6 +407,7 @@ public class GameMultiplayerManager : NetworkSingleton<GameMultiplayerManager>
                 return i;
             }
         }
+        Debug.Log("Class error");
         return -1;
     }
 

@@ -45,9 +45,9 @@ public partial class PlayerManager : NetworkSingleton<PlayerManager>
     {
         if (IsServer)
         {
-            NetworkManager.OnClientConnectedCallback += PlayerManager_OnClientConnectedHandler;
+            OnClientConnect += PlayerManager_OnClientConnectedHandler;
             NetworkManager.OnClientDisconnectCallback += PlayerManager_OnClientDisconnectHandler;
-            PlayerManager_OnServerStartedHandler();
+            // PlayerManager_OnServerStartedHandler();
         }
 
     }
@@ -55,16 +55,35 @@ public partial class PlayerManager : NetworkSingleton<PlayerManager>
     {
         if (IsServer)
         {
-            NetworkManager.OnClientConnectedCallback -= PlayerManager_OnClientConnectedHandler;
+            OnClientConnect -= PlayerManager_OnClientConnectedHandler;
             NetworkManager.OnClientDisconnectCallback -= PlayerManager_OnClientDisconnectHandler;
         }
 
     }
     private void PlayerManager_OnClientConnectedHandler(ulong clientId)
     {
-        OnClientConnect?.Invoke(clientId);
+        Debug.Log("Id Value: " + clientId);
+        ulong PLAYER_CHAR_ID;
+        int playerDataIndex = GameMultiplayerManager.Instance.GetPlayerDataIndexFromClientId(clientId);
+        var playerDatasList = GameMultiplayerManager.Instance.GetPlayerDataNetworkList();
+        int classId = playerDatasList[playerDataIndex].classId;
+        switch (classId)
+        {
+            case 0:
+                PLAYER_CHAR_ID = 1001;
+                break;
+            case 1:
+                PLAYER_CHAR_ID = 1002;
+                break;
+            case 2:
+                PLAYER_CHAR_ID = 1003;
+                break;
+            default:
+                PLAYER_CHAR_ID = 1000;
+                break;
+        }
 
-        Transform playerChar = Instantiate(PlayerCharacterPrefab[1002]);
+        Transform playerChar = Instantiate(PlayerCharacterPrefab[PLAYER_CHAR_ID]);
         playerChar.GetComponent<NetworkObject>().SpawnAsPlayerObject(clientId, true);
 
         Debug.Log("Client Connected");
@@ -79,7 +98,7 @@ public partial class PlayerManager : NetworkSingleton<PlayerManager>
             if (clientId == player.OwnerClientId)
             {
                 PlayerGameObjectsByRole.Add(player.PlayerCharacterData.PlayerRole, player.gameObject);
-                
+
                 if (PlayerCharacterDatas.TryAdd(clientId, player.PlayerCharacterData))
                 {
                     isAddPlayerCharacterData = true;
@@ -120,7 +139,7 @@ public partial class PlayerManager : NetworkSingleton<PlayerManager>
 
     private void PlayerManager_OnClientDisconnectHandler(ulong clientId)
     {
-        Debug.Log("Client Disconnected");
+        Debug.Log("Client Disconnected " + clientId);
         // UserDatas.Remove(clientId);
         PlayerCharacterDatas.Remove(clientId);
         PlayerGameObjects.Remove(clientId);

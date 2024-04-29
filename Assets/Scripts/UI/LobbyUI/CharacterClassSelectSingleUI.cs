@@ -21,6 +21,7 @@ public class CharacterClassSelectSingleUI : MonoBehaviour
     {
         GetComponent<Button>().onClick.AddListener(() =>
         {
+            Debug.Log("Change class to " + classId);
             GameMultiplayerManager.Instance.ChangePlayerClass(classId);
         });
         GameMultiplayerManager.Instance.OnPlayerDataNetworkListChanged += GameMultiplayer_OnPlayerDataNetworkListChanged;

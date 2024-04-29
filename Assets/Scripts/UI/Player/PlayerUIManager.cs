@@ -24,14 +24,17 @@ public class PlayerUIManager : NetworkSingleton<PlayerUIManager>
         // Debug.Log("Dropdown Value: " + selectCharacterDropdown.value);
         Debug.Log("Id Value: " + clientId);
         ulong PLAYER_CHAR_ID;
-        switch (clientId)
+        int playerDataIndex = GameMultiplayerManager.Instance.GetPlayerDataIndexFromClientId(clientId);
+        var playerDatasList = GameMultiplayerManager.Instance.GetPlayerDataNetworkList();
+        int classId = playerDatasList[playerDataIndex].classId;
+        switch (classId)
         {
             case 0:
-                PLAYER_CHAR_ID = 1002;
+                PLAYER_CHAR_ID = 1001;
                 PlayerManager.Instance.SwitchPlayerCharacter_ServerRpc(PLAYER_CHAR_ID);
                 break;
             case 1:
-                PLAYER_CHAR_ID = 1001;
+                PLAYER_CHAR_ID = 1002;
                 PlayerManager.Instance.SwitchPlayerCharacter_ServerRpc(PLAYER_CHAR_ID);
                 break;
             case 2:
@@ -60,7 +63,7 @@ public class PlayerUIManager : NetworkSingleton<PlayerUIManager>
 
     public override void OnNetworkSpawn()
     {
-        PlayerManager.Instance.OnAfterClientConnect += SetSelectCharacter;
+        // PlayerManager.Instance.OnAfterClientConnect += SetSelectCharacter;
 
     }
 
@@ -69,7 +72,7 @@ public class PlayerUIManager : NetworkSingleton<PlayerUIManager>
     public override void OnNetworkDespawn()
     {
 
-        PlayerManager.Instance.OnAfterClientConnect -= SetSelectCharacter;
+        // PlayerManager.Instance.OnAfterClientConnect -= SetSelectCharacter;
 
     }
     public void SetPlayerCrossHairState(bool isActive)

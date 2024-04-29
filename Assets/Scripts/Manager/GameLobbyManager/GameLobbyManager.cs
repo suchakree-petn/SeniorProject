@@ -91,7 +91,7 @@ public partial class GameLobbyManager : NetworkSingleton<GameLobbyManager>
                 Data = new Dictionary<string, DataObject>
                 {
                     {KEY_STAGE_ID,new DataObject(DataObject.VisibilityOptions.Public,stage.ToString())},
-                    {KEY_TANK_ID,new DataObject(DataObject.VisibilityOptions.Public,"false")},
+                    {KEY_TANK_ID,new DataObject(DataObject.VisibilityOptions.Public,"true")},
                     {KEY_ARCHER_ID,new DataObject(DataObject.VisibilityOptions.Public,"false")},
                     {KEY_CASTER_ID,new DataObject(DataObject.VisibilityOptions.Public,"false")}
 
@@ -170,7 +170,8 @@ public partial class GameLobbyManager : NetworkSingleton<GameLobbyManager>
     }
     private void HandleCheckIsInLobby()
     {
-        if (SceneManager.GetActiveScene().name == "Thanva_MainMenu_UserDataPersistence") return;
+        if (SceneManager.GetActiveScene().name != "Thanva_InLobby") return;
+
         checkInLobbyTimer -= Time.deltaTime;
         if (checkInLobbyTimer < 0f)
         {
