@@ -19,9 +19,9 @@ public partial class GameLobbyManager : NetworkSingleton<GameLobbyManager>
     [SerializeField] public const string KEY_RELAY_JOIN_CODE = "RelayJoinCode";
     [SerializeField] public const string KEY_PLAYER_NAME = "PlayerName";
     [SerializeField] public const string KEY_STAGE_ID = "StageId";
-    [SerializeField] public const string KEY_TANK_ID = "0";
-    [SerializeField] public const string KEY_ARCHER_ID = "0";
-    [SerializeField] public const string KEY_CASTER_ID = "0";
+    [SerializeField] public const string KEY_TANK_ID = "TANK";
+    [SerializeField] public const string KEY_ARCHER_ID = "ARCHER";
+    [SerializeField] public const string KEY_CASTER_ID = "CASTER";
     private float heartbeatTimer;
     private float listLobbiesTimer;
     // +_______________________________________________
