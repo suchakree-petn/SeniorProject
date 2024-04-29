@@ -23,6 +23,7 @@ public partial class GameLobbyManager : NetworkSingleton<GameLobbyManager>
     [SerializeField] public const string KEY_ARCHER_ID = "ARCHER";
     [SerializeField] public const string KEY_CASTER_ID = "CASTER";
     private float heartbeatTimer;
+    private float refreshTimer;
     private float listLobbiesTimer;
     // +_______________________________________________
 
@@ -46,6 +47,7 @@ public partial class GameLobbyManager : NetworkSingleton<GameLobbyManager>
 
     private void Update() {
         //HandleRefreshLobbyList(); // Disabled Auto Refresh for testing with multiple builds
+        HandleLobbyRefresh();
         HandleLobbyHeartbeat();
         HandlePeriodicListLobbies();
     
@@ -81,9 +83,9 @@ public partial class GameLobbyManager : NetworkSingleton<GameLobbyManager>
             Data = new Dictionary<string, DataObject>
                 {
                     {KEY_STAGE_ID,new DataObject(DataObject.VisibilityOptions.Public,stage.ToString())},
-                    {KEY_TANK_ID,new DataObject(DataObject.VisibilityOptions.Public,"0")},
-                    {KEY_ARCHER_ID,new DataObject(DataObject.VisibilityOptions.Public,"0")},
-                    {KEY_CASTER_ID,new DataObject(DataObject.VisibilityOptions.Public,"0")}
+                    {KEY_TANK_ID,new DataObject(DataObject.VisibilityOptions.Public,"false")},
+                    {KEY_ARCHER_ID,new DataObject(DataObject.VisibilityOptions.Public,"false")},
+                    {KEY_CASTER_ID,new DataObject(DataObject.VisibilityOptions.Public,"false")}
                     
                 }
                 
@@ -149,6 +151,31 @@ public partial class GameLobbyManager : NetworkSingleton<GameLobbyManager>
             }
         }
     }
+    private async void HandleLobbyRefresh() {
+        // if (IsLobbyHost()) {
+        //     refreshTimer -= Time.deltaTime;
+        //     if (refreshTimer < 0f) {
+        //         float refreshTimerMax = 3f;
+        //         refreshTimer = refreshTimerMax;
+
+        //         Debug.Log("refresh");
+        //         RefreshLobbyList();
+        //     }
+        // }
+
+        if(joinedLobby != null) {
+            refreshTimer -= Time.deltaTime;
+            if(refreshTimer<0f){
+                float refreshTimerMax = 1.1f;
+                refreshTimer = refreshTimerMax;
+
+                Lobby lobby = await LobbyService.Instance.GetLobbyAsync(joinedLobby.Id);
+                joinedLobby = lobby;
+                RefreshLobbyList();
+            }
+        }
+    }
+
     public bool IsLobbyHost() {
         return joinedLobby != null && joinedLobby.HostId == AuthenticationService.Instance.PlayerId;
     }

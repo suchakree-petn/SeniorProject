@@ -82,7 +82,12 @@ public class GameMultiplayerManager : NetworkBehaviour {
         NetworkManager.Singleton.OnClientDisconnectCallback += NetworkManager_Server_OnClientDisconnectCallback;
         NetworkManager.Singleton.StartHost();
     }
-
+    public override void OnNetworkDespawn()
+    {
+        NetworkManager.Singleton.ConnectionApprovalCallback -= NetworkManager_ConnectionApprovalCallback;
+        NetworkManager.Singleton.OnClientConnectedCallback -= NetworkManager_OnClientConnectedCallback;
+        NetworkManager.Singleton.OnClientDisconnectCallback -= NetworkManager_Server_OnClientDisconnectCallback;
+    }
     private void NetworkManager_Server_OnClientDisconnectCallback(ulong clientId) {
         for (int i = 0; i < playerDataNetworkList.Count; i++) {
             PlayerData playerData = playerDataNetworkList[i];
@@ -276,20 +281,22 @@ public class GameMultiplayerManager : NetworkBehaviour {
 
         playerData.classId = classId;
 
+        playerDataNetworkList[playerDataIndex] = playerData;
+
         List<int> classSum = new List<int>();
         for(int i = 0;i<playerDataNetworkList.Count;i++){
             classSum.Add(playerDataNetworkList[i].classId);
         }
+        PlayerPrefs.SetString(GameLobbyManager.KEY_TANK_ID, "false");
+        PlayerPrefs.SetString(GameLobbyManager.KEY_ARCHER_ID, "false");
+        PlayerPrefs.SetString(GameLobbyManager.KEY_CASTER_ID, "false");
         foreach(int _classId in classSum) {
-            PlayerPrefs.SetString(GameLobbyManager.KEY_TANK_ID, "0");
-            PlayerPrefs.SetString(GameLobbyManager.KEY_ARCHER_ID, "0");
-            PlayerPrefs.SetString(GameLobbyManager.KEY_CASTER_ID, "0");
-            if (_classId == 0) {PlayerPrefs.SetString(GameLobbyManager.KEY_TANK_ID, "1");}
-            if (_classId == 1) {PlayerPrefs.SetString(GameLobbyManager.KEY_ARCHER_ID, "1");}
-            if (_classId == 2) {PlayerPrefs.SetString(GameLobbyManager.KEY_CASTER_ID, "1");}
+            Debug.Log("foreach "+_classId);
+            if (_classId == 0) {PlayerPrefs.SetString(GameLobbyManager.KEY_TANK_ID, "true");}
+            if (_classId == 1) {PlayerPrefs.SetString(GameLobbyManager.KEY_ARCHER_ID, "true");}
+            if (_classId == 2) {PlayerPrefs.SetString(GameLobbyManager.KEY_CASTER_ID, "true");}
         }
 
-        playerDataNetworkList[playerDataIndex] = playerData;
     }
 
     private bool IsClassAvailable(int classId) {

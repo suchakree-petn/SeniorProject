@@ -7,17 +7,17 @@ public class ConnectingUI : MonoBehaviour {
 
 
     private void Start() {
-        GameMultiplayerManager.Instance.OnTryingToJoinGame += KitchenGameMultiplayer_OnTryingToJoinGame;
-        GameMultiplayerManager.Instance.OnFailedToJoinGame += KitchenGameManager_OnFailedToJoinGame;
+        GameMultiplayerManager.Instance.OnTryingToJoinGame += GameManager_OnFailedToJoinGame;
+        GameMultiplayerManager.Instance.OnFailedToJoinGame += GameMultiplayer_OnTryingToJoinGame;
 
         Hide();
     }
 
-    private void KitchenGameManager_OnFailedToJoinGame(object sender, System.EventArgs e) {
+    private void GameManager_OnFailedToJoinGame(object sender, System.EventArgs e) {
         Hide();
     }
 
-    private void KitchenGameMultiplayer_OnTryingToJoinGame(object sender, System.EventArgs e) {
+    private void GameMultiplayer_OnTryingToJoinGame(object sender, System.EventArgs e) {
         Show();
     }
 
@@ -30,8 +30,8 @@ public class ConnectingUI : MonoBehaviour {
     }
 
     private void OnDestroy() {
-        GameMultiplayerManager.Instance.OnTryingToJoinGame -= KitchenGameMultiplayer_OnTryingToJoinGame;
-        GameMultiplayerManager.Instance.OnFailedToJoinGame -= KitchenGameManager_OnFailedToJoinGame;
+        GameMultiplayerManager.Instance.OnTryingToJoinGame -= GameManager_OnFailedToJoinGame;
+        GameMultiplayerManager.Instance.OnFailedToJoinGame -= GameMultiplayer_OnTryingToJoinGame;
     }
 
 }

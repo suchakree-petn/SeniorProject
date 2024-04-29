@@ -13,6 +13,7 @@ public class CharacterSelectUI : MonoBehaviour
 
     private void Awake() {
         mainMenuButton.onClick.AddListener(() => {
+            
             NetworkManager.Singleton.Shutdown();
             Loader.Load(Loader.Scene.LobbyScene);
         });

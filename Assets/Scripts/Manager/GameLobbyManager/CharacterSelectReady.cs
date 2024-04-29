@@ -42,6 +42,7 @@ public class CharacterSelectReady : NetworkBehaviour {
             }
         }
         Debug.Log("Players.Count "+GameLobbyManager.Instance.GetJoinedLobby().Players.Count);
+        
         if (allClientsReady && GameMultiplayerManager.Instance.GetPlayerDataNetworkList().Count == 3) {
             GameLobbyManager.Instance.DeleteLobby();
             Loader.LoadNetwork(Loader.Scene.GameScene);
