@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2845,6 +2845,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48e1b29877858124cac1e0badba689e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CarryToOtherScene: 1
   playerClassList:
   - {fileID: 8504291068338479810, guid: f4b53ebfb9dbaee40a1ac1b0a1a04fa3, type: 3}
   - {fileID: 2287088184699232494, guid: 25d5fabffcc5f644facc1961d7ffc071, type: 3}
@@ -5436,6 +5437,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1498216340104328055, guid: d95e7f8c8a47c254c877b86a02a30ef9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1557176904753265360, guid: d95e7f8c8a47c254c877b86a02a30ef9,
         type: 3}
       propertyPath: m_Enabled
@@ -5619,10 +5625,25 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1145533613}
     m_Modifications:
+    - target: {fileID: 4622066769039182589, guid: 2da3dcc22749e7f4280737786d898334,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4622338881456843899, guid: 2da3dcc22749e7f4280737786d898334,
         type: 3}
       propertyPath: m_Name
       value: Quantum Console (SRP)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4622338881456843899, guid: 2da3dcc22749e7f4280737786d898334,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4735113768296962263, guid: 2da3dcc22749e7f4280737786d898334,
+        type: 3}
+      propertyPath: _activateOnStartup
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4735202183287030787, guid: 2da3dcc22749e7f4280737786d898334,
         type: 3}
@@ -8002,7 +8023,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1675359928}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 17737e0516da2445b9b0077ae2bd9b4f, type: 3}
   m_Name: 
@@ -9867,7 +9888,6 @@ GameObject:
   - component: {fileID: 1935126170}
   - component: {fileID: 1935126169}
   - component: {fileID: 1935126168}
-  - component: {fileID: 1935126171}
   m_Layer: 5
   m_Name: ListViewPort
   m_TagString: Untagged
@@ -9947,18 +9967,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1935126166}
   m_CullTransparentMesh: 1
---- !u!114 &1935126171
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1935126166}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f268c269199a139458f6ed201e9bca57, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1990217848
 GameObject:
   m_ObjectHideFlags: 0

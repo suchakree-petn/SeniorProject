@@ -19,6 +19,8 @@ public class ShowClassUI : MonoBehaviour
         Debug.Log(lobby.Data[GameLobbyManager.KEY_TANK_ID].Value);
         if(bool.Parse(lobby.Data[GameLobbyManager.KEY_TANK_ID].Value)){
             Debug.Log("It trueeeeeeee");
+        }else{
+            Debug.Log("Cant parse");
         }
         selectTank.SetActive(bool.Parse(lobby.Data[GameLobbyManager.KEY_TANK_ID].Value));
         selectArcher.SetActive(bool.Parse(lobby.Data[GameLobbyManager.KEY_ARCHER_ID].Value));

@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CharacterClassSelectSingleUI : MonoBehaviour {
+public class CharacterClassSelectSingleUI : MonoBehaviour
+{
 
 
     [SerializeField] private int classId;
@@ -11,31 +12,41 @@ public class CharacterClassSelectSingleUI : MonoBehaviour {
     [SerializeField] private GameObject selectedGameObject;
 
 
-    private void Awake() {
-        GetComponent<Button>().onClick.AddListener(() => {
-            GameMultiplayerManager.Instance.ChangePlayerClass(classId);
-        });
+    private void Awake()
+    {
+
     }
 
-    private void Start() {
+    private void Start()
+    {
+        GetComponent<Button>().onClick.AddListener(() =>
+        {
+            GameMultiplayerManager.Instance.ChangePlayerClass(classId);
+        });
         GameMultiplayerManager.Instance.OnPlayerDataNetworkListChanged += GameMultiplayer_OnPlayerDataNetworkListChanged;
         // image.color = GameMultiplayerManager.Instance.GetPlayerClass(classId);
         UpdateIsSelected();
     }
 
-    private void GameMultiplayer_OnPlayerDataNetworkListChanged(object sender, System.EventArgs e) {
+    private void GameMultiplayer_OnPlayerDataNetworkListChanged(object sender, System.EventArgs e)
+    {
         UpdateIsSelected();
     }
 
-    private void UpdateIsSelected() {
-        if (GameMultiplayerManager.Instance.GetPlayerData().classId == classId) {
+    private void UpdateIsSelected()
+    {
+        if (GameMultiplayerManager.Instance.GetPlayerData().classId == classId)
+        {
             selectedGameObject.SetActive(true);
-        } else {
+        }
+        else
+        {
             selectedGameObject.SetActive(false);
         }
     }
 
-    private void OnDestroy() {
+    private void OnDestroy()
+    {
         GameMultiplayerManager.Instance.OnPlayerDataNetworkListChanged -= GameMultiplayer_OnPlayerDataNetworkListChanged;
     }
 }
