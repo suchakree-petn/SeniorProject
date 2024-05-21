@@ -8,27 +8,30 @@ using UnityEngine.UI;
 public class LobbyListSingleUI : MonoBehaviour {
 
     
-    [SerializeField] private TextMeshProUGUI lobbyNameText;
-    [SerializeField] private TextMeshProUGUI playersText;
-    [SerializeField] private TextMeshProUGUI stageText;
+    // [SerializeField] private TextMeshProUGUI lobbyNameText;
+    // [SerializeField] private TextMeshProUGUI playersText;
+    // [SerializeField] private TextMeshProUGUI stageText;
+    [SerializeField] private TextMeshPro lobbyNameText;
+    [SerializeField] private TextMeshPro playersText;
+    [SerializeField] private TextMeshPro stageText;
 
 
     private Lobby lobby;
 
 
     private void Awake() {
-        GetComponent<Button>().onClick.AddListener(() => {
-            GameLobbyManager.Instance.JoinWithId(lobby.Id);
-            GetComponent<Button>().Select();
-        });
+
     }
 
     public void UpdateLobby(Lobby lobby) {
         this.lobby = lobby;
 
         lobbyNameText.text = lobby.Name;
-        playersText.text = lobby.Players.Count + "/" + lobby.MaxPlayers;
-        stageText.text = lobby.Data[GameLobbyManager.KEY_STAGE_ID].Value;
+        playersText.text = "Member: "+ lobby.Players.Count + "/" + lobby.MaxPlayers;
+        stageText.text = "Map: "+ lobby.Data[GameLobbyManager.KEY_STAGE_ID].Value;
+    }
+    public void JoinLobby(){
+        GameLobbyManager.Instance.JoinWithId(lobby.Id);
     }
 
 

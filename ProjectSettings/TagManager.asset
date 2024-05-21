@@ -22,6 +22,7 @@ TagManager:
   - Enemy
   - Hitbox
   - CriticalHitbox
+  - Selectable
   layers:
   - Default
   - TransparentFX
