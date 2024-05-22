@@ -16,6 +16,7 @@ public class LobbyUI : MonoBehaviour
     [SerializeField] private Button joinCodeButton;
     [SerializeField] private Button nextButton;
     [SerializeField] private Button backButton;
+    [SerializeField] private Button mainMenuButton;
     [SerializeField] private TMP_InputField joinCodeInputField;
     [SerializeField] private TMP_InputField playerNameInputField;
     [SerializeField] private LobbyCreateUI lobbyCreateUI;
@@ -27,7 +28,17 @@ public class LobbyUI : MonoBehaviour
     public int lobbyPages = 0;
     double lobbyPageAmount = 1;
 
-
+    public void SetActiveUILobby(bool active){
+        mainMenuButton.gameObject.SetActive(active);
+        createLobbyButton.gameObject.SetActive(active);
+        quickJoinButton.gameObject.SetActive(active);
+        joinCodeButton.gameObject.SetActive(active);
+        nextButton.gameObject.SetActive(active);
+        backButton.gameObject.SetActive(active);
+        joinCodeInputField.gameObject.SetActive(active);
+        playerNameInputField.gameObject.SetActive(active);
+        pageText.gameObject.SetActive(active);
+    }
 
     private void Awake()
     {

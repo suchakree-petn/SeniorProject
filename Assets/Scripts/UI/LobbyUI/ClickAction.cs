@@ -11,8 +11,6 @@ public class ClickAction : MonoBehaviour
             RaycastHit rhInfo;
             bool didHit = Physics.Raycast(toMouse,out rhInfo,500.0f);
             if(didHit){
-                Debug.Log(rhInfo.collider.name + " . . "+ rhInfo.point);
-                
                 if(rhInfo.transform.gameObject.TryGetComponent<LobbyListSingleUI>(out LobbyListSingleUI lobbyGameObject)){
                     lobbyGameObject.JoinLobby();
                 }

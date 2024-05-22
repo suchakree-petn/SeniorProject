@@ -42,13 +42,6 @@ public class GameMultiplayerManager : NetworkSingleton<GameMultiplayerManager>
         playerDataNetworkList.OnListChanged += PlayerDataNetworkList_OnListChanged;
     }
 
-    // private void Start() {
-    //     if (!playMultiplayer) {
-    //         // Singleplayer
-    //         StartHost();
-    //         Loader.LoadNetwork(Loader.Scene.GameScene);
-    //     }
-    // }
     public string GetPlayerName()
     {
         return playerName;
