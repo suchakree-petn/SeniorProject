@@ -29,9 +29,6 @@ public class ArrowManiac : NetworkBehaviour
         Transform root = other.transform.root;
 
         if (root.TryGetComponent<PlayerController>(out _) || !other.isTrigger) return;
-        Debug.Log("1"+root.TryGetComponent(out IDamageable _));
-        Debug.Log("2"+root.TryGetComponent(out EnemyController _));
-        Debug.Log("3"+other.CompareTag("Hitbox"));
 
         if (root.TryGetComponent(out IDamageable damageable)
             && root.TryGetComponent(out EnemyController _)

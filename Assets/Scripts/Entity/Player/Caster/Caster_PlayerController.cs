@@ -72,7 +72,7 @@ public partial class Caster_PlayerController : PlayerController
 
 
 
-    private void HealOrbAnimation()
+    private void HealOrbAnimation(ServerRpcParams serverRpcParams = default)
     {
         if (caster_playerWeapon.IsReadyToUse)
         {

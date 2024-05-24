@@ -90,7 +90,7 @@ public class Spider_EnemyController : EnemyController
         base.TakeDamage_ClientRpc(damage);
 
     }
-    [ServerRpc]
+    [ServerRpc(RequireOwnership = false)]
     public override void TakeDamage_ServerRpc(AttackDamage damage)
     {
         Debug.Log($"Before: {enemyHealth.CurrentHealth}");

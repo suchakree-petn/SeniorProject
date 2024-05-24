@@ -43,7 +43,7 @@ public class Archer_PlayerWeapon : PlayerWeapon
             NormalAttack();
             IsDrawing = false;
             DrawPower = 0;
-            OnUseWeapon?.Invoke();
+            OnUseWeapon?.Invoke(new());
         }
 
     }
@@ -187,7 +187,7 @@ public class Archer_PlayerWeapon : PlayerWeapon
     protected override void OnEnable()
     {
         playerController.OnPlayerCameraModeChanged += SetWeaponHolderPosition;
-        OnUseWeapon += () => StartWeaponCooldown(BowWeaponData.AttackTimeInterval);
+        OnUseWeapon += (serverRpcAttribute) => StartWeaponCooldown(BowWeaponData.AttackTimeInterval);
         if (!IsOwner) return;
 
 

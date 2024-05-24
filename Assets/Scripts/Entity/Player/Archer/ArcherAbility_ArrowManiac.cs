@@ -40,11 +40,18 @@ public class ArcherAbility_ArrowManiac : PlayerAbility
 
         yield return new WaitForSeconds(2);
 
-        foreach (Transform arrow in ArrowManiac_List)
-        {
-            arrow.GetComponent<NetworkObject>().Despawn();
-            Destroy(arrow.gameObject);
-        }
+        ClearOldArrow_ServerRpc();
+        ArrowManiac_List.Clear();
+        ArrowManiac_Destination.Clear();
+        playerController.SetCanPlayerMove(true);
+        Debug.Log($"Finish {archerAbilityData.Name} ");
+
+    }
+
+
+    [ServerRpc(RequireOwnership = false)]
+    private void ClearOldArrow_ServerRpc()
+    {
         ArrowManiac[] allArrows = FindObjectsOfType<ArrowManiac>(true);
         foreach (ArrowManiac oldArrow in allArrows)
         {
@@ -55,40 +62,49 @@ public class ArcherAbility_ArrowManiac : PlayerAbility
             }
             Destroy(oldArrow.gameObject);
         }
-        ArrowManiac_List.Clear();
-        ArrowManiac_Destination.Clear();
-        playerController.SetCanPlayerMove(true);
-        Debug.Log($"Finish {archerAbilityData.Name} ");
-
     }
 
     [ServerRpc(RequireOwnership = false)]
-    private void SpawnArrowManiac_ServerRpc()
+    private void SpawnArrowManiac_ServerRpc(ServerRpcParams serverRpcParams = default)
     {
         Debug.Log($"Spawn Arrow");
-        Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
         foreach (Transform child in ArrowManiacSpawnGroup.transform)
         {
             Transform arrow = Instantiate(archerAbilityData.ArrowManiac_prf, child.position, child.rotation);
-            arrow.GetComponent<NetworkObject>().SpawnWithOwnership(UserClientId);
+            arrow.GetComponent<NetworkObject>().Spawn(true);
             ArrowManiac_List.Add(arrow);
-            Vector3 direction;
-            if (Physics.Raycast(ray, out RaycastHit hit, archerAbilityData.Distance, TargetLayer, QueryTriggerInteraction.Collide))
-            {
-                direction = (hit.point - child.position).normalized;
-            }
-            else
-            {
-                Vector3 endPoint = Camera.main.transform.position + Camera.main.transform.forward * archerAbilityData.Distance;
-                direction = (endPoint - child.position).normalized;
-            }
-            arrow.forward = direction;
-            ArrowManiac_Destination.Add(direction);
+            CalcDirection_ClientRpc(serverRpcParams.Receive.SenderClientId, child.position);
         }
         CancelInvoke(nameof(FireArrowManiac));
         InvokeRepeating(nameof(FireArrowManiac), 0.3f, archerAbilityData.TimeInterval);
     }
 
+    [ClientRpc]
+    private void CalcDirection_ClientRpc(ulong clientId, Vector3 childPos)
+    {
+        if (NetworkManager.LocalClientId != clientId) return;
+        Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
+
+        Vector3 direction;
+        if (Physics.Raycast(ray, out RaycastHit hit, archerAbilityData.Distance, TargetLayer, QueryTriggerInteraction.Collide))
+        {
+            direction = (hit.point - childPos).normalized;
+        }
+        else
+        {
+            Vector3 endPoint = Camera.main.transform.position + Camera.main.transform.forward * archerAbilityData.Distance;
+            direction = (endPoint - childPos).normalized;
+        }
+        SendDirection_ServerRpc(direction);
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    private void SendDirection_ServerRpc(Vector3 direction)
+    {
+        ArrowManiac_List[^1].forward = direction;
+        ArrowManiac_Destination.Add(direction);
+
+    }
     private void FireArrowManiac()
     {
         if (ArrowManiac_List.Count <= 0)

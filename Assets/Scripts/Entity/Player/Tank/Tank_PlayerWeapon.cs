@@ -32,7 +32,7 @@ public class Tank_PlayerWeapon : PlayerWeapon
         if (context.canceled)
         {
             IsSlash = false;
-            OnUseWeapon?.Invoke();
+            OnUseWeapon?.Invoke(new());
         }
 
     }
@@ -118,7 +118,7 @@ public class Tank_PlayerWeapon : PlayerWeapon
 
     protected override void OnEnable()
     {
-        OnUseWeapon += () => StartWeaponCooldown(SwordWeaponData.AttackTimeInterval);
+        OnUseWeapon += (serverRpcParams) => StartWeaponCooldown(SwordWeaponData.AttackTimeInterval);
     }
 
 
