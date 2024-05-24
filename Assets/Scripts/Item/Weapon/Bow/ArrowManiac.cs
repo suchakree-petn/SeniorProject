@@ -15,7 +15,7 @@ public class ArrowManiac : NetworkBehaviour
         if (!IsServer) return;
         hitBox.includeLayers = TargetLayer;
 
-        Destroy(gameObject, 5);
+
     }
     public virtual void OnTriggerEnter(Collider other)
     {
@@ -26,33 +26,20 @@ public class ArrowManiac : NetworkBehaviour
             SetKinematic();
             return;
         }
-        if ((ulong)AttackDamage.AttackerClientId != NetworkManager.Singleton.LocalClientId)
-        {
-            return;
-        }
-
-        if (other.transform.root.TryGetComponent<PlayerController>(out _) || !other.isTrigger) return;
-
         Transform root = other.transform.root;
+
+        if (root.TryGetComponent<PlayerController>(out _) || !other.isTrigger) return;
+        Debug.Log("1"+root.TryGetComponent(out IDamageable _));
+        Debug.Log("2"+root.TryGetComponent(out EnemyController _));
+        Debug.Log("3"+other.CompareTag("Hitbox"));
+
         if (root.TryGetComponent(out IDamageable damageable)
-            && other.TryGetComponent(out EnemyController _)
-            && other.CompareTag("Hitbox")
-            || other.CompareTag("CriticalHitbox"))
+            && root.TryGetComponent(out EnemyController _)
+            && other.CompareTag("Hitbox"))
         {
-            if (other.CompareTag("CriticalHitbox"))
-            {
-                AttackDamage.Damage *= 1.5f;
-                Debug.LogWarning("Critical");
-                DoDamage(damageable);
-                hitBox.enabled = false;
-
-                Destroy(gameObject, 1);
-                return;
-
-            }
+            Debug.Log("Do damage to: " + root.name);
             DoDamage(damageable);
             hitBox.enabled = false;
-            Destroy(gameObject, 1);
             return;
         }
     }
@@ -65,5 +52,11 @@ public class ArrowManiac : NetworkBehaviour
     public virtual void DoDamage(IDamageable damageable)
     {
         damageable.TakeDamage_ServerRpc(AttackDamage);
+    }
+    private void NetworkDespawn()
+    {
+        Debug.Log("Network Despawn");
+        GetComponent<NetworkObject>().Despawn();
+        Destroy(gameObject);
     }
 }

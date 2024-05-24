@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -17,7 +18,7 @@ public class CharacterSelectReady : NetworkBehaviour
 
     private Dictionary<ulong, bool> playerReadyDictionary;
 
-
+    public bool Test_One_Player;
     private void Awake()
     {
         Instance = this;
@@ -39,15 +40,26 @@ public class CharacterSelectReady : NetworkBehaviour
         playerReadyDictionary[serverRpcParams.Receive.SenderClientId] = true;
 
         bool allClientsReady = true;
-        foreach (ulong clientId in NetworkManager.Singleton.ConnectedClientsIds)
+        if (!Test_One_Player)
         {
-            if (!playerReadyDictionary.ContainsKey(clientId) || !playerReadyDictionary[clientId])
+            foreach (ulong clientId in NetworkManager.Singleton.ConnectedClientsIds)
             {
-                // This player is NOT ready
-                allClientsReady = false;
-                break;
+                if (!playerReadyDictionary.ContainsKey(clientId) || !playerReadyDictionary[clientId])
+                {
+                    // This player is NOT ready
+                    allClientsReady = false;
+                    break;
+                }
             }
         }
+        else
+        {
+            // Debug with one player
+            NetworkManager.SceneManager.OnLoadEventCompleted += OnNetworkManagerOnLoadEventCompleted;
+            Loader.LoadNetwork(Loader.Scene.GameScene);
+            return;
+        }
+
         Debug.Log("Players.Count " + GameLobbyManager.Instance.GetJoinedLobby().Players.Count);
 
         if (allClientsReady && GameMultiplayerManager.Instance.GetPlayerDataNetworkList().Count == 3)

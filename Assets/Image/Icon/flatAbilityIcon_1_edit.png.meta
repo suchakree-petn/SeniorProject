@@ -551,7 +551,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: flatAbilityIcon_1_edit_21
+      name: Icon_Archer_VineTrap
       rect:
         serializedVersion: 2
         x: 50
@@ -1349,7 +1349,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Icon_Archer_BowNA
+      name: Icon_Archer_ArrowManiac
       rect:
         serializedVersion: 2
         x: 450
@@ -2220,7 +2220,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Icon_Archer_BowNA: -1180721212
+      Icon_Archer_ArrowManiac: -1180721212
+      Icon_Archer_VineTrap: -1819282288
       flatAbilityIcon_1_edit_0: 1092816233
       flatAbilityIcon_1_edit_1: 771814061
       flatAbilityIcon_1_edit_10: 2075830866
@@ -2235,7 +2236,6 @@ TextureImporter:
       flatAbilityIcon_1_edit_19: 1215664504
       flatAbilityIcon_1_edit_2: -2099968008
       flatAbilityIcon_1_edit_20: -1782880358
-      flatAbilityIcon_1_edit_21: -1819282288
       flatAbilityIcon_1_edit_22: 810807483
       flatAbilityIcon_1_edit_23: 2145333007
       flatAbilityIcon_1_edit_24: 1606289593

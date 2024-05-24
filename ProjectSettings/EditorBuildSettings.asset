@@ -25,10 +25,7 @@ EditorBuildSettings:
     guid: 341d6855baf7af24db797783e8516ce2
   - enabled: 1
     path: Assets/Scenes/Tutor/Tutor_Map_Tester.unity
-    guid: de44b7bdd81d87f419e82cc9d5209209
-  - enabled: 1
-    path: Assets/Scenes/Tutor/Map_Tester_Tutor.unity
-    guid: 65a9441704d1c9247912c2718a9a734a
+    guid: 4738472301c279b40b3e31fb5b8bacd4
   - enabled: 1
     path: Assets/Scenes/Thanva/Thanva_InLobby.unity
     guid: 677f306f9f1d7ec49bc2a9f458257f44

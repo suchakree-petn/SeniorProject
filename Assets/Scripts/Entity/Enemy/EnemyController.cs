@@ -16,6 +16,7 @@ public class EnemyController : NetworkBehaviour, IDamageable
     [SerializeField] protected BehaviourTreeInstance behaviourTreeInstance;
 
     public Transform target;
+    public bool CanMove = true;
 
     [Header("Reference")]
     public EnemyHealth enemyHealth;
@@ -35,7 +36,7 @@ public class EnemyController : NetworkBehaviour, IDamageable
     {
         if (!IsOwner || !IsServer) return;
         target = PlayerManager.Instance.GetClosestPlayerFrom(transform.position);
-
+        CanMove = true;
     }
 
     public override void OnNetworkDespawn()
@@ -70,7 +71,6 @@ public class EnemyController : NetworkBehaviour, IDamageable
             direction = (target.position - transform.position).normalized;
         }
         enemyRb.transform.rotation = Quaternion.LookRotation(direction);
-
     }
 
     protected virtual void OnEnable()
@@ -102,7 +102,23 @@ public class EnemyController : NetworkBehaviour, IDamageable
             critHitBox.enabled = false;
         }
     }
+    public void StopMoving()
+    {
+        if (!IsOwner) return;
+        Debug.Log("Stop moving");
+        CanMove = false;
+        agent.isStopped = true;
+        animator.SetFloat("VelocityZ", 0);
 
+    }
+
+    public void Moving()
+    {
+        if (!IsOwner) return;
+        Debug.Log("Moving");
+        CanMove = true;
+        agent.isStopped = false;
+    }
     [ServerRpc]
     public virtual void TakeHeal_ServerRpc(AttackDamage damage)
     {

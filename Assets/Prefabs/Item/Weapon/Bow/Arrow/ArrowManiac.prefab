@@ -163,6 +163,21 @@ PrefabInstance:
       propertyPath: m_UseGravity
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4269340218531131940, guid: 849c39f219f0730498e338d46b9b8283,
+        type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6851957407499613674, guid: 849c39f219f0730498e338d46b9b8283,
+        type: 3}
+      propertyPath: m_Radius
+      value: 1.04
+      objectReference: {fileID: 0}
+    - target: {fileID: 6851957407499613674, guid: 849c39f219f0730498e338d46b9b8283,
+        type: 3}
+      propertyPath: m_Center.z
+      value: 0.04
+      objectReference: {fileID: 0}
     - target: {fileID: 6938922321965922709, guid: 849c39f219f0730498e338d46b9b8283,
         type: 3}
       propertyPath: m_Name
@@ -173,7 +188,8 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7712574691992090605, guid: 849c39f219f0730498e338d46b9b8283, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -237,7 +253,7 @@ MonoBehaviour:
     AttackerClientId: 11
   TargetLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   arrowRb: {fileID: 8061907753506239663}
   hitBox: {fileID: 849230728615703393}
 --- !u!54 &8061907753506239663 stripped

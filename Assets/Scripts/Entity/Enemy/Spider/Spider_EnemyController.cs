@@ -25,7 +25,7 @@ public class Spider_EnemyController : EnemyController
     private void Update()
     {
         if (!IsServer || !IsSpawned || enemyHealth.CurrentHealth <= 0) return;
-        if (Vector3.Distance(transform.position, target.position) > attackRange + 2 && isFinishAttack)
+        if (Vector3.Distance(transform.position, target.position) > attackRange + 2 && isFinishAttack && CanMove)
         {
             target = PlayerManager.Instance.GetClosestPlayerFrom(transform.position);
             agent.isStopped = false;
@@ -33,8 +33,10 @@ public class Spider_EnemyController : EnemyController
         }
         else
         {
-            // Attack
             agent.isStopped = true;
+
+            if (!CanMove) return;
+            // Attack
             animator.SetFloat("VelocityZ", Mathf.Lerp(animator.GetFloat("VelocityZ"), 0, Time.deltaTime * 10));
             if (!isReadyToAttack) return;
             NormalAttack();

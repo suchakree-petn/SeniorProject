@@ -58,7 +58,6 @@ public class PlayerController : NetworkBehaviour, IDamageable
         mouseMovement.LockMouseCursor();
         SetCameraMode(playerCameraMode, false);
 
-
     }
 
     public override void OnNetworkDespawn()
