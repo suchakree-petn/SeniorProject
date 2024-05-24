@@ -1,4 +1,5 @@
 using System;
+using Unity.Netcode;
 using UnityEngine;
 
 public class EnemyHealth : EntityHealth
@@ -34,13 +35,25 @@ public class EnemyHealth : EntityHealth
             }
         }
     }
+    public EnemyHealth_UI GetEnemyHealth_UI()
+    {
+        return enemyHealth_UI;
+    }
     private void OnEnable()
     {
         InitHp(enemyController.EnemyCharacterData);
-        OnEnemyTakeDamage += (AttackDamage attackDamage) => enemyHealth_UI.SetHpBar(CurrentHealth/MaxHp);
+        OnEnemyTakeDamage += OnEnemyTakeDamageHandler_ClientRpc;
     }
+
+    [ClientRpc]
+    private void OnEnemyTakeDamageHandler_ClientRpc(AttackDamage attackDamage)
+    {
+        enemyHealth_UI.SetHpBar(CurrentHealth / MaxHp);
+    }
+
     private void OnDisable()
     {
+        OnEnemyTakeDamage -= OnEnemyTakeDamageHandler_ClientRpc;
 
     }
 }

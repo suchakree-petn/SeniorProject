@@ -80,15 +80,14 @@ public class EnemyController : NetworkBehaviour, IDamageable
     [ClientRpc]
     public virtual void TakeDamage_ClientRpc(AttackDamage damage)
     {
-        if (!IsOwner) return;
+        // if (!IsOwner) return;
         enemyHealth.TakeDamage(damage, EnemyCharacterData.GetDefense());
-
     }
 
     [ClientRpc]
     public virtual void TakeHeal_ClientRpc(AttackDamage damage)
     {
-        if (!IsOwner) return;
+        // if (!IsOwner) return;
         enemyHealth.TakeHeal(damage);
     }
 
