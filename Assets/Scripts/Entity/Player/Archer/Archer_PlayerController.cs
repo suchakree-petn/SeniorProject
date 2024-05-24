@@ -4,6 +4,8 @@ public partial class Archer_PlayerController : PlayerController
 {
     [Header("Archer Reference")]
     [SerializeField] protected Archer_PlayerWeapon archer_playerWeapon;
+    [SerializeField] protected ArcherAbility_ArrowManiac archerAbility_ArrowManiac;
+    [SerializeField] protected ArcherAbility_VineTrap archerAbility_VineTrap;
 
 
     protected override void Start()
@@ -11,6 +13,9 @@ public partial class Archer_PlayerController : PlayerController
         if (!IsOwner) return;
 
         base.Start();
+        AbilityUIManager.Instance.OnSetAbilityIcon_E?.Invoke(archerAbility_ArrowManiac.archerAbilityData.Icon);
+        AbilityUIManager.Instance.OnSetAbilityIcon_Q?.Invoke(archerAbility_VineTrap.archerAbilityData.Icon);
+
     }
 
     protected override void Update()

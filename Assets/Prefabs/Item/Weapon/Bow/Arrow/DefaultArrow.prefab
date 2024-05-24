@@ -227,7 +227,7 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
@@ -270,9 +270,9 @@ MonoBehaviour:
     IsCriticalable: 0
     Damage: 19
     AttackerClientId: 11
-  mask:
+  TargetLayer:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 128
   arrowRb: {fileID: 4269340218531131940}
   hitBox: {fileID: 6851957407499613674}
   vfx_Hit: {fileID: 2944396702758532163, guid: e190bf97c041e58448af6b043116cba0, type: 3}

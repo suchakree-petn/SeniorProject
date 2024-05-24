@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43c8d0a7ae4b9aa478cf90c16f9af847, type: 3}
+  m_Name: VineTrap
+  m_EditorClassIdentifier: 
+  Name: Vine Trap
+  Description: Throw a trap forward. Monster that step on this trap can not move
+    for 5 sec.
+  Cooldown: 5
+  Icon: {fileID: -1819282288, guid: e6c754a4d66ab27408be1a826ebacdb3, type: 3}
+  VineTrap_prf: {fileID: 7129014563926262699, guid: 64e431524f7aa6c4db7f63513f5d1a84,
+    type: 3}
+  StopMoveDuration: 5
+  PopOffset: 1
+  PopDuration: 0.3
+  ThrowForce: 10

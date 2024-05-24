@@ -12,10 +12,6 @@ public abstract class Arrow : MonoBehaviour
     [SerializeField] private GameObject vfx_Hit;
     private GameObject vfx_HitInstance;
 
-    private void Awake()
-    {
-        hitBox.includeLayers = TargetLayer;
-    }
     protected virtual void Start()
     {
         Destroy(gameObject, 1);
@@ -37,7 +33,7 @@ public abstract class Arrow : MonoBehaviour
 
         Transform root = other.transform.root;
         if (root.TryGetComponent(out IDamageable damageable)
-            && other.TryGetComponent(out EnemyController enemyController)
+            && root.TryGetComponent(out EnemyController _)
             && other.CompareTag("Hitbox")
             || other.CompareTag("CriticalHitbox"))
         {
