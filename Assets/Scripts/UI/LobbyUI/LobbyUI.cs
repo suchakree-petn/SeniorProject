@@ -20,8 +20,6 @@ public class LobbyUI : MonoBehaviour
     [SerializeField] private TMP_InputField joinCodeInputField;
     [SerializeField] private TMP_InputField playerNameInputField;
     [SerializeField] private LobbyCreateUI lobbyCreateUI;
-    [SerializeField] private Transform lobbyContainer;
-    [SerializeField] private Transform lobbyTemplate;
     [SerializeField] private Transform paperList;
     [SerializeField] private TextMeshProUGUI pageText;
     
@@ -69,7 +67,7 @@ public class LobbyUI : MonoBehaviour
             GameLobbyManager.Instance.RefreshLobbyList();
         });
 
-        lobbyTemplate.gameObject.SetActive(false);
+        SetActiveUILobby(false);
     }
 
     private void Start()
