@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Net.Http.Headers;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -8,11 +9,15 @@ public partial class Tank_PlayerController : PlayerController
 {
     [Header("Tank Reference")]
     [SerializeField] protected Tank_PlayerWeapon tank_playerWeapon;
+    [SerializeField] protected TankAbility_BarbarianShout tankAbility_BarbarianShout;
+    [SerializeField] protected TankAbility_GroundSmash tankAbility_GroundSmash;
 
 
     protected override void Start()
     {
         base.Start();
+        AbilityUIManager.Instance.OnSetAbilityIcon_E?.Invoke(tankAbility_GroundSmash.AbilityData.Icon);
+        AbilityUIManager.Instance.OnSetAbilityIcon_Q?.Invoke(tankAbility_BarbarianShout.AbilityData.Icon);
     }
 
     protected override void Update()
@@ -50,7 +55,7 @@ public partial class Tank_PlayerController : PlayerController
         playerInputManager.Attack.canceled -= tank_playerWeapon.UseWeapon;
 
     }
-    
+
     public void SetWeaponHolderPosition(PlayerCameraMode prev, PlayerCameraMode current)
     {
         if (current == PlayerCameraMode.Focus)
@@ -114,7 +119,9 @@ public partial class Tank_PlayerController : PlayerController
             playerAnimation.SetMoveVelocityZ(finalVelocity.z);
         }
     }
-
+    public Tank_PlayerWeapon GetTank_PlayerWeapon(){
+        return tank_playerWeapon;
+    }
     protected override void OnEnable()
     {
         base.OnEnable();

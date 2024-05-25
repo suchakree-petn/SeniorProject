@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class ArcherAbility_ArrowManiac : PlayerAbility
 {
-    public ulong UserClientId;
     public ArcherAbilityData_ArrowManiac archerAbilityData;
     public List<Transform> ArrowManiac_List;
     public List<Vector3> ArrowManiac_Destination;
@@ -15,7 +14,6 @@ public class ArcherAbility_ArrowManiac : PlayerAbility
     {
         Debug.Log($"{archerAbilityData.Name} activated");
         Archer_PlayerController playerController = GetComponent<Archer_PlayerController>();
-        UserClientId = playerController.OwnerClientId;
         TargetLayer = playerController.PlayerCharacterData.TargetLayer;
 
         StartCoroutine(ActiveDuration(archerAbilityData.Duration, playerController));
