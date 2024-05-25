@@ -8,14 +8,17 @@ public partial class Caster_PlayerController : PlayerController
 {
     [Header("Caster Reference")]
     [SerializeField] protected Caster_PlayerWeapon caster_playerWeapon;
+    [SerializeField] protected CasterAbility_BlessingShield casterAbility_BlessingShield;
+    [SerializeField] protected CasterAbility_PowerUp casterAbility_PowerUp;
 
 
     protected override void Start()
     {
-        if (!IsOwner) return;
+        // if (!IsOwner) return;
 
         base.Start();
-
+        AbilityUIManager.Instance.OnSetAbilityIcon_E?.Invoke(casterAbility_BlessingShield.AbilityData.Icon);
+        AbilityUIManager.Instance.OnSetAbilityIcon_Q?.Invoke(casterAbility_PowerUp.AbilityData.Icon);
     }
 
     protected override void Update()
@@ -109,7 +112,10 @@ public partial class Caster_PlayerController : PlayerController
         }
     }
 
-
+    public Caster_PlayerWeapon GetCaster_PlayerWeapon()
+    {
+        return caster_playerWeapon;
+    }
 
     protected override void OnEnable()
     {

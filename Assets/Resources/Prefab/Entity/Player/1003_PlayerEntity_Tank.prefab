@@ -2814,7 +2814,7 @@ PrefabInstance:
     - target: {fileID: 8174493298335311036, guid: 8468fa4c8e09695459a2f7572471e55b,
         type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 3483765102
+      value: 86899938
       objectReference: {fileID: 0}
     - target: {fileID: 8251370818320174555, guid: 8468fa4c8e09695459a2f7572471e55b,
         type: 3}
@@ -2991,6 +2991,7 @@ MonoBehaviour:
   HitboxCollider: {fileID: 0}
   tank_playerWeapon: {fileID: 7727020092802202058}
   tankAbility_BarbarianShout: {fileID: 4288378132987168278}
+  tankAbility_GroundSmash: {fileID: -2883226893010950193}
 --- !u!114 &7727020092802202058
 MonoBehaviour:
   m_ObjectHideFlags: 0

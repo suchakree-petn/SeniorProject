@@ -404,7 +404,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: flatAbilityIcon_1_edit_14
+      name: Icon_Caster_BlessingShield
       rect:
         serializedVersion: 2
         x: 200
@@ -740,7 +740,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: flatAbilityIcon_1_edit_30
+      name: Icon_Caster_PowerUp
       rect:
         serializedVersion: 2
         x: 0
@@ -2222,6 +2222,8 @@ TextureImporter:
     nameFileIdTable:
       Icon_Archer_ArrowManiac: -1180721212
       Icon_Archer_VineTrap: -1819282288
+      Icon_Caster_BlessingShield: -66487537
+      Icon_Caster_PowerUp: -1262289715
       Icon_Tank_BarbarianShout: -1949747907
       Icon_Tank_GroundSmash: -2102628041
       flatAbilityIcon_1_edit_0: 1092816233
@@ -2230,7 +2232,6 @@ TextureImporter:
       flatAbilityIcon_1_edit_11: 816807065
       flatAbilityIcon_1_edit_12: -57134362
       flatAbilityIcon_1_edit_13: -103047085
-      flatAbilityIcon_1_edit_14: -66487537
       flatAbilityIcon_1_edit_15: -296411308
       flatAbilityIcon_1_edit_16: 841771681
       flatAbilityIcon_1_edit_17: -572699860
@@ -2246,7 +2247,6 @@ TextureImporter:
       flatAbilityIcon_1_edit_28: 506530134
       flatAbilityIcon_1_edit_29: -1644348479
       flatAbilityIcon_1_edit_3: -1971243435
-      flatAbilityIcon_1_edit_30: -1262289715
       flatAbilityIcon_1_edit_31: 210472078
       flatAbilityIcon_1_edit_32: -1910079574
       flatAbilityIcon_1_edit_33: -55591117

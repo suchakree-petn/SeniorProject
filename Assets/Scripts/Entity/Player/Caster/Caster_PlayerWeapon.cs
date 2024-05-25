@@ -10,6 +10,7 @@ public class Caster_PlayerWeapon : PlayerWeapon
     public MagicItemConfig MagicItemConfig = new();
     private bool isHasLockTarget;
     private ulong currentLockTargetClientId;
+    public Transform currentLockTargetTransform;
     private Vector3 currentLockTargetPosition;
 
     [Header("Caster Reference")]
@@ -19,7 +20,7 @@ public class Caster_PlayerWeapon : PlayerWeapon
 
     public override void UseWeapon(InputAction.CallbackContext context)
     {
-        if(!IsOwner) return;
+        if (!IsOwner) return;
         if (!IsReadyToUse) return;
 
         if (firePointTransform == null)
@@ -57,7 +58,7 @@ public class Caster_PlayerWeapon : PlayerWeapon
         {
             isHasLockTarget = true;
             PlayerUIManager.Instance.SetLockTargetState(true);
-            PlayerUIManager.Instance.SetLockTargetPosition(currentLockTargetPosition,true);
+            PlayerUIManager.Instance.SetLockTargetPosition(currentLockTargetPosition, false);
         }
         else
         {
@@ -75,6 +76,7 @@ public class Caster_PlayerWeapon : PlayerWeapon
             {
                 currentLockTargetClientId = playerController.OwnerClientId;
                 currentLockTargetPosition = hit.collider.bounds.center;
+                currentLockTargetTransform = playerController.transform;
                 return true;
             }
         }
@@ -109,6 +111,10 @@ public class Caster_PlayerWeapon : PlayerWeapon
         firePointHolderTransform.forward = Camera.main.transform.forward;
     }
 
+    public ulong GetCurrentLockTargetClientId()
+    {
+        return currentLockTargetClientId;
+    }
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(currentLockTargetPosition, MagicItemConfig.SphereCastRadius);
