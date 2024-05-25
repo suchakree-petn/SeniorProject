@@ -1,6 +1,4 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using TheKiwiCoder;
 using Unity.Netcode;
 using Unity.Netcode.Components;
@@ -17,6 +15,8 @@ public class EnemyController : NetworkBehaviour, IDamageable
 
     public Transform target;
     public bool CanMove = true;
+    public bool IsTaunted = false;
+    public bool IsStun = false;
 
     [Header("Reference")]
     public EnemyHealth enemyHealth;
@@ -111,6 +111,39 @@ public class EnemyController : NetworkBehaviour, IDamageable
 
     }
 
+    [ServerRpc(RequireOwnership = false)]
+    public void StartTaunt_ServerRpc(NetworkObjectReference tauntTarget)
+    {
+        Debug.Log(gameObject.name + " are taunted");
+        if (tauntTarget.TryGet(out NetworkObject networkObject))
+        {
+            target = networkObject.transform;
+            IsTaunted = true;
+        }
+
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    public void FinishTaunt_ServerRpc()
+    {
+        target = PlayerManager.Instance.GetClosestPlayerFrom(transform.position);
+        IsTaunted = false;
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    public void StartStun_ServerRpc()
+    {
+        Debug.Log(gameObject.name + " are stun");
+        StopMoving();
+        IsStun = true;
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    public void FinishStun_ServerRpc()
+    {
+        Moving();
+        IsStun = false;
+    }
     public void Moving()
     {
         if (!IsOwner) return;

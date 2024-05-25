@@ -677,7 +677,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: flatAbilityIcon_1_edit_27
+      name: Icon_Tank_GroundSmash
       rect:
         serializedVersion: 2
         x: 350
@@ -2063,7 +2063,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: flatAbilityIcon_1_edit_93
+      name: icon_ironbody
       rect:
         serializedVersion: 2
         x: 150
@@ -2084,7 +2084,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: flatAbilityIcon_1_edit_94
+      name: Icon_Tank_BarbarianShout
       rect:
         serializedVersion: 2
         x: 200
@@ -2222,6 +2222,8 @@ TextureImporter:
     nameFileIdTable:
       Icon_Archer_ArrowManiac: -1180721212
       Icon_Archer_VineTrap: -1819282288
+      Icon_Tank_BarbarianShout: -1949747907
+      Icon_Tank_GroundSmash: -2102628041
       flatAbilityIcon_1_edit_0: 1092816233
       flatAbilityIcon_1_edit_1: 771814061
       flatAbilityIcon_1_edit_10: 2075830866
@@ -2241,7 +2243,6 @@ TextureImporter:
       flatAbilityIcon_1_edit_24: 1606289593
       flatAbilityIcon_1_edit_25: -985501368
       flatAbilityIcon_1_edit_26: -1887670106
-      flatAbilityIcon_1_edit_27: -2102628041
       flatAbilityIcon_1_edit_28: 506530134
       flatAbilityIcon_1_edit_29: -1644348479
       flatAbilityIcon_1_edit_3: -1971243435
@@ -2313,13 +2314,12 @@ TextureImporter:
       flatAbilityIcon_1_edit_90: -1132429762
       flatAbilityIcon_1_edit_91: -1311318232
       flatAbilityIcon_1_edit_92: 865184182
-      flatAbilityIcon_1_edit_93: -539348459
-      flatAbilityIcon_1_edit_94: -1949747907
       flatAbilityIcon_1_edit_95: 1426459593
       flatAbilityIcon_1_edit_96: 1008617705
       flatAbilityIcon_1_edit_97: 179458449
       flatAbilityIcon_1_edit_98: 1704827213
       flatAbilityIcon_1_edit_99: 1087994915
+      icon_ironbody: -539348459
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

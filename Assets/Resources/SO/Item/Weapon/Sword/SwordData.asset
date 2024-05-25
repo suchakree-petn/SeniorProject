@@ -16,6 +16,6 @@ MonoBehaviour:
   AttackPoint: 100
   WeaponType: 0
   IsCriticalable: 0
-  AttackTimeInterval: 0
+  AttackTimeInterval: 1
   LightAttack_DamageMultiplier: 1
-  HeavyAttack_DamageMultiplier: 1.2
+  HeavyAttack_DamageMultiplier: 1

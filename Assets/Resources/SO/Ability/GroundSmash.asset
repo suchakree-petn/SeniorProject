@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1061c380dbc1064f86b7da3a393f95f, type: 3}
+  m_Name: GroundSmash
+  m_EditorClassIdentifier: 
+  Name: Ground Smash
+  Description: 
+  Cooldown: 4
+  Icon: {fileID: -2102628041, guid: e6c754a4d66ab27408be1a826ebacdb3, type: 3}
+  VFX_prf: {fileID: 7759845270126239565, guid: 7ca4fc6646087fc4ba9abb3bf4a5153f, type: 3}
+  StunVFX_prf: {fileID: 5659291355382750491, guid: 7cdd90822979ac546a33ff1f13c6ce47,
+    type: 3}
+  VFXDuration: 0.5
+  StunVFXDuration: 4
+  StunVFXOffset: -36.32
+  StopMoveDuration: 0.5
+  StunDuration: 4
+  Radius: 5.98
+  PositionOffsetX: 3.19
+  PositionOffsetY: -0.95
+  PositionOffsetZ: 0
+  DamageMultiplier: 1.5

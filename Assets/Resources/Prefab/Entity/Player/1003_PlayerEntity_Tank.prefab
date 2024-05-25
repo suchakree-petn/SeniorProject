@@ -2701,6 +2701,16 @@ PrefabInstance:
       propertyPath: playerController
       value: 
       objectReference: {fileID: 5698460776653806195}
+    - target: {fileID: 3940136737352189086, guid: 8468fa4c8e09695459a2f7572471e55b,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3940136737352189086, guid: 8468fa4c8e09695459a2f7572471e55b,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4421562747518347658, guid: 8468fa4c8e09695459a2f7572471e55b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2804,7 +2814,7 @@ PrefabInstance:
     - target: {fileID: 8174493298335311036, guid: 8468fa4c8e09695459a2f7572471e55b,
         type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 86899938
+      value: 3483765102
       objectReference: {fileID: 0}
     - target: {fileID: 8251370818320174555, guid: 8468fa4c8e09695459a2f7572471e55b,
         type: 3}
@@ -2874,6 +2884,7 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: -3906203105981109117, guid: 8468fa4c8e09695459a2f7572471e55b, type: 3}
     - {fileID: 200559469220496104, guid: 8468fa4c8e09695459a2f7572471e55b, type: 3}
+    - {fileID: 3472561861059167791, guid: 8468fa4c8e09695459a2f7572471e55b, type: 3}
     m_RemovedGameObjects:
     - {fileID: 327012991693844751, guid: 8468fa4c8e09695459a2f7572471e55b, type: 3}
     m_AddedGameObjects:
@@ -2906,6 +2917,14 @@ PrefabInstance:
         type: 3}
       insertIndex: 3
       addedObject: {fileID: 7727020092802202058}
+    - targetCorrespondingSourceObject: {fileID: 8164219173163491055, guid: 8468fa4c8e09695459a2f7572471e55b,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4288378132987168278}
+    - targetCorrespondingSourceObject: {fileID: 8164219173163491055, guid: 8468fa4c8e09695459a2f7572471e55b,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -2883226893010950193}
   m_SourcePrefab: {fileID: 100100000, guid: 8468fa4c8e09695459a2f7572471e55b, type: 3}
 --- !u!114 &831939996720355351 stripped
 MonoBehaviour:
@@ -2971,6 +2990,7 @@ MonoBehaviour:
   playerHealth: {fileID: 1673985521950328931}
   HitboxCollider: {fileID: 0}
   tank_playerWeapon: {fileID: 7727020092802202058}
+  tankAbility_BarbarianShout: {fileID: 4288378132987168278}
 --- !u!114 &7727020092802202058
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2997,6 +3017,40 @@ MonoBehaviour:
     type: 3}
   IsSlash: 0
   DrawPower: 0
+--- !u!114 &4288378132987168278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5938101958819870438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ecc52a6e9a2ae646a7d0c9882dd242e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ActivateKey: 113
+  AbilityData: {fileID: 11400000, guid: e3fcd63edb952f74f9f6a9fbcc007fa8, type: 2}
+  TargetLayer:
+    serializedVersion: 2
+    m_Bits: 128
+--- !u!114 &-2883226893010950193
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5938101958819870438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbac919be61f1e446ad546bb113e6b8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ActivateKey: 101
+  AbilityData: {fileID: 11400000, guid: 53a9fd8c3381d7346a93b5b1332ebd21, type: 2}
+  TargetLayer:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!114 &6192920143298601696 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8562730884081978089, guid: 8468fa4c8e09695459a2f7572471e55b,

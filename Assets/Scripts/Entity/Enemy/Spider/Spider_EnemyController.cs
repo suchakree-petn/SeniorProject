@@ -27,7 +27,10 @@ public class Spider_EnemyController : EnemyController
         if (!IsServer || !IsSpawned || enemyHealth.CurrentHealth <= 0) return;
         if (Vector3.Distance(transform.position, target.position) > attackRange + 2 && isFinishAttack && CanMove)
         {
-            target = PlayerManager.Instance.GetClosestPlayerFrom(transform.position);
+            if (!IsTaunted)
+            {
+                target = PlayerManager.Instance.GetClosestPlayerFrom(transform.position);
+            }
             agent.isStopped = false;
             animator.SetFloat("VelocityZ", Mathf.Lerp(animator.GetFloat("VelocityZ"), 1, Time.deltaTime * 5));
         }
@@ -38,7 +41,7 @@ public class Spider_EnemyController : EnemyController
             if (!CanMove) return;
             // Attack
             animator.SetFloat("VelocityZ", Mathf.Lerp(animator.GetFloat("VelocityZ"), 0, Time.deltaTime * 10));
-            if (!isReadyToAttack) return;
+            if (!isReadyToAttack || IsStun) return;
             NormalAttack();
             StartAttackCooldown(attackTimeInterval);
             networkAnimator.SetTrigger("Attack");
@@ -52,7 +55,7 @@ public class Spider_EnemyController : EnemyController
         {
             if (hit.collider.transform.root.TryGetComponent(out PlayerController playerController) && hit.collider.isTrigger)
             {
-                Debug.Log("Spider hit " + hit.collider.transform.root.name);
+                // Debug.Log("Spider hit " + hit.collider.transform.root.name);
                 AttackDamage attackDamage = new(attackPower_Multiplier, attackPower, DamageType.Melee, false);
                 playerController.GetComponent<IDamageable>().TakeDamage_ClientRpc(attackDamage);
             }
