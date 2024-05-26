@@ -390,7 +390,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ActivateKey: 101
-  archerAbilityData: {fileID: 11400000, guid: 486015ca54227ee47824a56e59771969, type: 2}
+  AbilityData: {fileID: 11400000, guid: 486015ca54227ee47824a56e59771969, type: 2}
   ArrowManiac_List: []
   ArrowManiac_Destination: []
   ArrowManiacSpawnGroup: {fileID: 8118701618383164173}

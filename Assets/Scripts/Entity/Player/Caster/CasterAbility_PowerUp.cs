@@ -14,14 +14,16 @@ public class CasterAbility_PowerUp : PlayerAbility
         Debug.Log($"{AbilityData.Name} activated");
         Caster_PlayerController playerController = GetComponent<Caster_PlayerController>();
         UserClientId = playerController.OwnerClientId;
-        playerController.playerAnimation.SetTriggerNetworkAnimation("PowerUp");
+        
         if (activeVFX != null)
         {
             Destroy(activeVFX);
         }
 
         Caster_PlayerWeapon caster_PlayerWeapon = playerController.GetCaster_PlayerWeapon();
+
         if (caster_PlayerWeapon.currentLockTargetTransform == null) return;
+        playerController.playerAnimation.SetTriggerNetworkAnimation("PowerUp");
         ulong targetClientId = caster_PlayerWeapon.GetCurrentLockTargetClientId();
         SpawnVFX(caster_PlayerWeapon.currentLockTargetTransform);
         SpawnVFX_ServerRpc(targetClientId, UserClientId);

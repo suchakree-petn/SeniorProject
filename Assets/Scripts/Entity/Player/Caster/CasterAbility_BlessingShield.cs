@@ -14,13 +14,15 @@ public class CasterAbility_BlessingShield : PlayerAbility
         Debug.Log($"{AbilityData.Name} activated");
         Caster_PlayerController playerController = GetComponent<Caster_PlayerController>();
         UserClientId = playerController.OwnerClientId;
-        playerController.playerAnimation.SetTriggerNetworkAnimation("BlessingShield");
+        
         if (activeShield != null)
         {
             Destroy(activeShield);
         }
         Caster_PlayerWeapon caster_PlayerWeapon = playerController.GetCaster_PlayerWeapon();
+
         if (caster_PlayerWeapon.currentLockTargetTransform == null) return;
+        playerController.playerAnimation.SetTriggerNetworkAnimation("BlessingShield");
         ulong targetClientId = caster_PlayerWeapon.GetCurrentLockTargetClientId();
         SpawnShield(caster_PlayerWeapon.currentLockTargetTransform);
         SpawnShield_ServerRpc(targetClientId, UserClientId);
