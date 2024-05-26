@@ -14,7 +14,7 @@ public class CasterAbility_PowerUp : PlayerAbility
         Debug.Log($"{AbilityData.Name} activated");
         Caster_PlayerController playerController = GetComponent<Caster_PlayerController>();
         UserClientId = playerController.OwnerClientId;
-
+        playerController.playerAnimation.SetTriggerNetworkAnimation("PowerUp");
         if (activeVFX != null)
         {
             Destroy(activeVFX);

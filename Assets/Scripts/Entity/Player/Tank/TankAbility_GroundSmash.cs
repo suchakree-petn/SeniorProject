@@ -14,7 +14,7 @@ public class TankAbility_GroundSmash : PlayerAbility
         Tank_PlayerController playerController = GetComponent<Tank_PlayerController>();
         TargetLayer = playerController.PlayerCharacterData.TargetLayer;
 
-
+        playerController.playerAnimation.SetTriggerNetworkAnimation("Groundsmash");
         StartCoroutine(ActiveDuration(playerController));
 
         AbilityUIManager.Instance.OnUseAbility_E?.Invoke(AbilityData.Cooldown);

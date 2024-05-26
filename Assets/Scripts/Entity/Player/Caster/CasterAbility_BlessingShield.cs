@@ -14,7 +14,7 @@ public class CasterAbility_BlessingShield : PlayerAbility
         Debug.Log($"{AbilityData.Name} activated");
         Caster_PlayerController playerController = GetComponent<Caster_PlayerController>();
         UserClientId = playerController.OwnerClientId;
-
+        playerController.playerAnimation.SetTriggerNetworkAnimation("BlessingShield");
         if (activeShield != null)
         {
             Destroy(activeShield);

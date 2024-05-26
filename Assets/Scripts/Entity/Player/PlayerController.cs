@@ -20,7 +20,7 @@ public class PlayerController : NetworkBehaviour, IDamageable
     [Header("Reference")]
     [SerializeField] protected PlayerMovement playerMovement;
     [SerializeField] protected MouseMovement mouseMovement;
-    [SerializeField] protected PlayerAnimation playerAnimation;
+    public PlayerAnimation playerAnimation;
     [SerializeField] protected PlayerHealth playerHealth;
     public Collider HitboxCollider;
 

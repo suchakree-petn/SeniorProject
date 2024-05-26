@@ -186,7 +186,7 @@ public class Archer_PlayerWeapon : PlayerWeapon
 
     protected override void OnEnable()
     {
-        playerController.OnPlayerCameraModeChanged += SetWeaponHolderPosition;
+        // playerController.OnPlayerCameraModeChanged += SetWeaponHolderPosition;
         OnUseWeapon += (serverRpcAttribute) => StartWeaponCooldown(BowWeaponData.AttackTimeInterval);
         if (!IsOwner) return;
 
@@ -196,7 +196,7 @@ public class Archer_PlayerWeapon : PlayerWeapon
     {
         base.OnDisable();
 
-        playerController.OnPlayerCameraModeChanged -= SetWeaponHolderPosition;
+        // playerController.OnPlayerCameraModeChanged -= SetWeaponHolderPosition;
         if (!IsOwner) return;
 
     }

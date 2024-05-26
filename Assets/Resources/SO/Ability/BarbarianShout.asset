@@ -18,7 +18,7 @@ MonoBehaviour:
   Icon: {fileID: -1949747907, guid: e6c754a4d66ab27408be1a826ebacdb3, type: 3}
   VFX_prf: {fileID: 7315185524819277306, guid: c79e6d6e0d365064a879f68e7c084015, type: 3}
   VFXDuration: 2
-  StopMoveDuration: 0.7
+  StopMoveDuration: 1.55
   TauntDuration: 6
   Radius: 20
   DefenseBonus: 50

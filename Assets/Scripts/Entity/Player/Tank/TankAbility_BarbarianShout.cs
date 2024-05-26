@@ -12,8 +12,8 @@ public class TankAbility_BarbarianShout : PlayerAbility
         Debug.Log($"{AbilityData.Name} activated");
         Tank_PlayerController playerController = GetComponent<Tank_PlayerController>();
         TargetLayer = playerController.PlayerCharacterData.TargetLayer;
-
-
+        
+        playerController.playerAnimation.SetTriggerNetworkAnimation("Barbarianshout");
         StartCoroutine(ActiveDuration(playerController));
 
         AbilityUIManager.Instance.OnUseAbility_Q?.Invoke(AbilityData.Cooldown);
