@@ -22,7 +22,7 @@ public class Archer_PlayerWeapon : PlayerWeapon
     public override void UseWeapon(InputAction.CallbackContext context)
     {
         if (!IsOwner) return;
-        // if (Archer_WeaponHolderState.InHand != WeaponHolderState) return;
+        if (Archer_WeaponHolderState.InHand != WeaponHolderState) return;
 
         if (!IsReadyToUse) return;
 
@@ -161,12 +161,12 @@ public class Archer_PlayerWeapon : PlayerWeapon
     {
         if (current == PlayerCameraMode.Focus)
         {
-            SwitchWeaponHolderTo(Archer_WeaponHolderState.InHand);
+            // SwitchWeaponHolderTo(Archer_WeaponHolderState.InHand);
             WeaponHolderState = Archer_WeaponHolderState.InHand;
         }
         else
         {
-            SwitchWeaponHolderTo(Archer_WeaponHolderState.OnBack);
+            // SwitchWeaponHolderTo(Archer_WeaponHolderState.OnBack);
             WeaponHolderState = Archer_WeaponHolderState.OnBack;
         }
 
@@ -185,7 +185,7 @@ public class Archer_PlayerWeapon : PlayerWeapon
 
     protected override void OnEnable()
     {
-        // playerController.OnPlayerCameraModeChanged += SetWeaponHolderPosition;
+        playerController.OnPlayerCameraModeChanged += SetWeaponHolderPosition;
         OnUseWeapon += (serverRpcAttribute) => StartWeaponCooldown(BowWeaponData.AttackTimeInterval);
         if (!IsOwner) return;
 
@@ -195,7 +195,7 @@ public class Archer_PlayerWeapon : PlayerWeapon
     {
         base.OnDisable();
 
-        // playerController.OnPlayerCameraModeChanged -= SetWeaponHolderPosition;
+        playerController.OnPlayerCameraModeChanged -= SetWeaponHolderPosition;
         if (!IsOwner) return;
 
     }
