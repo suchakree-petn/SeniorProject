@@ -91,7 +91,7 @@ public partial class GameLobbyManager : NetworkSingleton<GameLobbyManager>
         }
     }
 
-    public async void CreateLobby(string lobbyName, bool isPrivate, int stage)
+    public async void CreateLobby(string lobbyName, bool isPrivate, string mapName)
     {
         OnCreateLobbyStarted?.Invoke(this, EventArgs.Empty);
         try
@@ -108,7 +108,7 @@ public partial class GameLobbyManager : NetworkSingleton<GameLobbyManager>
                 },
                 Data = new Dictionary<string, DataObject>
                 {
-                    {KEY_STAGE_ID,new DataObject(DataObject.VisibilityOptions.Public,stage.ToString())},
+                    {KEY_STAGE_ID,new DataObject(DataObject.VisibilityOptions.Public,mapName)},
                     {KEY_TANK_ID,new DataObject(DataObject.VisibilityOptions.Public,"true")},
                     {KEY_ARCHER_ID,new DataObject(DataObject.VisibilityOptions.Public,"false")},
                     {KEY_CASTER_ID,new DataObject(DataObject.VisibilityOptions.Public,"false")}
