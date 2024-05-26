@@ -291,11 +291,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6618734251774362899, guid: 58437a38aec03b4478d7fdb505663dec,
         type: 3}
-      propertyPath: m_UseGravity
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6618734251774362899, guid: 58437a38aec03b4478d7fdb505663dec,
-        type: 3}
       propertyPath: m_CollisionDetection
       value: 2
       objectReference: {fileID: 0}
@@ -494,6 +489,9 @@ MonoBehaviour:
   agent: {fileID: 6001819275899621731}
   behaviourTreeInstance: {fileID: 1851742019605905526}
   target: {fileID: 0}
+  CanMove: 1
+  IsTaunted: 0
+  IsStun: 0
   enemyHealth: {fileID: 7289086918844434345}
   enemyRb: {fileID: 3435360099078161397}
   networkAnimator: {fileID: 6322938050345439138}

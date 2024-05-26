@@ -43,11 +43,9 @@ public class CasterAbility_BlessingShield : PlayerAbility
     private void SpawnShield_ClientRpc(NetworkObjectReference networkObjectReference, ulong userClientId)
     {
         if (NetworkManager.LocalClientId == userClientId) return;
-        Debug.Log("Pass: " + NetworkManager.LocalClientId);
         if (networkObjectReference.TryGet(out NetworkObject networkObject))
         {
             SpawnShield(networkObject.transform);
-            Debug.Log("net obj: " + networkObject.OwnerClientId);
             StartCoroutine(ActiveShield(networkObject.GetComponent<PlayerController>().PlayerCharacterData));
 
         }
