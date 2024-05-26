@@ -244,21 +244,6 @@ PrefabInstance:
       propertyPath: m_Speed
       value: 3.5
       objectReference: {fileID: 0}
-    - target: {fileID: 6001819275899621731, guid: 5134e637dc0b31c4fad23fac8e303af9,
-        type: 3}
-      propertyPath: m_Height
-      value: 2.45
-      objectReference: {fileID: 0}
-    - target: {fileID: 6001819275899621731, guid: 5134e637dc0b31c4fad23fac8e303af9,
-        type: 3}
-      propertyPath: m_Radius
-      value: 1.9
-      objectReference: {fileID: 0}
-    - target: {fileID: 6001819275899621731, guid: 5134e637dc0b31c4fad23fac8e303af9,
-        type: 3}
-      propertyPath: m_AgentTypeID
-      value: -334000983
-      objectReference: {fileID: 0}
     - target: {fileID: 7557614475561441946, guid: 5134e637dc0b31c4fad23fac8e303af9,
         type: 3}
       propertyPath: m_LocalScale.x
