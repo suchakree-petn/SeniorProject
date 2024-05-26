@@ -23,17 +23,22 @@ public class CasterAbility_PowerUp : PlayerAbility
         Caster_PlayerWeapon caster_PlayerWeapon = playerController.GetCaster_PlayerWeapon();
 
         if (caster_PlayerWeapon.currentLockTargetTransform == null) return;
+
         playerController.playerAnimation.SetTriggerNetworkAnimation("PowerUp");
-        ulong targetClientId = caster_PlayerWeapon.GetCurrentLockTargetClientId();
-        SpawnVFX(caster_PlayerWeapon.currentLockTargetTransform);
-        SpawnVFX_ServerRpc(targetClientId, UserClientId);
+        StartCoroutine(ActiveSkill(caster_PlayerWeapon,AbilityData.castDelay));
+        
 
         AbilityUIManager.Instance.OnUseAbility_Q?.Invoke(AbilityData.Cooldown);
 
         SetOnCD();
         Invoke(nameof(SetFinishCD), AbilityData.Cooldown);
     }
-
+    IEnumerator ActiveSkill(Caster_PlayerWeapon caster_PlayerWeapon,float castDelay){
+        ulong targetClientId = caster_PlayerWeapon.GetCurrentLockTargetClientId();
+        yield return new WaitForSeconds(castDelay);
+        SpawnVFX(caster_PlayerWeapon.currentLockTargetTransform);
+        SpawnVFX_ServerRpc(targetClientId, UserClientId);
+    }
     [ServerRpc(RequireOwnership = false)]
     private void SpawnVFX_ServerRpc(ulong targetClientId, ulong userClientId)
     {

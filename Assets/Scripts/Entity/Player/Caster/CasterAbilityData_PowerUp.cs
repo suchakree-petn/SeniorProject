@@ -9,4 +9,5 @@ public class CasterAbilityData_PowerUp : AbilityData
     public float VFXOffset;
     public float BuffDuration;
     public float AttackBonus;
+    public float castDelay;
 }

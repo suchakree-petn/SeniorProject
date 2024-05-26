@@ -9,4 +9,5 @@ public class CasterAbilityData_BlessingShield : AbilityData
     public float ShieldOffset;
     public float ShieldDuration;
     public float BonusDefense = 1000000;
+    public float castDelay;
 }
