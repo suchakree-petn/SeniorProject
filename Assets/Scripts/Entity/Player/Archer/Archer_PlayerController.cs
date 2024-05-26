@@ -13,7 +13,7 @@ public partial class Archer_PlayerController : PlayerController
         if (!IsOwner) return;
 
         base.Start();
-        AbilityUIManager.Instance.OnSetAbilityIcon_E?.Invoke(archerAbility_ArrowManiac.archerAbilityData.Icon);
+        AbilityUIManager.Instance.OnSetAbilityIcon_E?.Invoke(archerAbility_ArrowManiac.AbilityData.Icon);
         AbilityUIManager.Instance.OnSetAbilityIcon_Q?.Invoke(archerAbility_VineTrap.archerAbilityData.Icon);
 
     }

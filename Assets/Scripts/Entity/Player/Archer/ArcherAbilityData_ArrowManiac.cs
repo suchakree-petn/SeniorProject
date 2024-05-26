@@ -7,9 +7,13 @@ public class ArcherAbilityData_ArrowManiac : AbilityData
 {
     public Transform ArrowManiac_prf;
     public Transform ArrowManiac_SpawnGroup;
+    public Transform VFX_prf;
     public float Duration;
     public float TimeInterval;
     public float Distance;
     public float ArrowSpeed;
     public float DamageMultiplier;
+    public float VFXOffset;
+    public float VFXDuration;
+
 }
