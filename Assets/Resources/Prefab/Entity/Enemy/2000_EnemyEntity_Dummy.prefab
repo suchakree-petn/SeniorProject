@@ -726,7 +726,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 156021223
+  GlobalObjectIdHash: 2328778544
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
   ActiveSceneSynchronization: 0
@@ -750,6 +750,9 @@ MonoBehaviour:
   agent: {fileID: 0}
   behaviourTreeInstance: {fileID: 0}
   target: {fileID: 0}
+  CanMove: 1
+  IsTaunted: 0
+  IsStun: 0
   enemyHealth: {fileID: 1251622043368636751}
   enemyRb: {fileID: 6618734251774362899}
   networkAnimator: {fileID: 0}

@@ -2677,7 +2677,7 @@ PrefabInstance:
     - target: {fileID: 8174493298335311036, guid: 8468fa4c8e09695459a2f7572471e55b,
         type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 2580230173
+      value: 893028088
       objectReference: {fileID: 0}
     - target: {fileID: 8251370818320174555, guid: 8468fa4c8e09695459a2f7572471e55b,
         type: 3}
@@ -2849,8 +2849,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ActivateKey: 101
-  UserClientId: 0
-  archerAbilityData: {fileID: 11400000, guid: 486015ca54227ee47824a56e59771969, type: 2}
+  AbilityData: {fileID: 11400000, guid: 486015ca54227ee47824a56e59771969, type: 2}
   ArrowManiac_List: []
   ArrowManiac_Destination: []
   ArrowManiacSpawnGroup: {fileID: 8118701618383164173}
