@@ -23,14 +23,18 @@ public class CasterAbility_BlessingShield : PlayerAbility
 
         if (caster_PlayerWeapon.currentLockTargetTransform == null) return;
         playerController.playerAnimation.SetTriggerNetworkAnimation("BlessingShield");
-        ulong targetClientId = caster_PlayerWeapon.GetCurrentLockTargetClientId();
-        SpawnShield(caster_PlayerWeapon.currentLockTargetTransform);
-        SpawnShield_ServerRpc(targetClientId, UserClientId);
+        StartCoroutine(ActiveSkill(caster_PlayerWeapon,AbilityData.castDelay));
 
         AbilityUIManager.Instance.OnUseAbility_E?.Invoke(AbilityData.Cooldown);
 
         SetOnCD();
         Invoke(nameof(SetFinishCD), AbilityData.Cooldown);
+    }
+    IEnumerator ActiveSkill(Caster_PlayerWeapon caster_PlayerWeapon,float delay){
+        ulong targetClientId = caster_PlayerWeapon.GetCurrentLockTargetClientId();
+        yield return new WaitForSeconds(delay);
+        SpawnShield(caster_PlayerWeapon.currentLockTargetTransform);
+        SpawnShield_ServerRpc(targetClientId, UserClientId);
     }
 
     [ServerRpc(RequireOwnership = false)]

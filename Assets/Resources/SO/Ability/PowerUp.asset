@@ -20,3 +20,4 @@ MonoBehaviour:
   VFXOffset: 0
   BuffDuration: 5
   AttackBonus: 80
+  castDelay: 2
