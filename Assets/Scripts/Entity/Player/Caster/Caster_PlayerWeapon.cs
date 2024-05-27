@@ -21,7 +21,7 @@ public class Caster_PlayerWeapon : PlayerWeapon
     public override void UseWeapon(InputAction.CallbackContext context)
     {
         if (!IsOwner) return;
-        if (!caster_PlayerController.IsPlayerDie) return;
+        if (caster_PlayerController.IsPlayerDie) return;
 
         if (!IsReadyToUse) return;
 

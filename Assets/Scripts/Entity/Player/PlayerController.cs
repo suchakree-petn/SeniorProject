@@ -226,12 +226,14 @@ public class PlayerController : NetworkBehaviour, IDamageable
     {
         IsPlayerDie = true;
         // Animation
+        playerAnimation.SetBool("IsDying", IsPlayerDie);
         PlayerUIManager.Instance.ShowRespawnCountdown();
         Invoke(nameof(WaitForRespawn), 10);
     }
     private void WaitForRespawn()
     {
         IsPlayerDie = false;
+        playerAnimation.SetBool("IsDying", IsPlayerDie);
         PlayerUIManager.Instance.HideRespawnCountdown();
         AttackDamage healAmount = new()
         {
