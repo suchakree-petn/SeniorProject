@@ -14,6 +14,7 @@ public class PlayerUIManager : NetworkSingleton<PlayerUIManager>
     [SerializeField] private GameObject lockTarget;
     [SerializeField] private GameObject respawnCountdownUI;
     [SerializeField] private TextMeshProUGUI respawnCountdownUI_text;
+    [SerializeField] private GameObject resultUI;
 
     public float RespawnCountdown = 10;
     private float respawnCountdown;
@@ -116,6 +117,14 @@ public class PlayerUIManager : NetworkSingleton<PlayerUIManager>
     {
         isShowRespawnUI = false;
         respawnCountdownUI.SetActive(false);
+    }
+    public void ShowResultUI()
+    {
+        resultUI.SetActive(true);
+    }
+    public void HideResultUI()
+    {
+        resultUI.SetActive(false);
     }
     public void SetLockTargetState(bool isActive)
     {

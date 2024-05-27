@@ -98,7 +98,9 @@ public class PlayerController : NetworkBehaviour, IDamageable
 
 
     }
-
+    public MouseMovement GetMouseMovement(){
+        return mouseMovement;
+    }
     public bool SetPlayerCharacterData(PlayerCharacterData playerCharacterData)
     {
         _playerCharacterData = playerCharacterData;
