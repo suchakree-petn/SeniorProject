@@ -12,6 +12,7 @@ public class LobbyCreateUI : MonoBehaviour
     [SerializeField] private Button createPrivateButton;
     [SerializeField] private TMP_InputField lobbyNameInputField;
     [SerializeField] private TMP_Dropdown gameStage;
+    [SerializeField] private List<string> mapName;
 
 
 
@@ -19,12 +20,12 @@ public class LobbyCreateUI : MonoBehaviour
     {
         createPublicButton.onClick.AddListener(() =>
         {
-            GameLobbyManager.Instance.CreateLobby(lobbyNameInputField.text, false, gameStage.value + 1);
+            GameLobbyManager.Instance.CreateLobby(lobbyNameInputField.text, false, mapName[gameStage.value]);
             Hide();
         });
         createPrivateButton.onClick.AddListener(() =>
         {
-            GameLobbyManager.Instance.CreateLobby(lobbyNameInputField.text, true, gameStage.value + 1);
+            GameLobbyManager.Instance.CreateLobby(lobbyNameInputField.text, true, mapName[gameStage.value]);
             Hide();
         });
         closeButton.onClick.AddListener(() =>
