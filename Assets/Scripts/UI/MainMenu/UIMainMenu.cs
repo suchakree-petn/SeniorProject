@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
+using DG.Tweening;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.Timeline;
@@ -18,6 +20,7 @@ public class UIMainMenu : MonoBehaviour
     [SerializeField] private Button exitButton;
     [SerializeField] private Button mainMenuButton;
     [SerializeField] private LobbyUI lobbyUI;
+    [SerializeField] private Image trioRaidLogo;
     public bool mainMenu = true;
     private void Awake()
     {
@@ -39,12 +42,46 @@ public class UIMainMenu : MonoBehaviour
         });
     }
 
-    void SetActiveUIMainMenu(bool active)
+    private void Start()
     {
-        playButton.gameObject.SetActive(active);
-        settingButton.gameObject.SetActive(active);
-        exitButton.gameObject.SetActive(active);
+        SetActiveUIMainMenu(true);
     }
+
+    public void SetActiveUIMainMenu(bool active)
+    {
+        // playButton.gameObject.SetActive(active);
+        // settingButton.gameObject.SetActive(active);
+        // exitButton.gameObject.SetActive(active);
+        if (active)
+        {
+            UnFadeButton(playButton);
+            UnFadeButton(settingButton);
+            UnFadeButton(exitButton);
+            trioRaidLogo.DOFade(1, 0.3f);
+        }
+        else
+        {
+            FadeButton(playButton);
+            FadeButton(settingButton);
+            FadeButton(exitButton);
+            trioRaidLogo.DOFade(0, 0.3f);
+        }
+    }
+
+    private void UnFadeButton(Button button)
+    {
+        button.interactable = true;
+        button.GetComponent<Image>().DOFade(1, 0.3f);
+        button.GetComponentInChildren<TextMeshProUGUI>().DOFade(1, 0.3f);
+    }
+
+    private void FadeButton(Button button)
+    {
+        button.interactable = false;
+        button.GetComponent<Image>().DOFade(0, 0.3f);
+        button.GetComponentInChildren<TextMeshProUGUI>().DOFade(0, 0.3f);
+    }
+
     private void ChangeSection()
     {
         if (mainMenu)

@@ -5,7 +5,7 @@ using Unity.Netcode;
 using Unity.Services.Lobbies.Models;
 using UnityEngine;
 using UnityEngine.UI;
-
+using DG.Tweening;
 public class LobbyUI : MonoBehaviour
 {
 
@@ -22,20 +22,45 @@ public class LobbyUI : MonoBehaviour
     [SerializeField] private LobbyCreateUI lobbyCreateUI;
     [SerializeField] private Transform paperList;
     [SerializeField] private TextMeshProUGUI pageText;
-    
+
     public int lobbyPages = 0;
     double lobbyPageAmount = 1;
 
-    public void SetActiveUILobby(bool active){
-        mainMenuButton.gameObject.SetActive(active);
-        createLobbyButton.gameObject.SetActive(active);
-        quickJoinButton.gameObject.SetActive(active);
-        joinCodeButton.gameObject.SetActive(active);
-        nextButton.gameObject.SetActive(active);
-        backButton.gameObject.SetActive(active);
-        joinCodeInputField.gameObject.SetActive(active);
-        playerNameInputField.gameObject.SetActive(active);
-        pageText.gameObject.SetActive(active);
+    public void SetActiveUILobby(bool active)
+    {
+        if (active)
+        {
+            UnFadeButton(mainMenuButton);
+            UnFadeButton(createLobbyButton);
+            UnFadeButton(quickJoinButton);
+            UnFadeButton(joinCodeButton);
+            UnFadeButton(nextButton);
+            UnFadeButton(backButton);
+            UnFadeInputField(joinCodeInputField);
+            UnFadeInputField(playerNameInputField);
+            pageText.DOFade(1,0.3f);
+        }
+        else
+        {
+            FadeButton(mainMenuButton);
+            FadeButton(createLobbyButton);
+            FadeButton(quickJoinButton);
+            FadeButton(joinCodeButton);
+            FadeButton(nextButton);
+            FadeButton(backButton);
+            FadeInputField(joinCodeInputField);
+            FadeInputField(playerNameInputField);
+            pageText.DOFade(0,0.3f);
+        }
+        // mainMenuButton.gameObject.SetActive(active);
+        // createLobbyButton.gameObject.SetActive(active);
+        // quickJoinButton.gameObject.SetActive(active);
+        // joinCodeButton.gameObject.SetActive(active);
+        // nextButton.gameObject.SetActive(active);
+        // backButton.gameObject.SetActive(active);
+        // joinCodeInputField.gameObject.SetActive(active);
+        // playerNameInputField.gameObject.SetActive(active);
+        // pageText.gameObject.SetActive(active);
     }
 
     private void Awake()
@@ -58,12 +83,12 @@ public class LobbyUI : MonoBehaviour
         });
         nextButton.onClick.AddListener(() =>
         {
-            if(lobbyPages+1<lobbyPageAmount)lobbyPages++;
+            if (lobbyPages + 1 < lobbyPageAmount) lobbyPages++;
             GameLobbyManager.Instance.RefreshLobbyList();
         });
         backButton.onClick.AddListener(() =>
         {
-            if(lobbyPages+1>lobbyPageAmount)lobbyPages--;
+            if (lobbyPages + 1 > lobbyPageAmount) lobbyPages--;
             GameLobbyManager.Instance.RefreshLobbyList();
         });
 
@@ -82,7 +107,33 @@ public class LobbyUI : MonoBehaviour
 
         // UpdateLobbyList(new List<Lobby>());
     }
+    private void UnFadeButton(Button button)
+    {
+        button.interactable = true;
+        button.GetComponent<Image>().DOFade(1, 0.3f);
+        button.GetComponentInChildren<TextMeshProUGUI>().DOFade(1, 0.3f);
+    }
 
+    private void FadeButton(Button button)
+    {
+        button.interactable = false;
+        button.GetComponent<Image>().DOFade(0, 0.3f);
+        button.GetComponentInChildren<TextMeshProUGUI>().DOFade(0, 0.3f);
+    }
+
+    private void UnFadeInputField(TMP_InputField inputField)
+    {
+        inputField.interactable = true;
+        inputField.GetComponent<Image>().DOFade(1, 0.3f);
+        inputField.GetComponentInChildren<TextMeshProUGUI>().DOFade(1, 0.3f);
+    }
+
+    private void FadeInputField(TMP_InputField inputField)
+    {
+        inputField.interactable = false;
+        inputField.GetComponent<Image>().DOFade(0, 0.3f);
+        inputField.GetComponentInChildren<TextMeshProUGUI>().DOFade(0, 0.3f);
+    }
     private void GameLobbyManager_OnKickedFromLobby(object sender, GameLobbyManager.LobbyEventArgs e)
     {
         Debug.Log("Load back to lobby");
@@ -114,19 +165,26 @@ public class LobbyUI : MonoBehaviour
     //     }
     // }
 
-    private void UpdateStatusPage(List<Lobby> lobbyList){
-        lobbyPageAmount = Math.Ceiling(lobbyList.Count/6.0f);
-        if(lobbyPageAmount==0)lobbyPageAmount=1;
-        pageText.text = lobbyPages+1 +"/"+lobbyPageAmount;
-        
-        if(lobbyPages==0){
+    private void UpdateStatusPage(List<Lobby> lobbyList)
+    {
+        lobbyPageAmount = Math.Ceiling(lobbyList.Count / 6.0f);
+        if (lobbyPageAmount == 0) lobbyPageAmount = 1;
+        pageText.text = lobbyPages + 1 + "/" + lobbyPageAmount;
+
+        if (lobbyPages == 0)
+        {
             backButton.interactable = false;
-        }else{
+        }
+        else
+        {
             backButton.interactable = true;
         }
-        if(lobbyPages+1>=lobbyPageAmount){
+        if (lobbyPages + 1 >= lobbyPageAmount)
+        {
             nextButton.interactable = false;
-        }else{
+        }
+        else
+        {
             nextButton.interactable = true;
         }
     }
@@ -139,12 +197,15 @@ public class LobbyUI : MonoBehaviour
             child.gameObject.SetActive(false);
         }
 
-        int lobbyShowAmount = lobbyPages*6;
+        int lobbyShowAmount = lobbyPages * 6;
 
-        for (int i = lobbyShowAmount;i<lobbyList.Count;i++){
+        for (int i = lobbyShowAmount; i < lobbyList.Count; i++)
+        {
             GameObject paperGameObject;
-            for(int j = 0;j<6;j++){
-                if(!paperList.GetChild(j).gameObject.active){
+            for (int j = 0; j < 6; j++)
+            {
+                if (!paperList.GetChild(j).gameObject.active)
+                {
                     paperGameObject = paperList.GetChild(j).gameObject;
                     paperGameObject.gameObject.SetActive(true);
                     paperGameObject.GetComponent<LobbyListSingleUI>().UpdateLobby(lobbyList[i]);
@@ -157,7 +218,7 @@ public class LobbyUI : MonoBehaviour
 
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
         GameLobbyManager.Instance.OnLobbyListChanged -= GameLobby_OnLobbyListChanged;
     }
