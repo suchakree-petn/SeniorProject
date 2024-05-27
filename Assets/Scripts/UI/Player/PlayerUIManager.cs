@@ -25,10 +25,7 @@ public class PlayerUIManager : NetworkSingleton<PlayerUIManager>
     [SerializeField] private Button selectCharacterButton_Host;
     [SerializeField] private Button selectCharacterButton_Client;
 
-    private void Start()
-    {
-        respawnCountdown = RespawnCountdown;
-    }
+
     private void Update()
     {
         if (isShowRespawnUI)
@@ -112,6 +109,7 @@ public class PlayerUIManager : NetworkSingleton<PlayerUIManager>
     public void ShowRespawnCountdown()
     {
         isShowRespawnUI = true;
+        respawnCountdown = RespawnCountdown;
         respawnCountdownUI.SetActive(true);
     }
     public void HideRespawnCountdown()
