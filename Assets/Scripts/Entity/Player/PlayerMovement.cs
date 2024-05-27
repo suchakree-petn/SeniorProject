@@ -9,6 +9,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField, ReadOnlyGUI] private bool isGrounded;
     [SerializeField, ReadOnlyGUI] private bool isOnSlope;
     [SerializeField, ReadOnlyGUI] private bool isRunning;
+    private bool IsDyinng => playerController.IsPlayerDie;
     [ReadOnlyGUI] public bool CanMove;
     [SerializeField, ReadOnlyGUI] private Vector3 moveDirection = Vector3.zero;
     public Rigidbody PlayerRigidbody => playerRb;
@@ -19,8 +20,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Reference")]
     [SerializeField] private Transform groundCheck;
     [SerializeField] private Rigidbody playerRb;
-
-
+    [SerializeField] private PlayerController playerController;
 
     private void OnDrawGizmos()
     {
@@ -196,13 +196,18 @@ public class PlayerMovement : MonoBehaviour
             playerMovementConfig.MovementPenaltyPercentage += playerMovementConfig.InAirPenaltyPercentage;
         }
 
+        if (IsDyinng)
+        {
+            playerMovementConfig.MovementPenaltyPercentage += playerMovementConfig.DyingMovingPenaltyPercentage;
+        }
+
         float ratio = 1 + (playerMovementConfig.MovementBonusPercentage - playerMovementConfig.MovementPenaltyPercentage) / 100f;
         playerMovementConfig.MoveSpeed = playerMovementConfig._defaultMoveSpeed * ratio;
     }
 
     public void PlayerJump(InputAction.CallbackContext context)
     {
-        if (context.performed && isGrounded && CanMove)
+        if (context.performed && isGrounded && CanMove && !IsDyinng)
         {
             Debug.Log(playerRb.GetInstanceID());
             playerRb.velocity = new(playerRb.velocity.x, 0, playerRb.velocity.z);
@@ -213,14 +218,14 @@ public class PlayerMovement : MonoBehaviour
 
     public void PlayerRun(InputAction.CallbackContext context)
     {
-        if (!isRunning)
+        if (!isRunning && !IsDyinng)
         {
             isRunning = true;
         }
     }
     public void PlayerStopRun(InputAction.CallbackContext context)
     {
-        if (isRunning)
+        if (isRunning || IsDyinng)
         {
             isRunning = false;
         }
@@ -264,6 +269,7 @@ public class PlayerMovementConfig
     [Header("Speed Bonus & Penalty")]
     [Range(0, 100)] public float RunSpeedBonusPercentage;
     [Range(0, 100)] public float InAirPenaltyPercentage;
+    [Range(0, 100)] public float DyingMovingPenaltyPercentage;
 
     [ReadOnlyGUI] public float MovementBonusPercentage;
     [ReadOnlyGUI] public float MovementPenaltyPercentage;

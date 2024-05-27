@@ -248,6 +248,16 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: -1.352
       objectReference: {fileID: 0}
+    - target: {fileID: 8562730884081978089, guid: 8468fa4c8e09695459a2f7572471e55b,
+        type: 3}
+      propertyPath: playerController
+      value: 
+      objectReference: {fileID: 3491484360437324280}
+    - target: {fileID: 8562730884081978089, guid: 8468fa4c8e09695459a2f7572471e55b,
+        type: 3}
+      propertyPath: playerMovementConfig.DyingMovingPenaltyPercentage
+      value: 50
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -3906203105981109117, guid: 8468fa4c8e09695459a2f7572471e55b, type: 3}
     - {fileID: 200559469220496104, guid: 8468fa4c8e09695459a2f7572471e55b, type: 3}
@@ -340,6 +350,7 @@ MonoBehaviour:
   _playerCharacterData: {fileID: 11400000, guid: dbc9564b13b8efb4fba259a5472b2f15,
     type: 2}
   OuterForce: {x: 0, y: 0, z: 0}
+  IsPlayerDie: 0
   playerMovement: {fileID: 6192920143298601696}
   mouseMovement: {fileID: 831939996720355351}
   playerAnimation: {fileID: 8920344854508572487}

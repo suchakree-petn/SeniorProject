@@ -12,6 +12,12 @@ public class PlayerUIManager : NetworkSingleton<PlayerUIManager>
     public GameObject PlayerCanvas;
     [SerializeField] private GameObject crossHair;
     [SerializeField] private GameObject lockTarget;
+    [SerializeField] private GameObject respawnCountdownUI;
+    [SerializeField] private TextMeshProUGUI respawnCountdownUI_text;
+
+    public float RespawnCountdown = 10;
+    private float respawnCountdown;
+    private bool isShowRespawnUI;
 
     [Header("Reference select UI")]
     [SerializeField] private GameObject selectCharacterMenu;
@@ -19,6 +25,15 @@ public class PlayerUIManager : NetworkSingleton<PlayerUIManager>
     [SerializeField] private Button selectCharacterButton_Host;
     [SerializeField] private Button selectCharacterButton_Client;
 
+
+    private void Update()
+    {
+        if (isShowRespawnUI)
+        {
+            respawnCountdown -= Time.deltaTime;
+            respawnCountdownUI_text.text = "Respawn in: " + (int)respawnCountdown;
+        }
+    }
     public void SetSelectCharacter(ulong clientId)
     {
         // Debug.Log("Dropdown Value: " + selectCharacterDropdown.value);
@@ -91,7 +106,17 @@ public class PlayerUIManager : NetworkSingleton<PlayerUIManager>
             lockTarget.transform.position = Camera.main.WorldToScreenPoint(worldPos);
         }
     }
-
+    public void ShowRespawnCountdown()
+    {
+        isShowRespawnUI = true;
+        respawnCountdown = RespawnCountdown;
+        respawnCountdownUI.SetActive(true);
+    }
+    public void HideRespawnCountdown()
+    {
+        isShowRespawnUI = false;
+        respawnCountdownUI.SetActive(false);
+    }
     public void SetLockTargetState(bool isActive)
     {
         lockTarget.SetActive(isActive);
