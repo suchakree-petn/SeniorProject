@@ -15,11 +15,11 @@ public static class Loader
     static string TransScene(string scene){
         string returnScene = "LoadingScene";
         if(scene == "LobbyScene"){
-            returnScene = "Thanva_MainMenu_UserDataPersistence";
+            returnScene = "MainMenu";
         }else if(scene == "GameScene"){
-            returnScene = "Thanva_Map_Tester";
+            returnScene = "InGame_Map_1";
         }else if(scene == "CharacterSelectScene"){
-            returnScene = "Thanva_InLobby";
+            returnScene = "InLobby";
         }
         return returnScene;
     }
