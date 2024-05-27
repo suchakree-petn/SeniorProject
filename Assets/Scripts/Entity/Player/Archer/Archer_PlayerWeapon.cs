@@ -22,6 +22,8 @@ public class Archer_PlayerWeapon : PlayerWeapon
     public override void UseWeapon(InputAction.CallbackContext context)
     {
         if (!IsOwner) return;
+        if (!archer_PlayerController.IsPlayerDie) return;
+
         if (Archer_WeaponHolderState.InHand != WeaponHolderState) return;
 
         if (!IsReadyToUse) return;

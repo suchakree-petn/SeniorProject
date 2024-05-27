@@ -15,7 +15,8 @@ public class PlayerController : NetworkBehaviour, IDamageable
     public Vector3 OuterForce;
 
     public Action<PlayerCameraMode, PlayerCameraMode> OnPlayerCameraModeChanged;
-
+    public Action OnPlayerDie;
+    public bool IsPlayerDie;
 
     [Header("Reference")]
     [SerializeField] protected PlayerMovement playerMovement;
@@ -221,12 +222,32 @@ public class PlayerController : NetworkBehaviour, IDamageable
         playerMovement.CanMove = canMove;
     }
 
+    public void PlayerController_OnPlayerDie()
+    {
+        IsPlayerDie = true;
+        // Animation
+        PlayerUIManager.Instance.ShowRespawnCountdown();
+        Invoke(nameof(WaitForRespawn), 10);
+    }
+    private void WaitForRespawn()
+    {
+        IsPlayerDie = false;
+        PlayerUIManager.Instance.HideRespawnCountdown();
+        AttackDamage healAmount = new()
+        {
+            Damage = 100000
+        };
+        TakeHeal_ClientRpc(healAmount);
+    }
     protected virtual void OnEnable()
     {
         playerHealth.InitHp(PlayerCharacterData);
+
+        OnPlayerDie += PlayerController_OnPlayerDie;
     }
     protected virtual void OnDisable()
     {
+        OnPlayerDie -= PlayerController_OnPlayerDie;
     }
 
 }

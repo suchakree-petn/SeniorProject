@@ -14,6 +14,7 @@ public class Tank_PlayerWeapon : PlayerWeapon
     [SerializeField] Transform attackRangeHolder;
     [SerializeField] GameObject slashEffectPrefab;
     [SerializeField] GameObject slashEffectPrefab2;
+    [SerializeField] Tank_PlayerController tank_PlayerController;
     public bool IsSlash;
     public float DrawPower;
 
@@ -22,6 +23,7 @@ public class Tank_PlayerWeapon : PlayerWeapon
     public override void UseWeapon(InputAction.CallbackContext context)
     {
         if (!IsReadyToUse) return;
+        if (!tank_PlayerController.IsPlayerDie) return;
 
         if (context.performed)
         {

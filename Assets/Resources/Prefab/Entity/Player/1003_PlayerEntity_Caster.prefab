@@ -2668,7 +2668,7 @@ PrefabInstance:
     - target: {fileID: 8164219173163491055, guid: 8468fa4c8e09695459a2f7572471e55b,
         type: 3}
       propertyPath: m_Name
-      value: 1001_PlayerEntity_Caster
+      value: 1003_PlayerEntity_Caster
       objectReference: {fileID: 0}
     - target: {fileID: 8174493298335311036, guid: 8468fa4c8e09695459a2f7572471e55b,
         type: 3}
@@ -2688,7 +2688,7 @@ PrefabInstance:
     - target: {fileID: 8410790543009126724, guid: 8468fa4c8e09695459a2f7572471e55b,
         type: 3}
       propertyPath: TransitionStateInfoList.Array.size
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8410790543009126724, guid: 8468fa4c8e09695459a2f7572471e55b,
         type: 3}
@@ -2697,8 +2697,38 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8410790543009126724, guid: 8468fa4c8e09695459a2f7572471e55b,
         type: 3}
+      propertyPath: TransitionStateInfoList.Array.data[1].Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8410790543009126724, guid: 8468fa4c8e09695459a2f7572471e55b,
+        type: 3}
+      propertyPath: TransitionStateInfoList.Array.data[2].Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8410790543009126724, guid: 8468fa4c8e09695459a2f7572471e55b,
+        type: 3}
       propertyPath: TransitionStateInfoList.Array.data[0].TriggerNameHash
       value: -1570718414
+      objectReference: {fileID: 0}
+    - target: {fileID: 8410790543009126724, guid: 8468fa4c8e09695459a2f7572471e55b,
+        type: 3}
+      propertyPath: TransitionStateInfoList.Array.data[1].TransitionIndex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8410790543009126724, guid: 8468fa4c8e09695459a2f7572471e55b,
+        type: 3}
+      propertyPath: TransitionStateInfoList.Array.data[1].TriggerNameHash
+      value: -64505553
+      objectReference: {fileID: 0}
+    - target: {fileID: 8410790543009126724, guid: 8468fa4c8e09695459a2f7572471e55b,
+        type: 3}
+      propertyPath: TransitionStateInfoList.Array.data[2].TransitionIndex
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8410790543009126724, guid: 8468fa4c8e09695459a2f7572471e55b,
+        type: 3}
+      propertyPath: TransitionStateInfoList.Array.data[2].TriggerNameHash
+      value: -1062349637
       objectReference: {fileID: 0}
     - target: {fileID: 8410790543009126724, guid: 8468fa4c8e09695459a2f7572471e55b,
         type: 3}
@@ -2710,10 +2740,45 @@ PrefabInstance:
       propertyPath: TransitionStateInfoList.Array.data[0].OriginatingState
       value: -601574123
       objectReference: {fileID: 0}
+    - target: {fileID: 8410790543009126724, guid: 8468fa4c8e09695459a2f7572471e55b,
+        type: 3}
+      propertyPath: TransitionStateInfoList.Array.data[1].DestinationState
+      value: 812862075
+      objectReference: {fileID: 0}
+    - target: {fileID: 8410790543009126724, guid: 8468fa4c8e09695459a2f7572471e55b,
+        type: 3}
+      propertyPath: TransitionStateInfoList.Array.data[1].OriginatingState
+      value: -601574123
+      objectReference: {fileID: 0}
+    - target: {fileID: 8410790543009126724, guid: 8468fa4c8e09695459a2f7572471e55b,
+        type: 3}
+      propertyPath: TransitionStateInfoList.Array.data[2].DestinationState
+      value: 1690116925
+      objectReference: {fileID: 0}
+    - target: {fileID: 8410790543009126724, guid: 8468fa4c8e09695459a2f7572471e55b,
+        type: 3}
+      propertyPath: TransitionStateInfoList.Array.data[2].OriginatingState
+      value: -601574123
+      objectReference: {fileID: 0}
+    - target: {fileID: 8410790543009126724, guid: 8468fa4c8e09695459a2f7572471e55b,
+        type: 3}
+      propertyPath: TransitionStateInfoList.Array.data[1].TransitionDuration
+      value: 0.25
+      objectReference: {fileID: 0}
     - target: {fileID: 8541470699786124171, guid: 8468fa4c8e09695459a2f7572471e55b,
         type: 3}
       propertyPath: m_LocalPosition.y
       value: -1.352
+      objectReference: {fileID: 0}
+    - target: {fileID: 8562730884081978089, guid: 8468fa4c8e09695459a2f7572471e55b,
+        type: 3}
+      propertyPath: playerController
+      value: 
+      objectReference: {fileID: 7802546280471116810}
+    - target: {fileID: 8562730884081978089, guid: 8468fa4c8e09695459a2f7572471e55b,
+        type: 3}
+      propertyPath: playerMovementConfig.DyingMovingPenaltyPercentage
+      value: 50
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -3906203105981109117, guid: 8468fa4c8e09695459a2f7572471e55b, type: 3}
@@ -2819,6 +2884,7 @@ MonoBehaviour:
   _playerCharacterData: {fileID: 11400000, guid: 41a375c978d02f342acb5e5ff1b56b4f,
     type: 2}
   OuterForce: {x: 0, y: 0, z: 0}
+  IsPlayerDie: 0
   playerMovement: {fileID: 6192920143298601696}
   mouseMovement: {fileID: 831939996720355351}
   playerAnimation: {fileID: 8920344854508572487}

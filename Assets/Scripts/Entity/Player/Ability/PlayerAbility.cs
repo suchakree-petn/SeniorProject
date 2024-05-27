@@ -11,7 +11,7 @@ public abstract class PlayerAbility : NetworkBehaviour
     {
         if (!IsOwner) return;
 
-        if (Input.GetKeyDown(ActivateKey) && !IsOnCD)
+        if (Input.GetKeyDown(ActivateKey) && !IsOnCD && !GetComponent<PlayerController>().IsPlayerDie)
         {
             ActivateAbility(OwnerClientId);
         }

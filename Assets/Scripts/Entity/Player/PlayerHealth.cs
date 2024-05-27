@@ -8,7 +8,7 @@ public class PlayerHealth : EntityHealth
     [SerializeField] protected PlayerController playerController;
     public Slider miniHpBar;
 
-  
+
     public override void TakeDamage(AttackDamage damage, float defense)
     {
         if (CurrentHealth > 0)
@@ -18,6 +18,11 @@ public class PlayerHealth : EntityHealth
             if (CurrentHealth < 0)
             {
                 currentHealth.Value = 0;
+            }
+
+            if (CurrentHealth == 0)
+            {
+                playerController.OnPlayerDie?.Invoke();
             }
         }
         UIHPBar.Instance.SetHP_ServerRpc(NetworkManager.LocalClientId);

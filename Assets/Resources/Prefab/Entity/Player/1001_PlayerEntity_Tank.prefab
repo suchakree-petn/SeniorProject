@@ -362,7 +362,7 @@ PrefabInstance:
     - target: {fileID: 8164219173163491055, guid: 8468fa4c8e09695459a2f7572471e55b,
         type: 3}
       propertyPath: m_Name
-      value: 1003_PlayerEntity_Tank
+      value: 1001_PlayerEntity_Tank
       objectReference: {fileID: 0}
     - target: {fileID: 8174493298335311036, guid: 8468fa4c8e09695459a2f7572471e55b,
         type: 3}
@@ -382,27 +382,32 @@ PrefabInstance:
     - target: {fileID: 8410790543009126724, guid: 8468fa4c8e09695459a2f7572471e55b,
         type: 3}
       propertyPath: TransitionStateInfoList.Array.size
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8410790543009126724, guid: 8468fa4c8e09695459a2f7572471e55b,
         type: 3}
       propertyPath: TransitionStateInfoList.Array.data[1].Layer
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8410790543009126724, guid: 8468fa4c8e09695459a2f7572471e55b,
         type: 3}
       propertyPath: TransitionStateInfoList.Array.data[0].TriggerNameHash
-      value: -972068619
+      value: 815699161
+      objectReference: {fileID: 0}
+    - target: {fileID: 8410790543009126724, guid: 8468fa4c8e09695459a2f7572471e55b,
+        type: 3}
+      propertyPath: TransitionStateInfoList.Array.data[1].TransitionIndex
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8410790543009126724, guid: 8468fa4c8e09695459a2f7572471e55b,
         type: 3}
       propertyPath: TransitionStateInfoList.Array.data[1].TriggerNameHash
-      value: -972068619
+      value: 1415618140
       objectReference: {fileID: 0}
     - target: {fileID: 8410790543009126724, guid: 8468fa4c8e09695459a2f7572471e55b,
         type: 3}
       propertyPath: TransitionStateInfoList.Array.data[0].DestinationState
-      value: -1373914550
+      value: -941841787
       objectReference: {fileID: 0}
     - target: {fileID: 8410790543009126724, guid: 8468fa4c8e09695459a2f7572471e55b,
         type: 3}
@@ -412,7 +417,7 @@ PrefabInstance:
     - target: {fileID: 8410790543009126724, guid: 8468fa4c8e09695459a2f7572471e55b,
         type: 3}
       propertyPath: TransitionStateInfoList.Array.data[1].DestinationState
-      value: 490576371
+      value: -273361795
       objectReference: {fileID: 0}
     - target: {fileID: 8410790543009126724, guid: 8468fa4c8e09695459a2f7572471e55b,
         type: 3}
@@ -422,17 +427,27 @@ PrefabInstance:
     - target: {fileID: 8410790543009126724, guid: 8468fa4c8e09695459a2f7572471e55b,
         type: 3}
       propertyPath: TransitionStateInfoList.Array.data[0].TransitionDuration
-      value: 0.25
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8410790543009126724, guid: 8468fa4c8e09695459a2f7572471e55b,
         type: 3}
       propertyPath: TransitionStateInfoList.Array.data[1].TransitionDuration
-      value: 0.25
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8541470699786124171, guid: 8468fa4c8e09695459a2f7572471e55b,
         type: 3}
       propertyPath: m_LocalPosition.y
       value: -1.352
+      objectReference: {fileID: 0}
+    - target: {fileID: 8562730884081978089, guid: 8468fa4c8e09695459a2f7572471e55b,
+        type: 3}
+      propertyPath: playerController
+      value: 
+      objectReference: {fileID: 5698460776653806195}
+    - target: {fileID: 8562730884081978089, guid: 8468fa4c8e09695459a2f7572471e55b,
+        type: 3}
+      propertyPath: playerMovementConfig.DyingMovingPenaltyPercentage
+      value: 50
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -3906203105981109117, guid: 8468fa4c8e09695459a2f7572471e55b, type: 3}
@@ -528,6 +543,7 @@ MonoBehaviour:
   _playerCharacterData: {fileID: 11400000, guid: 2c81e9a0ce7a2e748893d82c4f1d48cf,
     type: 2}
   OuterForce: {x: 0, y: 0, z: 0}
+  IsPlayerDie: 0
   playerMovement: {fileID: 6192920143298601696}
   mouseMovement: {fileID: 831939996720355351}
   playerAnimation: {fileID: 8920344854508572487}
@@ -560,6 +576,7 @@ MonoBehaviour:
     type: 3}
   slashEffectPrefab2: {fileID: 3864607183413600524, guid: 4f179be89e710d448a7362307a07de88,
     type: 3}
+  tank_PlayerController: {fileID: 5698460776653806195}
   IsSlash: 0
   DrawPower: 0
 --- !u!114 &4288378132987168278
