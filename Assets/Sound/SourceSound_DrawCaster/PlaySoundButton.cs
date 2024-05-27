@@ -4,10 +4,7 @@ using UnityEngine;
 
 public class PlaySoundButton : MonoBehaviour
 {
-    public void PlaySFXGo(){
-        SoundSource.Instance.PlaySfxGo();
-    }
-    public void PlaySfxBack(){
-        SoundSource.Instance.PlaySfxBack();
+    public void PlaySFXButton(){
+        SoundSource.Instance.PlaySfxButton();
     }
 }

@@ -25,6 +25,7 @@ public class CharacterSelectUI : MonoBehaviour
         readyButton.onClick.AddListener(() =>
         {
             CharacterSelectReady.Instance.SetPlayerReady();
+            readyButton.interactable = false;
         });
     }
 
