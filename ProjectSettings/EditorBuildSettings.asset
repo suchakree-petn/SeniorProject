@@ -6,11 +6,11 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Thanva/Thanva_MainMenu_UserDataPersistence.unity
+    guid: f360811a0f163224f8a7d3b721cfabad
+  - enabled: 1
     path: Assets/Scenes/Tutor/Tutor_MainMenu_UserDataPersistence.unity
     guid: 5eaf429340441554780b550615aee7b5
-  - enabled: 1
-    path: Assets/Scenes/Thanva/MainMenu.unity
-    guid: f360811a0f163224f8a7d3b721cfabad
   - enabled: 1
     path: Assets/Scenes/Tutor/Tutor_Test_FPS_Movement&FreeLook.unity
     guid: bf71d0fe907d96b4f80a99d42669e84f
@@ -21,18 +21,15 @@ EditorBuildSettings:
     path: Assets/Scenes/Pond/Map_Tester.unity
     guid: b3331a446a460534096fb759b58ffeff
   - enabled: 1
-    path: Assets/Scenes/Thanva/InGame_Map_1.unity
+    path: Assets/Scenes/Thanva/Thanva_Map_Tester.unity
     guid: 1876c624b9bfbea4ca9bceb4bf70505d
   - enabled: 1
     path: Assets/Scenes/Tutor/Tutor_Map_Tester.unity
     guid: 4738472301c279b40b3e31fb5b8bacd4
   - enabled: 1
-    path: Assets/Scenes/Thanva/InLobby.unity
+    path: Assets/Scenes/Thanva/Thanva_InLobby.unity
     guid: 677f306f9f1d7ec49bc2a9f458257f44
   - enabled: 1
     path: Assets/Scenes/Thanva/LoadingScene.unity
     guid: c6ddafd8f05277b498aabe70cba8a328
-  - enabled: 1
-    path: Assets/Scenes/Thanva/Thanva_MainMenu_UserDataPersistence.unity
-    guid: ee5302d9432298a4d9d827c7bc5e4dc1
   m_configObjects: {}

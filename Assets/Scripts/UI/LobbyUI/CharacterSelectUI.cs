@@ -14,7 +14,6 @@ public class CharacterSelectUI : MonoBehaviour
         {
             if (GameLobbyManager.Instance.IsLobbyHost())
             {
-                Destroy(GameMultiplayerManager.Instance.gameObject);
                 GameLobbyManager.Instance.DeleteLobby();
             }
             else
