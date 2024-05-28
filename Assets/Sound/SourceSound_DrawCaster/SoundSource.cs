@@ -37,7 +37,7 @@ public class SoundSource : MonoBehaviour
             mainMenu_source.Play();
             normal_source.Pause();
         }
-        else if (scenename == "InGame")
+        else if (scenename == "InGame_Map_1")
         {
             mainMenu_source.Pause();
             normal_source.Play();

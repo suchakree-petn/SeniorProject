@@ -7,12 +7,13 @@ public class TankAbility_BarbarianShout : PlayerAbility
 {
     public TankAbilityData_BarbarianShout AbilityData;
     public LayerMask TargetLayer;
+    public AudioSource audioSource;
     public override void ActivateAbility(ulong userClientId)
     {
         Debug.Log($"{AbilityData.Name} activated");
         Tank_PlayerController playerController = GetComponent<Tank_PlayerController>();
         TargetLayer = playerController.PlayerCharacterData.TargetLayer;
-        
+        audioSource.Play();
         playerController.playerAnimation.SetTriggerNetworkAnimation("Barbarianshout");
         StartCoroutine(ActiveDuration(playerController));
 
@@ -46,6 +47,7 @@ public class TankAbility_BarbarianShout : PlayerAbility
         }
         Transform vfxTransform = Instantiate(AbilityData.VFX_prf, transform.position, transform.rotation);
         Destroy(vfxTransform.gameObject, AbilityData.VFXDuration);
+        
         SpawnVFX_ServerRpc();
         playerController.SetCanPlayerMove(true);
 
@@ -76,6 +78,7 @@ public class TankAbility_BarbarianShout : PlayerAbility
     private void SpawnVFX_ClientRpc(ulong userClientId)
     {
         if (NetworkManager.LocalClientId == userClientId) return;
+
 
         Transform vfxTransform = Instantiate(AbilityData.VFX_prf, transform.position, transform.rotation);
         Destroy(vfxTransform.gameObject, AbilityData.VFXDuration);

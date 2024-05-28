@@ -10,8 +10,8 @@ public class ArcherAbility_ArrowManiac : PlayerAbility
     public List<Vector3> ArrowManiac_Destination;
     public Transform ArrowManiacSpawnGroup;
     private LayerMask TargetLayer;
-
     private GameObject activeVFX;
+    public AudioSource audioSource;
 
     public override void ActivateAbility(ulong userClientId)
     {
@@ -23,6 +23,7 @@ public class ArcherAbility_ArrowManiac : PlayerAbility
         {
             Destroy(activeVFX);
         }
+        audioSource.Play();
         SpawnVFX(transform);
         SpawnVFX_ServerRpc(userClientId);
         StartCoroutine(ActiveDuration(AbilityData.Duration, playerController));

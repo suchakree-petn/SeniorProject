@@ -93,6 +93,7 @@ public class LobbyUI : MonoBehaviour
         });
 
         SetActiveUILobby(false);
+        Debug.Log("setfalseUIlobby");
     }
 
     private void Start()
@@ -111,14 +112,14 @@ public class LobbyUI : MonoBehaviour
     {
         button.interactable = true;
         button.GetComponent<Image>().DOFade(1, 0.3f);
-        button.GetComponentInChildren<TextMeshProUGUI>().DOFade(1, 0.3f);
+        if(button.GetComponentInChildren<TextMeshProUGUI>() != null)button.GetComponentInChildren<TextMeshProUGUI>().DOFade(1, 0.3f);
     }
 
     private void FadeButton(Button button)
     {
         button.interactable = false;
         button.GetComponent<Image>().DOFade(0, 0.3f);
-        button.GetComponentInChildren<TextMeshProUGUI>().DOFade(0, 0.3f);
+        if(button.GetComponentInChildren<TextMeshProUGUI>() != null)button.GetComponentInChildren<TextMeshProUGUI>().DOFade(0, 0.3f);
     }
 
     private void UnFadeInputField(TMP_InputField inputField)
@@ -193,7 +194,6 @@ public class LobbyUI : MonoBehaviour
         UpdateStatusPage(lobbyList);
         foreach (Transform child in paperList)
         {
-            if (child == paperList) continue;
             child.gameObject.SetActive(false);
         }
 
@@ -209,7 +209,7 @@ public class LobbyUI : MonoBehaviour
                     paperGameObject = paperList.GetChild(j).gameObject;
                     paperGameObject.gameObject.SetActive(true);
                     paperGameObject.GetComponent<LobbyListSingleUI>().UpdateLobby(lobbyList[i]);
-                    paperGameObject.transform.GetChild(4).GetComponent<ShowClassUI>().UpdateLobby(lobbyList[i]);
+                    paperGameObject.GetComponentInChildren<ShowClassUI>().UpdateLobby(lobbyList[i]);
                     break;
                 }
             }

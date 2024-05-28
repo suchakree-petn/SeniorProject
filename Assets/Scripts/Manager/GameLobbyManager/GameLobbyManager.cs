@@ -63,7 +63,9 @@ public partial class GameLobbyManager : NetworkSingleton<GameLobbyManager>
         HandleUpdateLobbyData_SelectedClass();
 
     }
-
+    private void Start() {
+        RefreshLobbyList();
+    }
     private void HandleUpdateLobbyData_SelectedClass()
     {
         if (joinedLobby != null && IsServer)

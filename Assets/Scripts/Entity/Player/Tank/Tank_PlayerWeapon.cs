@@ -15,6 +15,7 @@ public class Tank_PlayerWeapon : PlayerWeapon
     [SerializeField] GameObject slashEffectPrefab;
     [SerializeField] GameObject slashEffectPrefab2;
     [SerializeField] Tank_PlayerController tank_PlayerController;
+    public AudioSource audioSource;
     public bool IsSlash;
     public float DrawPower;
 
@@ -62,6 +63,7 @@ public class Tank_PlayerWeapon : PlayerWeapon
     public override void NormalAttack()
     {
         AttackDamage attackDamage;
+        audioSource.Play();
         if (WeaponHolderState == Tank_WeaponHolderState.InHand)
         {
             attackDamage = SwordWeaponData.GetDamage(SwordWeaponData.LightAttack_DamageMultiplier,

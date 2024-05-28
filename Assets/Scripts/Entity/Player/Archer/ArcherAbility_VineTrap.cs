@@ -7,12 +7,13 @@ public class ArcherAbility_VineTrap : PlayerAbility
     public ArcherAbilityData_VineTrap archerAbilityData;
 
     private GameObject activeVineTrap;
+    public AudioSource audioSource;
     public override void ActivateAbility(ulong userClientId)
     {
         Debug.Log($"{archerAbilityData.Name} activated");
         Archer_PlayerController playerController = GetComponent<Archer_PlayerController>();
         UserClientId = playerController.OwnerClientId;
-
+        audioSource.Play();
         SpawnVineTrap_ServerRpc();
 
         AbilityUIManager.Instance.OnUseAbility_Q?.Invoke(archerAbilityData.Cooldown);

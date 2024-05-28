@@ -7,8 +7,8 @@ public class CasterAbility_BlessingShield : PlayerAbility
 {
     public ulong UserClientId;
     public CasterAbilityData_BlessingShield AbilityData;
-
     private GameObject activeShield;
+    public AudioSource audioSource;
     public override void ActivateAbility(ulong userClientId)
     {
         Debug.Log($"{AbilityData.Name} activated");
@@ -33,6 +33,7 @@ public class CasterAbility_BlessingShield : PlayerAbility
     IEnumerator ActiveSkill(Caster_PlayerWeapon caster_PlayerWeapon,float delay){
         ulong targetClientId = caster_PlayerWeapon.GetCurrentLockTargetClientId();
         yield return new WaitForSeconds(delay);
+        audioSource.Play();
         SpawnShield(caster_PlayerWeapon.currentLockTargetTransform);
         SpawnShield_ServerRpc(targetClientId, UserClientId);
     }
@@ -70,6 +71,7 @@ public class CasterAbility_BlessingShield : PlayerAbility
     {
 
         if (NetworkManager.LocalClientId != targetClientId) return;
+        audioSource.Play();
         if (networkObject.TryGet(out NetworkObject networkObj))
         {
             networkObj.GetComponent<PlayerController>().PlayerCharacterData.DefenseBonus += AbilityData.BonusDefense;

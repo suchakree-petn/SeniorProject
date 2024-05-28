@@ -7,8 +7,8 @@ public class CasterAbility_PowerUp : PlayerAbility
 {
     public ulong UserClientId;
     public CasterAbilityData_PowerUp AbilityData;
-
     private GameObject activeVFX;
+    public AudioSource audioSource;
     public override void ActivateAbility(ulong userClientId)
     {
         Debug.Log($"{AbilityData.Name} activated");
@@ -36,6 +36,7 @@ public class CasterAbility_PowerUp : PlayerAbility
     IEnumerator ActiveSkill(Caster_PlayerWeapon caster_PlayerWeapon,float castDelay){
         ulong targetClientId = caster_PlayerWeapon.GetCurrentLockTargetClientId();
         yield return new WaitForSeconds(castDelay);
+        audioSource.Play();
         SpawnVFX(caster_PlayerWeapon.currentLockTargetTransform);
         SpawnVFX_ServerRpc(targetClientId, UserClientId);
     }
@@ -70,6 +71,7 @@ public class CasterAbility_PowerUp : PlayerAbility
     {
 
         if (NetworkManager.LocalClientId != targetClientId) return;
+        audioSource.Play();
         if (networkObject.TryGet(out NetworkObject networkObj))
         {
             networkObj.GetComponent<PlayerController>().PlayerCharacterData.AttackBonus += AbilityData.AttackBonus;
