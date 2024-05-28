@@ -73,7 +73,11 @@ public class MouseMovement : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
-
+    public void UnLockMouseCursor()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
     public void SetFocus(bool isShowCrossHair = true)
     {
         CameraManager.Instance.GetThirdPersonCamera().Priority = 0;
