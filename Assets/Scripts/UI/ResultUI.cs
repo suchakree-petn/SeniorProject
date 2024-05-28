@@ -21,7 +21,9 @@ public class ResultUI : MonoBehaviour
             NetworkManager.Singleton.Shutdown();
         }
         PlayerUIManager.Instance.HideResultUI();
-        SceneManager.LoadScene("MainMenu");
+        Debug.Log("ResultUI");
+        Destroy(GameMultiplayerManager.Instance.gameObject);
+        Loader.Load(Loader.Scene.LobbyScene);
 
     }
 

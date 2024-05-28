@@ -12,7 +12,6 @@ using Unity.Services.Relay;
 using Unity.Services.Relay.Models;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public partial class GameLobbyManager : NetworkSingleton<GameLobbyManager>
 {
@@ -159,8 +158,9 @@ public partial class GameLobbyManager : NetworkSingleton<GameLobbyManager>
         {
             try
             {
+                NetworkManager.Shutdown();
                 await LobbyService.Instance.DeleteLobbyAsync(joinedLobby.Id);
-
+                Loader.Load(Loader.Scene.LobbyScene);
                 joinedLobby = null;
             }
             catch (LobbyServiceException e)
@@ -374,8 +374,9 @@ public partial class GameLobbyManager : NetworkSingleton<GameLobbyManager>
             try
             {
                 await LobbyService.Instance.RemovePlayerAsync(joinedLobby.Id, AuthenticationService.Instance.PlayerId);
-
+                Loader.Load(Loader.Scene.LobbyScene);
                 joinedLobby = null;
+
             }
             catch (LobbyServiceException e)
             {

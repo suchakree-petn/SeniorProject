@@ -32,7 +32,7 @@ public class SoundSource : MonoBehaviour
     public void ChangeSoundLoop(Scene scene, LoadSceneMode loadSceneMode)
     {
         string scenename = scene.name;
-        if (scenename == "MainMenu" || scenename == "InLobby")
+        if (scenename == "Thanva_MainMenu_UserDataPersistence" || scenename == "InLobby")
         {
             mainMenu_source.Play();
             normal_source.Pause();
