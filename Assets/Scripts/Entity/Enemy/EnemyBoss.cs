@@ -12,7 +12,6 @@ public class EnemyBoss : MonoBehaviour
         {
             mouseMovements.Add(tank_mouseMovement);
         }
-
         if (PlayerManager.Instance.PlayerGameObjectsByRole[PlayerRole.Archer].TryGetComponent(out MouseMovement archer_mouseMovement))
         {
             mouseMovements.Add(archer_mouseMovement);
@@ -21,6 +20,7 @@ public class EnemyBoss : MonoBehaviour
         {
             mouseMovements.Add(caster_mouseMovement);
         }
+        
         foreach (var movement in mouseMovements)
         {
             movement.UnLockMouseCursor();

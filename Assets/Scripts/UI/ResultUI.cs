@@ -21,7 +21,8 @@ public class ResultUI : MonoBehaviour
             NetworkManager.Singleton.Shutdown();
         }
         PlayerUIManager.Instance.HideResultUI();
-        SceneManager.LoadScene("MainMenu");
+        Destroy(GameMultiplayerManager.Instance.gameObject);
+        SceneManager.LoadScene("Thanva_MainMenu_UserDataPersistence");
 
     }
 

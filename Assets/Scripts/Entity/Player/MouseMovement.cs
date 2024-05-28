@@ -30,10 +30,10 @@ public class MouseMovement : MonoBehaviour
     }
     private void Update()
     {
-        if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.S))
-        {
-            SaveCameraSensitive();
-        }
+        // if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.S))
+        // {
+        //     SaveCameraSensitive();
+        // }
     }
     public void InitCameras(PlayerCameraMode playerCameraMode)
     {
@@ -224,11 +224,13 @@ public class MouseMovement : MonoBehaviour
     {
         lookInput = context.ReadValue<Vector2>();
     }
-    private void OnDestroy()
-    {
-        SaveCameraSensitive();
+    // private void OnDestroy()
+    // {
+    //     SaveCameraSensitive();
+    // }
+    private void OnDisable() {
+        UnLockMouseCursor();
     }
-
     private void SaveCameraSensitive()
     {
         MouseSensitive_ThirdPerson mouseSensitive_ThirdPerson = new(mouseMovementConfig.ThirdPerson_X_Axis_Sensitive, mouseMovementConfig.ThirdPerson_Y_Axis_Sensitive);
@@ -238,18 +240,18 @@ public class MouseMovement : MonoBehaviour
         SettingManager.Instance.dataPersistenceInGameSetting.SaveData();
     }
 
-#if UNITY_EDITOR
-    public void OnValidate()
-    {
-        if (CameraManager.Instance != null)
-        {
-            CameraManager.Instance.GetThirdPersonCamera().m_XAxis.m_MaxSpeed = mouseMovementConfig.ThirdPerson_X_Axis_Sensitive;
-            CameraManager.Instance.GetThirdPersonCamera().m_YAxis.m_MaxSpeed = mouseMovementConfig.ThirdPerson_Y_Axis_Sensitive;
-        }
+// #if UNITY_EDITOR
+//     public void OnValidate()
+//     {
+//         if (CameraManager.Instance != null)
+//         {
+//             CameraManager.Instance.GetThirdPersonCamera().m_XAxis.m_MaxSpeed = mouseMovementConfig.ThirdPerson_X_Axis_Sensitive;
+//             CameraManager.Instance.GetThirdPersonCamera().m_YAxis.m_MaxSpeed = mouseMovementConfig.ThirdPerson_Y_Axis_Sensitive;
+//         }
 
 
-    }
-#endif
+//     }
+// #endif
 }
 public enum PlayerCameraMode
 {
