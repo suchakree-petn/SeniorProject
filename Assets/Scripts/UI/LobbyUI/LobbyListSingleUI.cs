@@ -28,7 +28,7 @@ public class LobbyListSingleUI : MonoBehaviour {
 
         lobbyNameText.text = lobby.Name;
         playersText.text = "Member: "+ lobby.Players.Count + "/" + lobby.MaxPlayers;
-        stageText.text = "Map: "+ lobby.Data[GameLobbyManager.KEY_STAGE_ID].Value;
+        stageText.text = lobby.Data[GameLobbyManager.KEY_STAGE_ID].Value;
     }
     public void JoinLobby(){
         GameLobbyManager.Instance.JoinWithId(lobby.Id);
