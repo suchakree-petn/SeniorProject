@@ -16,17 +16,17 @@ public class SpawnEnemyWhenPlayerPass : NetworkBehaviour
         }
 
     }
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            foreach (GameObject enemy in enemys)
-            {
-                ulong id = ulong.Parse(enemy.name.Split("_")[0]);
-                EnemyManager.Instance.Spawn(id, enemy.transform.position);
-            }
-        }
-    }
+    // private void Update()
+    // {
+    //     if (Input.GetKeyDown(KeyCode.Alpha1))
+    //     {
+    //         foreach (GameObject enemy in enemys)
+    //         {
+    //             ulong id = ulong.Parse(enemy.name.Split("_")[0]);
+    //             EnemyManager.Instance.Spawn(id, enemy.transform.position);
+    //         }
+    //     }
+    // }
     [ServerRpc(RequireOwnership = false)]
     public void Spawn_ServerRpc()
     {

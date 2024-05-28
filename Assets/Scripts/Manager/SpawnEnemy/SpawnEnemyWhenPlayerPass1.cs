@@ -15,13 +15,13 @@ public class SpawnEnemyWhenPlayerPass1 : NetworkBehaviour
         }
         
     }
-    private void Update() {
-        if(Input.GetKeyDown(KeyCode.Alpha2)){
-            foreach(GameObject enemy in enemys){
-                EnemyManager.Instance.Spawn(2001,enemy.transform.position);
-            }
-        }
-    }
+    // private void Update() {
+    //     if(Input.GetKeyDown(KeyCode.Alpha2)){
+    //         foreach(GameObject enemy in enemys){
+    //             EnemyManager.Instance.Spawn(2001,enemy.transform.position);
+    //         }
+    //     }
+    // }
     [ServerRpc(RequireOwnership = false)]
     public void Spawn_ServerRpc(){
         
