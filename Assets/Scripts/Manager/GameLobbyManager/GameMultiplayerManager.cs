@@ -276,6 +276,18 @@ public class GameMultiplayerManager : NetworkSingleton<GameMultiplayerManager>
         return default;
     }
 
+    public PlayerData GetPlayerDataFromPlayerId(string playerId)
+    {
+        foreach (PlayerData playerData in playerDataNetworkList)
+        {
+            if (playerData.playerId == playerId)
+            {
+                return playerData;
+            }
+        }
+        return default;
+    }
+
     public PlayerData GetPlayerData()
     {
         return GetPlayerDataFromClientId(NetworkManager.Singleton.LocalClientId);

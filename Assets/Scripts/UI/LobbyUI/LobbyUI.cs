@@ -38,7 +38,7 @@ public class LobbyUI : MonoBehaviour
             UnFadeButton(backButton);
             UnFadeInputField(joinCodeInputField);
             UnFadeInputField(playerNameInputField);
-            pageText.DOFade(1,0.3f);
+            pageText.DOFade(1, 0.3f);
         }
         else
         {
@@ -50,7 +50,7 @@ public class LobbyUI : MonoBehaviour
             FadeButton(backButton);
             FadeInputField(joinCodeInputField);
             FadeInputField(playerNameInputField);
-            pageText.DOFade(0,0.3f);
+            pageText.DOFade(0, 0.3f);
         }
         // mainMenuButton.gameObject.SetActive(active);
         // createLobbyButton.gameObject.SetActive(active);
@@ -112,14 +112,14 @@ public class LobbyUI : MonoBehaviour
     {
         button.interactable = true;
         button.GetComponent<Image>().DOFade(1, 0.3f);
-        if(button.GetComponentInChildren<TextMeshProUGUI>() != null)button.GetComponentInChildren<TextMeshProUGUI>().DOFade(1, 0.3f);
+        if (button.GetComponentInChildren<TextMeshProUGUI>() != null) button.GetComponentInChildren<TextMeshProUGUI>().DOFade(1, 0.3f);
     }
 
     private void FadeButton(Button button)
     {
         button.interactable = false;
         button.GetComponent<Image>().DOFade(0, 0.3f);
-        if(button.GetComponentInChildren<TextMeshProUGUI>() != null)button.GetComponentInChildren<TextMeshProUGUI>().DOFade(0, 0.3f);
+        if (button.GetComponentInChildren<TextMeshProUGUI>() != null) button.GetComponentInChildren<TextMeshProUGUI>().DOFade(0, 0.3f);
     }
 
     private void UnFadeInputField(TMP_InputField inputField)
@@ -218,7 +218,7 @@ public class LobbyUI : MonoBehaviour
 
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
         GameLobbyManager.Instance.OnLobbyListChanged -= GameLobby_OnLobbyListChanged;
     }
