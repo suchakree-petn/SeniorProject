@@ -35,12 +35,52 @@ public class Archer_PlayerWeapon : PlayerWeapon
             return;
         }
 
-        if (context.performed)
+        // if (context.performed)
+        // {
+        //     IsDrawing = true;
+        // }
+
+        // if (context.canceled && DrawPower > 0)
+        // {
+        //     NormalAttack();
+        //     IsDrawing = false;
+        //     DrawPower = 0;
+        //     OnUseWeapon?.Invoke(new());
+        // }
+
+    }
+
+    private void Update()
+    {
+        if (!IsOwner) return;
+        if (Archer_WeaponHolderState.InHand == WeaponHolderState)
+        {
+            RotateFirePointHolder();
+        }
+
+        // Draw bow
+        if (archer_PlayerController.IsPlayerDie) return;
+
+        if (Archer_WeaponHolderState.InHand != WeaponHolderState) return;
+
+        if (!IsReadyToUse) return;
+
+        if (firePointTransform == null)
+        {
+            Debug.LogWarning($"No Fire Point transform");
+            return;
+        }
+        if (Input.GetMouseButton(0))
         {
             IsDrawing = true;
         }
 
-        if (context.canceled && DrawPower > 0)
+        if (IsDrawing)
+        {
+            DrawBow();
+        }
+
+        if (Input.GetMouseButtonUp(0) && DrawPower > 0)
         {
             NormalAttack();
             IsDrawing = false;
@@ -48,21 +88,7 @@ public class Archer_PlayerWeapon : PlayerWeapon
             OnUseWeapon?.Invoke(new());
         }
 
-    }
 
-    private void Update()
-    {
-        if (!IsOwner) return;
-
-        if (IsDrawing)
-        {
-            DrawBow();
-        }
-
-        if (Archer_WeaponHolderState.InHand == WeaponHolderState)
-        {
-            RotateFirePointHolder();
-        }
 
     }
     private void DrawBow()
