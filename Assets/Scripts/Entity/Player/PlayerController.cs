@@ -17,13 +17,13 @@ public class PlayerController : NetworkBehaviour, IDamageable
     public Action<PlayerCameraMode, PlayerCameraMode> OnPlayerCameraModeChanged;
     public Action OnPlayerDie;
     public bool IsPlayerDie;
+    public bool IsGrounded => playerMovement.IsGrouded;
 
     [Header("Reference")]
     [SerializeField] protected PlayerMovement playerMovement;
     [SerializeField] protected MouseMovement mouseMovement;
     public PlayerAnimation playerAnimation;
     [SerializeField] protected PlayerHealth playerHealth;
-    public Collider HitboxCollider;
 
 
     protected virtual void Start()
@@ -44,7 +44,6 @@ public class PlayerController : NetworkBehaviour, IDamageable
 
         playerInputManager.Look.performed += mouseMovement.SetLook;
         playerInputManager.Look.canceled += mouseMovement.SetLook;
-        // playerInputManager.SwitchViewMode.performed += SwitchViewMode;
         playerInputManager.SwitchViewMode.canceled += SwitchViewMode;
 
 
@@ -98,7 +97,8 @@ public class PlayerController : NetworkBehaviour, IDamageable
 
 
     }
-    public MouseMovement GetMouseMovement(){
+    public MouseMovement GetMouseMovement()
+    {
         return mouseMovement;
     }
     public bool SetPlayerCharacterData(PlayerCharacterData playerCharacterData)

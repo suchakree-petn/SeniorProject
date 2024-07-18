@@ -23,23 +23,14 @@ public class EnemyManager : NetworkSingleton<EnemyManager>
     protected override void InitAfterAwake()
     {
     }
-    private void Start()
-    {
-        
-    }
-
-    private void Update()
-    {
-
-    }
-
+ 
 
     public void Spawn(ulong id, Vector3 position = default)
     {
         Spawn_ServerRpc(id, position);
     }
     [ServerRpc(RequireOwnership = false)]
-    public void Spawn_ServerRpc(ulong id, Vector3 position = default)
+    private void Spawn_ServerRpc(ulong id, Vector3 position = default)
     {
         GameObject gameObject = Instantiate(EnemyCharacterPrefab[id], position, Quaternion.identity).gameObject;
         gameObject.GetComponent<NetworkObject>().Spawn(true);

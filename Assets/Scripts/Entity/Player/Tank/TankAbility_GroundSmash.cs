@@ -29,9 +29,11 @@ public class TankAbility_GroundSmash : PlayerAbility
 
         Debug.Log($"Start {AbilityData.Name} duration: {AbilityData.StopMoveDuration}");
         playerController.SetCanPlayerMove(false);
+        playerController.playerAnimation.SetLayerWeight(1, 0);
 
         yield return new WaitForSeconds(AbilityData.StopMoveDuration);
 
+        playerController.playerAnimation.SetLayerWeight(1, 1);
         Vector3 origin = transform.position + (transform.forward * AbilityData.PositionOffsetX);
         RaycastHit[] hits = Physics.BoxCastAll(origin, new(AbilityData.Radius, 2, AbilityData.Radius), transform.forward);
         List<EnemyController> enemyControllers = new();
@@ -88,7 +90,7 @@ public class TankAbility_GroundSmash : PlayerAbility
     private void SpawnVFX_ClientRpc(ulong userClientId, Vector3 origin)
     {
         if (NetworkManager.LocalClientId == userClientId) return;
-        
+
         audioSource.Play();
         Transform vfxTransform = Instantiate(AbilityData.VFX_prf, origin, transform.rotation);
         Destroy(vfxTransform.gameObject, AbilityData.VFXDuration);

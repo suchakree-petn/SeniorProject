@@ -1,6 +1,7 @@
 using System.Collections;
 using Mono.CSharp;
 using Unity.Netcode;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -10,33 +11,52 @@ public class Tank_PlayerWeapon : PlayerWeapon
 
     public SwordBase SwordWeaponData;
     [SerializeField] Transform effectpos;
-    [SerializeField] Transform attackRange;
-    [SerializeField] Transform attackRangeHolder;
-    [SerializeField] GameObject slashEffectPrefab;
-    [SerializeField] GameObject slashEffectPrefab2;
+    [SerializeField] Transform attackPoint;
+    [SerializeField] Transform attackPointHolder;
+    [SerializeField] GameObject VFX_NA_Combo_1;
+    [SerializeField] GameObject VFX_NA_Combo_2;
+    [SerializeField] GameObject VFX_NA_Combo_3;
+    [SerializeField] AnimationClip NA_Combo_1_Clip;
+    [SerializeField] AnimationClip NA_Combo_2_Clip;
+    [SerializeField] AnimationClip NA_Combo_3_Clip;
     [SerializeField] Tank_PlayerController tank_PlayerController;
     public AudioSource audioSource;
-    public bool IsSlash;
-    public float DrawPower;
 
+    private int comboIndex = 0;
+    private float comboTimeInterval = 0;
+    public float ComboTimeInterval => comboTimeInterval;
 
+    private float _attackInterval;
 
     public override void UseWeapon(InputAction.CallbackContext context)
     {
-        if (!IsReadyToUse) return;
+        if (_attackInterval > 0) return;
         if (tank_PlayerController.IsPlayerDie) return;
+        if (!tank_PlayerController.IsGrounded) return;
 
         if (context.performed)
         {
-            IsSlash = true;
-            NormalAttack();
+            comboIndex++;
+            if (comboIndex == 1)
+            {
+                comboTimeInterval = NA_Combo_1_Clip.length;
+                tank_PlayerController.playerAnimation.SetTriggerNetworkAnimation("NA_Combo_1");
+            }
+            else if (comboIndex == 2 && comboTimeInterval > 0)
+            {
+                comboTimeInterval = NA_Combo_2_Clip.length;
+                tank_PlayerController.playerAnimation.SetTriggerNetworkAnimation("NA_Combo_2");
+            }
+            else if (comboIndex == 3 && comboTimeInterval > 0)
+            {
+                comboTimeInterval = NA_Combo_3_Clip.length;
+                tank_PlayerController.playerAnimation.SetTriggerNetworkAnimation("NA_Combo_3");
+            }
+            OnUseWeapon?.Invoke(new());
+            _attackInterval = SwordWeaponData.AttackTimeInterval;
+
         }
 
-        if (context.canceled)
-        {
-            IsSlash = false;
-            OnUseWeapon?.Invoke(new());
-        }
 
     }
 
@@ -51,47 +71,64 @@ public class Tank_PlayerWeapon : PlayerWeapon
         {
             SetPointHolder();
         }
+
+        // Combo timer
+        if (comboTimeInterval > 0)
+        {
+            comboTimeInterval -= Time.deltaTime;
+        }
+        else if (comboTimeInterval <= 0)
+        {
+            comboTimeInterval = 0;
+            comboIndex = 0;
+        }
+
+        if (_attackInterval > 0)
+        {
+            _attackInterval -= Time.deltaTime;
+        }
     }
     private void RotatePointHolder()
     {
-        attackRangeHolder.forward = Camera.main.transform.forward;
+        attackPointHolder.forward = Camera.main.transform.forward;
     }
     private void SetPointHolder()
     {
-        attackRangeHolder.forward = transform.forward;
+        attackPointHolder.forward = transform.forward;
     }
+
+    public void AnimationEvent_NormalAttack(int comboIndex)
+    {
+        SpawnSlashVFX(comboIndex);
+        NormalAttack();
+    }
+
     public override void NormalAttack()
     {
-        AttackDamage attackDamage;
-        audioSource.Play();
-        if (WeaponHolderState == Tank_WeaponHolderState.InHand)
-        {
-            attackDamage = SwordWeaponData.GetDamage(SwordWeaponData.LightAttack_DamageMultiplier,
-                            playerController.PlayerCharacterData, (long)OwnerClientId);
-        }
-        else
-        {
-            attackDamage = SwordWeaponData.GetDamage(SwordWeaponData.HeavyAttack_DamageMultiplier,
-                            playerController.PlayerCharacterData, (long)OwnerClientId);
-        }
-        Debug.Log("NAttack");
-        SlashAttack_ServerRpc(attackDamage);
-    }
-    [ServerRpc(RequireOwnership = false)]
-    public void SlashAttack_ServerRpc(AttackDamage attackDamage, ServerRpcParams serverRpcParams = default)
-    {
-        GameObject effect;
-        if (WeaponHolderState == Tank_WeaponHolderState.InHand)
-        {
-            effect = Instantiate(slashEffectPrefab, effectpos.position, attackRange.rotation);
-        }
-        else
-        {
-            effect = Instantiate(slashEffectPrefab2, effectpos.position, attackRange.rotation);
-        }
-        effect.GetComponent<NetworkObject>().Spawn(true);
 
-        RaycastHit[] hits = Physics.BoxCastAll(attackRange.position, new Vector3(4, 1, 2), transform.forward, transform.rotation, 3f);
+        AttackDamage attackDamage = comboIndex switch
+        {
+            1 => SwordWeaponData.GetDamage(SwordWeaponData.NA_Combo_1_DamageMultiplier,
+                                playerController.PlayerCharacterData, (long)OwnerClientId),
+            2 => SwordWeaponData.GetDamage(SwordWeaponData.NA_Combo_2_DamageMultiplier,
+                                playerController.PlayerCharacterData, (long)OwnerClientId),
+            3 => SwordWeaponData.GetDamage(SwordWeaponData.NA_Combo_3_DamageMultiplier,
+                                playerController.PlayerCharacterData, (long)OwnerClientId),
+            _ => SwordWeaponData.GetDamage(SwordWeaponData.NA_Combo_1_DamageMultiplier,
+                                playerController.PlayerCharacterData, (long)OwnerClientId),
+        };
+
+        SlashAttack_ServerRpc(attackDamage, comboIndex);
+
+    }
+
+
+    [ServerRpc(RequireOwnership = false)]
+    public void SlashAttack_ServerRpc(AttackDamage attackDamage, int comboIndex)
+    {
+        SpawnSlashVFX_ClientRpc(comboIndex, (ulong)attackDamage.AttackerClientId);
+
+        RaycastHit[] hits = Physics.SphereCastAll(attackPoint.position, SwordWeaponData.NA_AttackRange, transform.forward, 0, tank_PlayerController.PlayerCharacterData.TargetLayer);
 
         foreach (RaycastHit hit in hits)
         {
@@ -107,16 +144,33 @@ public class Tank_PlayerWeapon : PlayerWeapon
         }
     }
 
+    [ClientRpc]
+    private void SpawnSlashVFX_ClientRpc(int comboIndex, ulong clientId)
+    {
+        if (NetworkManager.LocalClientId == clientId) return;
+        SpawnSlashVFX(comboIndex);
+    }
+
+    private void SpawnSlashVFX(int comboIndex)
+    {
+        audioSource.Play();
+        GameObject effect = comboIndex switch
+        {
+            1 => Instantiate(VFX_NA_Combo_1, effectpos.position, transform.rotation),
+            2 => Instantiate(VFX_NA_Combo_2, effectpos.position, transform.rotation),
+            3 => Instantiate(VFX_NA_Combo_3, effectpos.position, transform.rotation),
+            _ => Instantiate(VFX_NA_Combo_1, effectpos.position, transform.rotation),
+        };
+
+        Destroy(effect, 1);
+
+    }
+
     void OnDrawGizmos()
     {
-        float maxDistance = 3f;
 
-        RaycastHit[] hits = Physics.BoxCastAll(attackRange.position, new Vector3(4, 1, 2), transform.forward, transform.rotation, maxDistance);
-        foreach (RaycastHit hit in hits)
-        {
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireCube(attackRange.position, new Vector3(4, 1, 2));
-        }
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(attackPoint.position, SwordWeaponData.NA_AttackRange);
 
     }
 

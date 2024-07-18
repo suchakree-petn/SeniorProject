@@ -73,7 +73,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4728507105197983812}
   m_Layer: 0
-  m_Name: Range
+  m_Name: AttackPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -167,7 +167,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6058639542969173605}
   m_Layer: 0
-  m_Name: AttackRange
+  m_Name: AttackPointHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -182,7 +182,7 @@ Transform:
   m_GameObject: {fileID: 8175125890401597839}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 1.25, z: 0.84}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -367,7 +367,7 @@ PrefabInstance:
     - target: {fileID: 8174493298335311036, guid: 8468fa4c8e09695459a2f7572471e55b,
         type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 562734823
+      value: 86899938
       objectReference: {fileID: 0}
     - target: {fileID: 8251370818320174555, guid: 8468fa4c8e09695459a2f7572471e55b,
         type: 3}
@@ -382,12 +382,27 @@ PrefabInstance:
     - target: {fileID: 8410790543009126724, guid: 8468fa4c8e09695459a2f7572471e55b,
         type: 3}
       propertyPath: TransitionStateInfoList.Array.size
-      value: 2
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8410790543009126724, guid: 8468fa4c8e09695459a2f7572471e55b,
         type: 3}
       propertyPath: TransitionStateInfoList.Array.data[1].Layer
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8410790543009126724, guid: 8468fa4c8e09695459a2f7572471e55b,
+        type: 3}
+      propertyPath: TransitionStateInfoList.Array.data[2].Layer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8410790543009126724, guid: 8468fa4c8e09695459a2f7572471e55b,
+        type: 3}
+      propertyPath: TransitionStateInfoList.Array.data[3].Layer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8410790543009126724, guid: 8468fa4c8e09695459a2f7572471e55b,
+        type: 3}
+      propertyPath: TransitionStateInfoList.Array.data[4].Layer
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8410790543009126724, guid: 8468fa4c8e09695459a2f7572471e55b,
         type: 3}
@@ -403,6 +418,26 @@ PrefabInstance:
         type: 3}
       propertyPath: TransitionStateInfoList.Array.data[1].TriggerNameHash
       value: 1415618140
+      objectReference: {fileID: 0}
+    - target: {fileID: 8410790543009126724, guid: 8468fa4c8e09695459a2f7572471e55b,
+        type: 3}
+      propertyPath: TransitionStateInfoList.Array.data[2].TransitionIndex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8410790543009126724, guid: 8468fa4c8e09695459a2f7572471e55b,
+        type: 3}
+      propertyPath: TransitionStateInfoList.Array.data[2].TriggerNameHash
+      value: 1974221544
+      objectReference: {fileID: 0}
+    - target: {fileID: 8410790543009126724, guid: 8468fa4c8e09695459a2f7572471e55b,
+        type: 3}
+      propertyPath: TransitionStateInfoList.Array.data[3].TriggerNameHash
+      value: -324703406
+      objectReference: {fileID: 0}
+    - target: {fileID: 8410790543009126724, guid: 8468fa4c8e09695459a2f7572471e55b,
+        type: 3}
+      propertyPath: TransitionStateInfoList.Array.data[4].TriggerNameHash
+      value: -1683858492
       objectReference: {fileID: 0}
     - target: {fileID: 8410790543009126724, guid: 8468fa4c8e09695459a2f7572471e55b,
         type: 3}
@@ -426,6 +461,36 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8410790543009126724, guid: 8468fa4c8e09695459a2f7572471e55b,
         type: 3}
+      propertyPath: TransitionStateInfoList.Array.data[2].DestinationState
+      value: 1974221544
+      objectReference: {fileID: 0}
+    - target: {fileID: 8410790543009126724, guid: 8468fa4c8e09695459a2f7572471e55b,
+        type: 3}
+      propertyPath: TransitionStateInfoList.Array.data[2].OriginatingState
+      value: 2081823275
+      objectReference: {fileID: 0}
+    - target: {fileID: 8410790543009126724, guid: 8468fa4c8e09695459a2f7572471e55b,
+        type: 3}
+      propertyPath: TransitionStateInfoList.Array.data[3].DestinationState
+      value: -324703406
+      objectReference: {fileID: 0}
+    - target: {fileID: 8410790543009126724, guid: 8468fa4c8e09695459a2f7572471e55b,
+        type: 3}
+      propertyPath: TransitionStateInfoList.Array.data[3].OriginatingState
+      value: 1974221544
+      objectReference: {fileID: 0}
+    - target: {fileID: 8410790543009126724, guid: 8468fa4c8e09695459a2f7572471e55b,
+        type: 3}
+      propertyPath: TransitionStateInfoList.Array.data[4].DestinationState
+      value: -1683858492
+      objectReference: {fileID: 0}
+    - target: {fileID: 8410790543009126724, guid: 8468fa4c8e09695459a2f7572471e55b,
+        type: 3}
+      propertyPath: TransitionStateInfoList.Array.data[4].OriginatingState
+      value: -324703406
+      objectReference: {fileID: 0}
+    - target: {fileID: 8410790543009126724, guid: 8468fa4c8e09695459a2f7572471e55b,
+        type: 3}
       propertyPath: TransitionStateInfoList.Array.data[0].TransitionDuration
       value: 0
       objectReference: {fileID: 0}
@@ -433,6 +498,16 @@ PrefabInstance:
         type: 3}
       propertyPath: TransitionStateInfoList.Array.data[1].TransitionDuration
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8410790543009126724, guid: 8468fa4c8e09695459a2f7572471e55b,
+        type: 3}
+      propertyPath: TransitionStateInfoList.Array.data[3].TransitionDuration
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 8410790543009126724, guid: 8468fa4c8e09695459a2f7572471e55b,
+        type: 3}
+      propertyPath: TransitionStateInfoList.Array.data[4].TransitionDuration
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 8541470699786124171, guid: 8468fa4c8e09695459a2f7572471e55b,
         type: 3}
@@ -552,7 +627,9 @@ MonoBehaviour:
   mouseMovement: {fileID: 831939996720355351}
   playerAnimation: {fileID: 8920344854508572487}
   playerHealth: {fileID: 1673985521950328931}
-  HitboxCollider: {fileID: 0}
+  LockEnemyTarget: {fileID: 0}
+  moveWhileComboMaxDistance: 2
+  moveWhileComboDuration: 0.6
   tank_playerWeapon: {fileID: 7727020092802202058}
   tankAbility_BarbarianShout: {fileID: 4288378132987168278}
   tankAbility_GroundSmash: {fileID: -2883226893010950193}
@@ -574,16 +651,22 @@ MonoBehaviour:
   WeaponHolderState: 0
   SwordWeaponData: {fileID: 11400000, guid: dcff6a9be35097b438d9cac4991a5382, type: 2}
   effectpos: {fileID: 9164154332981973159}
-  attackRange: {fileID: 4728507105197983812}
-  attackRangeHolder: {fileID: 6058639542969173605}
-  slashEffectPrefab: {fileID: 3864607183413600524, guid: 24f0647931927464aaabbad80046084c,
+  attackPoint: {fileID: 4728507105197983812}
+  attackPointHolder: {fileID: 6058639542969173605}
+  VFX_NA_Combo_1: {fileID: 3864607183413600524, guid: 24f0647931927464aaabbad80046084c,
     type: 3}
-  slashEffectPrefab2: {fileID: 3864607183413600524, guid: 4f179be89e710d448a7362307a07de88,
+  VFX_NA_Combo_2: {fileID: 3864607183413600524, guid: b553c81e5915816428b1e9faa41c7679,
+    type: 3}
+  VFX_NA_Combo_3: {fileID: 3864607183413600524, guid: 5a9c8e1b3fb09a44abfcbfd7de51e247,
+    type: 3}
+  NA_Combo_1_Clip: {fileID: -203655887218126122, guid: 39e9f381d3fa07342ac9c97750859ea5,
+    type: 3}
+  NA_Combo_2_Clip: {fileID: 4061839508520268033, guid: 39e9f381d3fa07342ac9c97750859ea5,
+    type: 3}
+  NA_Combo_3_Clip: {fileID: 8842878171678463616, guid: 39e9f381d3fa07342ac9c97750859ea5,
     type: 3}
   tank_PlayerController: {fileID: 5698460776653806195}
   audioSource: {fileID: 655031338406326071}
-  IsSlash: 0
-  DrawPower: 0
 --- !u!114 &4288378132987168278
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -27,8 +27,10 @@ public class TankAbility_BarbarianShout : PlayerAbility
     {
         Debug.Log($"Start {AbilityData.Name} duration: {AbilityData.StopMoveDuration}");
         playerController.SetCanPlayerMove(false);
+        playerController.playerAnimation.SetLayerWeight(1, 0);
 
         yield return new WaitForSeconds(AbilityData.StopMoveDuration);
+        playerController.playerAnimation.SetLayerWeight(1, 1);
 
         playerController.PlayerCharacterData.DefenseBonus += AbilityData.DefenseBonus;
 

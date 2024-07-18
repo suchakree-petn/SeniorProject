@@ -9,8 +9,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField, ReadOnlyGUI] private bool isGrounded;
     [SerializeField, ReadOnlyGUI] private bool isOnSlope;
     [SerializeField, ReadOnlyGUI] private bool isRunning;
-    private bool IsDyinng => playerController.IsPlayerDie;
+    private bool IsDying => playerController.IsPlayerDie;
     [ReadOnlyGUI] public bool CanMove;
+    public bool IsGrouded => isGrounded;
     [SerializeField, ReadOnlyGUI] private Vector3 moveDirection = Vector3.zero;
     public Rigidbody PlayerRigidbody => playerRb;
 
@@ -196,7 +197,7 @@ public class PlayerMovement : MonoBehaviour
             playerMovementConfig.MovementPenaltyPercentage += playerMovementConfig.InAirPenaltyPercentage;
         }
 
-        if (IsDyinng)
+        if (IsDying)
         {
             playerMovementConfig.MovementPenaltyPercentage += playerMovementConfig.DyingMovingPenaltyPercentage;
         }
@@ -207,7 +208,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void PlayerJump(InputAction.CallbackContext context)
     {
-        if (context.performed && isGrounded && CanMove && !IsDyinng)
+        if (context.performed && isGrounded && CanMove && !IsDying)
         {
             Debug.Log(playerRb.GetInstanceID());
             playerRb.velocity = new(playerRb.velocity.x, 0, playerRb.velocity.z);
@@ -218,14 +219,14 @@ public class PlayerMovement : MonoBehaviour
 
     public void PlayerRun(InputAction.CallbackContext context)
     {
-        if (!isRunning && !IsDyinng)
+        if (!isRunning && !IsDying)
         {
             isRunning = true;
         }
     }
     public void PlayerStopRun(InputAction.CallbackContext context)
     {
-        if (isRunning || IsDyinng)
+        if (isRunning || IsDying)
         {
             isRunning = false;
         }

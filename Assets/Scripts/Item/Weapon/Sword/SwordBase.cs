@@ -4,7 +4,10 @@ using UnityEngine;
 
 public abstract class SwordBase : WeaponBase
 {
-    public float LightAttack_DamageMultiplier;
-    public float HeavyAttack_DamageMultiplier;
+    public float NA_Combo_1_DamageMultiplier;
+    public float NA_Combo_2_DamageMultiplier;
+    public float NA_Combo_3_DamageMultiplier;
+
+    public float NA_AttackRange;
     
 }
