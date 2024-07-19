@@ -1,11 +1,15 @@
+using System;
 using System.Collections;
 using TheKiwiCoder;
 using Unity.Netcode;
 using Unity.Netcode.Components;
 using UnityEngine;
 using UnityEngine.AI;
+using DG.Tweening;
 public class EnemyController : NetworkBehaviour, IDamageable
 {
+    public Action OnEnemyDead;
+
     [SerializeField] protected EnemyCharacterData _enemyCharacterData;
     public EnemyCharacterData EnemyCharacterData => _enemyCharacterData;
 
@@ -25,12 +29,19 @@ public class EnemyController : NetworkBehaviour, IDamageable
     public Animator animator;
     public Collider hitBox;
     public Collider critHitBox;
+    [SerializeField] private GameObject mesh;
+    private Material dissolveMaterial;
 
     protected virtual void Awake()
     {
+        dissolveMaterial = mesh.GetComponent<Renderer>().material;
         if (!IsOwner) return;
-        enemyRb = GetComponent<Rigidbody>();
     }
+
+    protected virtual void Start()
+    {
+    }
+
 
     public override void OnNetworkSpawn()
     {
@@ -77,11 +88,26 @@ public class EnemyController : NetworkBehaviour, IDamageable
     {
     }
 
+    public void OnEnemyDead_Dissolve()
+    {
+        Debug.Log("Dissolve");
+        mesh.layer = 0;
+        dissolveMaterial.DOFloat(1, "_Dissolve", 2).SetEase(Ease.OutSine);
+    }
+
     [ClientRpc]
     public virtual void TakeDamage_ClientRpc(AttackDamage damage)
     {
-        // if (!IsOwner) return;
         enemyHealth.TakeDamage(damage, EnemyCharacterData.GetDefense());
+        Debug.Log("CurrentHealth: " + enemyHealth.CurrentHealth);
+        if (enemyHealth.IsDead)
+        {
+            StopMoving();
+            hitBox.enabled = false;
+            critHitBox.enabled = false;
+            OnEnemyDead?.Invoke();
+            Debug.Log("OnEnemyDead fired");
+        }
     }
 
     [ClientRpc]
@@ -95,11 +121,6 @@ public class EnemyController : NetworkBehaviour, IDamageable
     public virtual void TakeDamage_ServerRpc(AttackDamage damage)
     {
         TakeDamage_ClientRpc(damage);
-        if (enemyHealth.IsDead)
-        {
-            hitBox.enabled = false;
-            critHitBox.enabled = false;
-        }
     }
     public void StopMoving()
     {
@@ -158,7 +179,6 @@ public class EnemyController : NetworkBehaviour, IDamageable
     }
     public IEnumerator DelayDestroy(float time)
     {
-        Debug.Log($"Start delay destroy");
         yield return new WaitForSeconds(time);
         GetComponent<NetworkObject>().Despawn();
         Destroy(gameObject);

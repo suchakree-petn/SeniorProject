@@ -4,8 +4,18 @@ using UnityEngine;
 
 public abstract class EntityHealth : NetworkBehaviour
 {
-    public NetworkVariable<float> currentHealth = new(1337, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
-    public float CurrentHealth => currentHealth.Value;
+    [SerializeField] private NetworkVariable<float> currentHealth = new(1337, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+    public float CurrentHealth
+    {
+        get
+        {
+            return currentHealth.Value;
+        }
+        set
+        {
+            currentHealth.Value = value;
+        }
+    }
     private float maxHp;
     public float MaxHp => maxHp;
     public bool IsDead => CurrentHealth <= 0;
@@ -16,12 +26,12 @@ public abstract class EntityHealth : NetworkBehaviour
 
         float damageTook = CalcDamageRecieve(damage, defense);
         currentHealth.Value -= damageTook;
-        Debug.Log($"Entity {name} took {damageTook} damage");
+        // Debug.Log($"Entity {name} took {damageTook} damage");
     }
     public virtual void TakeHeal(AttackDamage damage)
     {
         currentHealth.Value += damage.Damage;
-        Debug.Log($"Entity {name} took {damage.Damage} heal");
+        // Debug.Log($"Entity {name} took {damage.Damage} heal");
     }
     public virtual float CalcDamageRecieve(AttackDamage damage, float defense)
     {

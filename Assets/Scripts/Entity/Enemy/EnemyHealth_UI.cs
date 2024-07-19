@@ -10,7 +10,6 @@ public class EnemyHealth_UI : MonoBehaviour
 
     public void SetHpBar(float hpPercentage)
     {
-        Debug.Log("Set Hp Bar: Monster");
         hpFill.fillAmount = hpPercentage;
     }
 }

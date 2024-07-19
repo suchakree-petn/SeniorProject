@@ -17,7 +17,7 @@ public class EnemyHealth : EntityHealth
 
             if (CurrentHealth < 0)
             {
-                currentHealth.Value = 0;
+                CurrentHealth = 0;
             }
             OnEnemyTakeDamage?.Invoke(damage);
         }
@@ -31,7 +31,7 @@ public class EnemyHealth : EntityHealth
 
             if (CurrentHealth > MaxHp)
             {
-                currentHealth.Value = MaxHp;
+                CurrentHealth = MaxHp;
             }
         }
     }

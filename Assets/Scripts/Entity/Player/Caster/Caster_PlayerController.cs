@@ -30,11 +30,11 @@ public partial class Caster_PlayerController : PlayerController
 
         if (playerHealth.CurrentHealth < PlayerCharacterData.GetMaxHp())
         {
-            playerHealth.currentHealth.Value += Time.deltaTime * 20;
+            playerHealth.CurrentHealth += Time.deltaTime * 20;
         }
         if (playerHealth.CurrentHealth > PlayerCharacterData.GetMaxHp())
         {
-            playerHealth.currentHealth.Value = PlayerCharacterData.GetMaxHp();
+            playerHealth.CurrentHealth = PlayerCharacterData.GetMaxHp();
         }
 
     }

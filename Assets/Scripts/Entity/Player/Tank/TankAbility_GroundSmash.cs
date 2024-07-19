@@ -11,7 +11,6 @@ public class TankAbility_GroundSmash : PlayerAbility
     public AudioSource audioSource;
     public override void ActivateAbility(ulong userClientId)
     {
-        Debug.Log($"{AbilityData.Name} activated");
         Tank_PlayerController playerController = GetComponent<Tank_PlayerController>();
         TargetLayer = playerController.PlayerCharacterData.TargetLayer;
 
@@ -27,7 +26,6 @@ public class TankAbility_GroundSmash : PlayerAbility
     IEnumerator ActiveDuration(Tank_PlayerController playerController)
     {
 
-        Debug.Log($"Start {AbilityData.Name} duration: {AbilityData.StopMoveDuration}");
         playerController.SetCanPlayerMove(false);
         playerController.playerAnimation.SetLayerWeight(1, 0);
 
@@ -37,14 +35,12 @@ public class TankAbility_GroundSmash : PlayerAbility
         Vector3 origin = transform.position + (transform.forward * AbilityData.PositionOffsetX);
         RaycastHit[] hits = Physics.BoxCastAll(origin, new(AbilityData.Radius, 2, AbilityData.Radius), transform.forward);
         List<EnemyController> enemyControllers = new();
-        Debug.Log("Hits count: " + hits.Length);
         foreach (RaycastHit hit in hits)
         {
             // if (hit.collider == null) continue;
 
             if (hit.collider.transform.root.TryGetComponent(out EnemyController enemyController))
             {
-                Debug.Log("Here");
                 if (enemyControllers.Contains(enemyController)) continue;
                 enemyControllers.Add(enemyController);
                 enemyController.StartStun_ServerRpc();

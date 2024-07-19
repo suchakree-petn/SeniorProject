@@ -17,7 +17,7 @@ public class PlayerHealth : EntityHealth
 
             if (CurrentHealth < 0)
             {
-                currentHealth.Value = 0;
+                CurrentHealth = 0;
             }
 
             if (CurrentHealth == 0)
@@ -37,7 +37,7 @@ public class PlayerHealth : EntityHealth
 
             if (CurrentHealth > maxHp)
             {
-                currentHealth.Value = maxHp;
+                CurrentHealth = maxHp;
             }
         }
         UIHPBar.Instance.SetHP_ServerRpc(NetworkManager.LocalClientId);

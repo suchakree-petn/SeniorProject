@@ -23,6 +23,7 @@ TagManager:
   - Hitbox
   - CriticalHitbox
   - Selectable
+  - Sound Soucre
   layers:
   - Default
   - TransparentFX
@@ -33,8 +34,8 @@ TagManager:
   - PlayerCharacter
   - NonPlayerCharacter
   - PlayerAttackObject
-  - 
-  - 
+  - Outline_Enemy
+  - Outline_Player
   - 
   - 
   - 

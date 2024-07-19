@@ -5,9 +5,10 @@ using TMPro;
 using Unity.Services.Lobbies.Models;
 using UnityEngine.UI;
 
-public class LobbyListSingleUI : MonoBehaviour {
+public class LobbyListSingleUI : MonoBehaviour
+{
 
-    
+
     // [SerializeField] private TextMeshProUGUI lobbyNameText;
     // [SerializeField] private TextMeshProUGUI playersText;
     // [SerializeField] private TextMeshProUGUI stageText;
@@ -19,20 +20,29 @@ public class LobbyListSingleUI : MonoBehaviour {
     private Lobby lobby;
 
 
-    private void Awake() {
+    private void Awake()
+    {
 
     }
 
-    public void UpdateLobby(Lobby lobby) {
+    public void UpdateLobby(Lobby lobby)
+    {
         this.lobby = lobby;
 
         lobbyNameText.text = lobby.Name;
-        playersText.text = "Member: "+ lobby.Players.Count + "/" + lobby.MaxPlayers;
+        playersText.text = "Member: " + lobby.Players.Count + "/" + lobby.MaxPlayers;
         stageText.text = lobby.Data[GameLobbyManager.KEY_STAGE_ID].Value;
     }
-    public void JoinLobby(){
+    public void JoinLobby()
+    {
         GameLobbyManager.Instance.JoinWithId(lobby.Id);
     }
+
+    private void OnMouseDown()
+    {
+        JoinLobby();
+    }
+
 
 
 }

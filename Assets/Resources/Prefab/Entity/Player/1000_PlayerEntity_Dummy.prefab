@@ -932,7 +932,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 1171210223
+  GlobalObjectIdHash: 1676546360
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
   ActiveSceneSynchronization: 0
@@ -961,7 +961,8 @@ MonoBehaviour:
   mouseMovement: {fileID: 2931534758810841118}
   playerAnimation: {fileID: 6408107913954600782}
   playerHealth: {fileID: 3755565199410241642}
-  HitboxCollider: {fileID: 4238448583515551294}
+  meshRenderer_character: {fileID: 0}
+  meshRenderer_weapon: {fileID: 0}
 --- !u!54 &1041791184314300143
 Rigidbody:
   m_ObjectHideFlags: 0

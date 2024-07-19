@@ -18,13 +18,13 @@ public class Spider_EnemyController : EnemyController
     [Header("Spider Reference")]
     [SerializeField] private Transform attackPointTransform;
 
-    private void Start()
+    protected override void Start()
     {
-
+        base.Start();
     }
     private void Update()
     {
-        if (!IsServer || !IsSpawned || enemyHealth.CurrentHealth <= 0) return;
+        if (!IsServer || !IsSpawned ) return;
         if (Vector3.Distance(transform.position, target.position) > attackRange + 2 && isFinishAttack && CanMove)
         {
             if (!IsTaunted)
@@ -78,6 +78,9 @@ public class Spider_EnemyController : EnemyController
         isReadyToAttack = true;
         isFinishAttack = true;
     }
+
+
+
     protected override void OnEnable()
     {
         base.OnEnable();
@@ -96,14 +99,12 @@ public class Spider_EnemyController : EnemyController
     [ServerRpc(RequireOwnership = false)]
     public override void TakeDamage_ServerRpc(AttackDamage damage)
     {
-        Debug.Log($"Before: {enemyHealth.CurrentHealth}");
         base.TakeDamage_ServerRpc(damage);
-        Debug.Log($"After: {enemyHealth.CurrentHealth}");
 
         if (enemyHealth.CurrentHealth <= 0)
         {
             networkAnimator.SetTrigger("Death");
-            StartCoroutine(DelayDestroy(1.5f));
+            StartCoroutine(DelayDestroy(4f));
         }
     }
 

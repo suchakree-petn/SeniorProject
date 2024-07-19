@@ -132,13 +132,11 @@ public class Tank_PlayerWeapon : PlayerWeapon
 
         foreach (RaycastHit hit in hits)
         {
-            Debug.Log("outif" + hit.transform.gameObject.name);
 
             if (hit.collider.transform.root.TryGetComponent(out IDamageable damageable)
             && hit.collider.transform.root.TryGetComponent(out EnemyController _)
             && hit.collider.CompareTag("Hitbox"))
             {
-                Debug.Log("inif" + hit.transform.root.gameObject.name);
                 damageable.TakeDamage_ServerRpc(attackDamage);
             }
         }

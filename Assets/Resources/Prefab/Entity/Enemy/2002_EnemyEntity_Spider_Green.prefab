@@ -314,6 +314,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5023896876588504443, guid: 5134e637dc0b31c4fad23fac8e303af9,
         type: 3}
+      propertyPath: mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5023896876588504443, guid: 5134e637dc0b31c4fad23fac8e303af9,
+        type: 3}
       propertyPath: attackPower
       value: 250
       objectReference: {fileID: 0}

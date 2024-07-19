@@ -24,11 +24,23 @@ public class PlayerController : NetworkBehaviour, IDamageable
     [SerializeField] protected MouseMovement mouseMovement;
     public PlayerAnimation playerAnimation;
     [SerializeField] protected PlayerHealth playerHealth;
+    [SerializeField] private Renderer meshRenderer_character;
+    [SerializeField]
+    private Renderer meshRenderer_weapon
+    ;
 
 
     protected virtual void Start()
     {
+        if (IsLocalPlayer)
+        {
+            meshRenderer_character.gameObject.layer = 0;
 
+            if (meshRenderer_weapon != null)
+            {
+                meshRenderer_weapon.gameObject.layer = 0;
+            }
+        }
     }
 
     public override void OnNetworkSpawn()

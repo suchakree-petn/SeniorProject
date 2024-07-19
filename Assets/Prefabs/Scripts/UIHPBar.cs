@@ -13,7 +13,6 @@ public class UIHPBar : NetworkSingleton<UIHPBar>
     [ServerRpc(RequireOwnership = false)]
     public void SetHP_ServerRpc(ulong clientId)
     {
-        Debug.Log("Set Hp");
         GameObject playerGo = PlayerManager.Instance.PlayerGameObjects[clientId];
         PlayerHealth playerHealth = playerGo.GetComponent<PlayerHealth>();
         int currentHp = (int)playerHealth.CurrentHealth;
