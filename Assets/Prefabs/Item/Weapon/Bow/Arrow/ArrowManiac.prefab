@@ -136,6 +136,71 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3403304395738904866, guid: 849c39f219f0730498e338d46b9b8283,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3403304395738904866, guid: 849c39f219f0730498e338d46b9b8283,
+        type: 3}
+      propertyPath: ShapeModule.type
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 3403304395738904866, guid: 849c39f219f0730498e338d46b9b8283,
+        type: 3}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3403304395738904866, guid: 849c39f219f0730498e338d46b9b8283,
+        type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 11.29
+      objectReference: {fileID: 0}
+    - target: {fileID: 3403304395738904866, guid: 849c39f219f0730498e338d46b9b8283,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3403304395738904866, guid: 849c39f219f0730498e338d46b9b8283,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 0.80302215
+      objectReference: {fileID: 0}
+    - target: {fileID: 3403304395738904866, guid: 849c39f219f0730498e338d46b9b8283,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3403304395738904866, guid: 849c39f219f0730498e338d46b9b8283,
+        type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key0.g
+      value: 0.17767382
+      objectReference: {fileID: 0}
+    - target: {fileID: 3403304395738904866, guid: 849c39f219f0730498e338d46b9b8283,
+        type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key0.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3403304395738904866, guid: 849c39f219f0730498e338d46b9b8283,
+        type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.m_ColorSpace
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3403304395738904867, guid: 849c39f219f0730498e338d46b9b8283,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+    - target: {fileID: 3403304395738904893, guid: 849c39f219f0730498e338d46b9b8283,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3403304395923492349, guid: 849c39f219f0730498e338d46b9b8283,
+        type: 3}
+      propertyPath: m_Time
+      value: 0.25
+      objectReference: {fileID: 0}
     - target: {fileID: 3403304395923492349, guid: 849c39f219f0730498e338d46b9b8283,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -143,8 +208,13 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: a9671f396574f8c41bfe9b68825436fb, type: 2}
     - target: {fileID: 3403304395923492349, guid: 849c39f219f0730498e338d46b9b8283,
         type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3403304395923492349, guid: 849c39f219f0730498e338d46b9b8283,
+        type: 3}
       propertyPath: m_Parameters.colorGradient.key0.g
-      value: 0.1377711
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3403304395923492349, guid: 849c39f219f0730498e338d46b9b8283,
         type: 3}
@@ -239,17 +309,17 @@ PrefabInstance:
     - target: {fileID: 4010580131365827827, guid: 849c39f219f0730498e338d46b9b8283,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -36.49797
       objectReference: {fileID: 0}
     - target: {fileID: 4010580131365827827, guid: 849c39f219f0730498e338d46b9b8283,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 3.96
       objectReference: {fileID: 0}
     - target: {fileID: 4010580131365827827, guid: 849c39f219f0730498e338d46b9b8283,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 7.4
       objectReference: {fileID: 0}
     - target: {fileID: 4010580131365827827, guid: 849c39f219f0730498e338d46b9b8283,
         type: 3}
@@ -286,6 +356,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4105984271259515462, guid: 849c39f219f0730498e338d46b9b8283,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4105984271259515462, guid: 849c39f219f0730498e338d46b9b8283,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a9671f396574f8c41bfe9b68825436fb, type: 2}
     - target: {fileID: 4269340218531131940, guid: 849c39f219f0730498e338d46b9b8283,
         type: 3}
       propertyPath: m_UseGravity
@@ -311,6 +391,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ArrowManiac
       objectReference: {fileID: 0}
+    - target: {fileID: 7568383275163936872, guid: 849c39f219f0730498e338d46b9b8283,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: ea225c58d4b5ff84a8f4d0f54d132518, type: 2}
     - target: {fileID: 7712574691992090605, guid: 849c39f219f0730498e338d46b9b8283,
         type: 3}
       propertyPath: m_Enabled
@@ -318,7 +403,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7712574691992090605, guid: 849c39f219f0730498e338d46b9b8283, type: 3}
-    m_RemovedGameObjects: []
+    - {fileID: 4105984271259515462, guid: 849c39f219f0730498e338d46b9b8283, type: 3}
+    - {fileID: 2242675762862968460, guid: 849c39f219f0730498e338d46b9b8283, type: 3}
+    m_RemovedGameObjects:
+    - {fileID: 3403304396477312567, guid: 849c39f219f0730498e338d46b9b8283, type: 3}
+    - {fileID: 3403304397601500444, guid: 849c39f219f0730498e338d46b9b8283, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 4010580131365827827, guid: 849c39f219f0730498e338d46b9b8283,
         type: 3}
@@ -366,7 +455,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 4222893815
+  GlobalObjectIdHash: 1556712961
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
   ActiveSceneSynchronization: 0
@@ -396,6 +485,7 @@ MonoBehaviour:
     m_Bits: 128
   arrowRb: {fileID: 8061907753506239663}
   hitBox: {fileID: 849230728615703393}
+  glitter: {fileID: 0}
 --- !u!114 &2523471324822981060
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -21,6 +21,7 @@ public class EnemyController : NetworkBehaviour, IDamageable
     public bool CanMove = true;
     public bool IsTaunted = false;
     public bool IsStun = false;
+    public bool IsDead => enemyHealth.IsDead;
 
     [Header("Reference")]
     public EnemyHealth enemyHealth;
@@ -40,6 +41,7 @@ public class EnemyController : NetworkBehaviour, IDamageable
 
     protected virtual void Start()
     {
+        OnEnemyDead += () => enemyHealth.GetEnemyHealth_UI().gameObject.SetActive(false);
     }
 
 
@@ -81,7 +83,10 @@ public class EnemyController : NetworkBehaviour, IDamageable
         {
             direction = (target.position - transform.position).normalized;
         }
-        enemyRb.transform.rotation = Quaternion.LookRotation(direction);
+        if (direction != Vector3.zero && CanMove)
+        {
+            enemyRb.transform.forward = direction;
+        }
     }
 
     protected virtual void OnEnable()
@@ -90,7 +95,6 @@ public class EnemyController : NetworkBehaviour, IDamageable
 
     public void OnEnemyDead_Dissolve()
     {
-        Debug.Log("Dissolve");
         mesh.layer = 0;
         dissolveMaterial.DOFloat(1, "_Dissolve", 2).SetEase(Ease.OutSine);
     }
@@ -99,14 +103,12 @@ public class EnemyController : NetworkBehaviour, IDamageable
     public virtual void TakeDamage_ClientRpc(AttackDamage damage)
     {
         enemyHealth.TakeDamage(damage, EnemyCharacterData.GetDefense());
-        Debug.Log("CurrentHealth: " + enemyHealth.CurrentHealth);
         if (enemyHealth.IsDead)
         {
             StopMoving();
             hitBox.enabled = false;
             critHitBox.enabled = false;
             OnEnemyDead?.Invoke();
-            Debug.Log("OnEnemyDead fired");
         }
     }
 
@@ -125,7 +127,6 @@ public class EnemyController : NetworkBehaviour, IDamageable
     public void StopMoving()
     {
         if (!IsOwner) return;
-        Debug.Log("Stop moving");
         CanMove = false;
         agent.isStopped = true;
         animator.SetFloat("VelocityZ", 0);
@@ -135,7 +136,6 @@ public class EnemyController : NetworkBehaviour, IDamageable
     [ServerRpc(RequireOwnership = false)]
     public void StartTaunt_ServerRpc(NetworkObjectReference tauntTarget)
     {
-        Debug.Log(gameObject.name + " are taunted");
         if (tauntTarget.TryGet(out NetworkObject networkObject))
         {
             target = networkObject.transform;
@@ -154,7 +154,6 @@ public class EnemyController : NetworkBehaviour, IDamageable
     [ServerRpc(RequireOwnership = false)]
     public void StartStun_ServerRpc()
     {
-        Debug.Log(gameObject.name + " are stun");
         StopMoving();
         IsStun = true;
     }
@@ -168,7 +167,6 @@ public class EnemyController : NetworkBehaviour, IDamageable
     public void Moving()
     {
         if (!IsOwner) return;
-        Debug.Log("Moving");
         CanMove = true;
         agent.isStopped = false;
     }

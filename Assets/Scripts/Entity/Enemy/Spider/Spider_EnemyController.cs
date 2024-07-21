@@ -48,7 +48,7 @@ public class Spider_EnemyController : EnemyController
         }
     }
 
-    private void NormalAttack()
+    public void NormalAttack()
     {
         RaycastHit[] hits = Physics.SphereCastAll(attackPointTransform.position, attackRange, attackPointTransform.forward, attackRange, EnemyCharacterData.TargetLayer);
         foreach (RaycastHit hit in hits)

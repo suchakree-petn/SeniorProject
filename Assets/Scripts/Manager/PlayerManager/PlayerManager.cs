@@ -155,10 +155,13 @@ public partial class PlayerManager : NetworkSingleton<PlayerManager>
         ulong clientId = default;
         foreach (NetworkClient item in NetworkManager.ConnectedClientsList)
         {
-            float distant = Vector3.Distance(position, PlayerPos[item.ClientId]);
-            if (distant < closestDistant)
+            PlayerController playerController = item.PlayerObject.GetComponent<PlayerController>();
+            if(playerController.IsDead) continue;
+            
+            float distance = Vector3.Distance(position, PlayerPos[item.ClientId]);
+            if (distance < closestDistant)
             {
-                closestDistant = distant;
+                closestDistant = distance;
                 clientId = item.ClientId;
             }
         }

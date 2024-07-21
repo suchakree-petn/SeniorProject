@@ -6,15 +6,15 @@ public class ArrowManiac : NetworkBehaviour
     public AttackDamage AttackDamage;
     public LayerMask TargetLayer;
 
-    [Header("Base Reference")]
+    [Header("Reference")]
     [SerializeField] private Rigidbody arrowRb;
     [SerializeField] private SphereCollider hitBox;
+    public ParticleSystem glitter;
 
     public override void OnNetworkSpawn()
     {
         if (!IsServer) return;
         hitBox.includeLayers = TargetLayer;
-
 
     }
     public virtual void OnTriggerEnter(Collider other)

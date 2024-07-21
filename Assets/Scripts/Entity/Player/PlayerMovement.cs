@@ -9,7 +9,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField, ReadOnlyGUI] private bool isGrounded;
     [SerializeField, ReadOnlyGUI] private bool isOnSlope;
     [SerializeField, ReadOnlyGUI] private bool isRunning;
-    private bool IsDying => playerController.IsPlayerDie;
+    private bool IsDying => playerController.IsDead;
     [ReadOnlyGUI] public bool CanMove;
     public bool IsGrouded => isGrounded;
     [SerializeField, ReadOnlyGUI] private Vector3 moveDirection = Vector3.zero;

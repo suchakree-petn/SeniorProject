@@ -56,6 +56,23 @@ public partial class Tank_PlayerController : PlayerController
         if (!IsOwner) return;
         base.LateUpdate();
 
+        PlayerUIManager playerUIManager = PlayerUIManager.Instance;
+        if (LockEnemyTarget != null)
+        {
+            if (!LockEnemyTarget.GetComponent<EnemyController>().IsDead)
+            {
+                playerUIManager.SetLockTargetState(true);
+                playerUIManager.SetLockTargetPosition(LockEnemyTarget.transform.position, false);
+            }
+            else
+            {
+                playerUIManager.SetLockTargetState(false);
+            }
+        }
+        else
+        {
+            playerUIManager.SetLockTargetState(false);
+        }
         // TankAnimation();
     }
 
@@ -85,7 +102,7 @@ public partial class Tank_PlayerController : PlayerController
     }
     private void MoveToLockTargetWhenAttack()
     {
-        if (LockEnemyTarget == null)
+        if (LockEnemyTarget == null || LockEnemyTarget.GetComponent<EnemyController>().IsDead)
         {
             transform.DOMove(transform.position + (transform.forward * moveWhileComboMaxDistance), moveWhileComboDuration).SetEase(Ease.InSine);
         }
@@ -109,7 +126,7 @@ public partial class Tank_PlayerController : PlayerController
     }
     private void LockTarget(InputAction.CallbackContext context)
     {
-        if (LockEnemyTarget == null)
+        if (LockEnemyTarget == null || LockEnemyTarget.GetComponent<EnemyController>().IsDead)
         {
             LockEnemyTarget = GetClosestEnemy();
         }
@@ -132,6 +149,8 @@ public partial class Tank_PlayerController : PlayerController
         int index = 0;
         for (int i = 0; i < allEnemyInScene.Length; i++)
         {
+            if(allEnemyInScene[i].GetComponent<EnemyController>().IsDead) continue;
+            
             Transform enemyTransform = allEnemyInScene[i].transform;
             float distance = Vector3.Distance(enemyTransform.position, transform.root.position);
             if (distance < closestEnemyDistance)
@@ -145,25 +164,32 @@ public partial class Tank_PlayerController : PlayerController
 
     private void SwitchLockTarget()
     {
-        if (LockEnemyTarget == null)
+        if (LockEnemyTarget != null)
+        {
+            if (LockEnemyTarget.GetComponent<EnemyController>().IsDead)
+            {
+                LockTarget(new());
+                return;
+            }
+        }
+        else
         {
             LockTarget(new());
             return;
         }
 
-        // Define the screen bounds in world space
-        Camera mainCamera = Camera.main;
-        Vector3 screenCenter = mainCamera.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, mainCamera.nearClipPlane));
-        float screenWidth = Screen.width;
-        float screenHeight = Screen.height;
-
-        Vector3 boxSize = new(screenWidth, screenHeight, mainCamera.farClipPlane);
-
-        Collider[] allEnemyCol = Physics.OverlapBox(screenCenter, boxSize / 2, mainCamera.transform.rotation, PlayerCharacterData.TargetLayer);
+        Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
+        RaycastHit[] hits = Physics.SphereCastAll(ray, 8, 50, PlayerCharacterData.TargetLayer);
         List<GameObject> allEnemy = new();
-        foreach (Collider col in allEnemyCol)
+        foreach (RaycastHit hit in hits)
         {
-            allEnemy.Add(col.transform.root.gameObject);
+            GameObject enemy = hit.transform.root.gameObject;
+            if (!allEnemy.Contains(enemy) && !enemy.GetComponent<EnemyController>().IsDead)
+            {
+                Debug.Log("Hits " + hit.transform.gameObject.name);
+                allEnemy.Add(enemy);
+            }
+
         }
 
         int lockIndex = 0;
@@ -178,9 +204,13 @@ public partial class Tank_PlayerController : PlayerController
                 }
             }
         }
+        else
+        {
+            return;
+        }
 
         lockIndex++;
-        if (lockIndex > allEnemy.Count)
+        if (lockIndex > allEnemy.Count - 1)
         {
             lockIndex = 0;
         }

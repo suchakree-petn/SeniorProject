@@ -74,9 +74,9 @@ public class ArcherAbility_ArrowManiac : PlayerAbility
         vfxTransform.localPosition = new Vector3(0, AbilityData.VFXOffset, 0);
         activeVFX = vfxTransform.gameObject;
 
-        Destroy(activeVFX,AbilityData.VFXDuration);
+        Destroy(activeVFX, AbilityData.VFXDuration);
     }
-    
+
     [ServerRpc(RequireOwnership = false)]
     private void ClearOldArrow_ServerRpc()
     {
@@ -140,7 +140,6 @@ public class ArcherAbility_ArrowManiac : PlayerAbility
             CancelInvoke(nameof(FireArrowManiac));
             return;
         }
-        Debug.Log($"Fire Arrow");
         Transform arrow = ArrowManiac_List[0];
         ArrowManiac arrowManiac = arrow.GetComponent<ArrowManiac>();
         Archer_PlayerController archer_PlayerController = GetComponent<Archer_PlayerController>();
@@ -148,6 +147,8 @@ public class ArcherAbility_ArrowManiac : PlayerAbility
         ArrowManiac_List.RemoveAt(0);
         arrow.GetComponent<Rigidbody>().AddForce(ArrowManiac_Destination[0] * AbilityData.ArrowSpeed, ForceMode.Impulse);
         ArrowManiac_Destination.RemoveAt(0);
+
+        arrowManiac.glitter.Play();
     }
 
     private void OnEnable()

@@ -1,6 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+using DG.Tweening;
 using TMPro;
 using Unity.Netcode;
 using UnityEngine;
@@ -8,13 +6,17 @@ using UnityEngine.UI;
 
 public class PlayerUIManager : NetworkSingleton<PlayerUIManager>
 {
-    [Header("Reference")]
+    [SerializeField] private float FS_Hit_Intensity = 0.1f;
+    [SerializeField] private float FS_Hit_Duration = 0.3f;
+
+    [Header("In Game Reference")]
     public GameObject PlayerCanvas;
     [SerializeField] private GameObject crossHair;
     [SerializeField] private GameObject lockTarget;
     [SerializeField] private GameObject respawnCountdownUI;
     [SerializeField] private TextMeshProUGUI respawnCountdownUI_text;
     [SerializeField] private GameObject resultUI;
+    [SerializeField] private Material fullScreen_Hit;
 
     public float RespawnCountdown = 10;
     private float respawnCountdown;
@@ -129,5 +131,21 @@ public class PlayerUIManager : NetworkSingleton<PlayerUIManager>
     public void SetLockTargetState(bool isActive)
     {
         lockTarget.SetActive(isActive);
+    }
+
+    public void FullScreen_Player_Hit()
+    {
+        fullScreen_Hit.DOKill();
+        Debug.Log("PlayerUI: FS_Hit");
+        fullScreen_Hit.DOFloat(FS_Hit_Intensity, "_Intensity", FS_Hit_Duration).OnComplete(() =>
+        {
+            fullScreen_Hit.DOFloat(0, "_Intensity", FS_Hit_Duration);
+        });
+    }
+
+    public override void OnDestroy()
+    {
+        base.OnDestroy();
+        fullScreen_Hit.SetFloat("_Intensity", 0);
     }
 }

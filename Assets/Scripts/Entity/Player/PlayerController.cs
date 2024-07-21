@@ -16,7 +16,8 @@ public class PlayerController : NetworkBehaviour, IDamageable
 
     public Action<PlayerCameraMode, PlayerCameraMode> OnPlayerCameraModeChanged;
     public Action OnPlayerDie;
-    public bool IsPlayerDie;
+    public Action OnPlayerTakeDamage;
+    public bool IsDead;
     public bool IsGrounded => playerMovement.IsGrouded;
 
     [Header("Reference")]
@@ -41,6 +42,8 @@ public class PlayerController : NetworkBehaviour, IDamageable
                 meshRenderer_weapon.gameObject.layer = 0;
             }
         }
+
+        OnPlayerTakeDamage += PlayerUIManager.Instance.FullScreen_Player_Hit;
     }
 
     public override void OnNetworkSpawn()
@@ -203,6 +206,7 @@ public class PlayerController : NetworkBehaviour, IDamageable
         else
         {
             playerHealth.TakeDamage(damage, PlayerCharacterData.GetDefense());
+            OnPlayerTakeDamage?.Invoke();
         }
     }
 
@@ -238,16 +242,16 @@ public class PlayerController : NetworkBehaviour, IDamageable
 
     public void PlayerController_OnPlayerDie()
     {
-        IsPlayerDie = true;
+        IsDead = true;
         // Animation
-        playerAnimation.SetBool("IsDying", IsPlayerDie);
+        playerAnimation.SetBool("IsDying", IsDead);
         PlayerUIManager.Instance.ShowRespawnCountdown();
         Invoke(nameof(WaitForRespawn), 10);
     }
     private void WaitForRespawn()
     {
-        IsPlayerDie = false;
-        playerAnimation.SetBool("IsDying", IsPlayerDie);
+        IsDead = false;
+        playerAnimation.SetBool("IsDying", IsDead);
         PlayerUIManager.Instance.HideRespawnCountdown();
         AttackDamage healAmount = new()
         {

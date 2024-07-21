@@ -31,7 +31,7 @@ public class Tank_PlayerWeapon : PlayerWeapon
     public override void UseWeapon(InputAction.CallbackContext context)
     {
         if (_attackInterval > 0) return;
-        if (tank_PlayerController.IsPlayerDie) return;
+        if (tank_PlayerController.IsDead) return;
         if (!tank_PlayerController.IsGrounded) return;
 
         if (context.performed)
