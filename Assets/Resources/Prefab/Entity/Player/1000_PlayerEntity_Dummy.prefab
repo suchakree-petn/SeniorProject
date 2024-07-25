@@ -956,7 +956,7 @@ MonoBehaviour:
   _playerCharacterData: {fileID: 11400000, guid: dc71539b9cfcab4418d31da4b305ae0d,
     type: 2}
   OuterForce: {x: 0, y: 0, z: 0}
-  IsPlayerDie: 0
+  IsDead: 0
   playerMovement: {fileID: 8562730884081978089}
   mouseMovement: {fileID: 2931534758810841118}
   playerAnimation: {fileID: 6408107913954600782}
@@ -1077,7 +1077,7 @@ MonoBehaviour:
     maxSlope: 45
     groundMask:
       serializedVersion: 2
-      m_Bits: 8
+      m_Bits: 2048
     RunSpeedBonusPercentage: 50
     InAirPenaltyPercentage: 0
     DyingMovingPenaltyPercentage: 0
