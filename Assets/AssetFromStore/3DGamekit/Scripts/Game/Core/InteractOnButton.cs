@@ -9,28 +9,30 @@ namespace Gamekit3D
     public class InteractOnButton : InteractOnTrigger
     {
 
-        public string buttonName = "X";
+        public KeyCode Button = KeyCode.F;
         public UnityEvent OnButtonPress;
 
         bool canExecuteButtons = false;
 
         protected override void ExecuteOnEnter(Collider other)
         {
+            base.ExecuteOnEnter(other);
             canExecuteButtons = true;
         }
 
         protected override void ExecuteOnExit(Collider other)
         {
+            base.ExecuteOnExit(other);
             canExecuteButtons = false;
         }
 
         void Update()
         {
-            if (canExecuteButtons && Input.GetButtonDown(buttonName))
+            if (canExecuteButtons && Input.GetKeyDown(Button))
             {
                 OnButtonPress.Invoke();
             }
         }
 
-    } 
+    }
 }
