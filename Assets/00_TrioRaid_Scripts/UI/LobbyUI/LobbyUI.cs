@@ -204,7 +204,7 @@ public class LobbyUI : MonoBehaviour
             GameObject paperGameObject;
             for (int j = 0; j < 6; j++)
             {
-                if (!paperList.GetChild(j).gameObject.active)
+                if (!paperList.GetChild(j).gameObject.activeSelf)
                 {
                     paperGameObject = paperList.GetChild(j).gameObject;
                     paperGameObject.gameObject.SetActive(true);

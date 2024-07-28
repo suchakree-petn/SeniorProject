@@ -7,6 +7,8 @@ using UnityEngine;
 
 public partial class PlayerManager : NetworkSingleton<PlayerManager>
 {
+    public PlayerController LocalPlayerController { get; private set; }
+
     private static Dictionary<ulong, Transform> _playerCharacterPrefab;
     public static Dictionary<ulong, Transform> PlayerCharacterPrefab
     {
@@ -25,11 +27,30 @@ public partial class PlayerManager : NetworkSingleton<PlayerManager>
 
     public Dictionary<ulong, GameObject> PlayerGameObjects { get; private set; } = new();
     public Dictionary<PlayerRole, GameObject> PlayerGameObjectsByRole { get; private set; } = new();
+
+    private Dictionary<ulong, Vector3> playerPos;
     public Dictionary<ulong, Vector3> PlayerPos
     {
         get
         {
-            return PlayerGameObjects.ToDictionary(key => key.Key, val => val.Value.transform.position);
+            if (playerPos == null)
+            {
+                playerPos = PlayerGameObjects.ToDictionary(key => key.Key, val => val.Value.transform.position);
+            }
+            return playerPos;
+        }
+    }
+
+    private Dictionary<ulong, PlayerController> playerControllers;
+    public Dictionary<ulong, PlayerController> PlayerControllers
+    {
+        get
+        {
+            if (playerControllers == null)
+            {
+                playerControllers = PlayerGameObjects.ToDictionary(key => key.Key, val => val.Value.GetComponent<PlayerController>());
+            }
+            return playerControllers;
         }
     }
 
@@ -62,7 +83,6 @@ public partial class PlayerManager : NetworkSingleton<PlayerManager>
     }
     private void PlayerManager_OnClientConnectedHandler(ulong clientId)
     {
-        Debug.Log("Id Value: " + clientId);
         ulong PLAYER_CHAR_ID;
         int playerDataIndex = GameMultiplayerManager.Instance.GetPlayerDataIndexFromClientId(clientId);
         var playerDatasList = GameMultiplayerManager.Instance.GetPlayerDataNetworkList();
@@ -116,6 +136,11 @@ public partial class PlayerManager : NetworkSingleton<PlayerManager>
                 {
                     Debug.LogWarning($"Already contain this clientId");
                 }
+
+                if (clientId == player.NetworkManager.LocalClientId)
+                {
+                    LocalPlayerController = player;
+                }
             }
         }
         if (!isAddAll)
@@ -156,8 +181,8 @@ public partial class PlayerManager : NetworkSingleton<PlayerManager>
         foreach (NetworkClient item in NetworkManager.ConnectedClientsList)
         {
             PlayerController playerController = item.PlayerObject.GetComponent<PlayerController>();
-            if(playerController.IsDead) continue;
-            
+            if (playerController.IsDead) continue;
+
             float distance = Vector3.Distance(position, PlayerPos[item.ClientId]);
             if (distance < closestDistant)
             {

@@ -58,24 +58,24 @@ public partial class Archer_PlayerController : PlayerController
     {
         if (PlayerCameraMode.Focus == PlayerCameraMode)
         {
-            playerAnimation.SetLayerWeight(1, Mathf.Lerp(playerAnimation.GetLayerWeight(1), 1, Time.deltaTime * 10));
+            PlayerAnimation.SetLayerWeight(1, Mathf.Lerp(PlayerAnimation.GetLayerWeight(1), 1, Time.deltaTime * 10));
             WalkAnimationWhileFocus();
 
             if (archer_playerWeapon.IsDrawing)
             {
-                playerAnimation.SetLayerWeight(2, 1);
+                PlayerAnimation.SetLayerWeight(2, 1);
                 DrawingBowAnimation();
             }
             else
             {
-                playerAnimation.SetLayerWeight(2, 0);
-                playerAnimation.SetFloat("DrawPower", 0);
+                PlayerAnimation.SetLayerWeight(2, 0);
+                PlayerAnimation.SetFloat("DrawPower", 0);
             }
         }
         else
         {
-            playerAnimation.SetLayerWeight(2, 0);
-            playerAnimation.SetLayerWeight(1, Mathf.Lerp(playerAnimation.GetLayerWeight(1), 0, Time.deltaTime * 10));
+            PlayerAnimation.SetLayerWeight(2, 0);
+            PlayerAnimation.SetLayerWeight(1, Mathf.Lerp(PlayerAnimation.GetLayerWeight(1), 0, Time.deltaTime * 10));
         }
     }
 
@@ -88,20 +88,20 @@ public partial class Archer_PlayerController : PlayerController
         finalVelocity = playerMovement.GetMoveSpeedRatioOfNormalMoveSpeed(finalVelocity);
         if (PlayerInputManager.Instance.MovementAction.IsPressed())
         {
-            playerAnimation.SetMoveVelocityX(finalVelocity.x);
-            playerAnimation.SetMoveVelocityZ(finalVelocity.z);
+            PlayerAnimation.SetMoveVelocityX(finalVelocity.x);
+            PlayerAnimation.SetMoveVelocityZ(finalVelocity.z);
         }
         else
         {
             finalVelocity -= playerMovement.PlayerMovementConfig.groundDrag * Time.fixedDeltaTime * finalVelocity;
-            playerAnimation.SetMoveVelocityX(finalVelocity.x);
-            playerAnimation.SetMoveVelocityZ(finalVelocity.z);
+            PlayerAnimation.SetMoveVelocityX(finalVelocity.x);
+            PlayerAnimation.SetMoveVelocityZ(finalVelocity.z);
         }
     }
     private void DrawingBowAnimation()
     {
         float drawPowerRatio = archer_playerWeapon.DrawPower / archer_playerWeapon.BowConfig.MaxDrawPower;
-        playerAnimation.SetFloat("DrawPower", drawPowerRatio);
+        PlayerAnimation.SetFloat("DrawPower", drawPowerRatio);
     }
 
     public Archer_PlayerWeapon GetArcherWeapon()

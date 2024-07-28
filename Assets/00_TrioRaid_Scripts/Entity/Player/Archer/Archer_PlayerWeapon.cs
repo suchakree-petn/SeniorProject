@@ -70,7 +70,7 @@ public class Archer_PlayerWeapon : PlayerWeapon
             Debug.LogWarning($"No Fire Point transform");
             return;
         }
-        if (Input.GetMouseButton(0))
+        if (PlayerInputManager.Instance.Attack.WasPerformedThisFrame())
         {
             IsDrawing = true;
         }
@@ -80,12 +80,12 @@ public class Archer_PlayerWeapon : PlayerWeapon
             DrawBow();
         }
 
-        if (Input.GetMouseButtonUp(0) && DrawPower > 0)
+        if (PlayerInputManager.Instance.Attack.WasReleasedThisFrame() && DrawPower > 0)
         {
             NormalAttack();
             IsDrawing = false;
             DrawPower = 0;
-            OnUseWeapon?.Invoke(new());
+            OnUseWeapon?.Invoke();
         }
 
 
@@ -215,7 +215,7 @@ public class Archer_PlayerWeapon : PlayerWeapon
     protected override void OnEnable()
     {
         playerController.OnPlayerCameraModeChanged += SetWeaponHolderPosition;
-        OnUseWeapon += (serverRpcAttribute) => StartWeaponCooldown(BowWeaponData.AttackTimeInterval);
+        OnUseWeapon += () => StartWeaponCooldown(BowWeaponData.AttackTimeInterval);
         if (!IsOwner) return;
 
 

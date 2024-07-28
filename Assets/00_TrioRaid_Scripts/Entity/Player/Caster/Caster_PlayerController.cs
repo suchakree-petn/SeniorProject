@@ -46,9 +46,9 @@ public partial class Caster_PlayerController : PlayerController
         {
             WalkAnimationWhileFocus();
         }
-        else if (playerAnimation.GetLayerWeight(1) > 0)
+        else if (PlayerAnimation.GetLayerWeight(1) > 0)
         {
-            playerAnimation.SetLayerWeight(1, Mathf.Lerp(playerAnimation.GetLayerWeight(1), 0, Time.deltaTime * 10));
+            PlayerAnimation.SetLayerWeight(1, Mathf.Lerp(PlayerAnimation.GetLayerWeight(1), 0, Time.deltaTime * 10));
         }
     }
 
@@ -75,11 +75,11 @@ public partial class Caster_PlayerController : PlayerController
 
 
 
-    private void HealOrbAnimation(ServerRpcParams serverRpcParams = default)
+    private void HealOrbAnimation()
     {
         if (caster_playerWeapon.IsReadyToUse)
         {
-            playerAnimation.SetTriggerNetworkAnimation("HealOrb");
+            PlayerAnimation.SetTriggerNetworkAnimation("HealOrb");
             Debug.Log("Heal orb anim");
         }
         else
@@ -92,7 +92,7 @@ public partial class Caster_PlayerController : PlayerController
 
     private void WalkAnimationWhileFocus()
     {
-        playerAnimation.SetLayerWeight(1, Mathf.Lerp(playerAnimation.GetLayerWeight(1), 1, Time.deltaTime * 10));
+        PlayerAnimation.SetLayerWeight(1, Mathf.Lerp(PlayerAnimation.GetLayerWeight(1), 1, Time.deltaTime * 10));
 
         Vector3 finalVelocity = playerMovement.GetMovementForce();
         finalVelocity = new(finalVelocity.x, 0f, finalVelocity.z);
@@ -101,14 +101,14 @@ public partial class Caster_PlayerController : PlayerController
         finalVelocity = playerMovement.GetMoveSpeedRatioOfNormalMoveSpeed(finalVelocity);
         if (PlayerInputManager.Instance.MovementAction.IsPressed())
         {
-            playerAnimation.SetMoveVelocityX(finalVelocity.x);
-            playerAnimation.SetMoveVelocityZ(finalVelocity.z);
+            PlayerAnimation.SetMoveVelocityX(finalVelocity.x);
+            PlayerAnimation.SetMoveVelocityZ(finalVelocity.z);
         }
         else
         {
             finalVelocity -= playerMovement.PlayerMovementConfig.groundDrag * Time.fixedDeltaTime * finalVelocity;
-            playerAnimation.SetMoveVelocityX(finalVelocity.x);
-            playerAnimation.SetMoveVelocityZ(finalVelocity.z);
+            PlayerAnimation.SetMoveVelocityX(finalVelocity.x);
+            PlayerAnimation.SetMoveVelocityZ(finalVelocity.z);
         }
     }
 

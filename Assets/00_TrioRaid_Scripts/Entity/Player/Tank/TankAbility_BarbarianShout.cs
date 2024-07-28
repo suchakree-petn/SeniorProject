@@ -8,13 +8,19 @@ public class TankAbility_BarbarianShout : PlayerAbility
     public TankAbilityData_BarbarianShout AbilityData;
     public LayerMask TargetLayer;
     public AudioSource audioSource;
+
+    protected override void Update()
+    {
+        base.Update();
+    }
+
     public override void ActivateAbility(ulong userClientId)
     {
         Debug.Log($"{AbilityData.Name} activated");
         Tank_PlayerController playerController = GetComponent<Tank_PlayerController>();
         TargetLayer = playerController.PlayerCharacterData.TargetLayer;
         audioSource.Play();
-        playerController.playerAnimation.SetTriggerNetworkAnimation("Barbarianshout");
+        playerController.PlayerAnimation.SetTriggerNetworkAnimation("Barbarianshout");
         StartCoroutine(ActiveDuration(playerController));
 
         AbilityUIManager.Instance.OnUseAbility_Q?.Invoke(AbilityData.Cooldown);
@@ -27,10 +33,10 @@ public class TankAbility_BarbarianShout : PlayerAbility
     {
         Debug.Log($"Start {AbilityData.Name} duration: {AbilityData.StopMoveDuration}");
         playerController.SetCanPlayerMove(false);
-        playerController.playerAnimation.SetLayerWeight(1, 0);
+        playerController.PlayerAnimation.SetLayerWeight(1, 0);
 
         yield return new WaitForSeconds(AbilityData.StopMoveDuration);
-        playerController.playerAnimation.SetLayerWeight(1, 1);
+        playerController.PlayerAnimation.SetLayerWeight(1, 1);
 
         playerController.PlayerCharacterData.DefenseBonus += AbilityData.DefenseBonus;
 

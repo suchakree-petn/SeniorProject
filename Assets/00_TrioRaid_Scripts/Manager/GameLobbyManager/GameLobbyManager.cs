@@ -150,6 +150,7 @@ public partial class GameLobbyManager : NetworkSingleton<GameLobbyManager>
         catch (LobbyServiceException e)
         {
             Debug.LogWarning(e);
+            OnCreateLobbyFailed.Invoke(this, EventArgs.Empty);
         }
 
     }
@@ -288,6 +289,8 @@ public partial class GameLobbyManager : NetworkSingleton<GameLobbyManager>
         catch (LobbyServiceException e)
         {
             Debug.LogWarning(e);
+            OnQuickJoinFailed.Invoke(this, EventArgs.Empty);
+
         }
     }
     public async void JoinWithId(string lobbyId)

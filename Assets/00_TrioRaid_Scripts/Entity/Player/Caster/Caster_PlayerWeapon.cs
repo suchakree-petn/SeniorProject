@@ -33,7 +33,7 @@ public class Caster_PlayerWeapon : PlayerWeapon
         if (context.performed)
         {
             NormalAttack();
-            OnUseWeapon?.Invoke(new());
+            OnUseWeapon?.Invoke();
         }
 
 
@@ -124,7 +124,7 @@ public class Caster_PlayerWeapon : PlayerWeapon
 
     protected override void OnEnable()
     {
-        OnUseWeapon += (serverRpcParams) => StartWeaponCooldown(MagicItemWeaponData.AttackTimeInterval);
+        OnUseWeapon += () => StartWeaponCooldown(MagicItemWeaponData.AttackTimeInterval);
         if (!IsOwner) return;
     }
 }

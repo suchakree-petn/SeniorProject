@@ -23,13 +23,13 @@ public class PlayerController : NetworkBehaviour, IDamageable
     [Header("Reference")]
     [SerializeField] protected PlayerMovement playerMovement;
     [SerializeField] protected MouseMovement mouseMovement;
-    public PlayerAnimation playerAnimation;
+    [SerializeField] protected PlayerWeapon playerWeapon;
+    [SerializeField] protected PlayerAbility playerAbilityE;
+    [SerializeField] protected PlayerAbility playerAbilityQ;
+    public PlayerAnimation PlayerAnimation;
     [SerializeField] protected PlayerHealth playerHealth;
     [SerializeField] private Renderer meshRenderer_character;
-    [SerializeField]
-    private Renderer meshRenderer_weapon
-    ;
-
+    [SerializeField] private Renderer meshRenderer_weapon;
 
     protected virtual void Start()
     {
@@ -134,14 +134,14 @@ public class PlayerController : NetworkBehaviour, IDamageable
         finalVelocity = playerMovement.GetMoveSpeedRatioOfMaxMoveSpeed(finalVelocity);
         if (PlayerInputManager.Instance.MovementAction.IsPressed())
         {
-            playerAnimation.SetMoveVelocityX(finalVelocity.x);
-            playerAnimation.SetMoveVelocityZ(finalVelocity.z);
+            PlayerAnimation.SetMoveVelocityX(finalVelocity.x);
+            PlayerAnimation.SetMoveVelocityZ(finalVelocity.z);
         }
         else
         {
             finalVelocity -= playerMovement.PlayerMovementConfig.groundDrag * Time.fixedDeltaTime * finalVelocity;
-            playerAnimation.SetMoveVelocityX(finalVelocity.x);
-            playerAnimation.SetMoveVelocityZ(finalVelocity.z);
+            PlayerAnimation.SetMoveVelocityX(finalVelocity.x);
+            PlayerAnimation.SetMoveVelocityZ(finalVelocity.z);
         }
     }
 
@@ -175,7 +175,7 @@ public class PlayerController : NetworkBehaviour, IDamageable
         playerMovement.SetCameraMode(playerCameraMode);
         mouseMovement.SetCameraMode(playerCameraMode);
     }
-    protected virtual void SwitchViewMode(InputAction.CallbackContext context)
+    public virtual void SwitchViewMode(InputAction.CallbackContext context)
     {
         switch (playerCameraMode)
         {
@@ -190,6 +190,24 @@ public class PlayerController : NetworkBehaviour, IDamageable
         }
         Debug.Log($"Switch to {playerCameraMode}");
 
+    }
+
+    public void SwitchViewMode(PlayerCameraMode playerCameraMode)
+    {
+        if (this.playerCameraMode == playerCameraMode) return;
+
+        switch (playerCameraMode)
+        {
+            case PlayerCameraMode.ThirdPerson:
+                SetCameraMode(PlayerCameraMode.ThirdPerson, false);
+                OnPlayerCameraModeChanged?.Invoke(PlayerCameraMode.Focus, PlayerCameraMode.ThirdPerson);
+                break;
+            case PlayerCameraMode.Focus:
+                SetCameraMode(PlayerCameraMode.Focus, true);
+                OnPlayerCameraModeChanged?.Invoke(PlayerCameraMode.ThirdPerson, PlayerCameraMode.Focus);
+                break;
+        }
+        Debug.Log($"Switch to {playerCameraMode}");
     }
 
     public virtual float GetCurrentHp()
@@ -243,18 +261,68 @@ public class PlayerController : NetworkBehaviour, IDamageable
         playerMovement.CanMove = canMove;
     }
 
+    [ClientRpc]
+    public void SetCanPlayerMove_ClientRpc(bool canMove, ulong clientId)
+    {
+        if (!IsLocalPlayer) return;
+        SetCanPlayerMove(canMove);
+    }
+
+    public void SetIsReadyToAttack(bool isReady)
+    {
+        playerWeapon.IsReadyToUse = isReady;
+    }
+
+    [ClientRpc]
+    public void SetIsReadyToAttack_ClientRpc(bool isReady, ulong clientId)
+    {
+        if (NetworkManager.LocalClientId != clientId) return;
+        SetIsReadyToAttack(isReady);
+    }
+
+    public void SetCanUseAbilityE(bool canUseAbilityE)
+    {
+        playerAbilityE.CanUse = canUseAbilityE;
+    }
+
+    [ClientRpc]
+    public void SetCanUseAbilityE_ClientRpc(bool canUseAbilityE, ulong clientId)
+    {
+        if (NetworkManager.LocalClientId != clientId) return;
+
+        SetCanUseAbilityE(canUseAbilityE);
+    }
+
+    public void SetCanUseAbilityQ(bool canUseAbilityQ)
+    {
+        playerAbilityQ.CanUse = canUseAbilityQ;
+    }
+
+    [ClientRpc]
+    public void SetCanUseAbilityQ_ClientRpc(bool canUseAbilityQ, ulong clientId)
+    {
+        if (NetworkManager.LocalClientId != clientId) return;
+
+        SetCanUseAbilityE(canUseAbilityQ);
+    }
+
+    public void SetPlayerVisible(bool visible)
+    {
+        meshRenderer_character.enabled = visible;
+    }
+
     public void PlayerController_OnPlayerDie()
     {
         IsDead = true;
         // Animation
-        playerAnimation.SetBool("IsDying", IsDead);
+        PlayerAnimation.SetBool("IsDying", IsDead);
         PlayerUIManager.Instance.ShowRespawnCountdown();
         Invoke(nameof(WaitForRespawn), 10);
     }
     private void WaitForRespawn()
     {
         IsDead = false;
-        playerAnimation.SetBool("IsDying", IsDead);
+        PlayerAnimation.SetBool("IsDying", IsDead);
         PlayerUIManager.Instance.HideRespawnCountdown();
         AttackDamage healAmount = new()
         {

@@ -9,6 +9,12 @@ public class CasterAbility_PowerUp : PlayerAbility
     public CasterAbilityData_PowerUp AbilityData;
     private GameObject activeVFX;
     public AudioSource audioSource;
+
+    protected override void Update()
+    {
+        base.Update();
+    }
+
     public override void ActivateAbility(ulong userClientId)
     {
         Debug.Log($"{AbilityData.Name} activated");
@@ -24,7 +30,7 @@ public class CasterAbility_PowerUp : PlayerAbility
 
         if (caster_PlayerWeapon.currentLockTargetTransform == null) return;
 
-        playerController.playerAnimation.SetTriggerNetworkAnimation("PowerUp");
+        playerController.PlayerAnimation.SetTriggerNetworkAnimation("PowerUp");
         StartCoroutine(ActiveSkill(caster_PlayerWeapon,AbilityData.castDelay));
         
 

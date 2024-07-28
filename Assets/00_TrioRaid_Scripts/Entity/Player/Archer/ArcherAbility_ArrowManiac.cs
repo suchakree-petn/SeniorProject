@@ -1,30 +1,48 @@
 using System.Collections;
 using System.Collections.Generic;
+using Mono.CSharp;
 using Unity.Netcode;
 using UnityEngine;
 
 public class ArcherAbility_ArrowManiac : PlayerAbility
 {
     public ArcherAbilityData_ArrowManiac AbilityData;
+    public float ChargeSpeed = 0.2f;
     public List<Transform> ArrowManiac_List;
     public List<Vector3> ArrowManiac_Destination;
     public Transform ArrowManiacSpawnGroup;
     private LayerMask TargetLayer;
-    private GameObject activeVFX;
+    private GameObject groundVFX;
     public AudioSource audioSource;
+    public Archer_PlayerController archer_PlayerController;
 
+    protected override void Update()
+    {
+        base.Update();
+
+        if (IsActive)
+        {
+            Archer_PlayerWeapon archer_PlayerWeapon = archer_PlayerController.GetArcherWeapon();
+            if (archer_PlayerWeapon.DrawPower >= archer_PlayerWeapon.BowConfig.MaxDrawPower)
+            {
+                SpawnArrowManiac_ServerRpc();
+                archer_PlayerWeapon.DrawPower = 0;
+            }
+        }
+
+    }
     public override void ActivateAbility(ulong userClientId)
     {
         Debug.Log($"{AbilityData.Name} activated");
         Archer_PlayerController playerController = GetComponent<Archer_PlayerController>();
         TargetLayer = playerController.PlayerCharacterData.TargetLayer;
 
-        if (activeVFX != null)
+        if (groundVFX != null)
         {
-            Destroy(activeVFX);
+            Destroy(groundVFX);
         }
         audioSource.Play();
-        SpawnVFX(transform);
+        SpawnGroundVFX(transform);
         SpawnVFX_ServerRpc(userClientId);
         StartCoroutine(ActiveDuration(AbilityData.Duration, playerController));
 
@@ -38,16 +56,31 @@ public class ArcherAbility_ArrowManiac : PlayerAbility
     {
 
         Debug.Log($"Start {AbilityData.Name} duration: {duration}");
+        IsActive = true;
+
         playerController.SetCanPlayerMove(false);
+        playerController.SwitchViewMode(PlayerCameraMode.Focus);
+
         Archer_PlayerWeapon archer_PlayerWeapon = playerController.GetArcherWeapon();
-        archer_PlayerWeapon.OnUseWeapon += SpawnArrowManiac_ServerRpc;
+        archer_PlayerWeapon.IsDrawing = true;
+        float temp_drawSpeed = archer_PlayerWeapon.BowConfig.DrawSpeed;
+        archer_PlayerWeapon.BowConfig.DrawSpeed = ChargeSpeed;
+
+        PlayerInputManager.Instance.Attack.Disable();
+        PlayerInputManager.Instance.SwitchViewMode.Disable();
 
         yield return new WaitForSeconds(duration);
 
-        archer_PlayerWeapon.OnUseWeapon -= SpawnArrowManiac_ServerRpc;
-        CancelInvoke(nameof(FireArrowManiac));
+        IsActive = false;
 
-        yield return new WaitForSeconds(2);
+        PlayerInputManager.Instance.Attack.Enable();
+        PlayerInputManager.Instance.SwitchViewMode.Enable();
+
+        archer_PlayerWeapon.DrawPower = 0;
+        archer_PlayerWeapon.IsDrawing = false;
+        archer_PlayerWeapon.BowConfig.DrawSpeed = temp_drawSpeed;
+
+        CancelInvoke(nameof(FireArrowManiac));
 
         ClearOldArrow_ServerRpc();
         ArrowManiac_List.Clear();
@@ -59,22 +92,22 @@ public class ArcherAbility_ArrowManiac : PlayerAbility
     [ServerRpc(RequireOwnership = false)]
     private void SpawnVFX_ServerRpc(ulong userClientId)
     {
-        SpawnVFX_ClientRpc(userClientId);
+        SpawnGroundVFX_ClientRpc(userClientId);
     }
     [ClientRpc]
-    private void SpawnVFX_ClientRpc(ulong userClientId)
+    private void SpawnGroundVFX_ClientRpc(ulong userClientId)
     {
         if (NetworkManager.LocalClientId == userClientId) return;
 
-        SpawnVFX(transform);
+        SpawnGroundVFX(transform);
     }
-    private void SpawnVFX(Transform parent)
+    private void SpawnGroundVFX(Transform parent)
     {
-        Transform vfxTransform = Instantiate(AbilityData.VFX_prf, parent);
+        Transform vfxTransform = Instantiate(AbilityData.VFX_Ground_prf, parent);
         vfxTransform.localPosition = new Vector3(0, AbilityData.VFXOffset, 0);
-        activeVFX = vfxTransform.gameObject;
+        groundVFX = vfxTransform.gameObject;
 
-        Destroy(activeVFX, AbilityData.VFXDuration);
+        Destroy(groundVFX, AbilityData.VFXDuration);
     }
 
     [ServerRpc(RequireOwnership = false)]
@@ -104,7 +137,7 @@ public class ArcherAbility_ArrowManiac : PlayerAbility
             CalcDirection_ClientRpc(serverRpcParams.Receive.SenderClientId, child.position);
         }
         CancelInvoke(nameof(FireArrowManiac));
-        InvokeRepeating(nameof(FireArrowManiac), 0.3f, AbilityData.TimeInterval);
+        InvokeRepeating(nameof(FireArrowManiac), 0.1f, AbilityData.TimeInterval);
     }
 
     [ClientRpc]

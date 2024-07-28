@@ -8,6 +8,12 @@ public class ArcherAbility_VineTrap : PlayerAbility
 
     private GameObject activeVineTrap;
     public AudioSource audioSource;
+
+    protected override void Update()
+    {
+        base.Update();
+    }
+    
     public override void ActivateAbility(ulong userClientId)
     {
         Debug.Log($"{archerAbilityData.Name} activated");

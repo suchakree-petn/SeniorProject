@@ -33,6 +33,7 @@ public class Tank_PlayerWeapon : PlayerWeapon
         if (_attackInterval > 0) return;
         if (tank_PlayerController.IsDead) return;
         if (!tank_PlayerController.IsGrounded) return;
+        if (!IsReadyToUse) return;
 
         if (context.performed)
         {
@@ -40,19 +41,19 @@ public class Tank_PlayerWeapon : PlayerWeapon
             if (comboIndex == 1)
             {
                 comboTimeInterval = NA_Combo_1_Clip.length;
-                tank_PlayerController.playerAnimation.SetTriggerNetworkAnimation("NA_Combo_1");
+                tank_PlayerController.PlayerAnimation.SetTriggerNetworkAnimation("NA_Combo_1");
             }
             else if (comboIndex == 2 && comboTimeInterval > 0)
             {
                 comboTimeInterval = NA_Combo_2_Clip.length;
-                tank_PlayerController.playerAnimation.SetTriggerNetworkAnimation("NA_Combo_2");
+                tank_PlayerController.PlayerAnimation.SetTriggerNetworkAnimation("NA_Combo_2");
             }
             else if (comboIndex == 3 && comboTimeInterval > 0)
             {
                 comboTimeInterval = NA_Combo_3_Clip.length;
-                tank_PlayerController.playerAnimation.SetTriggerNetworkAnimation("NA_Combo_3");
+                tank_PlayerController.PlayerAnimation.SetTriggerNetworkAnimation("NA_Combo_3");
             }
-            OnUseWeapon?.Invoke(new());
+            OnUseWeapon?.Invoke();
             _attackInterval = SwordWeaponData.AttackTimeInterval;
 
         }
@@ -174,7 +175,7 @@ public class Tank_PlayerWeapon : PlayerWeapon
 
     protected override void OnEnable()
     {
-        OnUseWeapon += (serverRpcParams) => StartWeaponCooldown(SwordWeaponData.AttackTimeInterval);
+        // OnUseWeapon += (serverRpcParams) => StartWeaponCooldown(SwordWeaponData.AttackTimeInterval);
     }
 
 

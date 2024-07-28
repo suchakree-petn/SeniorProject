@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 
 public abstract class PlayerWeapon : NetworkBehaviour
 {
-    public Action<ServerRpcParams> OnUseWeapon;
+    public Action OnUseWeapon;
     public bool IsReadyToUse = true;
     protected Coroutine weaponCooldown;
 

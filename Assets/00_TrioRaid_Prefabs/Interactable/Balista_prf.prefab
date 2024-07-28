@@ -90,7 +90,7 @@ Transform:
   m_GameObject: {fileID: 587497646781728253}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.385409, y: 1.2703753, z: -0.36818492}
+  m_LocalPosition: {x: -0.9126682, y: 1.3440123, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1016,7 +1016,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 4073236882
+  GlobalObjectIdHash: 388497781
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
   ActiveSceneSynchronization: 0
@@ -1036,15 +1036,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 460cc3fff0be5774ca52becd818d9732, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  repairProgress:
+    m_InternalValue: 0
+  RepairMaxProgress: 100
   isInUse:
     m_InternalValue: 0
   RotateSpeed: 0.5
   MaxCameraPitch: 60
+  UsingPlayer: {fileID: 0}
   text_interactButton: {fileID: 591857450129120334}
   use_interactButton: {fileID: 248737751355993603}
   exit_interactButton: {fileID: 1052447456490298170}
   povTransform: {fileID: 4148369993730136090}
   povCam: {fileID: 4870456492629152130}
+  animator: {fileID: 0}
 --- !u!65 &7817844189018134885
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1394,11 +1399,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd6043bde05a7fc4cba197d06915c1e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Damping: {x: 0.1, y: 0.5, z: 0.3}
-  ShoulderOffset: {x: 0.5, y: -0.4, z: 0}
+  Damping: {x: 0.8, y: 0.5, z: 0.3}
+  ShoulderOffset: {x: 0, y: -0.3, z: 0}
   VerticalArmLength: 0.4
-  CameraSide: 1
-  CameraDistance: 2
+  CameraSide: 0.5
+  CameraDistance: 0
   CameraCollisionFilter:
     serializedVersion: 2
     m_Bits: 0

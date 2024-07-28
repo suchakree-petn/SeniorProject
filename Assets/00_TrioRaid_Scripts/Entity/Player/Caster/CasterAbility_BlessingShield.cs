@@ -9,12 +9,18 @@ public class CasterAbility_BlessingShield : PlayerAbility
     public CasterAbilityData_BlessingShield AbilityData;
     private GameObject activeShield;
     public AudioSource audioSource;
+
+    protected override void Update()
+    {
+        base.Update();
+    }
+
     public override void ActivateAbility(ulong userClientId)
     {
         Debug.Log($"{AbilityData.Name} activated");
         Caster_PlayerController playerController = GetComponent<Caster_PlayerController>();
         UserClientId = playerController.OwnerClientId;
-        
+
         if (activeShield != null)
         {
             Destroy(activeShield);
@@ -22,15 +28,16 @@ public class CasterAbility_BlessingShield : PlayerAbility
         Caster_PlayerWeapon caster_PlayerWeapon = playerController.GetCaster_PlayerWeapon();
 
         if (caster_PlayerWeapon.currentLockTargetTransform == null) return;
-        playerController.playerAnimation.SetTriggerNetworkAnimation("BlessingShield");
-        StartCoroutine(ActiveSkill(caster_PlayerWeapon,AbilityData.castDelay));
+        playerController.PlayerAnimation.SetTriggerNetworkAnimation("BlessingShield");
+        StartCoroutine(ActiveSkill(caster_PlayerWeapon, AbilityData.castDelay));
 
         AbilityUIManager.Instance.OnUseAbility_E?.Invoke(AbilityData.Cooldown);
 
         SetOnCD();
         Invoke(nameof(SetFinishCD), AbilityData.Cooldown);
     }
-    IEnumerator ActiveSkill(Caster_PlayerWeapon caster_PlayerWeapon,float delay){
+    IEnumerator ActiveSkill(Caster_PlayerWeapon caster_PlayerWeapon, float delay)
+    {
         ulong targetClientId = caster_PlayerWeapon.GetCurrentLockTargetClientId();
         yield return new WaitForSeconds(delay);
         audioSource.Play();

@@ -2906,10 +2906,13 @@ MonoBehaviour:
   _playerCharacterData: {fileID: 11400000, guid: 41a375c978d02f342acb5e5ff1b56b4f,
     type: 2}
   OuterForce: {x: 0, y: 0, z: 0}
-  IsPlayerDie: 0
+  IsDead: 0
   playerMovement: {fileID: 6192920143298601696}
   mouseMovement: {fileID: 831939996720355351}
-  playerAnimation: {fileID: 8920344854508572487}
+  playerWeapon: {fileID: 4086381456720999541}
+  playerAbilityE: {fileID: 4375989519964650209}
+  playerAbilityQ: {fileID: 3070919574868137117}
+  PlayerAnimation: {fileID: 8920344854508572487}
   playerHealth: {fileID: 1673985521950328931}
   meshRenderer_character: {fileID: 8894094430919120413}
   meshRenderer_weapon: {fileID: 0}
@@ -2928,6 +2931,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c8499e6ba7e72c4dae8e051fc4b9823, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CanUse: 1
   ActivateKey: 101
   UserClientId: 0
   AbilityData: {fileID: 11400000, guid: 674d1d44a65cb2c4788fa6f0afcac374, type: 2}
@@ -2944,6 +2948,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b012b4d228ec6894ba61c07a81016aa3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CanUse: 1
   ActivateKey: 113
   UserClientId: 0
   AbilityData: {fileID: 11400000, guid: 4ee79697a83f3e34d933df939f672bc4, type: 2}

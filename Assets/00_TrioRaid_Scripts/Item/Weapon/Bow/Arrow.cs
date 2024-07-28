@@ -11,10 +11,25 @@ public abstract class Arrow : MonoBehaviour
     [SerializeField] private SphereCollider hitBox;
     [SerializeField] private GameObject vfx_Hit;
     private GameObject vfx_HitInstance;
+    [SerializeField] private TrailRenderer trailRenderer;
+
 
     protected virtual void Start()
     {
         Destroy(gameObject, 1);
+    }
+
+    private void LateUpdate()
+    {
+        if (arrowRb.velocity.magnitude > 0.1f)
+        {
+            transform.forward = arrowRb.velocity.normalized;
+            trailRenderer.gameObject.SetActive(true);
+        }
+        else
+        {
+            trailRenderer.gameObject.SetActive(true);
+        }
     }
 
     public virtual void OnTriggerEnter(Collider other)

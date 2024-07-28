@@ -9,12 +9,18 @@ public class TankAbility_GroundSmash : PlayerAbility
     public TankAbilityData_GroundSmash AbilityData;
     public LayerMask TargetLayer;
     public AudioSource audioSource;
+
+    protected override void Update()
+    {
+        base.Update();
+    }
+
     public override void ActivateAbility(ulong userClientId)
     {
         Tank_PlayerController playerController = GetComponent<Tank_PlayerController>();
         TargetLayer = playerController.PlayerCharacterData.TargetLayer;
 
-        playerController.playerAnimation.SetTriggerNetworkAnimation("Groundsmash");
+        playerController.PlayerAnimation.SetTriggerNetworkAnimation("Groundsmash");
         StartCoroutine(ActiveDuration(playerController));
 
         AbilityUIManager.Instance.OnUseAbility_E?.Invoke(AbilityData.Cooldown);
@@ -27,11 +33,11 @@ public class TankAbility_GroundSmash : PlayerAbility
     {
 
         playerController.SetCanPlayerMove(false);
-        playerController.playerAnimation.SetLayerWeight(1, 0);
+        playerController.PlayerAnimation.SetLayerWeight(1, 0);
 
         yield return new WaitForSeconds(AbilityData.StopMoveDuration);
 
-        playerController.playerAnimation.SetLayerWeight(1, 1);
+        playerController.PlayerAnimation.SetLayerWeight(1, 1);
         Vector3 origin = transform.position + (transform.forward * AbilityData.PositionOffsetX);
         RaycastHit[] hits = Physics.BoxCastAll(origin, new(AbilityData.Radius, 2, AbilityData.Radius), transform.forward);
         List<EnemyController> enemyControllers = new();

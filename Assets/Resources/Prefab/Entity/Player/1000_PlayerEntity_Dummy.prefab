@@ -903,10 +903,6 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 3755565199410241642}
-    - targetCorrespondingSourceObject: {fileID: 712881128543300860, guid: b116f61db08cf6f49b80c75bfc0b419c,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 3472561861059167791}
   m_SourcePrefab: {fileID: 100100000, guid: b116f61db08cf6f49b80c75bfc0b419c, type: 3}
 --- !u!4 &4421562747518347658 stripped
 Transform:
@@ -932,7 +928,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 1676546360
+  GlobalObjectIdHash: 1171210223
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
   ActiveSceneSynchronization: 0
@@ -959,7 +955,10 @@ MonoBehaviour:
   IsDead: 0
   playerMovement: {fileID: 8562730884081978089}
   mouseMovement: {fileID: 2931534758810841118}
-  playerAnimation: {fileID: 6408107913954600782}
+  playerWeapon: {fileID: 0}
+  playerAbilityE: {fileID: 0}
+  playerAbilityQ: {fileID: 0}
+  PlayerAnimation: {fileID: 6408107913954600782}
   playerHealth: {fileID: 3755565199410241642}
   meshRenderer_character: {fileID: 0}
   meshRenderer_weapon: {fileID: 0}
@@ -1147,18 +1146,6 @@ MonoBehaviour:
     m_InternalValue: 0
   playerController: {fileID: -3906203105981109117}
   miniHpBar: {fileID: 8533457598553105747}
---- !u!114 &3472561861059167791
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8164219173163491055}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 14547b9fefc5b424c973660d50bcc13e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &8541470699786124171 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1018075001130600856, guid: b116f61db08cf6f49b80c75bfc0b419c,

@@ -1,22 +1,30 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using Cinemachine;
 using DG.Tweening;
 using Gamekit3D;
-using Gamekit3D.GameCommands;
 using TMPro;
 using Unity.Netcode;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class BalistaController : NetworkBehaviour
 {
+    [Header("Broken")]
+    public Action OnRepairSuccess;
+
+    [SerializeField] private NetworkVariable<float> repairProgress = new(0);
+    public float RepairProgress => repairProgress.Value;
+    public float RepairMaxProgress = 100;
+    public bool IsRepaired => RepairProgress >= RepairMaxProgress;
+
+
+    [Header("Completed")]
     [SerializeField] private NetworkVariable<bool> isInUse = new(false);
     public bool IsInUse => isInUse.Value;
     public float RotateSpeed = 10;
     public float MaxCameraPitch = 60;
     float cameraPitch;
+
+    public PlayerController UsingPlayer;
 
     [Header("Refererence")]
     [SerializeField] private TextMeshPro text_interactButton;
@@ -24,9 +32,18 @@ public class BalistaController : NetworkBehaviour
     [SerializeField] private InteractOnButton exit_interactButton;
     [SerializeField] private Transform povTransform;
     [SerializeField] private CinemachineVirtualCamera povCam;
+    [SerializeField] private Animator animator;
 
     private void Start()
     {
+        text_interactButton.SetText("<color=#ffa500ff> F </color> Repair");
+
+        OnRepairSuccess += ()=> text_interactButton.SetText("<color=#ffa500ff> F </color> Use Balista");
+    }
+
+    private void Update()
+    {
+        animator.SetFloat("RepairProgress", RepairProgress / RepairMaxProgress);
     }
 
     private void LateUpdate()
@@ -63,13 +80,28 @@ public class BalistaController : NetworkBehaviour
         exit_interactButton.OnButtonPress.RemoveListener(ExitBalista);
     }
 
+    public void AddProgress(float value)
+    {
+        text_interactButton.SetText("<color=#ffa500ff> F </color> Repair");
+
+    }
+
     private void ExitBalista()
     {
         if (IsInUse)
         {
             povCam.Priority = -int.MaxValue;
+
             ShowInteractText();
+            PlayerUIManager.Instance.SetPlayerCrossHairState(false);
+
             ExitBalista_ServerRpc();
+
+            UsingPlayer.SetCanPlayerMove(true);
+            UsingPlayer.SetIsReadyToAttack(true);
+            UsingPlayer.SetCanUseAbilityE(true);
+            UsingPlayer.SetCanUseAbilityQ(true);
+            UsingPlayer.SetPlayerVisible(true);
         }
 
     }
@@ -79,8 +111,18 @@ public class BalistaController : NetworkBehaviour
         if (!IsInUse)
         {
             povCam.Priority = int.MaxValue;
+
             HideInteractText();
-            UseBalista_ServerRpc();
+            PlayerUIManager.Instance.SetPlayerCrossHairState(true);
+
+            UseBalista_ServerRpc(NetworkManager.LocalClientId);
+
+            UsingPlayer = PlayerManager.Instance.LocalPlayerController;
+            UsingPlayer.SetCanPlayerMove(false);
+            UsingPlayer.SetIsReadyToAttack(false);
+            UsingPlayer.SetCanUseAbilityE(false);
+            UsingPlayer.SetCanUseAbilityQ(false);
+            UsingPlayer.SetPlayerVisible(false);
         }
 
     }
@@ -97,11 +139,16 @@ public class BalistaController : NetworkBehaviour
     }
 
     [ServerRpc(RequireOwnership = false)]
-    private void UseBalista_ServerRpc()
+    private void UseBalista_ServerRpc(ulong userClientId)
     {
         if (!IsInUse)
         {
             isInUse.Value = true;
+            // PlayerController userController = PlayerManager.Instance.PlayerControllers[userClientId];
+            // userController.SetCanPlayerMove_ClienRpc(false, userClientId);
+            // userController.SetIsReadyToAttack_ClientRpc(false, userClientId);
+            // userController.SetCanUseAbilityE_ClientRpc(false, userClientId);
+            // userController.SetCanUseAbilityQ_ClientRpc(false, userClientId);
             Debug.Log("Using Balista");
         }
     }

@@ -272,14 +272,14 @@ public partial class Tank_PlayerController : PlayerController
         finalVelocity = playerMovement.GetMoveSpeedRatioOfNormalMoveSpeed(finalVelocity);
         if (PlayerInputManager.Instance.MovementAction.IsPressed())
         {
-            playerAnimation.SetMoveVelocityX(finalVelocity.x);
-            playerAnimation.SetMoveVelocityZ(finalVelocity.z);
+            PlayerAnimation.SetMoveVelocityX(finalVelocity.x);
+            PlayerAnimation.SetMoveVelocityZ(finalVelocity.z);
         }
         else
         {
             finalVelocity -= playerMovement.PlayerMovementConfig.groundDrag * Time.fixedDeltaTime * finalVelocity;
-            playerAnimation.SetMoveVelocityX(finalVelocity.x);
-            playerAnimation.SetMoveVelocityZ(finalVelocity.z);
+            PlayerAnimation.SetMoveVelocityX(finalVelocity.x);
+            PlayerAnimation.SetMoveVelocityZ(finalVelocity.z);
         }
     }
     public Tank_PlayerWeapon GetTank_PlayerWeapon()
@@ -287,7 +287,7 @@ public partial class Tank_PlayerController : PlayerController
         return tank_playerWeapon;
     }
 
-    protected override void SwitchViewMode(InputAction.CallbackContext context)
+    public override void SwitchViewMode(InputAction.CallbackContext context)
     {
         // No focus mode for tank;
     }
