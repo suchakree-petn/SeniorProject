@@ -59,10 +59,14 @@ public class TankAbility_GroundSmash : PlayerAbility
                 }
             }
         }
-        Transform vfxTransform = Instantiate(AbilityData.VFX_prf, origin, transform.rotation);
-        Destroy(vfxTransform.gameObject, AbilityData.VFXDuration);
+        Transform vfxTransform = Instantiate(AbilityData.VFX_prf, origin, Quaternion.identity);
+        vfxTransform.position = new(vfxTransform.position.x,
+                            vfxTransform.position.y + AbilityData.PositionOffsetY,
+                            vfxTransform.position.z);
         audioSource.Play();
+
         SpawnVFX_ServerRpc(origin);
+
         playerController.SetCanPlayerMove(true);
 
         yield return new WaitForSeconds(AbilityData.StunDuration);
@@ -95,7 +99,6 @@ public class TankAbility_GroundSmash : PlayerAbility
 
         audioSource.Play();
         Transform vfxTransform = Instantiate(AbilityData.VFX_prf, origin, transform.rotation);
-        Destroy(vfxTransform.gameObject, AbilityData.VFXDuration);
     }
 
     [ServerRpc(RequireOwnership = false)]
