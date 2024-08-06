@@ -214,6 +214,10 @@ public class PlayerController : NetworkBehaviour, IDamageable
     {
         return playerHealth.CurrentHealth;
     }
+    
+    public void TakeDamage(AttackDamage damage)
+    {
+    }
 
     [ClientRpc]
     public void TakeDamage_ClientRpc(AttackDamage damage)
@@ -340,5 +344,6 @@ public class PlayerController : NetworkBehaviour, IDamageable
     {
         OnPlayerDie -= PlayerController_OnPlayerDie;
     }
+
 
 }

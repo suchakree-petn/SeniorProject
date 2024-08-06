@@ -19,7 +19,6 @@ public class ArrowManiac : NetworkBehaviour
     }
     public virtual void OnTriggerEnter(Collider other)
     {
-        if (!IsServer) return;
 
         if (other.gameObject.layer == 3)
         {
@@ -30,14 +29,21 @@ public class ArrowManiac : NetworkBehaviour
 
         if (root.TryGetComponent<PlayerController>(out _) || !other.isTrigger) return;
 
+
         if (root.TryGetComponent(out IDamageable damageable)
-            && root.TryGetComponent(out EnemyController _)
+            && root.TryGetComponent(out EnemyController enemyController)
             && other.CompareTag("Hitbox"))
         {
-            Debug.Log("Do damage to: " + root.name);
-            DoDamage(damageable);
-            hitBox.enabled = false;
-            return;
+            if (IsServer)
+            {
+                Debug.Log("Do damage to: " + root.name);
+                DoDamage(damageable);
+                hitBox.enabled = false;
+            }
+            else
+            {
+                enemyController.OnEnemyHit_Flashing();
+            }
         }
     }
     public virtual void SetKinematic(bool isActive = true)
@@ -48,7 +54,7 @@ public class ArrowManiac : NetworkBehaviour
 
     public virtual void DoDamage(IDamageable damageable)
     {
-        damageable.TakeDamage_ServerRpc(AttackDamage);
+        damageable.TakeDamage(AttackDamage);
     }
     private void NetworkDespawn()
     {

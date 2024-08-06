@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.Mathematics;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -43,7 +42,6 @@ public class TankAbility_GroundSmash : PlayerAbility
         List<EnemyController> enemyControllers = new();
         foreach (RaycastHit hit in hits)
         {
-            // if (hit.collider == null) continue;
 
             if (hit.collider.transform.root.TryGetComponent(out EnemyController enemyController))
             {
@@ -53,7 +51,7 @@ public class TankAbility_GroundSmash : PlayerAbility
                 if (enemyController.TryGetComponent(out IDamageable damageable))
                 {
                     AttackDamage attackDamage = playerController.GetTank_PlayerWeapon().SwordWeaponData.GetDamage(AbilityData.DamageMultiplier, playerController.PlayerCharacterData, (long)NetworkManager.LocalClientId);
-                    damageable.TakeDamage_ServerRpc(attackDamage);
+                    damageable.TakeDamage(attackDamage);
                     SpawnStunVFX(enemyController.NetworkObject);
                     SpawnStunVFX_ServerRpc(enemyController.NetworkObject);
                 }

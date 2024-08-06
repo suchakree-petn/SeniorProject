@@ -81,6 +81,6 @@ public abstract class Arrow : MonoBehaviour
 
     public virtual void DoDamage(IDamageable damageable)
     {
-        damageable.TakeDamage_ServerRpc(AttackDamage);
+        damageable.TakeDamage(AttackDamage);
     }
 }

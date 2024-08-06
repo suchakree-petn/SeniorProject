@@ -1,7 +1,5 @@
-using System.Collections;
-using Mono.CSharp;
+using System;
 using Unity.Netcode;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -27,6 +25,9 @@ public class Tank_PlayerWeapon : PlayerWeapon
     public float ComboTimeInterval => comboTimeInterval;
 
     private float _attackInterval;
+
+    private void Start() {
+    }
 
     public override void UseWeapon(InputAction.CallbackContext context)
     {
@@ -119,15 +120,19 @@ public class Tank_PlayerWeapon : PlayerWeapon
                                 playerController.PlayerCharacterData, (long)OwnerClientId),
         };
 
-        SlashAttack_ServerRpc(attackDamage, comboIndex);
-
+        SlashAttack(attackDamage);
     }
-
 
     [ServerRpc(RequireOwnership = false)]
     public void SlashAttack_ServerRpc(AttackDamage attackDamage, int comboIndex)
     {
         SpawnSlashVFX_ClientRpc(comboIndex, (ulong)attackDamage.AttackerClientId);
+
+    }
+
+    private void SlashAttack(AttackDamage attackDamage)
+    {
+        SlashAttack_ServerRpc(attackDamage, comboIndex);
 
         RaycastHit[] hits = Physics.SphereCastAll(attackPoint.position, SwordWeaponData.NA_AttackRange, transform.forward, 0, tank_PlayerController.PlayerCharacterData.TargetLayer);
 
@@ -138,7 +143,7 @@ public class Tank_PlayerWeapon : PlayerWeapon
             && hit.collider.transform.root.TryGetComponent(out EnemyController _)
             && hit.collider.CompareTag("Hitbox"))
             {
-                damageable.TakeDamage_ServerRpc(attackDamage);
+                damageable.TakeDamage(attackDamage);
             }
         }
     }
@@ -181,16 +186,7 @@ public class Tank_PlayerWeapon : PlayerWeapon
 
 
 }
-// [System.Serializable]
-// public class BowConfig
-// {
-//     public float ArrowSpeed;
-//     public float DrawSpeed;
-//     public float MaxDrawPower;
-//     public float MinDrawPower;
-//     public float MaxRaycastDistance;
-//     public LayerMask targetMask;
-// }
+
 public enum Tank_WeaponHolderState
 {
     OnBack,

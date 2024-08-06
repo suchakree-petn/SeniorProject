@@ -8,7 +8,8 @@ using UnityEngine.AI;
 using DG.Tweening;
 public class EnemyController : NetworkBehaviour, IDamageable
 {
-    public Action OnEnemyDead;
+    public Action OnEnemyDead_Local;
+    public Action OnEnemyHit_Local;
 
     [SerializeField] protected EnemyCharacterData _enemyCharacterData;
     public EnemyCharacterData EnemyCharacterData => _enemyCharacterData;
@@ -41,7 +42,8 @@ public class EnemyController : NetworkBehaviour, IDamageable
 
     protected virtual void Start()
     {
-        OnEnemyDead += () => enemyHealth.GetEnemyHealth_UI().gameObject.SetActive(false);
+        OnEnemyDead_Local += () => enemyHealth.GetEnemyHealth_UI().gameObject.SetActive(false);
+        OnEnemyHit_Local += OnEnemyHit_Flashing;
     }
 
 
@@ -99,17 +101,41 @@ public class EnemyController : NetworkBehaviour, IDamageable
         dissolveMaterial.DOFloat(1, "_Dissolve", 2).SetEase(Ease.OutSine);
     }
 
+    public void OnEnemyHit_Flashing()
+    {
+        Sequence sequence = DOTween.Sequence();
+        sequence.Append(dissolveMaterial.DOFloat(0.5f, "_Smoothness", 0.05f));
+        sequence.Append(dissolveMaterial.DOFloat(0, "_Smoothness", 0.05f));
+    }
+
     [ClientRpc]
     public virtual void TakeDamage_ClientRpc(AttackDamage damage)
     {
+        if (damage.AttackerClientId == (long)NetworkManager.LocalClientId) return;
+
         enemyHealth.TakeDamage(damage, EnemyCharacterData.GetDefense());
+        OnEnemyHit_Local?.Invoke();
         if (enemyHealth.IsDead)
         {
             StopMoving();
             hitBox.enabled = false;
             critHitBox.enabled = false;
-            OnEnemyDead?.Invoke();
+            OnEnemyDead_Local?.Invoke();
         }
+    }
+
+    public void TakeDamage(AttackDamage damage)
+    {
+        enemyHealth.TakeDamage(damage, EnemyCharacterData.GetDefense());
+        OnEnemyHit_Local?.Invoke();
+        if (enemyHealth.IsDead)
+        {
+            StopMoving();
+            hitBox.enabled = false;
+            critHitBox.enabled = false;
+            OnEnemyDead_Local?.Invoke();
+        }
+        TakeDamage_ServerRpc(damage);
     }
 
     [ClientRpc]
