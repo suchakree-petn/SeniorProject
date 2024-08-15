@@ -1,9 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
-using TheKiwiCoder;
 using Unity.Netcode;
 using UnityEngine;
-using UnityEngine.AI;
 public class Spider_EnemyController : EnemyController
 {
 
@@ -21,10 +18,16 @@ public class Spider_EnemyController : EnemyController
     protected override void Start()
     {
         base.Start();
+        OnEnemyAttack_Local += NormalAttack;
+        OnEnemyHit_Local += OnEnemyHit_HitAnimation;
+
     }
+
+
+
     private void Update()
     {
-        if (!IsServer || !IsSpawned ) return;
+        if (!IsServer || !IsSpawned) return;
         if (Vector3.Distance(transform.position, target.position) > attackRange + 2 && isFinishAttack && CanMove)
         {
             if (!IsTaunted)
@@ -42,9 +45,9 @@ public class Spider_EnemyController : EnemyController
             // Attack
             animator.SetFloat("VelocityZ", Mathf.Lerp(animator.GetFloat("VelocityZ"), 0, Time.deltaTime * 10));
             if (!isReadyToAttack || IsStun) return;
-            NormalAttack();
             StartAttackCooldown(attackTimeInterval);
             networkAnimator.SetTrigger("Attack");
+            
         }
     }
 
@@ -62,6 +65,12 @@ public class Spider_EnemyController : EnemyController
         }
 
     }
+
+    private void OnEnemyHit_HitAnimation()
+    {
+        animator.SetTrigger("Hit");
+    }
+
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(attackPointTransform.position, attackRange);
@@ -77,14 +86,14 @@ public class Spider_EnemyController : EnemyController
         yield return new WaitForSeconds(sec);
         isReadyToAttack = true;
         isFinishAttack = true;
+
     }
-
-
 
     protected override void OnEnable()
     {
         base.OnEnable();
     }
+
     [ClientRpc]
     public override void TakeDamage_ClientRpc(AttackDamage damage)
     {
@@ -96,6 +105,7 @@ public class Spider_EnemyController : EnemyController
         base.TakeDamage_ClientRpc(damage);
 
     }
+
     [ServerRpc(RequireOwnership = false)]
     public override void TakeDamage_ServerRpc(AttackDamage damage)
     {

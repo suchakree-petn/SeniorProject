@@ -42,7 +42,7 @@ public class ArrowManiac : NetworkBehaviour
             }
             else
             {
-                enemyController.OnEnemyHit_Flashing();
+                enemyController.OnEnemyHit_Shaking();
             }
         }
     }

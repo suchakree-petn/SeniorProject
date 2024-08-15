@@ -6,10 +6,12 @@ using Unity.Netcode.Components;
 using UnityEngine;
 using UnityEngine.AI;
 using DG.Tweening;
+
 public class EnemyController : NetworkBehaviour, IDamageable
 {
     public Action OnEnemyDead_Local;
     public Action OnEnemyHit_Local;
+    public Action OnEnemyAttack_Local;
 
     [SerializeField] protected EnemyCharacterData _enemyCharacterData;
     public EnemyCharacterData EnemyCharacterData => _enemyCharacterData;
@@ -30,8 +32,10 @@ public class EnemyController : NetworkBehaviour, IDamageable
     public NetworkAnimator networkAnimator;
     public Animator animator;
     public Collider hitBox;
+    public Collider collideHitBox;
     public Collider critHitBox;
     [SerializeField] private GameObject mesh;
+    [SerializeField] private Transform mesh_parent;
     private Material dissolveMaterial;
 
     protected virtual void Awake()
@@ -43,8 +47,10 @@ public class EnemyController : NetworkBehaviour, IDamageable
     protected virtual void Start()
     {
         OnEnemyDead_Local += () => enemyHealth.GetEnemyHealth_UI().gameObject.SetActive(false);
-        OnEnemyHit_Local += OnEnemyHit_Flashing;
+        OnEnemyDead_Local += () => collideHitBox.enabled = false;
+        OnEnemyHit_Local += OnEnemyHit_Shaking;
     }
+
 
 
     public override void OnNetworkSpawn()
@@ -85,14 +91,20 @@ public class EnemyController : NetworkBehaviour, IDamageable
         {
             direction = (target.position - transform.position).normalized;
         }
-        if (direction != Vector3.zero && CanMove)
+        else if (direction != Vector3.zero && CanMove)
         {
-            enemyRb.transform.forward = direction;
+            Vector3 forward = enemyRb.transform.forward;
+            enemyRb.transform.forward = new(forward.x, direction.y, forward.z);
         }
     }
 
     protected virtual void OnEnable()
     {
+    }
+
+    public void AnimationEvent_OnEnemyAttackHandler()
+    {
+        OnEnemyAttack_Local?.Invoke();
     }
 
     public void OnEnemyDead_Dissolve()
@@ -101,11 +113,11 @@ public class EnemyController : NetworkBehaviour, IDamageable
         dissolveMaterial.DOFloat(1, "_Dissolve", 2).SetEase(Ease.OutSine);
     }
 
-    public void OnEnemyHit_Flashing()
+    public void OnEnemyHit_Shaking()
     {
         Sequence sequence = DOTween.Sequence();
-        sequence.Append(dissolveMaterial.DOFloat(0.5f, "_Smoothness", 0.05f));
-        sequence.Append(dissolveMaterial.DOFloat(0, "_Smoothness", 0.05f));
+        sequence.Append(mesh_parent.DOShakePosition(0.2f, strength: 0.5f, vibrato: 50));
+        sequence.Play();
     }
 
     [ClientRpc]

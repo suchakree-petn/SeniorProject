@@ -71,7 +71,7 @@ public class TankAbility_GroundSmash : PlayerAbility
 
         foreach (EnemyController enemyController in enemyControllers)
         {
-            if (enemyController == null) continue;
+            if (enemyController == null || !enemyController.IsSpawned) continue;
 
             enemyController.FinishStun_ServerRpc();
         }

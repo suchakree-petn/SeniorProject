@@ -111,13 +111,16 @@ public partial class Tank_PlayerController : PlayerController
             float distance = Vector3.Distance(transform.position, LockEnemyTarget.transform.position);
             if (distance < tank_playerWeapon.SwordWeaponData.NA_AttackRange)
             {
+                Debug.Log("No move");
                 return;
             }
             Vector3 startPos = transform.position;
             transform.DOMove(LockEnemyTarget.transform.position, moveWhileComboDuration).SetEase(Ease.InSine).OnUpdate(() =>
             {
                 Vector3 currentPos = transform.position;
-                if (Vector3.Distance(currentPos, startPos) > moveWhileComboMaxDistance)
+
+                float distance = Vector3.Distance(transform.position, LockEnemyTarget.transform.position);
+                if (Vector3.Distance(currentPos, startPos) > moveWhileComboMaxDistance || distance < tank_playerWeapon.SwordWeaponData.NA_AttackRange)
                 {
                     transform.DOKill();
                 }

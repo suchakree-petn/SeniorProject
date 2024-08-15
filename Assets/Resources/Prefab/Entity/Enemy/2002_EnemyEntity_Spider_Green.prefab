@@ -316,7 +316,7 @@ PrefabInstance:
         type: 3}
       propertyPath: mesh
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1096781713368640642}
     - target: {fileID: 5023896876588504443, guid: 5134e637dc0b31c4fad23fac8e303af9,
         type: 3}
       propertyPath: attackPower
@@ -382,6 +382,51 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Speed
       value: 3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6322938050345439138, guid: 5134e637dc0b31c4fad23fac8e303af9,
+        type: 3}
+      propertyPath: TransitionStateInfoList.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6322938050345439138, guid: 5134e637dc0b31c4fad23fac8e303af9,
+        type: 3}
+      propertyPath: TransitionStateInfoList.Array.data[0].TransitionIndex
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6322938050345439138, guid: 5134e637dc0b31c4fad23fac8e303af9,
+        type: 3}
+      propertyPath: TransitionStateInfoList.Array.data[0].TriggerNameHash
+      value: 1080829965
+      objectReference: {fileID: 0}
+    - target: {fileID: 6322938050345439138, guid: 5134e637dc0b31c4fad23fac8e303af9,
+        type: 3}
+      propertyPath: TransitionStateInfoList.Array.data[1].TransitionIndex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6322938050345439138, guid: 5134e637dc0b31c4fad23fac8e303af9,
+        type: 3}
+      propertyPath: TransitionStateInfoList.Array.data[1].TriggerNameHash
+      value: 646380074
+      objectReference: {fileID: 0}
+    - target: {fileID: 6322938050345439138, guid: 5134e637dc0b31c4fad23fac8e303af9,
+        type: 3}
+      propertyPath: TransitionStateInfoList.Array.data[0].DestinationState
+      value: 1080829965
+      objectReference: {fileID: 0}
+    - target: {fileID: 6322938050345439138, guid: 5134e637dc0b31c4fad23fac8e303af9,
+        type: 3}
+      propertyPath: TransitionStateInfoList.Array.data[0].OriginatingState
+      value: -453240694
+      objectReference: {fileID: 0}
+    - target: {fileID: 6322938050345439138, guid: 5134e637dc0b31c4fad23fac8e303af9,
+        type: 3}
+      propertyPath: TransitionStateInfoList.Array.data[1].DestinationState
+      value: 646380074
+      objectReference: {fileID: 0}
+    - target: {fileID: 6322938050345439138, guid: 5134e637dc0b31c4fad23fac8e303af9,
+        type: 3}
+      propertyPath: TransitionStateInfoList.Array.data[1].TransitionDuration
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 7557614475561441946, guid: 5134e637dc0b31c4fad23fac8e303af9,
         type: 3}
@@ -524,12 +569,23 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9082710849249269872, guid: 740728f854d793848a530ac50ca86174,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 957358266527930445, guid: 740728f854d793848a530ac50ca86174, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 740728f854d793848a530ac50ca86174, type: 3}
+--- !u!1 &1096781713368640642 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9082710849249269872, guid: 740728f854d793848a530ac50ca86174,
+    type: 3}
+  m_PrefabInstance: {fileID: 8157365059764204786}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8932689154325109049 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 775605639411264971, guid: 740728f854d793848a530ac50ca86174,

@@ -24,6 +24,7 @@ TagManager:
   - CriticalHitbox
   - Selectable
   - Sound Soucre
+  - CollideHitbox
   layers:
   - Default
   - TransparentFX

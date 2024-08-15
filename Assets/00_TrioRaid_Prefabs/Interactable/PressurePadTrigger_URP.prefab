@@ -9,6 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4562347892707852}
+  - component: {fileID: 3756969721759678342}
+  - component: {fileID: -3170398251235948022}
   - component: {fileID: 65442326635485918}
   - component: {fileID: 114126345917595390}
   - component: {fileID: 114698752405655476}
@@ -40,6 +42,41 @@ Transform:
   - {fileID: 4866940173744546}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3756969721759678342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1120045469406090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 4128505056
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+--- !u!114 &-3170398251235948022
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1120045469406090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b442b59b62e8f3c4ea9861666ca67c2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isInUse:
+    m_InternalValue: 0
+  interactOnTrigger: {fileID: 114698752405655476}
 --- !u!65 &65442326635485918
 BoxCollider:
   m_ObjectHideFlags: 0
