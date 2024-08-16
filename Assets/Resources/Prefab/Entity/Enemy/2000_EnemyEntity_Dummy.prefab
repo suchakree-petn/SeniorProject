@@ -708,6 +708,12 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: -9096503597814934226}
   m_SourcePrefab: {fileID: 100100000, guid: b116f61db08cf6f49b80c75bfc0b419c, type: 3}
+--- !u!136 &3376350037253982338 stripped
+CapsuleCollider:
+  m_CorrespondingSourceObject: {fileID: 1178271469295348215, guid: b116f61db08cf6f49b80c75bfc0b419c,
+    type: 3}
+  m_PrefabInstance: {fileID: 4503946870236979573}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &3991757503176248713 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 712881128543300860, guid: b116f61db08cf6f49b80c75bfc0b419c,
@@ -758,7 +764,10 @@ MonoBehaviour:
   networkAnimator: {fileID: 0}
   animator: {fileID: 0}
   hitBox: {fileID: 0}
+  collideHitBox: {fileID: 3376350037253982338}
   critHitBox: {fileID: 0}
+  mesh: {fileID: 0}
+  mesh_parent: {fileID: 0}
 --- !u!114 &1251622043368636751
 MonoBehaviour:
   m_ObjectHideFlags: 0

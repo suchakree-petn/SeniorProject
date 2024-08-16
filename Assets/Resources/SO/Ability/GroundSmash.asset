@@ -22,7 +22,7 @@ MonoBehaviour:
   VFXDuration: 0.5
   StunVFXDuration: 4
   StunVFXOffset: -36.32
-  StopMoveDuration: 1.5
+  StopMoveDuration: 1.2
   StunDuration: 4
   Radius: 5.98
   PositionOffsetX: 3.19

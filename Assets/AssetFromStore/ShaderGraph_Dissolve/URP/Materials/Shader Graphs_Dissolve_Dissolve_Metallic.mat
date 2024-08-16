@@ -52,9 +52,9 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Dissolve: 1
-    - _EdgeColorIntensity: 1
-    - _EdgeWidth: 0.05
+    - _Dissolve: 0
+    - _EdgeColorIntensity: 12.3
+    - _EdgeWidth: 0.19
     - _Metallic: 0.337
     - _NoiseScale: 50
     - _NormalScale: 1
@@ -64,7 +64,7 @@ Material:
     - _Smoothness: 0.932
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 0}
-    - _EdgeColor: {r: 0.9494723, g: 3.9999995, b: 0, a: 0}
+    - _EdgeColor: {r: 1, g: 0.06277847, b: 0, a: 0}
     - _NoiseUVSpeed: {r: 0, g: 0, b: 0, a: 0}
     - _Offest: {r: 0, g: 0, b: 0, a: 0}
     - _Tiling: {r: 1, g: 1, b: 0, a: 0}

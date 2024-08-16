@@ -2377,7 +2377,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 2641238040
+  GlobalObjectIdHash: 4079035149
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
   ActiveSceneSynchronization: 0
@@ -2402,16 +2402,23 @@ MonoBehaviour:
   agent: {fileID: 1058642502872261628}
   behaviourTreeInstance: {fileID: 0}
   target: {fileID: 0}
-  moveSpeed: 5
+  CanMove: 1
+  IsTaunted: 0
+  IsStun: 0
   enemyHealth: {fileID: 7000802371296621320}
   enemyRb: {fileID: 3799832029524342995}
   networkAnimator: {fileID: 351855673801554010}
   animator: {fileID: 5101542369819983882}
+  hitBox: {fileID: 0}
+  collideHitBox: {fileID: 0}
+  critHitBox: {fileID: 0}
+  mesh: {fileID: 0}
   attackPower: 250
   attackPower_Multiplier: 1
   attackRange: 4
   attackTimeInterval: 3
   isReadyToAttack: 0
+  isFinishAttack: 0
   attackPointTransform: {fileID: 4176867571119622807}
 --- !u!114 &7000802371296621320
 MonoBehaviour:
@@ -2428,6 +2435,7 @@ MonoBehaviour:
   currentHealth:
     m_InternalValue: 0
   enemyController: {fileID: 2997473775106470142}
+  enemyHealth_UI: {fileID: 0}
 --- !u!114 &5076827360197047171
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2555,11 +2563,25 @@ MonoBehaviour:
   TransitionStateInfoList:
   - IsCrossFadeExit: 0
     Layer: 0
+    OriginatingState: 1080829965
+    DestinationState: 646380074
+    TransitionDuration: 0
+    TriggerNameHash: 646380074
+    TransitionIndex: 1
+  - IsCrossFadeExit: 0
+    Layer: 0
     OriginatingState: -453240694
     DestinationState: 1080829965
     TransitionDuration: 0
     TriggerNameHash: 1080829965
     TransitionIndex: 0
+  - IsCrossFadeExit: 0
+    Layer: 0
+    OriginatingState: -453240694
+    DestinationState: 646380074
+    TransitionDuration: 0
+    TriggerNameHash: 646380074
+    TransitionIndex: 1
   m_Animator: {fileID: 5101542369819983882}
 --- !u!1 &9114748193990799352
 GameObject:

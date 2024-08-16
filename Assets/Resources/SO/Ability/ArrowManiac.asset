@@ -20,7 +20,9 @@ MonoBehaviour:
     type: 3}
   ArrowManiac_SpawnGroup: {fileID: 5533049506211706981, guid: c60e3d13ad80e5346906435a1e9227f9,
     type: 3}
-  VFX_prf: {fileID: 3938001461733148409, guid: 4b154592bbeaf5d43981164ac126dc7d, type: 3}
+  VFX_Ground_prf: {fileID: 3938001461733148409, guid: 4b154592bbeaf5d43981164ac126dc7d,
+    type: 3}
+  VFX_Arrow_prf: {fileID: 0}
   Duration: 7
   TimeInterval: 0.13
   Distance: 50

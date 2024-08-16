@@ -2312,7 +2312,9 @@ GameObject:
   m_Component:
   - component: {fileID: 208357238848403331}
   - component: {fileID: 8894094430919120413}
-  m_Layer: 0
+  - component: {fileID: 1181320640378452299}
+  - component: {fileID: 5008188015997448279}
+  m_Layer: 10
   m_Name: PT_Priest_StPatrick
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2448,6 +2450,28 @@ SkinnedMeshRenderer:
     m_Center: {x: 0, y: -0.13488495, z: -0.02527234}
     m_Extent: {x: 0.9283499, y: 0.9995614, z: 0.3795232}
   m_DirtyAABB: 0
+--- !u!114 &1181320640378452299
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8903896015828011107}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2ccbbef751b7364d80cf658cdf5bf2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  storeInTexcoordChannel: 1
+  cospatialVertexDistance: 0.01
+--- !u!33 &5008188015997448279
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8903896015828011107}
+  m_Mesh: {fileID: -8596126587521788999, guid: 400ff1074cbaaa640ac7bd5f12bb4fcf, type: 3}
 --- !u!1 &9089594751630565615
 GameObject:
   m_ObjectHideFlags: 0
@@ -2673,7 +2697,7 @@ PrefabInstance:
     - target: {fileID: 8174493298335311036, guid: 8468fa4c8e09695459a2f7572471e55b,
         type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 4199076221
+      value: 2449191066
       objectReference: {fileID: 0}
     - target: {fileID: 8251370818320174555, guid: 8468fa4c8e09695459a2f7572471e55b,
         type: 3}
@@ -2848,12 +2872,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f1a4f9c8eed7ba44b5e35d94f2dd0e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!136 &1870327380768595511 stripped
-CapsuleCollider:
-  m_CorrespondingSourceObject: {fileID: 4238448583515551294, guid: 8468fa4c8e09695459a2f7572471e55b,
-    type: 3}
-  m_PrefabInstance: {fileID: 2532503277423405065}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2196008069706269059 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4421562747518347658, guid: 8468fa4c8e09695459a2f7572471e55b,
@@ -2888,12 +2906,16 @@ MonoBehaviour:
   _playerCharacterData: {fileID: 11400000, guid: 41a375c978d02f342acb5e5ff1b56b4f,
     type: 2}
   OuterForce: {x: 0, y: 0, z: 0}
-  IsPlayerDie: 0
+  IsDead: 0
   playerMovement: {fileID: 6192920143298601696}
   mouseMovement: {fileID: 831939996720355351}
-  playerAnimation: {fileID: 8920344854508572487}
+  playerWeapon: {fileID: 4086381456720999541}
+  playerAbilityE: {fileID: 4375989519964650209}
+  playerAbilityQ: {fileID: 3070919574868137117}
+  PlayerAnimation: {fileID: 8920344854508572487}
   playerHealth: {fileID: 1673985521950328931}
-  HitboxCollider: {fileID: 1870327380768595511}
+  meshRenderer_character: {fileID: 8894094430919120413}
+  meshRenderer_weapon: {fileID: 0}
   caster_playerWeapon: {fileID: 4086381456720999541}
   casterAbility_BlessingShield: {fileID: 4375989519964650209}
   casterAbility_PowerUp: {fileID: 3070919574868137117}
@@ -2909,6 +2931,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c8499e6ba7e72c4dae8e051fc4b9823, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CanUse: 1
   ActivateKey: 101
   UserClientId: 0
   AbilityData: {fileID: 11400000, guid: 674d1d44a65cb2c4788fa6f0afcac374, type: 2}
@@ -2925,6 +2948,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b012b4d228ec6894ba61c07a81016aa3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CanUse: 1
   ActivateKey: 113
   UserClientId: 0
   AbilityData: {fileID: 11400000, guid: 4ee79697a83f3e34d933df939f672bc4, type: 2}
