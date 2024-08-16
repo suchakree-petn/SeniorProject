@@ -17,7 +17,7 @@ public static class Loader
         if(scene == "LobbyScene"){
             returnScene = "MainMenu";
         }else if(scene == "GameScene"){
-            returnScene = "InGame_Map_1_thanva";
+            returnScene = "InGame_Map_1";
         }else if(scene == "CharacterSelectScene"){
             returnScene = "InLobby";
         }
