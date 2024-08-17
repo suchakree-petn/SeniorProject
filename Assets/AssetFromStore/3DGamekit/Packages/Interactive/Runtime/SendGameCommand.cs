@@ -23,7 +23,7 @@ namespace Gamekit3D.GameCommands
         [Tooltip("If onSendAudio is not null, it will play after this time has passed.")]
         public float audioDelay;
 
-        float lastSendTime;
+        protected float lastSendTime;
         bool isTriggered = false;
 
         public float Temperature

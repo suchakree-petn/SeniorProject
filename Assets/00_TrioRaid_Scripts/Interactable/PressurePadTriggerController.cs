@@ -1,20 +1,61 @@
-using System.Collections;
-using System.Collections.Generic;
-using Gamekit3D;
+using Gamekit3D.GameCommands;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PressurePadTriggerController : NetworkBehaviour
 {
     [SerializeField] private NetworkVariable<bool> isInUse = new(false);
     public bool IsInUse => isInUse.Value;
+    [SerializeField] private LayerMask layers;
+    [SerializeField] private float coolDown;
 
-    [Header("Reference")]
-    [SerializeField] private InteractOnTrigger interactOnTrigger;
+    public UnityEvent OnEnter_Local;
+    public UnityEvent OnExit_Local;
+
+    // [Header("Reference")]
+
+    private float lastExitTime;
+
+    void OnTriggerEnter(Collider other)
+    {
+        if(!IsServer) return;
+        if (Time.time - lastExitTime < coolDown) return;
+
+        if (IsInUse) return;
+
+        if (0 != (layers.value & 1 << other.gameObject.layer))
+        {
+            if (IsServer)
+            {
+                OnEnterPressurePadHandler();
+            }
+            OnEnter_Local?.Invoke();
+        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if(!IsServer) return;
+        if (!IsInUse) return;
+
+        if (0 != (layers.value & 1 << other.gameObject.layer))
+        {
+            if (IsServer)
+            {
+                OnExitPressurePadHandler();
+            }
+            OnExit_Local?.Invoke();
+            lastExitTime = Time.time;
+        }
+    }
 
     private void OnEnterPressurePadHandler()
     {
         UsePressurePad();
+    }
+    private void OnExitPressurePadHandler()
+    {
         ExitPressurePad();
     }
 
@@ -23,6 +64,7 @@ public class PressurePadTriggerController : NetworkBehaviour
         if (!IsInUse)
         {
             UsePressurePad_ServerRpc();
+            PressurePadPuzzleManager.Instance.AddActivatePadCount(1);
         }
     }
 
@@ -31,6 +73,7 @@ public class PressurePadTriggerController : NetworkBehaviour
         if (IsInUse)
         {
             ExitPressurePad_ServerRpc();
+            PressurePadPuzzleManager.Instance.RemoveActivatePadCount(1);
         }
     }
 
@@ -43,7 +86,7 @@ public class PressurePadTriggerController : NetworkBehaviour
         }
     }
 
-    [ServerRpc(RequireOwnership = false)]
+    [ServerRpc]
     private void UsePressurePad_ServerRpc()
     {
         if (!IsInUse)
@@ -54,11 +97,9 @@ public class PressurePadTriggerController : NetworkBehaviour
 
     private void OnEnable()
     {
-        interactOnTrigger.OnEnter.AddListener(OnEnterPressurePadHandler);
     }
 
     private void OnDisable()
     {
-        interactOnTrigger.OnEnter.RemoveListener(OnEnterPressurePadHandler);
     }
 }
