@@ -1,6 +1,4 @@
 using System.Collections.Generic;
-using DG.Tweening;
-using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -13,7 +11,6 @@ public partial class Tank_PlayerController : PlayerController
     [SerializeField] protected Tank_PlayerWeapon tank_playerWeapon;
     [SerializeField] protected TankAbility_BarbarianShout tankAbility_BarbarianShout;
     [SerializeField] protected TankAbility_GroundSmash tankAbility_GroundSmash;
-
 
     protected override void Start()
     {
@@ -104,7 +101,8 @@ public partial class Tank_PlayerController : PlayerController
     {
         if (LockEnemyTarget == null || LockEnemyTarget.GetComponent<EnemyController>().IsDead)
         {
-            transform.DOMove(transform.position + (transform.forward * moveWhileComboMaxDistance), moveWhileComboDuration).SetEase(Ease.InSine);
+            playerMovement.PlayerRigidbody.AddForce(transform.forward * moveWhileComboMaxDistance, ForceMode.Impulse);
+            // playerMovement.PlayerRigidbody.DOMove(transform.position + (transform.forward * moveWhileComboMaxDistance), moveWhileComboDuration).SetEase(Ease.InSine);
         }
         else
         {
@@ -115,16 +113,18 @@ public partial class Tank_PlayerController : PlayerController
                 return;
             }
             Vector3 startPos = transform.position;
-            transform.DOMove(LockEnemyTarget.transform.position, moveWhileComboDuration).SetEase(Ease.InSine).OnUpdate(() =>
-            {
-                Vector3 currentPos = transform.position;
+            playerMovement.PlayerRigidbody.AddForce(LockEnemyTarget.transform.position - startPos, ForceMode.Impulse);
 
-                float distance = Vector3.Distance(transform.position, LockEnemyTarget.transform.position);
-                if (Vector3.Distance(currentPos, startPos) > moveWhileComboMaxDistance || distance < tank_playerWeapon.SwordWeaponData.NA_AttackRange)
-                {
-                    transform.DOKill();
-                }
-            });
+            // playerMovement.PlayerRigidbody.DOMove(LockEnemyTarget.transform.position, moveWhileComboDuration).SetEase(Ease.InSine).OnUpdate(() =>
+            // {
+            //     Vector3 currentPos = transform.position;
+
+            //     float distance = Vector3.Distance(transform.position, LockEnemyTarget.transform.position);
+            //     if (Vector3.Distance(currentPos, startPos) > moveWhileComboMaxDistance || distance < tank_playerWeapon.SwordWeaponData.NA_AttackRange)
+            //     {
+            //         playerMovement.PlayerRigidbody.DOKill();
+            //     }
+            // });
         }
     }
     private void LockTarget(InputAction.CallbackContext context)
@@ -152,8 +152,8 @@ public partial class Tank_PlayerController : PlayerController
         int index = 0;
         for (int i = 0; i < allEnemyInScene.Length; i++)
         {
-            if(allEnemyInScene[i].GetComponent<EnemyController>().IsDead) continue;
-            
+            if (allEnemyInScene[i].GetComponent<EnemyController>().IsDead) continue;
+
             Transform enemyTransform = allEnemyInScene[i].transform;
             float distance = Vector3.Distance(enemyTransform.position, transform.root.position);
             if (distance < closestEnemyDistance)

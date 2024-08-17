@@ -606,6 +606,11 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Enemy
       objectReference: {fileID: 0}
+    - target: {fileID: 1178271469295348215, guid: b116f61db08cf6f49b80c75bfc0b419c,
+        type: 3}
+      propertyPath: m_ExcludeLayers.m_Bits
+      value: 1983
+      objectReference: {fileID: 0}
     - target: {fileID: 4441723888172652417, guid: b116f61db08cf6f49b80c75bfc0b419c,
         type: 3}
       propertyPath: m_LocalScale.y
@@ -732,7 +737,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 2328778544
+  GlobalObjectIdHash: 156021223
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
   ActiveSceneSynchronization: 0

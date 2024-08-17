@@ -104,7 +104,7 @@ Material:
     m_Colors:
     - _DeepColor: {r: 0.16189036, g: 0.31577072, b: 0.3207547, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
-    - _FoamColor: {r: 0.2971698, g: 1, b: 0.91264254, a: 0}
+    - _FoamColor: {r: 0.29716977, g: 1, b: 0.91264254, a: 0}
     - _ShallowColor: {r: 0, g: 0.89548254, b: 1, a: 0}
     - _Shallowcolor: {r: 0.4890531, g: 0.6480994, b: 0.6603774, a: 0}
     - _deepcolor: {r: 0.3301887, g: 0.1712053, b: 0.07631721, a: 0}

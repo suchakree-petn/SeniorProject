@@ -231,7 +231,7 @@ PrefabInstance:
     - target: {fileID: 8174493298335311036, guid: 8468fa4c8e09695459a2f7572471e55b,
         type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 2580230173
+      value: 893028088
       objectReference: {fileID: 0}
     - target: {fileID: 8251370818320174555, guid: 8468fa4c8e09695459a2f7572471e55b,
         type: 3}
@@ -360,8 +360,8 @@ MonoBehaviour:
   playerAbilityQ: {fileID: 2851045020734205238}
   PlayerAnimation: {fileID: 8920344854508572487}
   playerHealth: {fileID: 1673985521950328931}
-  meshRenderer_character: {fileID: 5090644285411763036}
-  meshRenderer_weapon: {fileID: 2302070494673359984}
+  meshRenderer_character:
+  - {fileID: 0}
   archer_playerWeapon: {fileID: 4525480869484328883}
   archerAbility_ArrowManiac: {fileID: 6757025908220086151}
   archerAbility_VineTrap: {fileID: 2851045020734205238}
@@ -1017,12 +1017,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 5090644285398083544}
   m_PrefabAsset: {fileID: 0}
---- !u!137 &5090644285411763036 stripped
-SkinnedMeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 13714564, guid: 100dded3f80a43846a29e6fdf0e82019,
-    type: 3}
-  m_PrefabInstance: {fileID: 5090644285398083544}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7831096782037102014
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1146,12 +1140,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c7d474b6e0534c945b194fa9425ad260, type: 3}
---- !u!23 &2302070494673359984 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 8313431483489417678, guid: c7d474b6e0534c945b194fa9425ad260,
-    type: 3}
-  m_PrefabInstance: {fileID: 7831096782037102014}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2317286678835358303 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5513816603122157537, guid: c7d474b6e0534c945b194fa9425ad260,
