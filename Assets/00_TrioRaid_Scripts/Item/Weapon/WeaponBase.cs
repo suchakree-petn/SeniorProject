@@ -1,5 +1,7 @@
+using Sirenix.OdinInspector;
 using UnityEngine;
 
+[InlineEditor]
 public abstract class WeaponBase : ScriptableObject
 {
     [Header("Weapon Details")]

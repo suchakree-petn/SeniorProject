@@ -778,6 +778,11 @@ PrefabInstance:
       propertyPath: m_Center.z
       value: -0.000000059604645
       objectReference: {fileID: 0}
+    - target: {fileID: 1178271469295348215, guid: b116f61db08cf6f49b80c75bfc0b419c,
+        type: 3}
+      propertyPath: m_ExcludeLayers.m_Bits
+      value: 1919
+      objectReference: {fileID: 0}
     - target: {fileID: 3295712773480710507, guid: b116f61db08cf6f49b80c75bfc0b419c,
         type: 3}
       propertyPath: GlobalObjectIdHash

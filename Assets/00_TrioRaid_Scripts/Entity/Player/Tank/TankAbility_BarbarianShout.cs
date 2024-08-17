@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -55,7 +56,7 @@ public class TankAbility_BarbarianShout : PlayerAbility
         }
         Transform vfxTransform = Instantiate(AbilityData.VFX_prf, transform.position, transform.rotation);
         Destroy(vfxTransform.gameObject, AbilityData.VFXDuration);
-        
+
         SpawnVFX_ServerRpc();
         playerController.SetCanPlayerMove(true);
 

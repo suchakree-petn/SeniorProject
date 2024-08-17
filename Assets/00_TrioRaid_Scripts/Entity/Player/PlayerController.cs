@@ -1,7 +1,10 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using Cinemachine;
 using QFSW.QC;
+using Sirenix.OdinInspector;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -10,7 +13,7 @@ public class PlayerController : NetworkBehaviour, IDamageable
 {
     [SerializeField] private PlayerCameraMode playerCameraMode;
     public PlayerCameraMode PlayerCameraMode => playerCameraMode;
-    [SerializeField] private PlayerCharacterData _playerCharacterData;
+    [InlineEditor] public PlayerCharacterData _playerCharacterData;
     public PlayerCharacterData PlayerCharacterData => _playerCharacterData;
     public Vector3 OuterForce;
 
@@ -28,18 +31,16 @@ public class PlayerController : NetworkBehaviour, IDamageable
     [SerializeField] protected PlayerAbility playerAbilityQ;
     public PlayerAnimation PlayerAnimation;
     [SerializeField] protected PlayerHealth playerHealth;
-    [SerializeField] private Renderer meshRenderer_character;
-    [SerializeField] private Renderer meshRenderer_weapon;
+    [SerializeField] private List<Renderer> meshRenderer_character;
 
     protected virtual void Start()
     {
         if (IsLocalPlayer)
         {
-            meshRenderer_character.gameObject.layer = 0;
-
-            if (meshRenderer_weapon != null)
+            meshRenderer_character = transform.GetComponentsInChildren<Renderer>().ToList();
+            foreach (Renderer characterMesh in meshRenderer_character)
             {
-                meshRenderer_weapon.gameObject.layer = 0;
+                characterMesh.gameObject.layer = 0;
             }
 
             Camera.main.GetComponent<AudioListener>().enabled = false;
@@ -214,7 +215,7 @@ public class PlayerController : NetworkBehaviour, IDamageable
     {
         return playerHealth.CurrentHealth;
     }
-    
+
     public void TakeDamage(AttackDamage damage)
     {
     }
@@ -312,7 +313,10 @@ public class PlayerController : NetworkBehaviour, IDamageable
 
     public void SetPlayerVisible(bool visible)
     {
-        meshRenderer_character.enabled = visible;
+        foreach (Renderer characterMesh in meshRenderer_character)
+        {
+            characterMesh.enabled = visible;
+        }
     }
 
     public void PlayerController_OnPlayerDie()

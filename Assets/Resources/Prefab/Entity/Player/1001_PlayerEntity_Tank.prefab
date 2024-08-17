@@ -366,7 +366,7 @@ PrefabInstance:
     - target: {fileID: 8174493298335311036, guid: 8468fa4c8e09695459a2f7572471e55b,
         type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 86899938
+      value: 3483765102
       objectReference: {fileID: 0}
     - target: {fileID: 8251370818320174555, guid: 8468fa4c8e09695459a2f7572471e55b,
         type: 3}
@@ -633,10 +633,11 @@ MonoBehaviour:
   playerAbilityQ: {fileID: 4288378132987168278}
   PlayerAnimation: {fileID: 8920344854508572487}
   playerHealth: {fileID: 1673985521950328931}
-  meshRenderer_character: {fileID: 3444278751281207682}
-  meshRenderer_weapon: {fileID: 2848342028169626550}
+  meshRenderer_character:
+  - {fileID: 3444278751281207682}
+  - {fileID: 3444278751281207682}
   LockEnemyTarget: {fileID: 0}
-  moveWhileComboMaxDistance: 2
+  moveWhileComboMaxDistance: 20
   moveWhileComboDuration: 0.6
   tank_playerWeapon: {fileID: 7727020092802202058}
   tankAbility_BarbarianShout: {fileID: 4288378132987168278}
@@ -1390,12 +1391,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4778fb0ebd4d7554887f2bd7e6fa39c1, type: 3}
---- !u!23 &2848342028169626550 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 6310147552963819493, guid: 4778fb0ebd4d7554887f2bd7e6fa39c1,
-    type: 3}
-  m_PrefabInstance: {fileID: 8076487124039808083}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4020723976643950809 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5177179249125788810, guid: 4778fb0ebd4d7554887f2bd7e6fa39c1,

@@ -1,5 +1,7 @@
+using Sirenix.OdinInspector;
 using UnityEngine;
 
+[InlineEditor]
 public abstract class EntityCharacterData : ScriptableObject
 {
     [Header("Info")]

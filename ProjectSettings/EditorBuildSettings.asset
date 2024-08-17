@@ -35,4 +35,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/00_TrioRaid_Scenes/Thanva/LoadingScene.unity
     guid: c6ddafd8f05277b498aabe70cba8a328
+  - enabled: 1
+    path: Assets/00_TrioRaid_Scenes/Tutor/InGame_Map_1_PressurePad.unity
+    guid: ff2f2bbd4a83dac4fb56697035a108ef
   m_configObjects: {}
