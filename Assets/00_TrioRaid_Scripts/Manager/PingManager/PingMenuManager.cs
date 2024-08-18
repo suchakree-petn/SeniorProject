@@ -15,7 +15,13 @@ public class PingMenuManager : NetworkSingleton<PingMenuManager>
     [SerializeField] private Image pingImage;
     [SerializeField] float inCircle = 20;
     [SerializeField] private GameObject pingCursor, pingHighlight;
-    [SerializeField] private Transform playerCamera;
+    public Transform PlayerCamera
+    {
+        get
+        {
+            return Camera.main.transform;
+        }
+    }
     [SerializeField] private LayerMask raycastableLayers;
     [SerializeField] private GameObject pingObjectPrefab;
     [SerializeField] private GameObject pingObjectParent;
@@ -29,14 +35,14 @@ public class PingMenuManager : NetworkSingleton<PingMenuManager>
     void Start()
     {
         pingMenuRootObject.SetActive(false);
-        playerCamera = Camera.main.transform;
     }
 
     void Update()
     {
+
         if (Input.GetMouseButtonDown(2))
         {
-            selectedItem = -1;
+            selectedItem = 4;
             isMouseMove = false;
             pingMenuRootObject.SetActive(true);
             SetDefaultPointer();
@@ -49,11 +55,11 @@ public class PingMenuManager : NetworkSingleton<PingMenuManager>
             pingMenuRootObject.SetActive(false);
             MouseCanMove(true);
 
-            if (selectedItem != -1)
-            {
+            // if (selectedItem != -1)
+            // {
                 RaycastHit hit;
 
-                if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.TransformDirection(Vector3.forward), out hit))
+                if (Physics.Raycast(PlayerCamera.position, PlayerCamera.TransformDirection(Vector3.forward), out hit,1000f,raycastableLayers))
                 {
                     if (pingObjectParent.transform.childCount > 0)
                     {
@@ -68,7 +74,7 @@ public class PingMenuManager : NetworkSingleton<PingMenuManager>
                     }
                     CreatePingManagerServerRpc(hit.point, NetworkManager.LocalClientId);
                 }
-            }
+            // }
         }
         if (Input.GetMouseButton(2))
         {
