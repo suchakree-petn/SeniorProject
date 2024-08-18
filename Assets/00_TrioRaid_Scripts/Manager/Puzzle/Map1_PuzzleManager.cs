@@ -1,8 +1,10 @@
 using System;
+using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using Unity.Netcode;
 using UnityEngine;
 
-public class PressurePadPuzzleManager : NetworkSingleton<PressurePadPuzzleManager>
+public class Map1_PuzzleManager : NetworkSingleton<Map1_PuzzleManager>
 {
     public Action OnActivatedPadCountChanged_Server;
 
@@ -10,8 +12,12 @@ public class PressurePadPuzzleManager : NetworkSingleton<PressurePadPuzzleManage
     public int ActivatedPadCount;
 
 
-    [Header("Reference")]
+    [FoldoutGroup("Reference")]
     [SerializeField] private GateController gateController;
+
+    [FoldoutGroup("Reference")]
+    [SerializeField] private List<Transform> spawnPos;
+
 
     protected override void InitAfterAwake()
     {
@@ -69,5 +75,13 @@ public class PressurePadPuzzleManager : NetworkSingleton<PressurePadPuzzleManage
         OnActivatedPadCountChanged_Server?.Invoke();
     }
 
+    [ServerRpc]
+    public void SpawnMobs_ServerRpc()
+    {
+        foreach (Transform position in spawnPos)
+        {
+            EnemyManager.Instance.Spawn(2001, position.position);
+        }
+    }
 }
 

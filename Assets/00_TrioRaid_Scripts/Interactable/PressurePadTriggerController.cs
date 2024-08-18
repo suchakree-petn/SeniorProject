@@ -22,33 +22,32 @@ public class PressurePadTriggerController : NetworkBehaviour
 
     protected virtual void OnTriggerEnter(Collider other)
     {
+        if (IsInUse) return;
+
+        OnEnter_Local?.Invoke();
+
         if (!IsServer) return;
+
         if (Time.time - lastExitTime < coolDown) return;
 
-        if (IsInUse) return;
 
         if (0 != (layers.value & 1 << other.gameObject.layer))
         {
-            if (IsServer)
-            {
-                OnEnterPressurePadHandler();
-            }
-            OnEnter_Local?.Invoke();
+            OnEnterPressurePadHandler();
         }
     }
 
     protected virtual void OnTriggerExit(Collider other)
     {
-        if (!IsServer) return;
         if (!IsInUse) return;
+
+        OnExit_Local?.Invoke();
+
+        if (!IsServer) return;
 
         if (0 != (layers.value & 1 << other.gameObject.layer))
         {
-            if (IsServer)
-            {
-                OnExitPressurePadHandler();
-            }
-            OnExit_Local?.Invoke();
+            OnExitPressurePadHandler();
             lastExitTime = Time.time;
         }
     }
@@ -67,7 +66,7 @@ public class PressurePadTriggerController : NetworkBehaviour
         if (!IsInUse)
         {
             UsePressurePad_ServerRpc();
-            PressurePadPuzzleManager.Instance.AddActivatePadCount(1);
+            Map1_PuzzleManager.Instance.AddActivatePadCount(1);
         }
     }
 
@@ -76,7 +75,7 @@ public class PressurePadTriggerController : NetworkBehaviour
         if (IsInUse)
         {
             ExitPressurePad_ServerRpc();
-            PressurePadPuzzleManager.Instance.RemoveActivatePadCount(1);
+            Map1_PuzzleManager.Instance.RemoveActivatePadCount(1);
         }
     }
 
