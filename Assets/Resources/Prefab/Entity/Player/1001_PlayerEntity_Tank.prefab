@@ -313,6 +313,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6638555846081995174, guid: 8468fa4c8e09695459a2f7572471e55b,
+        type: 3}
+      propertyPath: m_BlockingMask.m_Bits
+      value: 8191
+      objectReference: {fileID: 0}
     - target: {fileID: 7454716787649179170, guid: 8468fa4c8e09695459a2f7572471e55b,
         type: 3}
       propertyPath: playerMovementConfig.groundDistance
@@ -366,7 +371,7 @@ PrefabInstance:
     - target: {fileID: 8174493298335311036, guid: 8468fa4c8e09695459a2f7572471e55b,
         type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 3483765102
+      value: 86899938
       objectReference: {fileID: 0}
     - target: {fileID: 8251370818320174555, guid: 8468fa4c8e09695459a2f7572471e55b,
         type: 3}
