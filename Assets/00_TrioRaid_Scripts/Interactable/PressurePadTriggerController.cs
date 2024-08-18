@@ -1,4 +1,5 @@
 using Gamekit3D.GameCommands;
+using Sirenix.OdinInspector;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Events;
@@ -10,16 +11,18 @@ public class PressurePadTriggerController : NetworkBehaviour
     [SerializeField] private LayerMask layers;
     [SerializeField] private float coolDown;
 
+    [FoldoutGroup("Event")]
     public UnityEvent OnEnter_Local;
+    [FoldoutGroup("Event")]
     public UnityEvent OnExit_Local;
 
     // [Header("Reference")]
 
     private float lastExitTime;
 
-    void OnTriggerEnter(Collider other)
+    protected virtual void OnTriggerEnter(Collider other)
     {
-        if(!IsServer) return;
+        if (!IsServer) return;
         if (Time.time - lastExitTime < coolDown) return;
 
         if (IsInUse) return;
@@ -34,9 +37,9 @@ public class PressurePadTriggerController : NetworkBehaviour
         }
     }
 
-    void OnTriggerExit(Collider other)
+    protected virtual void OnTriggerExit(Collider other)
     {
-        if(!IsServer) return;
+        if (!IsServer) return;
         if (!IsInUse) return;
 
         if (0 != (layers.value & 1 << other.gameObject.layer))

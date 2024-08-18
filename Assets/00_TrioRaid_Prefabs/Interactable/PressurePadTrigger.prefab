@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 82977314588664216}
   - component: {fileID: 174149632205064052}
   m_Layer: 11
-  m_Name: PressurePadTrigger_URP
+  m_Name: PressurePadTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -126,8 +126,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2, y: 2, z: 2}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 2, y: 1.3846232, z: 2}
+  m_Center: {x: 0, y: -0.30768842, z: 0}
 --- !u!95 &95439531995642848
 Animator:
   serializedVersion: 5
