@@ -20,6 +20,8 @@ public class GateController : NetworkBehaviour
     [Header("Reference")]
     [SerializeField] Transform gateTransform;
 
+    [HideIf("IsOpen")]
+    [Button(ButtonSizes.Large), GUIColor(0, 1, 0)]
     public void OpenGate()
     {
         Debug.Log("Open Gate");
@@ -40,7 +42,8 @@ public class GateController : NetworkBehaviour
         gateTransform.DOLocalMoveY(openPositon_Y, openDuration).SetEase(Ease.Linear);
     }
 
-
+    [ShowIf("IsOpen")]
+    [Button(ButtonSizes.Large), GUIColor(1, 0.2f, 0)]
     public void CloseGate()
     {
         Debug.Log("Close Gate");

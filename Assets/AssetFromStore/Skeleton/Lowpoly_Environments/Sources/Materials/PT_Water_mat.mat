@@ -56,7 +56,7 @@ Material:
     - _AlphaCutoff: 0.5
     - _Cutoff: 0.5
     - _Depth: 0.233
-    - _DepthStrength: 1
+    - _DepthStrength: 0.24
     - _EdgeLength: 23.1
     - _EnvironmentReflections: 1
     - _Float1: 0.1
@@ -68,8 +68,8 @@ Material:
     - _FoamSpeed: 0.5
     - _GlossyReflections: 1
     - _Mettalic: 0.755
-    - _NormalMapWavesSpeed: 0.1
-    - _NormalMapsWavesSize: 6.14
+    - _NormalMapWavesSpeed: 0.029
+    - _NormalMapsWavesSize: 0.34
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
