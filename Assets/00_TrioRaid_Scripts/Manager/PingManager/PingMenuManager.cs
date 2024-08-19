@@ -28,7 +28,7 @@ public class PingMenuManager : NetworkSingleton<PingMenuManager>
     [SerializeField] private GameObject pingObjectParent;
     [SerializeField] private GameObject cancelTextGameObject;
 
-    float xSpeed = 0, ySpeed = 0, delayShowMenu;
+    float freeXSpeed = 0, freeYSpeed = 0,focusXSpeed = 0, focusYSpeed = 0, delayShowMenu;
     int selectedItem;
     bool isMouseMove, isUsePing;
     protected override void InitAfterAwake()
@@ -41,7 +41,6 @@ public class PingMenuManager : NetworkSingleton<PingMenuManager>
 
     void Update()
     {
-
         if (Input.GetMouseButtonDown(2))
         {
             selectedItem = 3;
@@ -51,8 +50,6 @@ public class PingMenuManager : NetworkSingleton<PingMenuManager>
 
             SetDefaultPointer();
             MouseCanMove(false);
-
-
         }
         if (Input.GetMouseButtonUp(2) && isUsePing)
         {
@@ -132,23 +129,24 @@ public class PingMenuManager : NetworkSingleton<PingMenuManager>
             }
         }
     }
-    void CreatePing(Vector3 position, ulong clientId)
+    void CreatePing(Vector3 position, ulong clientId, int classId)
     {
         GameObject pingGameObject = Instantiate(pingObjectPrefab, pingObjectParent.transform);
-        pingGameObject.GetComponent<PingObjectUI>().SetPingUI(listPingSprite[selectedItem], clientId);
+        pingGameObject.GetComponent<PingObjectUI>().SetPingUI(listPingSprite[selectedItem], clientId, classId);
         pingGameObject.transform.position = position;
+        Debug.Log("ClassId: "+classId);
     }
     [ServerRpc(RequireOwnership = false)]
     void CreatePingManagerServerRpc(Vector3 position, ulong clientId)
     {
-        Debug.Log("CreatePingManagerServerRpc");
-        CreatePingMessageClientRpc(position, clientId);
+        PlayerData playerData = GameMultiplayerManager.Instance.GetPlayerDataFromClientId(clientId);
+        CreatePingMessageClientRpc(position, clientId, playerData.classId);
     }
     [ClientRpc]
-    void CreatePingMessageClientRpc(Vector3 position, ulong clientId)
+    void CreatePingMessageClientRpc(Vector3 position, ulong clientId, int classId)
     {
         // Vector3 position = new Vector3(x, y, z);
-        CreatePing(position, clientId);
+        CreatePing(position, clientId, classId);
     }
 
     void DeletePing(int index)
@@ -192,16 +190,16 @@ public class PingMenuManager : NetworkSingleton<PingMenuManager>
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
 
-            CameraManager.Instance.GetThirdPersonCamera().GetComponent<CinemachineFreeLook>().m_XAxis.m_MaxSpeed = xSpeed;
-            CameraManager.Instance.GetThirdPersonCamera().GetComponent<CinemachineFreeLook>().m_YAxis.m_MaxSpeed = ySpeed;
+            CameraManager.Instance.GetThirdPersonCamera().GetComponent<CinemachineFreeLook>().m_XAxis.m_MaxSpeed = freeXSpeed;
+            CameraManager.Instance.GetThirdPersonCamera().GetComponent<CinemachineFreeLook>().m_YAxis.m_MaxSpeed = freeYSpeed;
         }
         else
         {
             Cursor.lockState = CursorLockMode.None;
             // Cursor.visible = true;
 
-            xSpeed = CameraManager.Instance.GetThirdPersonCamera().GetComponent<CinemachineFreeLook>().m_XAxis.m_MaxSpeed;
-            ySpeed = CameraManager.Instance.GetThirdPersonCamera().GetComponent<CinemachineFreeLook>().m_YAxis.m_MaxSpeed;
+            freeXSpeed = CameraManager.Instance.GetThirdPersonCamera().GetComponent<CinemachineFreeLook>().m_XAxis.m_MaxSpeed;
+            freeYSpeed = CameraManager.Instance.GetThirdPersonCamera().GetComponent<CinemachineFreeLook>().m_YAxis.m_MaxSpeed;
 
             CameraManager.Instance.GetThirdPersonCamera().GetComponent<CinemachineFreeLook>().m_XAxis.m_MaxSpeed = 0;
             CameraManager.Instance.GetThirdPersonCamera().GetComponent<CinemachineFreeLook>().m_YAxis.m_MaxSpeed = 0;
