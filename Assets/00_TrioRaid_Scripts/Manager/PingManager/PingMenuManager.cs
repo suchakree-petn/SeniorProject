@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
+using TMPro;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UI;
@@ -25,10 +26,11 @@ public class PingMenuManager : NetworkSingleton<PingMenuManager>
     [SerializeField] private LayerMask raycastableLayers;
     [SerializeField] private GameObject pingObjectPrefab;
     [SerializeField] private GameObject pingObjectParent;
+    [SerializeField] private GameObject cancelTextGameObject;
 
-    float xSpeed = 0, ySpeed = 0;
+    float xSpeed = 0, ySpeed = 0, delayShowMenu;
     int selectedItem;
-    bool isMouseMove;
+    bool isMouseMove, isUsePing;
     protected override void InitAfterAwake()
     {
     }
@@ -42,44 +44,48 @@ public class PingMenuManager : NetworkSingleton<PingMenuManager>
 
         if (Input.GetMouseButtonDown(2))
         {
-            selectedItem = 4;
+            selectedItem = 3;
+            delayShowMenu = 0;
             isMouseMove = false;
-            pingMenuRootObject.SetActive(true);
+            isUsePing = true;
+
             SetDefaultPointer();
             MouseCanMove(false);
 
 
         }
-        if (Input.GetMouseButtonUp(2))
+        if (Input.GetMouseButtonUp(2) && isUsePing)
         {
             pingMenuRootObject.SetActive(false);
             MouseCanMove(true);
 
-            // if (selectedItem != -1)
-            // {
-                RaycastHit hit;
+            RaycastHit hit;
 
-                if (Physics.Raycast(PlayerCamera.position, PlayerCamera.TransformDirection(Vector3.forward), out hit,1000f,raycastableLayers))
-                {
-                    if (pingObjectParent.transform.childCount > 0)
-                    {
-                        for (int i = 0; i < pingObjectParent.transform.childCount; i++)
-                        {
-                            GameObject pingObject = pingObjectParent.transform.GetChild(i).gameObject;
-                            if (pingObject.GetComponent<PingObjectUI>().GetIDPing() == NetworkManager.LocalClientId)
-                            {
-                                DeletePingManagerServerRpc(i);
-                            }
-                        }
-                    }
-                    CreatePingManagerServerRpc(hit.point, NetworkManager.LocalClientId);
-                }
-            // }
+            if (Physics.Raycast(PlayerCamera.position, PlayerCamera.TransformDirection(Vector3.forward), out hit, 1000f, raycastableLayers))
+            {
+                DeletePingInScene();
+                CreatePingManagerServerRpc(hit.point, NetworkManager.LocalClientId);
+            }
         }
         if (Input.GetMouseButton(2))
         {
+            delayShowMenu += Time.deltaTime;
+            if (delayShowMenu > 0.3 && isUsePing)
+            {
+                pingMenuRootObject.SetActive(true);
+                cancelTextGameObject.SetActive(true);
+                Cursor.visible = true;
+            }
+            if (Input.GetMouseButtonDown(1))
+            {
+                pingMenuRootObject.SetActive(false);
+                MouseCanMove(true);
+                DeletePingInScene();
+                isUsePing = false;
+            }
             if (isMouseMove)
             {
+                cancelTextGameObject.SetActive(false);
                 Vector2 screenCenter = new Vector2(Screen.width / 2, Screen.height / 2);
                 Vector2 mousePosition = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
                 Vector2 mouseDelta = mousePosition - screenCenter;
@@ -112,7 +118,6 @@ public class PingMenuManager : NetworkSingleton<PingMenuManager>
             }
             else
             {
-
                 Vector2 screenCenter = new Vector2(Screen.width / 2, Screen.height / 2);
                 Vector2 mousePosition = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
                 Vector2 mouseDelta = mousePosition - screenCenter;
@@ -160,6 +165,20 @@ public class PingMenuManager : NetworkSingleton<PingMenuManager>
     {
         DeletePing(index);
     }
+    void DeletePingInScene()
+    {
+        if (pingObjectParent.transform.childCount > 0)
+        {
+            for (int i = 0; i < pingObjectParent.transform.childCount; i++)
+            {
+                GameObject pingObject = pingObjectParent.transform.GetChild(i).gameObject;
+                if (pingObject.GetComponent<PingObjectUI>().GetIDPing() == NetworkManager.LocalClientId)
+                {
+                    DeletePingManagerServerRpc(i);
+                }
+            }
+        }
+    }
     void SetDefaultPointer()
     {
         pingCursor.SetActive(false);
@@ -179,7 +198,7 @@ public class PingMenuManager : NetworkSingleton<PingMenuManager>
         else
         {
             Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
+            // Cursor.visible = true;
 
             xSpeed = CameraManager.Instance.GetThirdPersonCamera().GetComponent<CinemachineFreeLook>().m_XAxis.m_MaxSpeed;
             ySpeed = CameraManager.Instance.GetThirdPersonCamera().GetComponent<CinemachineFreeLook>().m_YAxis.m_MaxSpeed;
