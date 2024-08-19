@@ -31,7 +31,7 @@ public class PingMenuManager : NetworkSingleton<PingMenuManager>
     [SerializeField] private GameObject pingObjectParent;
     [SerializeField] private GameObject cancelTextGameObject;
 
-    float freeXSpeed = 0, freeYSpeed = 0,focusXSpeed = 0, focusYSpeed = 0, delayShowMenu;
+    float freeXSpeed = 0, freeYSpeed = 0, focusXSpeed = 0, focusYSpeed = 0, delayShowMenu;
     int selectedItem;
     bool isMouseMove, isUsePing;
     protected override void InitAfterAwake()
@@ -44,93 +44,97 @@ public class PingMenuManager : NetworkSingleton<PingMenuManager>
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(2))
+        if (PlayerManager.Instance != null)
         {
-            selectedItem = 6;
-            delayShowMenu = 0;
-            isMouseMove = false;
-            isUsePing = true;
-
-            SetDefaultPointer();
-            MouseCanMove(false);
-        }
-        if (Input.GetMouseButtonUp(2) && isUsePing)
-        {
-            pingMenuRootObject.SetActive(false);
-            MouseCanMove(true);
-
-            RaycastHit hit;
-
-            if (Physics.SphereCast(PlayerCamera.position,sphereRadian, PlayerCamera.TransformDirection(Vector3.forward), out hit, 1000f, raycastableLayers))
+            if (Input.GetMouseButtonDown(2))
             {
-                DeletePingInScene();
-                if (0 != (enemyLayers.value & 1 << hit.collider.gameObject.layer) & !isMouseMove){
-                    selectedItem = 7;
-                }
-                CreatePingManagerServerRpc(hit.point, NetworkManager.LocalClientId);
+                selectedItem = 6;
+                delayShowMenu = 0;
+                isMouseMove = false;
+                isUsePing = true;
+
+                SetDefaultPointer();
+                MouseCanMove(false);
             }
-        }
-        if (Input.GetMouseButton(2))
-        {
-            delayShowMenu += Time.deltaTime;
-            if (delayShowMenu > 0.3 && isUsePing)
-            {
-                pingMenuRootObject.SetActive(true);
-                cancelTextGameObject.SetActive(true);
-                Cursor.visible = true;
-            }
-            if (Input.GetMouseButtonDown(1))
+            if (Input.GetMouseButtonUp(2) && isUsePing)
             {
                 pingMenuRootObject.SetActive(false);
                 MouseCanMove(true);
-                DeletePingInScene();
-                isUsePing = false;
-            }
-            if (isMouseMove)
-            {
-                cancelTextGameObject.SetActive(false);
-                Vector2 screenCenter = new Vector2(Screen.width / 2, Screen.height / 2);
-                Vector2 mousePosition = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
-                Vector2 mouseDelta = mousePosition - screenCenter;
 
-                if (Math.Abs(mouseDelta.x) > inCircle && Math.Abs(mouseDelta.x) > inCircle)
+                RaycastHit hit;
+
+                if (Physics.SphereCast(PlayerCamera.position, sphereRadian, PlayerCamera.TransformDirection(Vector3.forward), out hit, 1000f, raycastableLayers))
                 {
-                    float angle = Mathf.Atan2(mouseDelta.y, mouseDelta.x) * Mathf.Rad2Deg;
-
-                    float smoothAngle = Mathf.MoveTowardsAngle(CursorRootObject.eulerAngles.z, angle, mouseDelta.magnitude * Time.deltaTime * 250) - 60;
-                    CursorRootObject.transform.eulerAngles = new Vector3(0, 0, smoothAngle);
-
-                    float highlightAngle = Mathf.Round(smoothAngle / 60) * 60;
-                    HighlightRootObject.transform.eulerAngles = new Vector3(0, 0, highlightAngle);
-
-                    int pointerItem = (int)Mathf.Round(smoothAngle / 60);
-                    // selectedItem = pointerItem % 6;
-
-
-                    if (pointerItem <= 0)
+                    DeletePingInScene();
+                    if (0 != (enemyLayers.value & 1 << hit.collider.gameObject.layer) & !isMouseMove)
                     {
-                        selectedItem = Math.Abs(pointerItem);
+                        selectedItem = 7;
                     }
-                    else
-                    {
-                        selectedItem = Math.Abs(6 - pointerItem);
-                    }
-
-                    pingImage.sprite = listPingSprite[selectedItem];
+                    CreatePingManagerServerRpc(hit.point, NetworkManager.LocalClientId);
                 }
             }
-            else
+            if (Input.GetMouseButton(2))
             {
-                Vector2 screenCenter = new Vector2(Screen.width / 2, Screen.height / 2);
-                Vector2 mousePosition = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
-                Vector2 mouseDelta = mousePosition - screenCenter;
-
-                if (mouseDelta.magnitude > inCircle)
+                delayShowMenu += Time.deltaTime;
+                if (delayShowMenu > 0.3 && isUsePing)
                 {
-                    pingCursor.SetActive(true);
-                    pingHighlight.SetActive(true);
-                    pingImage.gameObject.SetActive(true);
-                    isMouseMove = true;
+                    pingMenuRootObject.SetActive(true);
+                    cancelTextGameObject.SetActive(true);
+                    Cursor.visible = true;
+                }
+                if (Input.GetMouseButtonDown(1))
+                {
+                    pingMenuRootObject.SetActive(false);
+                    MouseCanMove(true);
+                    DeletePingInScene();
+                    isUsePing = false;
+                }
+                if (isMouseMove)
+                {
+                    cancelTextGameObject.SetActive(false);
+                    Vector2 screenCenter = new Vector2(Screen.width / 2, Screen.height / 2);
+                    Vector2 mousePosition = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+                    Vector2 mouseDelta = mousePosition - screenCenter;
+
+                    if (Math.Abs(mouseDelta.x) > inCircle && Math.Abs(mouseDelta.x) > inCircle)
+                    {
+                        float angle = Mathf.Atan2(mouseDelta.y, mouseDelta.x) * Mathf.Rad2Deg;
+
+                        float smoothAngle = Mathf.MoveTowardsAngle(CursorRootObject.eulerAngles.z, angle, mouseDelta.magnitude * Time.deltaTime * 250) - 60;
+                        CursorRootObject.transform.eulerAngles = new Vector3(0, 0, smoothAngle);
+
+                        float highlightAngle = Mathf.Round(smoothAngle / 60) * 60;
+                        HighlightRootObject.transform.eulerAngles = new Vector3(0, 0, highlightAngle);
+
+                        int pointerItem = (int)Mathf.Round(smoothAngle / 60);
+                        // selectedItem = pointerItem % 6;
+
+
+                        if (pointerItem <= 0)
+                        {
+                            selectedItem = Math.Abs(pointerItem);
+                        }
+                        else
+                        {
+                            selectedItem = Math.Abs(6 - pointerItem);
+                        }
+
+                        pingImage.sprite = listPingSprite[selectedItem];
+                    }
+                }
+                else
+                {
+                    Vector2 screenCenter = new Vector2(Screen.width / 2, Screen.height / 2);
+                    Vector2 mousePosition = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+                    Vector2 mouseDelta = mousePosition - screenCenter;
+
+                    if (mouseDelta.magnitude > inCircle)
+                    {
+                        pingCursor.SetActive(true);
+                        pingHighlight.SetActive(true);
+                        pingImage.gameObject.SetActive(true);
+                        isMouseMove = true;
+                    }
                 }
             }
         }
