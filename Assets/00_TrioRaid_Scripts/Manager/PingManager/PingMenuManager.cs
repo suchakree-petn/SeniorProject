@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Cinemachine;
 using TMPro;
 using Unity.Netcode;
+using Unity.Services.Lobbies.Models;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -61,7 +62,7 @@ public class PingMenuManager : NetworkSingleton<PingMenuManager>
 
             RaycastHit hit;
 
-            if (Physics.Raycast(PlayerCamera.position, PlayerCamera.TransformDirection(Vector3.forward), out hit, 1000f, raycastableLayers))
+            if (Physics.SphereCast(PlayerCamera.position, 0.7f, PlayerCamera.TransformDirection(Vector3.forward), out hit, 1000f, raycastableLayers))
             {
                 DeletePingInScene();
                 CreatePingManagerServerRpc(hit.point, NetworkManager.LocalClientId);
@@ -194,6 +195,7 @@ public class PingMenuManager : NetworkSingleton<PingMenuManager>
 
             CameraManager.Instance.GetThirdPersonCamera().GetComponent<CinemachineFreeLook>().m_XAxis.m_MaxSpeed = xSpeed;
             CameraManager.Instance.GetThirdPersonCamera().GetComponent<CinemachineFreeLook>().m_YAxis.m_MaxSpeed = ySpeed;
+            PlayerManager.Instance.LocalPlayerController.GetMouseMovement().CanCameraMove = true;
         }
         else
         {
@@ -205,6 +207,8 @@ public class PingMenuManager : NetworkSingleton<PingMenuManager>
 
             CameraManager.Instance.GetThirdPersonCamera().GetComponent<CinemachineFreeLook>().m_XAxis.m_MaxSpeed = 0;
             CameraManager.Instance.GetThirdPersonCamera().GetComponent<CinemachineFreeLook>().m_YAxis.m_MaxSpeed = 0;
+            PlayerManager.Instance.LocalPlayerController.GetMouseMovement().CanCameraMove = false;
+
         }
     }
 
