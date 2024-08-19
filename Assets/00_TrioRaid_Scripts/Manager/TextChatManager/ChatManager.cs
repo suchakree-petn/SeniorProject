@@ -4,12 +4,18 @@ using UnityEngine;
 using Unity.Netcode;
 using TMPro;
 using System;
+using UnityEngine.UI;
 
 public class ChatManager : NetworkSingleton<ChatManager>
 {
     [SerializeField] ChatMessage chatMessagePrefab;
     [SerializeField] CanvasGroup chatContent;
     [SerializeField] TMP_InputField chatInput;
+    [SerializeField] GameObject bgChat;
+    [SerializeField] GameObject rootScrollbar;
+    [SerializeField] GameObject childScrollbar;
+    [SerializeField] GameObject chatInputGameObject;
+    [SerializeField] ScrollRect scrollRect;
     public bool isUsingChat = false;
     public Action OnOpenChat;
     public Action OnCloseChat;
@@ -17,34 +23,56 @@ public class ChatManager : NetworkSingleton<ChatManager>
     private void Start()
     {
         OnOpenChat += OpenChat;
+        OnOpenChat += () => { SetShowChatUI(true); };
         OnCloseChat += CloseChat;
+        OnCloseChat += () => { SetShowChatUI(false); };
+        SetShowChatUI(false);
     }
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Return) && !isUsingChat)
+        if (PlayerManager.Instance != null)
         {
-            OnOpenChat.Invoke();
-            Debug.Log("!isUsingChat");
+            if (Input.GetKeyDown(KeyCode.Return) && !isUsingChat)
+            {
+                OnOpenChat.Invoke();
+                Debug.Log("!isUsingChat");
+            }
+            else if (Input.GetKeyDown(KeyCode.Return) && string.IsNullOrEmpty(chatInput.text) && isUsingChat)
+            {
+                OnCloseChat.Invoke();
+                Debug.Log("CloseChat");
+            }
+            else if (Input.GetKeyDown(KeyCode.Return) && isUsingChat)
+            {
+
+                SendChatManager(chatInput.text, NetworkManager.LocalClientId);
+                chatInput.text = string.Empty;
+                chatInput.Select();
+                chatInput.ActivateInputField();
+                Debug.Log("isUsingChat");
+            }
         }
-        else if (Input.GetKeyDown(KeyCode.Return) && string.IsNullOrEmpty(chatInput.text) && isUsingChat)
-        {
-            OnCloseChat.Invoke();
-            Debug.Log("CloseChat");
-        }
-        else if (Input.GetKeyDown(KeyCode.Return) && isUsingChat)
-        {
-                
-            SendChatManager(chatInput.text, NetworkManager.LocalClientId);
-            chatInput.text = "";
+
+    }
+    IEnumerator AutoScrollChat(){
+        yield return new WaitForEndOfFrame();
+        yield return new WaitForEndOfFrame();
+        scrollRect.normalizedPosition = new Vector2(scrollRect.normalizedPosition.x, 0);
+    }
+    void SetShowChatUI(bool show)
+    {
+        bgChat.SetActive(show);
+        rootScrollbar.GetComponent<Image>().enabled = show;
+        childScrollbar.SetActive(show);
+        chatInputGameObject.SetActive(show);
+        if (show){
+            chatInput.Select();
             chatInput.ActivateInputField();
-            Debug.Log("isUsingChat");
         }
-        
     }
     void OpenChat()
     {
         isUsingChat = true;
-        chatInput.Select();
         PlayerManager.Instance.LocalPlayerController.SetCanPlayerMove(false);
         PlayerManager.Instance.LocalPlayerController.SetIsReadyToAttack(false);
         PlayerManager.Instance.LocalPlayerController.SetCanUseAbilityE(false);
@@ -62,12 +90,16 @@ public class ChatManager : NetworkSingleton<ChatManager>
     {
         if (string.IsNullOrWhiteSpace(_message)) return;
 
-        SendChatManagerServerRpc(_message,clientId);
+        SendChatManagerServerRpc(_message, clientId);
     }
     void AddMessage(string msg)
     {
         ChatMessage CM = Instantiate(chatMessagePrefab, chatContent.transform);
         CM.SetText(msg);
+        bool doAutoScroll = scrollRect.normalizedPosition.y < 0.001f;
+        if (doAutoScroll){
+            StartCoroutine(AutoScrollChat());
+        }
     }
     [ServerRpc(RequireOwnership = false)]
     void SendChatManagerServerRpc(string message, ulong clientId)
