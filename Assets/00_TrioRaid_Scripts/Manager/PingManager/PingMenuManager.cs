@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Cinemachine;
 using TMPro;
 using Unity.Netcode;
+using Unity.Services.Lobbies.Models;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -28,7 +29,7 @@ public class PingMenuManager : NetworkSingleton<PingMenuManager>
     [SerializeField] private GameObject pingObjectParent;
     [SerializeField] private GameObject cancelTextGameObject;
 
-    float freeXSpeed = 0, freeYSpeed = 0,focusXSpeed = 0, focusYSpeed = 0, delayShowMenu;
+    float xSpeed = 0, ySpeed = 0, delayShowMenu;
     int selectedItem;
     bool isMouseMove, isUsePing;
     protected override void InitAfterAwake()
@@ -41,6 +42,7 @@ public class PingMenuManager : NetworkSingleton<PingMenuManager>
 
     void Update()
     {
+
         if (Input.GetMouseButtonDown(2))
         {
             selectedItem = 3;
@@ -50,6 +52,8 @@ public class PingMenuManager : NetworkSingleton<PingMenuManager>
 
             SetDefaultPointer();
             MouseCanMove(false);
+
+
         }
         if (Input.GetMouseButtonUp(2) && isUsePing)
         {
@@ -58,7 +62,7 @@ public class PingMenuManager : NetworkSingleton<PingMenuManager>
 
             RaycastHit hit;
 
-            if (Physics.Raycast(PlayerCamera.position, PlayerCamera.TransformDirection(Vector3.forward), out hit, 1000f, raycastableLayers))
+            if (Physics.SphereCast(PlayerCamera.position, 0.7f, PlayerCamera.TransformDirection(Vector3.forward), out hit, 1000f, raycastableLayers))
             {
                 DeletePingInScene();
                 CreatePingManagerServerRpc(hit.point, NetworkManager.LocalClientId);
@@ -129,24 +133,23 @@ public class PingMenuManager : NetworkSingleton<PingMenuManager>
             }
         }
     }
-    void CreatePing(Vector3 position, ulong clientId, int classId)
+    void CreatePing(Vector3 position, ulong clientId)
     {
         GameObject pingGameObject = Instantiate(pingObjectPrefab, pingObjectParent.transform);
-        pingGameObject.GetComponent<PingObjectUI>().SetPingUI(listPingSprite[selectedItem], clientId, classId);
+        pingGameObject.GetComponent<PingObjectUI>().SetPingUI(listPingSprite[selectedItem], clientId);
         pingGameObject.transform.position = position;
-        Debug.Log("ClassId: "+classId);
     }
     [ServerRpc(RequireOwnership = false)]
     void CreatePingManagerServerRpc(Vector3 position, ulong clientId)
     {
-        PlayerData playerData = GameMultiplayerManager.Instance.GetPlayerDataFromClientId(clientId);
-        CreatePingMessageClientRpc(position, clientId, playerData.classId);
+        Debug.Log("CreatePingManagerServerRpc");
+        CreatePingMessageClientRpc(position, clientId);
     }
     [ClientRpc]
-    void CreatePingMessageClientRpc(Vector3 position, ulong clientId, int classId)
+    void CreatePingMessageClientRpc(Vector3 position, ulong clientId)
     {
         // Vector3 position = new Vector3(x, y, z);
-        CreatePing(position, clientId, classId);
+        CreatePing(position, clientId);
     }
 
     void DeletePing(int index)
@@ -190,19 +193,22 @@ public class PingMenuManager : NetworkSingleton<PingMenuManager>
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
 
-            CameraManager.Instance.GetThirdPersonCamera().GetComponent<CinemachineFreeLook>().m_XAxis.m_MaxSpeed = freeXSpeed;
-            CameraManager.Instance.GetThirdPersonCamera().GetComponent<CinemachineFreeLook>().m_YAxis.m_MaxSpeed = freeYSpeed;
+            CameraManager.Instance.GetThirdPersonCamera().GetComponent<CinemachineFreeLook>().m_XAxis.m_MaxSpeed = xSpeed;
+            CameraManager.Instance.GetThirdPersonCamera().GetComponent<CinemachineFreeLook>().m_YAxis.m_MaxSpeed = ySpeed;
+            PlayerManager.Instance.LocalPlayerController.GetMouseMovement().CanCameraMove = true;
         }
         else
         {
             Cursor.lockState = CursorLockMode.None;
             // Cursor.visible = true;
 
-            freeXSpeed = CameraManager.Instance.GetThirdPersonCamera().GetComponent<CinemachineFreeLook>().m_XAxis.m_MaxSpeed;
-            freeYSpeed = CameraManager.Instance.GetThirdPersonCamera().GetComponent<CinemachineFreeLook>().m_YAxis.m_MaxSpeed;
+            xSpeed = CameraManager.Instance.GetThirdPersonCamera().GetComponent<CinemachineFreeLook>().m_XAxis.m_MaxSpeed;
+            ySpeed = CameraManager.Instance.GetThirdPersonCamera().GetComponent<CinemachineFreeLook>().m_YAxis.m_MaxSpeed;
 
             CameraManager.Instance.GetThirdPersonCamera().GetComponent<CinemachineFreeLook>().m_XAxis.m_MaxSpeed = 0;
             CameraManager.Instance.GetThirdPersonCamera().GetComponent<CinemachineFreeLook>().m_YAxis.m_MaxSpeed = 0;
+            PlayerManager.Instance.LocalPlayerController.GetMouseMovement().CanCameraMove = false;
+
         }
     }
 
