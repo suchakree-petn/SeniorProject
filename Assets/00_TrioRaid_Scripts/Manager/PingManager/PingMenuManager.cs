@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using Cinemachine;
 using TMPro;
 using Unity.Netcode;
-using Unity.Services.Lobbies.Models;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,8 +13,10 @@ public class PingMenuManager : NetworkSingleton<PingMenuManager>
     [SerializeField] private Transform CursorRootObject;
     [SerializeField] private Transform HighlightRootObject;
     [SerializeField] private List<Sprite> listPingSprite;
+    [SerializeField] private List<string> listdetail;
     [SerializeField] private Image pingImage;
     [SerializeField] float inCircle = 20;
+    [SerializeField] float sphereRadian;
     [SerializeField] private GameObject pingCursor, pingHighlight;
     public Transform PlayerCamera
     {
@@ -25,11 +26,12 @@ public class PingMenuManager : NetworkSingleton<PingMenuManager>
         }
     }
     [SerializeField] private LayerMask raycastableLayers;
+    [SerializeField] private LayerMask enemyLayers;
     [SerializeField] private GameObject pingObjectPrefab;
     [SerializeField] private GameObject pingObjectParent;
     [SerializeField] private GameObject cancelTextGameObject;
 
-    float xSpeed = 0, ySpeed = 0, delayShowMenu;
+    float freeXSpeed = 0, freeYSpeed = 0,focusXSpeed = 0, focusYSpeed = 0, delayShowMenu;
     int selectedItem;
     bool isMouseMove, isUsePing;
     protected override void InitAfterAwake()
@@ -42,18 +44,15 @@ public class PingMenuManager : NetworkSingleton<PingMenuManager>
 
     void Update()
     {
-
         if (Input.GetMouseButtonDown(2))
         {
-            selectedItem = 3;
+            selectedItem = 6;
             delayShowMenu = 0;
             isMouseMove = false;
             isUsePing = true;
 
             SetDefaultPointer();
             MouseCanMove(false);
-
-
         }
         if (Input.GetMouseButtonUp(2) && isUsePing)
         {
@@ -62,9 +61,12 @@ public class PingMenuManager : NetworkSingleton<PingMenuManager>
 
             RaycastHit hit;
 
-            if (Physics.SphereCast(PlayerCamera.position, 0.7f, PlayerCamera.TransformDirection(Vector3.forward), out hit, 1000f, raycastableLayers))
+            if (Physics.SphereCast(PlayerCamera.position,sphereRadian, PlayerCamera.TransformDirection(Vector3.forward), out hit, 1000f, raycastableLayers))
             {
                 DeletePingInScene();
+                if (0 != (enemyLayers.value & 1 << hit.collider.gameObject.layer) & !isMouseMove){
+                    selectedItem = 7;
+                }
                 CreatePingManagerServerRpc(hit.point, NetworkManager.LocalClientId);
             }
         }
@@ -133,23 +135,22 @@ public class PingMenuManager : NetworkSingleton<PingMenuManager>
             }
         }
     }
-    void CreatePing(Vector3 position, ulong clientId)
+    void CreatePing(Vector3 position, ulong clientId, int classId)
     {
         GameObject pingGameObject = Instantiate(pingObjectPrefab, pingObjectParent.transform);
-        pingGameObject.GetComponent<PingObjectUI>().SetPingUI(listPingSprite[selectedItem], clientId);
+        pingGameObject.GetComponent<PingObjectUI>().SetPingUI(listPingSprite[selectedItem], clientId, classId, listdetail[selectedItem]);
         pingGameObject.transform.position = position;
     }
     [ServerRpc(RequireOwnership = false)]
     void CreatePingManagerServerRpc(Vector3 position, ulong clientId)
     {
-        Debug.Log("CreatePingManagerServerRpc");
-        CreatePingMessageClientRpc(position, clientId);
+        PlayerData playerData = GameMultiplayerManager.Instance.GetPlayerDataFromClientId(clientId);
+        CreatePingMessageClientRpc(position, clientId, playerData.classId);
     }
     [ClientRpc]
-    void CreatePingMessageClientRpc(Vector3 position, ulong clientId)
+    void CreatePingMessageClientRpc(Vector3 position, ulong clientId, int classId)
     {
-        // Vector3 position = new Vector3(x, y, z);
-        CreatePing(position, clientId);
+        CreatePing(position, clientId, classId);
     }
 
     void DeletePing(int index)
@@ -166,7 +167,7 @@ public class PingMenuManager : NetworkSingleton<PingMenuManager>
     {
         DeletePing(index);
     }
-    void DeletePingInScene()
+    public void DeletePingInScene()
     {
         if (pingObjectParent.transform.childCount > 0)
         {
@@ -193,8 +194,8 @@ public class PingMenuManager : NetworkSingleton<PingMenuManager>
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
 
-            CameraManager.Instance.GetThirdPersonCamera().GetComponent<CinemachineFreeLook>().m_XAxis.m_MaxSpeed = xSpeed;
-            CameraManager.Instance.GetThirdPersonCamera().GetComponent<CinemachineFreeLook>().m_YAxis.m_MaxSpeed = ySpeed;
+            CameraManager.Instance.GetThirdPersonCamera().GetComponent<CinemachineFreeLook>().m_XAxis.m_MaxSpeed = freeXSpeed;
+            CameraManager.Instance.GetThirdPersonCamera().GetComponent<CinemachineFreeLook>().m_YAxis.m_MaxSpeed = freeYSpeed;
             PlayerManager.Instance.LocalPlayerController.GetMouseMovement().CanCameraMove = true;
         }
         else
@@ -202,13 +203,12 @@ public class PingMenuManager : NetworkSingleton<PingMenuManager>
             Cursor.lockState = CursorLockMode.None;
             // Cursor.visible = true;
 
-            xSpeed = CameraManager.Instance.GetThirdPersonCamera().GetComponent<CinemachineFreeLook>().m_XAxis.m_MaxSpeed;
-            ySpeed = CameraManager.Instance.GetThirdPersonCamera().GetComponent<CinemachineFreeLook>().m_YAxis.m_MaxSpeed;
+            freeXSpeed = CameraManager.Instance.GetThirdPersonCamera().GetComponent<CinemachineFreeLook>().m_XAxis.m_MaxSpeed;
+            freeYSpeed = CameraManager.Instance.GetThirdPersonCamera().GetComponent<CinemachineFreeLook>().m_YAxis.m_MaxSpeed;
 
             CameraManager.Instance.GetThirdPersonCamera().GetComponent<CinemachineFreeLook>().m_XAxis.m_MaxSpeed = 0;
             CameraManager.Instance.GetThirdPersonCamera().GetComponent<CinemachineFreeLook>().m_YAxis.m_MaxSpeed = 0;
             PlayerManager.Instance.LocalPlayerController.GetMouseMovement().CanCameraMove = false;
-
         }
     }
 

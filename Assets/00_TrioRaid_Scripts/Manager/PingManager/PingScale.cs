@@ -20,7 +20,6 @@ public class PingScale : MonoBehaviour
     {
         transform.LookAt(playerCamera);
         dist = Vector3.Distance(transform.position, playerCamera.transform.position);
-        // distText.text = Math.Round(dist).ToString()+" M";
         if (dist > minDist){
             transform.localScale = Vector3.one * dist / minDist * scaleFactor;
         }else{
