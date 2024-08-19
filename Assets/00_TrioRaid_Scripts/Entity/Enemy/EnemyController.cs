@@ -46,7 +46,7 @@ public class EnemyController : NetworkBehaviour, IDamageable
 
     protected virtual void Start()
     {
-        OnEnemyDead_Local += () => enemyHealth.GetEnemyHealth_UI().gameObject.SetActive(false);
+        // OnEnemyDead_Local += () => enemyHealth.GetEnemyHealth_UI().gameObject.SetActive(false);
         OnEnemyDead_Local += () => collideHitBox.enabled = false;
         OnEnemyHit_Local += OnEnemyHit_Shaking;
     }
@@ -125,29 +125,35 @@ public class EnemyController : NetworkBehaviour, IDamageable
     {
         if (damage.AttackerClientId == (long)NetworkManager.LocalClientId) return;
 
-        enemyHealth.TakeDamage(damage, EnemyCharacterData.GetDefense());
-        OnEnemyHit_Local?.Invoke();
         if (enemyHealth.IsDead)
         {
             StopMoving();
             hitBox.enabled = false;
             critHitBox.enabled = false;
             OnEnemyDead_Local?.Invoke();
+        }
+        else
+        {
+            OnEnemyHit_Local?.Invoke();
         }
     }
 
     public void TakeDamage(AttackDamage damage)
     {
-        enemyHealth.TakeDamage(damage, EnemyCharacterData.GetDefense());
-        OnEnemyHit_Local?.Invoke();
+        TakeDamage_ServerRpc(damage);
+
         if (enemyHealth.IsDead)
         {
             StopMoving();
             hitBox.enabled = false;
             critHitBox.enabled = false;
             OnEnemyDead_Local?.Invoke();
+            OnEnemyDead_Local = null;
         }
-        TakeDamage_ServerRpc(damage);
+        else
+        {
+            OnEnemyHit_Local?.Invoke();
+        }
     }
 
     [ClientRpc]
@@ -160,6 +166,8 @@ public class EnemyController : NetworkBehaviour, IDamageable
     [ServerRpc]
     public virtual void TakeDamage_ServerRpc(AttackDamage damage)
     {
+        enemyHealth.TakeDamage(damage, EnemyCharacterData.GetDefense());
+
         TakeDamage_ClientRpc(damage);
     }
     public void StopMoving()

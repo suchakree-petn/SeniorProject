@@ -2801,6 +2801,16 @@ PrefabInstance:
       objectReference: {fileID: 7802546280471116810}
     - target: {fileID: 8562730884081978089, guid: 8468fa4c8e09695459a2f7572471e55b,
         type: 3}
+      propertyPath: playerMovementConfig.MoveSpeed
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8562730884081978089, guid: 8468fa4c8e09695459a2f7572471e55b,
+        type: 3}
+      propertyPath: playerMovementConfig._defaultMoveSpeed
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8562730884081978089, guid: 8468fa4c8e09695459a2f7572471e55b,
+        type: 3}
       propertyPath: playerMovementConfig.DyingMovingPenaltyPercentage
       value: 50
       objectReference: {fileID: 0}
@@ -2914,8 +2924,8 @@ MonoBehaviour:
   playerAbilityQ: {fileID: 3070919574868137117}
   PlayerAnimation: {fileID: 8920344854508572487}
   playerHealth: {fileID: 1673985521950328931}
-  meshRenderer_character: {fileID: 8894094430919120413}
-  meshRenderer_weapon: {fileID: 0}
+  meshRenderer_character:
+  - {fileID: 0}
   caster_playerWeapon: {fileID: 4086381456720999541}
   casterAbility_BlessingShield: {fileID: 4375989519964650209}
   casterAbility_PowerUp: {fileID: 3070919574868137117}
@@ -2932,6 +2942,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CanUse: 1
+  IsActive: 0
   ActivateKey: 101
   UserClientId: 0
   AbilityData: {fileID: 11400000, guid: 674d1d44a65cb2c4788fa6f0afcac374, type: 2}
@@ -2949,6 +2960,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CanUse: 1
+  IsActive: 0
   ActivateKey: 113
   UserClientId: 0
   AbilityData: {fileID: 11400000, guid: 4ee79697a83f3e34d933df939f672bc4, type: 2}

@@ -70,7 +70,9 @@ public class Archer_PlayerWeapon : PlayerWeapon
             Debug.LogWarning($"No Fire Point transform");
             return;
         }
-        if (PlayerInputManager.Instance.Attack.WasPerformedThisFrame())
+
+
+        if (Input.GetMouseButton(0) && !archer_PlayerController.ArcherAbility_ArrowManiac.IsActive)
         {
             IsDrawing = true;
         }
@@ -80,7 +82,7 @@ public class Archer_PlayerWeapon : PlayerWeapon
             DrawBow();
         }
 
-        if (PlayerInputManager.Instance.Attack.WasReleasedThisFrame() && DrawPower > 0)
+        if (Input.GetMouseButtonUp(0) && DrawPower > 0 && !archer_PlayerController.ArcherAbility_ArrowManiac.IsActive)
         {
             NormalAttack();
             IsDrawing = false;

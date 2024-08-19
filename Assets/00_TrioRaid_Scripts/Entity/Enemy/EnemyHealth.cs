@@ -42,7 +42,15 @@ public class EnemyHealth : EntityHealth
     private void OnEnable()
     {
         InitHp(enemyController.EnemyCharacterData);
-        OnEnemyTakeDamage += OnEnemyTakeDamageHandler_ClientRpc;
+
+        currentHealth.OnValueChanged += (prev, newValue) =>
+        {
+            enemyHealth_UI.SetHpBar(newValue / MaxHp);
+            if (newValue <= 0)
+            {
+                enemyHealth_UI.gameObject.SetActive(false);
+            }
+        };
     }
 
     [ClientRpc]

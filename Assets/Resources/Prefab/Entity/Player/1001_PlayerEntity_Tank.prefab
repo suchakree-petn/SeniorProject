@@ -525,6 +525,16 @@ PrefabInstance:
       objectReference: {fileID: 5698460776653806195}
     - target: {fileID: 8562730884081978089, guid: 8468fa4c8e09695459a2f7572471e55b,
         type: 3}
+      propertyPath: playerMovementConfig.MoveSpeed
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8562730884081978089, guid: 8468fa4c8e09695459a2f7572471e55b,
+        type: 3}
+      propertyPath: playerMovementConfig._defaultMoveSpeed
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8562730884081978089, guid: 8468fa4c8e09695459a2f7572471e55b,
+        type: 3}
       propertyPath: playerMovementConfig.DyingMovingPenaltyPercentage
       value: 50
       objectReference: {fileID: 0}

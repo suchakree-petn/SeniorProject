@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class EntityHealth : NetworkBehaviour
 {
-    [SerializeField] private NetworkVariable<float> currentHealth = new(1337, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+    [SerializeField] protected NetworkVariable<float> currentHealth = new(1337, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     public float CurrentHealth
     {
         get

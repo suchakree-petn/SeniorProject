@@ -231,7 +231,7 @@ PrefabInstance:
     - target: {fileID: 8174493298335311036, guid: 8468fa4c8e09695459a2f7572471e55b,
         type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 893028088
+      value: 2580230173
       objectReference: {fileID: 0}
     - target: {fileID: 8251370818320174555, guid: 8468fa4c8e09695459a2f7572471e55b,
         type: 3}
@@ -253,6 +253,16 @@ PrefabInstance:
       propertyPath: playerController
       value: 
       objectReference: {fileID: 3491484360437324280}
+    - target: {fileID: 8562730884081978089, guid: 8468fa4c8e09695459a2f7572471e55b,
+        type: 3}
+      propertyPath: playerMovementConfig.MoveSpeed
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8562730884081978089, guid: 8468fa4c8e09695459a2f7572471e55b,
+        type: 3}
+      propertyPath: playerMovementConfig._defaultMoveSpeed
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 8562730884081978089, guid: 8468fa4c8e09695459a2f7572471e55b,
         type: 3}
       propertyPath: playerMovementConfig.DyingMovingPenaltyPercentage
@@ -363,8 +373,8 @@ MonoBehaviour:
   meshRenderer_character:
   - {fileID: 0}
   archer_playerWeapon: {fileID: 4525480869484328883}
-  archerAbility_ArrowManiac: {fileID: 6757025908220086151}
-  archerAbility_VineTrap: {fileID: 2851045020734205238}
+  ArcherAbility_ArrowManiac: {fileID: 6757025908220086151}
+  ArcherAbility_VineTrap: {fileID: 2851045020734205238}
 --- !u!114 &4525480869484328883
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,4 +1,5 @@
 using DG.Tweening;
+using Sirenix.OdinInspector;
 using TMPro;
 using Unity.Netcode;
 using UnityEngine;
@@ -8,6 +9,7 @@ public class PlayerUIManager : NetworkSingleton<PlayerUIManager>
 {
     [SerializeField] private float FS_Hit_Intensity = 0.1f;
     [SerializeField] private float FS_Hit_Duration = 0.3f;
+    [SerializeField] private float fadeDuration = 4;
 
     [Header("In Game Reference")]
     public GameObject PlayerCanvas;
@@ -22,11 +24,16 @@ public class PlayerUIManager : NetworkSingleton<PlayerUIManager>
     private float respawnCountdown;
     private bool isShowRespawnUI;
 
-    [Header("Reference select UI")]
+    [FoldoutGroup("Reference select UI")]
     [SerializeField] private GameObject selectCharacterMenu;
+    [FoldoutGroup("Reference select UI")]
     [SerializeField] private TMP_Dropdown selectCharacterDropdown;
+    [FoldoutGroup("Reference select UI")]
     [SerializeField] private Button selectCharacterButton_Host;
+    [FoldoutGroup("Reference select UI")]
     [SerializeField] private Button selectCharacterButton_Client;
+    [FoldoutGroup("Reference select UI")]
+    [SerializeField] private Image fadeScreen;
 
 
     private void Update()
@@ -140,6 +147,18 @@ public class PlayerUIManager : NetworkSingleton<PlayerUIManager>
         {
             fullScreen_Hit.DOFloat(0, "_Intensity", FS_Hit_Duration);
         });
+    }
+
+    public Tween FadeScreenOut(Color fadeToColor = default)
+    {
+        fadeScreen.color = fadeToColor;
+        return fadeScreen.DOFade(1, fadeDuration);
+    }
+
+    public Tween FadeScreenIn(Color fadeFromColor = default)
+    {
+        fadeScreen.color = fadeFromColor;
+        return fadeScreen.DOFade(0, fadeDuration);
     }
 
     public override void OnDestroy()

@@ -20,7 +20,7 @@ MonoBehaviour:
   MoveSpeed: 0
   HpBase: 140000
   HpBonus: 0
-  AttackBase: 180
+  AttackBase: 1800
   AttackBonus: 0
   DefenseBase: 150
   DefenseBonus: 0
