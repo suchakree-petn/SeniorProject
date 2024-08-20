@@ -30,6 +30,13 @@ public class PingMenuManager : NetworkSingleton<PingMenuManager>
     [SerializeField] private GameObject pingObjectPrefab;
     [SerializeField] private GameObject pingObjectParent;
     [SerializeField] private GameObject cancelTextGameObject;
+    [SerializeField] string toggleTagName = "TogglePing";
+    [SerializeField] Toggle toggleActive{
+        get
+        {
+            return GameObject.FindGameObjectWithTag(toggleTagName).GetComponent<Toggle>();
+        }
+    }
 
     float freeXSpeed = 0, freeYSpeed = 0, focusXSpeed = 0, focusYSpeed = 0, delayShowMenu;
     int selectedItem;
@@ -215,6 +222,16 @@ public class PingMenuManager : NetworkSingleton<PingMenuManager>
             PlayerManager.Instance.LocalPlayerController.GetMouseMovement().CanCameraMove = false;
         }
     }
-
+    [ServerRpc(RequireOwnership = false)]
+    public void ActivePingServerRpc(bool active)
+    {
+        ActivePingClientRpc(active);
+    }
+    [ClientRpc]
+    void ActivePingClientRpc(bool active)
+    {
+        toggleActive.isOn = active;
+        PingMenuManager.Instance.gameObject.SetActive(active);
+    }
 
 }

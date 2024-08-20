@@ -16,6 +16,13 @@ public class ChatManager : NetworkSingleton<ChatManager>
     [SerializeField] GameObject childScrollbar;
     [SerializeField] GameObject chatInputGameObject;
     [SerializeField] ScrollRect scrollRect;
+    [SerializeField] string toggleTagName = "ToggleTextChat";
+    [SerializeField] Toggle toggleActive{
+        get
+        {
+            return GameObject.FindGameObjectWithTag(toggleTagName).GetComponent<Toggle>();
+        }
+    }
     public bool isUsingChat = false;
     public Action OnOpenChat;
     public Action OnCloseChat;
@@ -112,5 +119,16 @@ public class ChatManager : NetworkSingleton<ChatManager>
     {
         string package = playerName + " : " + message;
         AddMessage(package);
+    }
+    [ServerRpc(RequireOwnership = false)]
+    public void ActiveTextChatServerRpc(bool active)
+    {
+        ActiveTextChatClientRpc(active);
+    }
+    [ClientRpc]
+    void ActiveTextChatClientRpc(bool active)
+    {
+        toggleActive.isOn = active;
+        ChatManager.Instance.gameObject.SetActive(active);
     }
 }

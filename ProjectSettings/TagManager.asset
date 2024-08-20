@@ -25,6 +25,8 @@ TagManager:
   - Selectable
   - Sound Soucre
   - CollideHitbox
+  - ToggleTextChat
+  - TogglePing
   layers:
   - Default
   - TransparentFX
