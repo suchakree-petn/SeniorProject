@@ -3,13 +3,24 @@ using Sirenix.OdinInspector;
 using Unity.Netcode;
 using UnityEngine;
 
+[RequireComponent(typeof(BoxCollider))]
 public class Map1_BattleTrigger : MonoBehaviour
 {
     Action OnPlayerPlayerStayedInTriggerChanged_Local;
     [SerializeField] private int currentPlayerStayedInTrigger = 0;
+    [SerializeField] private int requirePlayerCount = 1;
+
 
     [FoldoutGroup("Reference")]
     [SerializeField] private Collider triggerCol;
+
+    private void Awake()
+    {
+        if (!triggerCol)
+        {
+            triggerCol = GetComponent<Collider>();
+        }
+    }
 
     private void Start()
     {
@@ -18,7 +29,7 @@ public class Map1_BattleTrigger : MonoBehaviour
 
     private void CheckCondition()
     {
-        if (currentPlayerStayedInTrigger == 3)
+        if (currentPlayerStayedInTrigger == requirePlayerCount)
         {
             triggerCol.enabled = false;
             if (NetworkManager.Singleton.IsServer)
@@ -31,7 +42,7 @@ public class Map1_BattleTrigger : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (!other.transform.root.TryGetComponent(out PlayerController _)) return;
-        if(!other.isTrigger) return;
+        if (!other.isTrigger) return;
         currentPlayerStayedInTrigger++;
         OnPlayerPlayerStayedInTriggerChanged_Local?.Invoke();
 
@@ -40,7 +51,7 @@ public class Map1_BattleTrigger : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         if (!other.transform.root.TryGetComponent(out PlayerController _)) return;
-        if(!other.isTrigger) return;
+        if (!other.isTrigger) return;
         currentPlayerStayedInTrigger--;
         OnPlayerPlayerStayedInTriggerChanged_Local?.Invoke();
     }

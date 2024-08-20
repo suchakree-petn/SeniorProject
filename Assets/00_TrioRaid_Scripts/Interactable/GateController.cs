@@ -24,8 +24,13 @@ public class GateController : NetworkBehaviour
     [Button(ButtonSizes.Large), GUIColor(0, 1, 0)]
     public void OpenGate()
     {
-        Debug.Log("Open Gate");
         OpenGate_ServerRpc();
+    }
+
+    [Button(ButtonSizes.Large), GUIColor(0, 1, 0)]
+    public void OpenGate_Local()
+    {
+        gateTransform.localPosition = new(gateTransform.localPosition.x,openPositon_Y, gateTransform.localPosition.z);
     }
 
     [ServerRpc(RequireOwnership = false)]
@@ -46,8 +51,13 @@ public class GateController : NetworkBehaviour
     [Button(ButtonSizes.Large), GUIColor(1, 0.2f, 0)]
     public void CloseGate()
     {
-        Debug.Log("Close Gate");
         CloseGate_ServerRpc();
+    }
+
+    [Button(ButtonSizes.Large), GUIColor(1, 0.2f, 0)]
+    public void CloseGate_Local()
+    {
+        gateTransform.localPosition = new(gateTransform.localPosition.x,closePositon_Y, gateTransform.localPosition.z);
     }
 
     [ServerRpc(RequireOwnership = false)]

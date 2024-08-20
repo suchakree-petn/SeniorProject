@@ -25,6 +25,8 @@ TagManager:
   - Selectable
   - Sound Soucre
   - CollideHitbox
+  - JigsawPanel
+  - RestAreaParent
   layers:
   - Default
   - TransparentFX
