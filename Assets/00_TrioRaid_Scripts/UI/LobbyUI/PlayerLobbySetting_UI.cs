@@ -15,6 +15,7 @@ public class PlayerLobbySetting_UI : MonoBehaviour
     [SerializeField] private Button leaveVoiceChannel;
     [SerializeField] private Transform vcIconsParent;
     [SerializeField] private Transform vcIcon_prf;
+    [SerializeField] private GameObject CanvasSettingGameObject;
 
     private void Awake()
     {
@@ -57,6 +58,7 @@ public class PlayerLobbySetting_UI : MonoBehaviour
         VivoxService.Instance.ParticipantAddedToChannel += ShowVoiceChatMember;
         VivoxService.Instance.ParticipantRemovedFromChannel += RemoveVoiceChatMember;
 
+        CanvasSettingGameObject.SetActive(false);
     }
 
 

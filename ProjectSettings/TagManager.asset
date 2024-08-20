@@ -27,6 +27,8 @@ TagManager:
   - CollideHitbox
   - JigsawPanel
   - RestAreaParent
+  - ToggleTextChat
+  - TogglePing
   layers:
   - Default
   - TransparentFX
