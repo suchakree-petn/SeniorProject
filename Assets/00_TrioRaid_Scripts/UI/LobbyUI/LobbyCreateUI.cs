@@ -5,14 +5,12 @@ using UnityEngine;
 using UnityEngine.UI;
 public class LobbyCreateUI : MonoBehaviour
 {
-
-
     [SerializeField] private Button closeButton;
     [SerializeField] private Button createPublicButton;
     [SerializeField] private Button createPrivateButton;
     [SerializeField] private TMP_InputField lobbyNameInputField;
     [SerializeField] private TMP_Dropdown gameStage;
-    [SerializeField] private List<string> mapName;
+    [SerializeField] private List<string> mapsName;
 
 
 
@@ -20,12 +18,12 @@ public class LobbyCreateUI : MonoBehaviour
     {
         createPublicButton.onClick.AddListener(() =>
         {
-            GameLobbyManager.Instance.CreateLobby(lobbyNameInputField.text, false, mapName[gameStage.value]);
+            GameLobbyManager.Instance.CreateLobby(lobbyNameInputField.text, false, mapsName[gameStage.value]);
             Hide();
         });
         createPrivateButton.onClick.AddListener(() =>
         {
-            GameLobbyManager.Instance.CreateLobby(lobbyNameInputField.text, true, mapName[gameStage.value]);
+            GameLobbyManager.Instance.CreateLobby(lobbyNameInputField.text, true, mapsName[gameStage.value]);
             Hide();
         });
         closeButton.onClick.AddListener(() =>
@@ -36,6 +34,7 @@ public class LobbyCreateUI : MonoBehaviour
 
     private void Start()
     {
+        AddNewMapInDropDown();
         Hide();
     }
 
@@ -50,6 +49,18 @@ public class LobbyCreateUI : MonoBehaviour
     {
         gameObject.SetActive(false);
     }
+    void AddNewMapInDropDown(){
+        foreach(string mapName in mapsName){
+            gameStage.options.Add(new (TranslateMapName(mapName), null));
+        }
+    }
+    string TranslateMapName(string mapName){
+        string stage = mapName.Split('_')[2];
+        string name = "";
+        
+        if(mapName.Split('_')[3] != "")name = mapName.Split('_')[3];
 
+        return stage + " " + name;
+    }
 }
 

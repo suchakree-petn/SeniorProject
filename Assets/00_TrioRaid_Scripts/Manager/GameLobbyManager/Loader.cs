@@ -33,6 +33,9 @@ public static class Loader
     public static void LoadNetwork(Scene targetScene){
         NetworkManager.Singleton.SceneManager.LoadScene(TransScene(targetScene.ToString()),LoadSceneMode.Single);
     }
+    public static void LoadNetworkString(string targetScene){
+        NetworkManager.Singleton.SceneManager.LoadScene(targetScene,LoadSceneMode.Single);
+    }
     public static void LoaderCallback(){
         SceneManager.LoadScene(TransScene(targetScene.ToString()));
     }

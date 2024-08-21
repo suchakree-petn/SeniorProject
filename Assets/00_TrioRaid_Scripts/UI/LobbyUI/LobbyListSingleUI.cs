@@ -31,7 +31,7 @@ public class LobbyListSingleUI : MonoBehaviour
 
         lobbyNameText.text = lobby.Name;
         playersText.text = "Member: " + lobby.Players.Count + "/" + lobby.MaxPlayers;
-        stageText.text = lobby.Data[GameLobbyManager.KEY_STAGE_ID].Value;
+        stageText.text = TranslateMapName(lobby.Data[GameLobbyManager.KEY_STAGE_ID].Value);
     }
     public void JoinLobby()
     {
@@ -43,6 +43,12 @@ public class LobbyListSingleUI : MonoBehaviour
         JoinLobby();
     }
 
+    string TranslateMapName(string mapName){
+        string stage = mapName.Split('_')[2];
+        string name = "";
+        
+        if(mapName.Split('_')[3] != "")name = mapName.Split('_')[3];
 
-
+        return stage + " " + name;
+    }
 }

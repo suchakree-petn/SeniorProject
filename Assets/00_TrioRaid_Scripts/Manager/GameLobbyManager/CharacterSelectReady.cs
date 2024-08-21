@@ -56,7 +56,7 @@ public class CharacterSelectReady : NetworkBehaviour
         {
             // Debug with one player
             NetworkManager.SceneManager.OnLoadEventCompleted += OnNetworkManagerOnLoadEventCompleted;
-            Loader.LoadNetwork(Loader.Scene.GameScene);
+            Loader.LoadNetworkString(GetStageName());
             return;
         }
 
@@ -65,8 +65,17 @@ public class CharacterSelectReady : NetworkBehaviour
         if (allClientsReady && GameMultiplayerManager.Instance.GetPlayerDataNetworkList().Count == 3)
         {
             NetworkManager.SceneManager.OnLoadEventCompleted += OnNetworkManagerOnLoadEventCompleted;
-            Loader.LoadNetwork(Loader.Scene.GameScene);
+            Loader.LoadNetworkString(GetStageName());
         }
+    }
+    private string GetStageName(){
+        // string stageName = "";
+        // try{
+        //     stageName = GameLobbyManager.Instance.GetLobby().Data["StageId"].Value;
+        // }catch{
+        //     Debug.Log("Get Stage Name Fail");;
+        // }
+        return GameLobbyManager.Instance.GetLobby().Data["StageId"].Value;
     }
 
     private void OnNetworkManagerOnLoadEventCompleted(string sceneName, LoadSceneMode loadSceneMode, List<ulong> clientsCompleted, List<ulong> clientsTimedOut)
