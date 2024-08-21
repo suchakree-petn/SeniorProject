@@ -7,11 +7,6 @@ using UnityEngine.UI;
 
 public class LobbyListSingleUI : MonoBehaviour
 {
-
-
-    // [SerializeField] private TextMeshProUGUI lobbyNameText;
-    // [SerializeField] private TextMeshProUGUI playersText;
-    // [SerializeField] private TextMeshProUGUI stageText;
     [SerializeField] private TextMeshPro lobbyNameText;
     [SerializeField] private TextMeshPro playersText;
     [SerializeField] private TextMeshPro stageText;
@@ -31,7 +26,7 @@ public class LobbyListSingleUI : MonoBehaviour
 
         lobbyNameText.text = lobby.Name;
         playersText.text = "Member: " + lobby.Players.Count + "/" + lobby.MaxPlayers;
-        stageText.text = lobby.Data[GameLobbyManager.KEY_STAGE_ID].Value;
+        stageText.text = TranslateMapName(lobby.Data[GameLobbyManager.KEY_STAGE_ID].Value);
     }
     public void JoinLobby()
     {
@@ -43,6 +38,10 @@ public class LobbyListSingleUI : MonoBehaviour
         JoinLobby();
     }
 
-
-
+    string TranslateMapName(string mapName){
+        string stage = mapName.Split('_')[2];
+        string name = mapName.Split('_')[3];
+        
+        return stage + " " + name;
+    }
 }
