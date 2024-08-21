@@ -25,6 +25,7 @@ public class EnemyController : NetworkBehaviour, IDamageable
     public bool IsTaunted = false;
     public bool IsStun = false;
     public bool IsDead => enemyHealth.IsDead;
+    private float delayEnemySpawn = 1;
 
     [Header("Reference")]
     public EnemyHealth enemyHealth;
@@ -64,8 +65,14 @@ public class EnemyController : NetworkBehaviour, IDamageable
     {
     }
 
+    protected virtual void Update()
+    {
+        delayEnemySpawn -= Time.deltaTime;
+    }
+
     protected virtual void FixedUpdate()
     {
+        if (delayEnemySpawn > 0) return;
         if (!IsOwner || !IsServer || !IsSpawned || agent.pathStatus == NavMeshPathStatus.PathInvalid) return;
 
         if (!agent.isStopped)
@@ -84,6 +91,7 @@ public class EnemyController : NetworkBehaviour, IDamageable
 
     protected virtual void LateUpdate()
     {
+        if (delayEnemySpawn > 0) return;
         if (!IsOwner || !IsServer || !IsSpawned) return;
 
         Vector3 direction = agent.velocity.normalized;

@@ -14,7 +14,7 @@ public class JigsawMapStandController : MonoBehaviour
     [FoldoutGroup("Reference")]
     [SerializeField] private GameObject worldSpaceCanvas;
     [FoldoutGroup("Reference")]
-    [SerializeField] private Image jigsawSpotMap;
+    [SerializeField] private GameObject overlayCanvas;
     [FoldoutGroup("Reference")]
     [SerializeField] private TextMeshProUGUI interactButtonText;
 
@@ -22,7 +22,7 @@ public class JigsawMapStandController : MonoBehaviour
     {
         worldSpaceCanvas.SetActive(false);
     }
-    
+
     private void OnTriggerEnter(Collider other)
     {
         if (!other.transform.root.TryGetComponent(out PlayerController _)) return;
@@ -81,12 +81,12 @@ public class JigsawMapStandController : MonoBehaviour
 
     private void ShowJigsawSpotMap()
     {
-        jigsawSpotMap.gameObject.SetActive(true);
+        overlayCanvas.SetActive(true);
     }
 
     private void HideJigsawSpotMap()
     {
-        jigsawSpotMap.gameObject.SetActive(false);
+        overlayCanvas.SetActive(false);
     }
 
 }

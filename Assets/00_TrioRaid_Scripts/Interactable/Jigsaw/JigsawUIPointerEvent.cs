@@ -25,7 +25,6 @@ public class JigsawUIPointerEvent : MonoBehaviour, IBeginDragHandler, IEndDragHa
         restAreaParent = GameObject.FindGameObjectWithTag("RestAreaParent").transform;
         jigsawPanelParent = GameObject.FindGameObjectWithTag("JigsawPanel").transform.parent;
         collectedParent = transform.parent;
-
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -45,19 +44,26 @@ public class JigsawUIPointerEvent : MonoBehaviour, IBeginDragHandler, IEndDragHa
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        image.raycastTarget = true;
-        foreach (GameObject go in eventData.hovered)
+        if (!isOnJigsawPanel)
         {
-            if (go.CompareTag("JigsawPanel"))
+            image.raycastTarget = true;
+            foreach (GameObject go in eventData.hovered)
             {
-                isOnJigsawPanel = true;
-                transform.SetParent(restAreaParent);
-                return;
+                if (go.CompareTag("JigsawPanel"))
+                {
+                    isOnJigsawPanel = true;
+                    transform.SetParent(restAreaParent);
+                    return;
+                }
             }
+            transform.SetParent(collectedParent);
+            transform.localScale = originalScale;
+            isOnJigsawPanel = false;
         }
-        transform.SetParent(collectedParent);
-        transform.localScale = originalScale;
-        isOnJigsawPanel = false;
+        else
+        {
+            CheckCondition(eventData);
+        }
 
     }
 
@@ -98,12 +104,10 @@ public class JigsawUIPointerEvent : MonoBehaviour, IBeginDragHandler, IEndDragHa
 
         foreach (Transform child in jigsawPanelParent)
         {
-            Debug.Log(child.name);
             if (child.TryGetComponent(out JigsawPieceHolder jigsawPieceHolder))
             {
                 if (JigsawPiece.JigsawId == jigsawPieceHolder.SlotIndex)
                 {
-                    Sprite jigsawPanelSprite = jigsawPieceHolder.GetComponent<Image>().sprite;
                     Vector3[] worldCorner = new Vector3[4];
                     jigsawPieceHolder.transform.GetComponent<RectTransform>().GetWorldCorners(worldCorner);
                     Rect rectB = new Rect(worldCorner[0], worldCorner[2] - worldCorner[0]);
@@ -113,6 +117,8 @@ public class JigsawUIPointerEvent : MonoBehaviour, IBeginDragHandler, IEndDragHa
                     {
                         jigsawPieceHolder.PlaceJigsawPiece();
                         this.JigsawBoardStandController.CollectedJigsawDict[JigsawPiece] = false;
+                        this.JigsawBoardStandController.PlacedJigsaw[JigsawPiece.JigsawId] = true;
+                        this.JigsawBoardStandController.OnJigsawPlaced?.Invoke();
                         Destroy(gameObject);
                     }
                 }

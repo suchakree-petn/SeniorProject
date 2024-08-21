@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Cinemachine;
 using Sirenix.OdinInspector;
 using Sirenix.Utilities;
 using TMPro;
@@ -10,6 +11,8 @@ using UnityEngine.UI;
 [RequireComponent(typeof(BoxCollider))]
 public class JigsawBoardStandController : SerializedMonoBehaviour
 {
+    public Action OnJigsawPlaced;
+
     public bool IsInUse = false;
     [ShowInInspector] public Dictionary<JigsawPiece, bool> CollectedJigsawDict = new();
 
@@ -30,6 +33,8 @@ public class JigsawBoardStandController : SerializedMonoBehaviour
         }
     }
 
+    [ShowInInspector] public Dictionary<uint, bool> PlacedJigsaw = new();
+
 
 
     [FoldoutGroup("Reference")]
@@ -44,11 +49,16 @@ public class JigsawBoardStandController : SerializedMonoBehaviour
     [SerializeField] private TextMeshProUGUI interactButtonText;
     [FoldoutGroup("Reference")]
     [SerializeField] private Transform collectedJigsawParent;
+    private float freeXSpeed;
+    private float freeYSpeed;
 
     private void Start()
     {
         worldSpaceCanvas.SetActive(false);
+        OnJigsawPlaced += CheckAllJigsawPlaced;
     }
+
+
 
     private void OnTriggerEnter(Collider other)
     {
@@ -61,7 +71,7 @@ public class JigsawBoardStandController : SerializedMonoBehaviour
     {
         if (!other.transform.root.TryGetComponent(out PlayerController _)) return;
 
-        StopUseJigsawฺBoard();
+        StopUseJigsawBoard();
         worldSpaceCanvas.SetActive(false);
     }
 
@@ -71,38 +81,68 @@ public class JigsawBoardStandController : SerializedMonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.F))
         {
-            StartUseJigsaฺwBoard();
+            StartUseJigsawBoard();
         }
 
         if (Input.GetKey(KeyCode.Escape))
         {
-            StopUseJigsawฺBoard();
+            StopUseJigsawBoard();
         }
 
 
     }
 
+    private void CheckAllJigsawPlaced()
+    {
+        int placedCount = 0;
+        foreach (var jigsaw in PlacedJigsaw)
+        {
+            if (jigsaw.Value)
+            {
+                placedCount++;
+            }
+        }
+        if (placedCount == PlacedJigsaw.Count)
+        {
+            Map2_JigsawScannerManager.Instance.gameObject.SetActive(false);
+            StopUseJigsawBoard();
+            Map2_PuzzleManager.Instance.EncounterBoss_ServerRpc();
+        }
+    }
+
     [HideIf("IsInUse")]
     [Button("Use")]
-    public void StartUseJigsaฺwBoard()
+    public void StartUseJigsawBoard()
     {
         if (!IsInUse)
         {
             IsInUse = true;
             ShowJigsawฺBoard();
             interactButtonText.gameObject.SetActive(false);
+            MouseCanMove(false);
+            PlayerInputManager.Instance.SwitchViewMode.Disable();
+            PlayerInputManager.Instance.Attack.Disable();
+            PlayerManager.Instance.LocalPlayerController.SetCanUseAbilityE(false);
+            PlayerManager.Instance.LocalPlayerController.SetCanUseAbilityQ(false);
+            PlayerManager.Instance.LocalPlayerController.SetCanPlayerMove(false);
         }
     }
 
     [ShowIf("IsInUse")]
     [Button("Exit")]
-    public void StopUseJigsawฺBoard()
+    public void StopUseJigsawBoard()
     {
         if (IsInUse)
         {
             IsInUse = false;
             HideJigsawฺBoard();
             interactButtonText.gameObject.SetActive(true);
+            MouseCanMove(true);
+            PlayerInputManager.Instance.SwitchViewMode.Enable();
+            PlayerInputManager.Instance.Attack.Enable();
+            PlayerManager.Instance.LocalPlayerController.SetCanUseAbilityE(true);
+            PlayerManager.Instance.LocalPlayerController.SetCanUseAbilityQ(true);
+            PlayerManager.Instance.LocalPlayerController.SetCanPlayerMove(true);
         }
     }
 
@@ -144,6 +184,31 @@ public class JigsawBoardStandController : SerializedMonoBehaviour
         jigsawUIPointerEvent.JigsawPiece = jigsawPiece;
         jigsawUIPointerEvent.JigsawBoardStandController = this;
 
+    }
+
+    void MouseCanMove(bool mouseCanMove)
+    {
+        if (mouseCanMove)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+
+            CameraManager.Instance.GetThirdPersonCamera().GetComponent<CinemachineFreeLook>().m_XAxis.m_MaxSpeed = freeXSpeed;
+            CameraManager.Instance.GetThirdPersonCamera().GetComponent<CinemachineFreeLook>().m_YAxis.m_MaxSpeed = freeYSpeed;
+            PlayerManager.Instance.LocalPlayerController.GetMouseMovement().CanCameraMove = true;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+
+            freeXSpeed = CameraManager.Instance.GetThirdPersonCamera().GetComponent<CinemachineFreeLook>().m_XAxis.m_MaxSpeed;
+            freeYSpeed = CameraManager.Instance.GetThirdPersonCamera().GetComponent<CinemachineFreeLook>().m_YAxis.m_MaxSpeed;
+
+            CameraManager.Instance.GetThirdPersonCamera().GetComponent<CinemachineFreeLook>().m_XAxis.m_MaxSpeed = 0;
+            CameraManager.Instance.GetThirdPersonCamera().GetComponent<CinemachineFreeLook>().m_YAxis.m_MaxSpeed = 0;
+            PlayerManager.Instance.LocalPlayerController.GetMouseMovement().CanCameraMove = false;
+        }
     }
 }
 

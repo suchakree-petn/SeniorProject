@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Cinemachine;
+using DG.Tweening;
 using Sirenix.OdinInspector;
 using Unity.Netcode;
 using UnityEngine;
@@ -32,7 +34,6 @@ public class Map1_PuzzleManager : NetworkSingleton<Map1_PuzzleManager>
     [SerializeField] private Collider battleBlocker;
     [FoldoutGroup("Reference")]
     [SerializeField] private Transform bossSpawnPos;
-
 
     protected override void InitAfterAwake()
     {
@@ -134,7 +135,7 @@ public class Map1_PuzzleManager : NetworkSingleton<Map1_PuzzleManager>
     private void CheckAllEnemyDead_Server()
     {
         if (!NetworkManager.IsServer) return;
-        
+
         if (aliveEnemyCount == 0 && EnemyWaveCount == 0)
         {
             DisableBattleBlocker_ClientRpc();
@@ -182,7 +183,8 @@ public class Map1_PuzzleManager : NetworkSingleton<Map1_PuzzleManager>
 
     private void BossSpawn_Server()
     {
-        EnemyManager.Instance.Spawn(2002, bossSpawnPos.position);
-    }
+        EnemyManager.Instance.Spawn(2002, bossSpawnPos.position);    }
+
+  
 }
 

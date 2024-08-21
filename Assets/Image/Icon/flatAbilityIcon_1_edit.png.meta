@@ -1202,7 +1202,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: flatAbilityIcon_1_edit_52
+      name: scanIcon
       rect:
         serializedVersion: 2
         x: 100
@@ -2270,7 +2270,6 @@ TextureImporter:
       flatAbilityIcon_1_edit_5: -451038009
       flatAbilityIcon_1_edit_50: 1613795150
       flatAbilityIcon_1_edit_51: 23862825
-      flatAbilityIcon_1_edit_52: -1596424270
       flatAbilityIcon_1_edit_53: 1384597889
       flatAbilityIcon_1_edit_54: 1002271477
       flatAbilityIcon_1_edit_55: 426702140
@@ -2320,6 +2319,7 @@ TextureImporter:
       flatAbilityIcon_1_edit_98: 1704827213
       flatAbilityIcon_1_edit_99: 1087994915
       icon_ironbody: -539348459
+      scanIcon: -1596424270
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

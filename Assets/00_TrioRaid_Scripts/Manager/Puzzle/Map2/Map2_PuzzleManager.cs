@@ -1,6 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using Cinemachine;
+using DG.Tweening;
 using Sirenix.OdinInspector;
 using Unity.Netcode;
 using UnityEngine;
@@ -11,16 +10,20 @@ public class Map2_PuzzleManager : NetworkSingleton<Map2_PuzzleManager>
     [ShowInInspector] public bool IsLocked => isLocked.Value;
 
 
-    [SerializeField] private float delayBossSpawn = 3;
+    [SerializeField] private float delayPanBossCamToPlayer = 3;
 
 
 
     [FoldoutGroup("Reference")]
     [SerializeField] private GateController gateController;
     [FoldoutGroup("Reference")]
+    [SerializeField] private GateController bossGateController;
+    [FoldoutGroup("Reference")]
     [SerializeField] private Transform bossSpawnPos;
     [FoldoutGroup("Reference")]
     [SerializeField] private JigsawBoardStandController jigsawBoardStandController;
+    [FoldoutGroup("Reference")]
+    [SerializeField] private CinemachineVirtualCamera bossCam;
 
 
     protected override void InitAfterAwake()
@@ -30,6 +33,7 @@ public class Map2_PuzzleManager : NetworkSingleton<Map2_PuzzleManager>
     private void Start()
     {
         gateController.OpenGate();
+        Map2_JigsawScannerManager.Instance.gameObject.SetActive(false);
 
     }
 
@@ -46,6 +50,7 @@ public class Map2_PuzzleManager : NetworkSingleton<Map2_PuzzleManager>
         {
             isLocked.Value = true;
             EnablePuzzleBlocker_ClientRpc();
+            Puzzle2_EnableJigsawScanner_ClientRpc();
         }
     }
 
@@ -78,15 +83,47 @@ public class Map2_PuzzleManager : NetworkSingleton<Map2_PuzzleManager>
         Debug.Log("Cannot add jigsaw: " + jigsawId);
     }
 
-
-    public void EncounterBoss_Server()
+    [ServerRpc(RequireOwnership = false)]
+    public void Puzzle2_EnableJigsawScanner_ServerRpc()
     {
-        Invoke(nameof(BossSpawn_Server), delayBossSpawn);
+        Puzzle2_EnableJigsawScanner_ClientRpc();
+    }
+
+    [ClientRpc]
+    private void Puzzle2_EnableJigsawScanner_ClientRpc()
+    {
+        Map2_JigsawScannerManager.Instance.gameObject.SetActive(true);
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    public void EncounterBoss_ServerRpc()
+    {
+        BossSpawn_Server();
     }
 
     private void BossSpawn_Server()
     {
         EnemyManager.Instance.Spawn(2003, bossSpawnPos.position);
+        PanCameraToBoss_ClientRpc();
+    }
+
+    [ClientRpc]
+    private void PanCameraToBoss_ClientRpc()
+    {
+        bossCam.Priority = 1000;
+        Sequence sequence = DOTween.Sequence();
+        sequence.AppendInterval(2);
+        sequence.AppendCallback(() =>
+        {
+            bossGateController.OpenGate();
+        });
+        sequence.AppendInterval(delayPanBossCamToPlayer);
+        sequence.OnComplete(() =>
+        {
+            bossCam.Priority = 0;
+            gateController.OpenGate();
+        });
+        sequence.Play();
     }
 }
 
