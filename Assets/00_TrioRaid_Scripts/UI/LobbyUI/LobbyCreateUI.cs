@@ -56,10 +56,8 @@ public class LobbyCreateUI : MonoBehaviour
     }
     string TranslateMapName(string mapName){
         string stage = mapName.Split('_')[2];
-        string name = "";
+        string name = mapName.Split('_')[3];
         
-        if(mapName.Split('_')[3] != "")name = mapName.Split('_')[3];
-
         return stage + " " + name;
     }
 }
