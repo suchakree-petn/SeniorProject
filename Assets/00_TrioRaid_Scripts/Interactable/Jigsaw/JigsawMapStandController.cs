@@ -18,6 +18,11 @@ public class JigsawMapStandController : MonoBehaviour
     [FoldoutGroup("Reference")]
     [SerializeField] private TextMeshProUGUI interactButtonText;
 
+    private void Start()
+    {
+        worldSpaceCanvas.SetActive(false);
+    }
+    
     private void OnTriggerEnter(Collider other)
     {
         if (!other.transform.root.TryGetComponent(out PlayerController _)) return;

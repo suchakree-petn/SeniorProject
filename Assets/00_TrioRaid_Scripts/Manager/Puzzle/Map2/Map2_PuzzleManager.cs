@@ -18,8 +18,6 @@ public class Map2_PuzzleManager : NetworkSingleton<Map2_PuzzleManager>
     [FoldoutGroup("Reference")]
     [SerializeField] private GateController gateController;
     [FoldoutGroup("Reference")]
-    [SerializeField] private Collider puzzleBlocker;
-    [FoldoutGroup("Reference")]
     [SerializeField] private Transform bossSpawnPos;
     [FoldoutGroup("Reference")]
     [SerializeField] private JigsawBoardStandController jigsawBoardStandController;
@@ -27,17 +25,17 @@ public class Map2_PuzzleManager : NetworkSingleton<Map2_PuzzleManager>
 
     protected override void InitAfterAwake()
     {
-        puzzleBlocker.enabled = false;
     }
 
     private void Start()
     {
+        gateController.OpenGate();
+
     }
 
     public override void OnNetworkSpawn()
     {
         if (!IsServer) return;
-
 
     }
 
@@ -55,14 +53,13 @@ public class Map2_PuzzleManager : NetworkSingleton<Map2_PuzzleManager>
     [ClientRpc]
     private void DisablePuzzleBlocker_ClientRpc()
     {
-        puzzleBlocker.enabled = false;
-
+        gateController.OpenGate();
     }
 
     [ClientRpc]
     private void EnablePuzzleBlocker_ClientRpc()
     {
-        puzzleBlocker.enabled = true;
+        gateController.CloseGate();
 
     }
 

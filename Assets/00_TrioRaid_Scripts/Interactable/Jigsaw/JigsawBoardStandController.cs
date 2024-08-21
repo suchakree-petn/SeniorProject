@@ -8,10 +8,9 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(BoxCollider))]
-public class JigsawBoardStandController : MonoBehaviour
+public class JigsawBoardStandController : SerializedMonoBehaviour
 {
     public bool IsInUse = false;
-
     [ShowInInspector] public Dictionary<JigsawPiece, bool> CollectedJigsawDict = new();
 
     [ShowInInspector]
@@ -45,6 +44,11 @@ public class JigsawBoardStandController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI interactButtonText;
     [FoldoutGroup("Reference")]
     [SerializeField] private Transform collectedJigsawParent;
+
+    private void Start()
+    {
+        worldSpaceCanvas.SetActive(false);
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -117,7 +121,7 @@ public class JigsawBoardStandController : MonoBehaviour
         overlaySpaceCanvas.SetActive(false);
         foreach (Transform child in collectedJigsawParent)
         {
-            DestroyImmediate(child.gameObject);
+            Destroy(child.gameObject);
         }
     }
 
@@ -135,6 +139,11 @@ public class JigsawBoardStandController : MonoBehaviour
         };
 
         jigsaw_prf.localEulerAngles = new(0, 0, rotation);
+
+        JigsawUIPointerEvent jigsawUIPointerEvent = jigsaw_prf.GetComponent<JigsawUIPointerEvent>();
+        jigsawUIPointerEvent.JigsawPiece = jigsawPiece;
+        jigsawUIPointerEvent.JigsawBoardStandController = this;
+
     }
 }
 

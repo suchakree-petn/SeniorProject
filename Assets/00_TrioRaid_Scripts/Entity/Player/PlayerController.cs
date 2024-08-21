@@ -160,8 +160,7 @@ public class PlayerController : NetworkBehaviour, IDamageable
         {
             case PlayerCameraMode.ThirdPerson:
                 mouseMovement.SetThirdperson(isShowCrossHair);
-                playerMovement.SetCameraMode(playerCameraMode);
-                mouseMovement.SetCameraMode(playerCameraMode);
+                StartCoroutine(WaitSetCameraMode());
 
                 break;
             case PlayerCameraMode.Focus:
@@ -174,7 +173,8 @@ public class PlayerController : NetworkBehaviour, IDamageable
     IEnumerator WaitSetCameraMode()
     {
         yield return new WaitForSeconds(Camera.main.GetComponent<CinemachineBrain>().m_DefaultBlend.m_Time);
-
+        playerMovement.SetCameraMode(playerCameraMode);
+        mouseMovement.SetCameraMode(playerCameraMode);
     }
     public virtual void SwitchViewMode(InputAction.CallbackContext context)
     {
