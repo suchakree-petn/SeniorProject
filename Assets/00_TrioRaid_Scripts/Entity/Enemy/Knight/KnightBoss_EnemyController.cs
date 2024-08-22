@@ -25,8 +25,9 @@ public class Spider_EnemyController : EnemyController
 
 
 
-    private void Update()
+    protected override void Update()
     {
+        base.Update();
         if (!IsServer || !IsSpawned) return;
         if (Vector3.Distance(transform.position, target.position) > attackRange + 2 && isFinishAttack && CanMove)
         {
@@ -71,10 +72,10 @@ public class Spider_EnemyController : EnemyController
         animator.SetTrigger("Hit");
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawWireSphere(attackPointTransform.position, attackRange);
-    }
+    // private void OnDrawGizmos()
+    // {
+    //     Gizmos.DrawWireSphere(attackPointTransform.position, attackRange);
+    // }
     private void StartAttackCooldown(float sec)
     {
         StartCoroutine(WaitForWeaponCooldown(sec));

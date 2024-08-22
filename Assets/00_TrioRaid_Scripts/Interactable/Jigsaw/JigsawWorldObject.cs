@@ -17,6 +17,7 @@ public class JigsawWorldObject : NetworkBehaviour, ICollectable
     private void Collect_ClientRpc()
     {
         Map2_PuzzleManager.Instance.Puzzle2_CollectJigsaw(JigsawId);
+        gameObject.SetActive(false);
     }
 
     public void Collect()
