@@ -30841,6 +30841,7 @@ MonoBehaviour:
   bossSpawnPos: {fileID: 1351536944}
   jigsawBoardStandController: {fileID: 1559745927}
   bossCam: {fileID: 1853268320}
+  map2_JigsawScannerManager: {fileID: 696405977}
 --- !u!1001 &815367259
 PrefabInstance:
   m_ObjectHideFlags: 0

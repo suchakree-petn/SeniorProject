@@ -7,7 +7,27 @@ using UnityEngine;
 
 public partial class PlayerManager : NetworkSingleton<PlayerManager>
 {
-    public PlayerController LocalPlayerController { get; private set; }
+    private PlayerController localPlayerController;
+    public PlayerController LocalPlayerController
+    {
+        get
+        {
+            if (!localPlayerController)
+            {
+                PlayerController[] allPlayers = FindObjectsOfType(typeof(PlayerController)) as PlayerController[];
+
+                foreach (PlayerController player in allPlayers)
+                {
+                    if (NetworkManager.LocalClientId == player.OwnerClientId)
+                    {
+                        localPlayerController = player;
+
+                    }
+                }
+            }
+            return localPlayerController;
+        }
+    }
 
     private static Dictionary<ulong, Transform> _playerCharacterPrefab;
     public static Dictionary<ulong, Transform> PlayerCharacterPrefab
@@ -135,11 +155,6 @@ public partial class PlayerManager : NetworkSingleton<PlayerManager>
                 else
                 {
                     Debug.LogWarning($"Already contain this clientId");
-                }
-
-                if (clientId == player.NetworkManager.LocalClientId)
-                {
-                    LocalPlayerController = player;
                 }
             }
         }

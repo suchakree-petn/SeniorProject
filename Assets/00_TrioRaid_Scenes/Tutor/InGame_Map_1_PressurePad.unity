@@ -31272,7 +31272,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fedeb9696bdb8df44b2f98bdb8f26137, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentPlayerStayedInTrigger: 2
+  currentPlayerStayedInTrigger: 0
   requirePlayerCount: 1
   triggerCol: {fileID: 583849894}
 --- !u!1001 &585721460

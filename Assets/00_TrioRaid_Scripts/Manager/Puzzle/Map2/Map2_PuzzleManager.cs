@@ -24,6 +24,8 @@ public class Map2_PuzzleManager : NetworkSingleton<Map2_PuzzleManager>
     [SerializeField] private JigsawBoardStandController jigsawBoardStandController;
     [FoldoutGroup("Reference")]
     [SerializeField] private CinemachineVirtualCamera bossCam;
+    [FoldoutGroup("Reference")]
+    [SerializeField] private Map2_JigsawScannerManager map2_JigsawScannerManager;
 
 
     protected override void InitAfterAwake()
@@ -33,7 +35,7 @@ public class Map2_PuzzleManager : NetworkSingleton<Map2_PuzzleManager>
     private void Start()
     {
         gateController.OpenGate();
-        Map2_JigsawScannerManager.Instance.gameObject.SetActive(false);
+        // Map2_JigsawScannerManager.Instance.gameObject.SetActive(false);
 
     }
 
@@ -92,7 +94,7 @@ public class Map2_PuzzleManager : NetworkSingleton<Map2_PuzzleManager>
     [ClientRpc]
     private void Puzzle2_EnableJigsawScanner_ClientRpc()
     {
-        Map2_JigsawScannerManager.Instance.gameObject.SetActive(true);
+        map2_JigsawScannerManager.gameObject.SetActive(true);
     }
 
     [ServerRpc(RequireOwnership = false)]

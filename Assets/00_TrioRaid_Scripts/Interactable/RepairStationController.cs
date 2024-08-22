@@ -8,6 +8,7 @@ using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UI;
 
+[SelectionBase]
 public class RepairStationController : NetworkBehaviour
 {
     private NetworkVariable<bool> isCollected = new(false);
@@ -37,15 +38,72 @@ public class RepairStationController : NetworkBehaviour
     [SerializeField] private TextMeshProUGUI collectButtonText;
     private string originalCollectButtonText;
 
+    [FoldoutGroup("Reference")]
+    [SerializeField] private Collider triggerCol;
+
+    [FoldoutGroup("Reference")]
+    [SerializeField] private Outline[] outlines;
+
     private void Awake()
     {
         collectingPlayer = new();
         originalCollectButtonText = collectButtonText.text;
+        triggerCol = GetComponent<Collider>();
+        outlines = transform.GetComponentsInChildren<Outline>();
     }
+
+    private void OnEnable()
+    {
+        Map5_PuzzleManager.Instance.OnStateChanged_Local += CheckEnable;
+        Map5_PuzzleManager.Instance.OnStateChanged_Local += CheckShowOutline;
+    }
+    
+    private void OnDisable()
+    {
+        Map5_PuzzleManager.Instance.OnStateChanged_Local -= CheckEnable;
+        Map5_PuzzleManager.Instance.OnStateChanged_Local -= CheckShowOutline;
+    }
+
+
 
     public override void OnNetworkSpawn()
     {
         collectProgress.OnValueChanged += ProgressBar;
+    }
+
+    private void CheckShowOutline(Map5_GameState state)
+    {
+        if (state == Map5_GameState.Phase2_RepairBalista)
+        {
+            ShowOutline();
+        }
+        else
+        {
+            HideOutline();
+        }
+    }
+    private void ShowOutline()
+    {
+        foreach (var outline in outlines)
+        {
+            outline.enabled = true;
+        }
+    }
+
+    private void HideOutline()
+    {
+        foreach (var outline in outlines)
+        {
+            outline.enabled = false;
+        }
+    }
+
+    private void CheckEnable(Map5_GameState newState)
+    {
+        if (newState == Map5_GameState.Phase2_RepairBalista)
+        {
+            triggerCol.enabled = false;
+        }
     }
 
     private void ProgressBar(float previousValue, float newValue)

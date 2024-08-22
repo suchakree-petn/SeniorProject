@@ -35,13 +35,11 @@ public class Map2_JigsawScannerManager : NetworkSingleton<Map2_JigsawScannerMana
 
     protected override void InitAfterAwake()
     {
-        _scanCooldown = scanCooldown;
     }
 
     private void Start()
     {
         gameObject.SetActive(false);
-        localPlayerTransform = PlayerManager.Instance.LocalPlayerController.transform;
 
     }
 
@@ -52,6 +50,7 @@ public class Map2_JigsawScannerManager : NetworkSingleton<Map2_JigsawScannerMana
 
         if (Input.GetKeyDown(KeyCode.R) && !isOnCooldown)
         {
+
             _scanCooldown = scanCooldown;
             ScanArea(localPlayerTransform.position);
         }
@@ -61,6 +60,8 @@ public class Map2_JigsawScannerManager : NetworkSingleton<Map2_JigsawScannerMana
 
     public void ScanArea(Vector3 position)
     {
+
+
         scanNotificationText.DOFade(0, 0f);
         scanNotificationText.DOKill();
 
@@ -73,7 +74,7 @@ public class Map2_JigsawScannerManager : NetworkSingleton<Map2_JigsawScannerMana
         RaycastHit[] raycastHit = Physics.SphereCastAll(position, scanRadius, -localPlayerTransform.up, 0.1f);
         foreach (RaycastHit hit in raycastHit)
         {
-            Debug.Log("hit: "+hit.collider.name);
+            Debug.Log("hit: " + hit.collider.name);
             if (hit.collider.TryGetComponent(out ICollectable collectable))
             {
                 isFound = true;
@@ -105,6 +106,15 @@ public class Map2_JigsawScannerManager : NetworkSingleton<Map2_JigsawScannerMana
         Instantiate(scanAuraVFX_prf, position, Quaternion.identity);
 
     }
+    private void OnEnable()
+    {
+        _scanCooldown = 1;
+
+        if (!localPlayerTransform && IsSpawned)
+        {
+            localPlayerTransform = PlayerManager.Instance.LocalPlayerController.transform;
+        }
+    }
 
     void OnDrawGizmos()
     {
@@ -126,5 +136,6 @@ public class Map2_JigsawScannerManager : NetworkSingleton<Map2_JigsawScannerMana
         Gizmos.DrawWireSphere(origin, scanRadius);
 
     }
+
 }
 
