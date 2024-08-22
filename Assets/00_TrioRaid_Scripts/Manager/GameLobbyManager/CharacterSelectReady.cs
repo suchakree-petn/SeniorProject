@@ -69,12 +69,6 @@ public class CharacterSelectReady : NetworkBehaviour
         }
     }
     private string GetStageName(){
-        // string stageName = "";
-        // try{
-        //     stageName = GameLobbyManager.Instance.GetLobby().Data["StageId"].Value;
-        // }catch{
-        //     Debug.Log("Get Stage Name Fail");;
-        // }
         return GameLobbyManager.Instance.GetLobby().Data["StageId"].Value;
     }
 

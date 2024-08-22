@@ -7,11 +7,11 @@ public class PingSettingManager : MonoBehaviour
 {
     [SerializeField]Toggle toggleTextChat;
     private void Awake() {
-        toggleTextChat.onValueChanged.AddListener (PingMenuManager.Instance.ActivePingServerRpc) ;
     }
     
     void Start()
     {
+        toggleTextChat.onValueChanged.AddListener (PingMenuManager.Instance.ActivePingServerRpc) ;
         PingMenuManager.Instance.ActivePingServerRpc(toggleTextChat.isOn);
     }
 }
