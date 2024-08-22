@@ -23,6 +23,8 @@ public class PressurePadTriggerController : NetworkBehaviour
     protected virtual void OnTriggerEnter(Collider other)
     {
         if (IsInUse) return;
+        if (!other.transform.root.TryGetComponent(out PlayerController _)) return;
+        if (!other.isTrigger) return;
 
         OnEnter_Local?.Invoke();
 
@@ -40,6 +42,8 @@ public class PressurePadTriggerController : NetworkBehaviour
     protected virtual void OnTriggerExit(Collider other)
     {
         if (!IsInUse) return;
+        if (!other.transform.root.TryGetComponent(out PlayerController _)) return;
+        if (!other.isTrigger) return;
 
         OnExit_Local?.Invoke();
 

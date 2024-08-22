@@ -1,25 +1,29 @@
 using System.Collections;
+using Sirenix.OdinInspector;
 using Unity.Netcode;
 using UnityEngine;
-public class Spider_EnemyController : EnemyController
+public class KnightBoss_EnemyController : EnemyController
 {
 
-    [SerializeField] private float attackPower;
+    [FoldoutGroup("Knight Config")]
     [SerializeField] private float attackPower_Multiplier;
+    [FoldoutGroup("Knight Config")]
     [SerializeField] private float attackRange;
+    [FoldoutGroup("Knight Config")]
     [SerializeField] private float attackTimeInterval;
+    [FoldoutGroup("Knight Config")]
     [SerializeField] private bool isReadyToAttack;
+    [FoldoutGroup("Knight Config")]
     [SerializeField] private bool isFinishAttack;
 
-
-    [Header("Spider Reference")]
+    [FoldoutGroup("Knight Reference")]
     [SerializeField] private Transform attackPointTransform;
 
     protected override void Start()
     {
         base.Start();
         OnEnemyAttack_Local += NormalAttack;
-        OnEnemyHit_Local += OnEnemyHit_HitAnimation;
+        // OnEnemyHit_Local += OnEnemyHit_HitAnimation;
 
     }
 
@@ -59,8 +63,7 @@ public class Spider_EnemyController : EnemyController
         {
             if (hit.collider.transform.root.TryGetComponent(out PlayerController playerController) && hit.collider.isTrigger)
             {
-                // Debug.Log("Spider hit " + hit.collider.transform.root.name);
-                AttackDamage attackDamage = new(attackPower_Multiplier, attackPower, DamageType.Melee, false);
+                AttackDamage attackDamage = new(attackPower_Multiplier, EnemyCharacterData.AttackBase, DamageType.Melee, false);
                 playerController.GetComponent<IDamageable>().TakeDamage_ClientRpc(attackDamage);
             }
         }

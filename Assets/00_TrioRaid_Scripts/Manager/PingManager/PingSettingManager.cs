@@ -12,6 +12,6 @@ public class PingSettingManager : MonoBehaviour
     
     void Start()
     {
-        PingMenuManager.Instance.ActivePingServerRpc(toggleTextChat.isOn);
+        // PingMenuManager.Instance.ActivePingServerRpc(toggleTextChat.isOn);
     }
 }

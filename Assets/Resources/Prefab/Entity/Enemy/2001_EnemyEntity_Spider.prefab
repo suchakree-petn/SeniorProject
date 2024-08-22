@@ -125,9 +125,9 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e42dce10de392fb46b7cf553d7658cf4, type: 3}
---- !u!1 &3777009486407612913 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4564163900601700228, guid: e42dce10de392fb46b7cf553d7658cf4,
+--- !u!137 &177041240791697334 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 669192383977910723, guid: e42dce10de392fb46b7cf553d7658cf4,
     type: 3}
   m_PrefabInstance: {fileID: 809954138784642677}
   m_PrefabAsset: {fileID: 0}
@@ -149,7 +149,7 @@ PrefabInstance:
         type: 3}
       propertyPath: enemyController
       value: 
-      objectReference: {fileID: 5023896876588504443}
+      objectReference: {fileID: 1610829594644378783}
     - target: {fileID: 2059451394939853948, guid: 58437a38aec03b4478d7fdb505663dec,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -431,7 +431,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3991757503176248713, guid: 58437a38aec03b4478d7fdb505663dec,
         type: 3}
       insertIndex: 2
-      addedObject: {fileID: 5023896876588504443}
+      addedObject: {fileID: 1610829594644378783}
     - targetCorrespondingSourceObject: {fileID: 3991757503176248713, guid: 58437a38aec03b4478d7fdb505663dec,
         type: 3}
       insertIndex: -1
@@ -498,7 +498,7 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 8392086764841469670}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &5023896876588504443
+--- !u!114 &1610829594644378783
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -507,7 +507,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4833273069750455151}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 624921cddd54b9540ac971e8ed9cd0dd, type: 3}
+  m_Script: {fileID: 11500000, guid: e866715ba1e44e847bd134196407b915, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _enemyCharacterData: {fileID: 11400000, guid: f32edb79fb3f81a48b2fdcae503814d5,
@@ -525,7 +525,7 @@ MonoBehaviour:
   hitBox: {fileID: 6154986747110004965}
   collideHitBox: {fileID: 3471851548167439380}
   critHitBox: {fileID: 6202138957216897403}
-  mesh: {fileID: 3777009486407612913}
+  mesh: {fileID: 177041240791697334}
   mesh_parent: {fileID: 8598420571638919186}
   attackPower: 190
   attackPower_Multiplier: 1

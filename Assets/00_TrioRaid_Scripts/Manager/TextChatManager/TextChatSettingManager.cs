@@ -10,8 +10,8 @@ public class TextChatSettingManager : MonoBehaviour
         toggleTextChat.onValueChanged.AddListener (ChatManager.Instance.ActiveTextChatServerRpc) ;
     }
     
-    void Start()
+    void  Start()
     {
-        ChatManager.Instance.ActiveTextChatServerRpc(toggleTextChat.isOn);
+        // ChatManager.Instance.ActiveTextChatServerRpc(toggleTextChat.isOn);
     }
 }

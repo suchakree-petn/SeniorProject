@@ -40,6 +40,10 @@ public class JigsawUIPointerEvent : MonoBehaviour, IBeginDragHandler, IEndDragHa
             image.raycastTarget = false;
             transform.localScale *= dragScaleMultiplier;
         }
+        else
+        {
+            image.raycastTarget = false;
+        }
     }
 
     public void OnEndDrag(PointerEventData eventData)
@@ -53,16 +57,32 @@ public class JigsawUIPointerEvent : MonoBehaviour, IBeginDragHandler, IEndDragHa
                 {
                     isOnJigsawPanel = true;
                     transform.SetParent(restAreaParent);
+                    CheckCondition(eventData);
                     return;
                 }
             }
             transform.SetParent(collectedParent);
             transform.localScale = originalScale;
-            isOnJigsawPanel = false;
         }
         else
         {
-            CheckCondition(eventData);
+            isOnJigsawPanel = false;
+
+            image.raycastTarget = true;
+            foreach (GameObject go in eventData.hovered)
+            {
+                if (go.CompareTag("JigsawPanel"))
+                {
+                    isOnJigsawPanel = true;
+                    return;
+                }
+            }
+
+            if (!isOnJigsawPanel)
+            {
+                transform.SetParent(collectedParent);
+                transform.localScale = originalScale;
+            }
         }
 
     }

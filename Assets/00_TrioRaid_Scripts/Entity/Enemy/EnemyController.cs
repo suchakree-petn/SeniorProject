@@ -6,6 +6,7 @@ using Unity.Netcode.Components;
 using UnityEngine;
 using UnityEngine.AI;
 using DG.Tweening;
+using Sirenix.OdinInspector;
 
 public class EnemyController : NetworkBehaviour, IDamageable
 {
@@ -27,21 +28,30 @@ public class EnemyController : NetworkBehaviour, IDamageable
     public bool IsDead => enemyHealth.IsDead;
     private float delayEnemySpawn = 1;
 
-    [Header("Reference")]
+    [FoldoutGroup("Reference")]
     public EnemyHealth enemyHealth;
+    [FoldoutGroup("Reference")]
     public Rigidbody enemyRb;
+    [FoldoutGroup("Reference")]
     public NetworkAnimator networkAnimator;
+    [FoldoutGroup("Reference")]
     public Animator animator;
+    [FoldoutGroup("Reference")]
     public Collider hitBox;
+    [FoldoutGroup("Reference")]
     public Collider collideHitBox;
+    [FoldoutGroup("Reference")]
     public Collider critHitBox;
-    [SerializeField] private GameObject mesh;
+    [FoldoutGroup("Reference")]
+    [SerializeField] private Renderer mesh;
+    [FoldoutGroup("Reference")]
     [SerializeField] private Transform mesh_parent;
+    [FoldoutGroup("Reference")]
     private Material dissolveMaterial;
 
     protected virtual void Awake()
     {
-        dissolveMaterial = mesh.GetComponent<Renderer>().material;
+        dissolveMaterial = mesh.material;
         if (!IsOwner) return;
     }
 
@@ -117,7 +127,7 @@ public class EnemyController : NetworkBehaviour, IDamageable
 
     public void OnEnemyDead_Dissolve()
     {
-        mesh.layer = 0;
+        mesh.gameObject.layer = 0;
         dissolveMaterial.DOFloat(1, "_Dissolve", 2).SetEase(Ease.OutSine);
     }
 
