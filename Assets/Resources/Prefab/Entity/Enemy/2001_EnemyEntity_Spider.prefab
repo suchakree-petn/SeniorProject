@@ -210,6 +210,11 @@ PrefabInstance:
       propertyPath: m_Center.z
       value: 0.08
       objectReference: {fileID: 0}
+    - target: {fileID: 3257062118021569489, guid: 58437a38aec03b4478d7fdb505663dec,
+        type: 3}
+      propertyPath: m_BlockingMask.m_Bits
+      value: 16383
+      objectReference: {fileID: 0}
     - target: {fileID: 3376350037253982338, guid: 58437a38aec03b4478d7fdb505663dec,
         type: 3}
       propertyPath: m_Height
@@ -373,7 +378,7 @@ PrefabInstance:
     - target: {fileID: 8964699346016857801, guid: 58437a38aec03b4478d7fdb505663dec,
         type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 2007371242
+      value: 352418138
       objectReference: {fileID: 0}
     - target: {fileID: 9006563807303963375, guid: 58437a38aec03b4478d7fdb505663dec,
         type: 3}
