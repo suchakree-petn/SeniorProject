@@ -170,7 +170,21 @@ public class PingMenuManager : NetworkSingleton<PingMenuManager>
 
     void DeletePing(int index)
     {
-        Destroy(pingObjectParent.transform.GetChild(index).gameObject);
+        // List<GameObject> gameObjects = pingObjectParent.transform;
+        int children = pingObjectParent.transform.childCount;
+        for (int i = 0; i < children; ++i)
+            // print("For loop: " + pingObjectParent.transform.GetChild(i));
+            if((int)pingObjectParent.transform.GetChild(i).gameObject.GetComponent<PingObjectUI>().GetIDPing() == index){
+                Destroy(pingObjectParent.transform.GetChild(i).gameObject);
+            }
+    
+        // foreach (GameObject gameObject in pingObjectParent.transform){
+        //     // gameObjects.Add(gameObject);
+        //     if((int)gameObject.GetComponent<PingObjectUI>().GetIDPing() == index){
+        //         Destroy(gameObject);
+        //     }
+        // }
+        // Destroy(pingObjectParent.transform.GetChild);
     }
     [ServerRpc(RequireOwnership = false)]
     void DeletePingManagerServerRpc(int index)
