@@ -11,14 +11,14 @@ public class Charmander_EnemyController : EnemyController
     [SerializeField] private bool isReadyToAttack;
     [SerializeField] private bool isFinishAttack;    
     [SerializeField] private Transform attackPointTransform;
-    void Start()
+    protected override void Start()
     {
         base.Start();
         OnEnemyAttack_Local += NormalAttack;
     }
 
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
         base.Update();
         if (!IsServer || !IsSpawned) return;
@@ -56,8 +56,13 @@ public class Charmander_EnemyController : EnemyController
             }
         }
     }
-    void BasicAttack(){
 
+    public override void OnNetworkSpawn()
+    {
+        base.OnNetworkSpawn();
+    }
+    void BasicAttack(){
+        
     }
     void ClawAttack(){
 
