@@ -31273,7 +31273,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentPlayerStayedInTrigger: 0
-  requirePlayerCount: 1
+  requirePlayerCount: 3
   triggerCol: {fileID: 583849894}
 --- !u!1001 &585721460
 PrefabInstance:
@@ -42231,7 +42231,7 @@ MonoBehaviour:
   ActivatedPadCount: 0
   EnemyWaveCount: 0
   delayBossSpawn: 3
-  enemyCount: 1
+  enemyCount: 18
   aliveEnemyCount: 0
   gateController: {fileID: 2042709215}
   spawnPos:
@@ -52120,8 +52120,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxRepairProgress: 100
-  repairSpeed: 100
-  requirePlayerCount: 1
+  repairSpeed: 10
+  requirePlayerCount: 3
   bridgeBlocker: {fileID: 1417691151}
   bridgeGameObeject: {fileID: 99723670}
   canvas: {fileID: 2017285091}
@@ -70865,7 +70865,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentPlayerStayedInTrigger: 0
-  requirePlayerCount: 1
+  requirePlayerCount: 3
   triggerCol: {fileID: 1369416403}
   bossAreaTransform: {fileID: 1888591128}
 --- !u!65 &1369416403

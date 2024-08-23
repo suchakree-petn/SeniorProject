@@ -843,7 +843,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 25077718}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -5628,7 +5628,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 168842353}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -11774,8 +11774,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.0016669245, y: -0.70791423, z: 0.0016707473, w: 0.7062945}
-  m_LocalPosition: {x: -151.45546, y: 0.8813009, z: 3.5884094}
+  m_LocalRotation: {x: 0.00015888178, y: -0.15242754, z: 0.0006551107, w: 0.98831445}
+  m_LocalPosition: {x: -118.359985, y: 0.16998291, z: -92.38}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -30835,7 +30835,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CarryToOtherScene: 0
-  delayPanBossCamToPlayer: 6
+  delayPanBossCamToPlayer: 4
   gateController: {fileID: 1216848819}
   bossGateController: {fileID: 807355913}
   bossSpawnPos: {fileID: 1351536944}
@@ -40987,7 +40987,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1115724457}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -52013,7 +52013,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1389520941}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -59703,8 +59703,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 6, y: 6, z: 6}
-  m_Center: {x: -0.000016033653, y: 0.37270778, z: 0.000051677227}
+  m_Size: {x: 4.3928566, y: 6, z: 6.0000005}
+  m_Center: {x: -0.80358815, y: 0.37270775, z: 0.00005161604}
 --- !u!114 &1559745927
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -59896,7 +59896,7 @@ MonoBehaviour:
       Data: 1
     - Name: $v
       Entry: 5
-      Data: true
+      Data: false
     - Name: 
       Entry: 8
       Data: 
@@ -59908,7 +59908,7 @@ MonoBehaviour:
       Data: 2
     - Name: $v
       Entry: 5
-      Data: true
+      Data: false
     - Name: 
       Entry: 8
       Data: 
@@ -59944,7 +59944,7 @@ MonoBehaviour:
       Data: 5
     - Name: $v
       Entry: 5
-      Data: true
+      Data: false
     - Name: 
       Entry: 8
       Data: 
@@ -59992,7 +59992,7 @@ MonoBehaviour:
       Data: 9
     - Name: $v
       Entry: 5
-      Data: true
+      Data: false
     - Name: 
       Entry: 8
       Data: 
@@ -62867,7 +62867,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1646898311}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1

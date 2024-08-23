@@ -48,6 +48,8 @@ public partial class GameLobbyManager : NetworkSingleton<GameLobbyManager>
     }
     // +_______________________________________________
     private Lobby joinedLobby;
+
+    float delay = 1;
     protected override void InitAfterAwake()
     {
         InitializeUnityAuthentication();
@@ -55,15 +57,20 @@ public partial class GameLobbyManager : NetworkSingleton<GameLobbyManager>
 
     private void Update()
     {
+        delay -= Time.deltaTime;
         //HandleRefreshLobbyList(); // Disabled Auto Refresh for testing with multiple builds
         HandleLobbyRefresh();
         HandleLobbyHeartbeat();
-        HandlePeriodicListLobbies();
+        if (delay <= 0)
+        {
+            HandlePeriodicListLobbies();
+        }
         HandleCheckIsInLobby();
         HandleUpdateLobbyData_SelectedClass();
 
     }
-    private void Start() {
+    private void Start()
+    {
         RefreshLobbyList();
     }
     private void HandleUpdateLobbyData_SelectedClass()
