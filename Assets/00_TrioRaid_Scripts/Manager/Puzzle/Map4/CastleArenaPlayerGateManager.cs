@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
+using Unity.Netcode;
 using UnityEngine;
 
 public class CastleArenaPlayerGateManager : MonoBehaviour
@@ -9,6 +9,8 @@ public class CastleArenaPlayerGateManager : MonoBehaviour
     [SerializeField]GateController gateControllerBoss;
     [SerializeField] private LayerMask playerLayers;
     [SerializeField] private List<GameObject> players;
+    [SerializeField] private Transform bossSpawn;
+        
     float timer = 0;
 
     // Update is called once per frame
@@ -17,6 +19,9 @@ public class CastleArenaPlayerGateManager : MonoBehaviour
         if (players.Count == 0 && timer>3){
             gateControllerPlayer.CloseGate();
             gateControllerBoss.OpenGate();
+            if(NetworkManager.Singleton.IsServer){
+            EnemyManager.Instance.Spawn(2005,bossSpawn.position);
+        }
             gameObject.SetActive(false);
         }else if(timer<=3){
             timer++;
