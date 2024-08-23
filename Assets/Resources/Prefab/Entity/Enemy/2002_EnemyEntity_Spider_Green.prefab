@@ -227,6 +227,11 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1610829594644378783, guid: 5134e637dc0b31c4fad23fac8e303af9,
+        type: 3}
+      propertyPath: mesh
+      value: 
+      objectReference: {fileID: 7826970388445611825}
     - target: {fileID: 1666813918900606866, guid: 5134e637dc0b31c4fad23fac8e303af9,
         type: 3}
       propertyPath: m_Pivot.x
@@ -583,6 +588,12 @@ PrefabInstance:
 --- !u!1 &1096781713368640642 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 9082710849249269872, guid: 740728f854d793848a530ac50ca86174,
+    type: 3}
+  m_PrefabInstance: {fileID: 8157365059764204786}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &7826970388445611825 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 2137578508600275907, guid: 740728f854d793848a530ac50ca86174,
     type: 3}
   m_PrefabInstance: {fileID: 8157365059764204786}
   m_PrefabAsset: {fileID: 0}

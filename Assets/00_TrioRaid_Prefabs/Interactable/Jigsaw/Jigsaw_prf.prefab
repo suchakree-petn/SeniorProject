@@ -55,6 +55,7 @@ MonoBehaviour:
     PieceDirection: 0
     Sprite: {fileID: 0}
   isOnJigsawPanel: 0
+  JigsawBoardStandController: {fileID: 0}
   dragScaleMultiplier: 2.66
 --- !u!222 &4263151458287840148
 CanvasRenderer:

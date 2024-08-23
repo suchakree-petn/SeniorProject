@@ -1,7 +1,7 @@
 using System.Collections;
 using Unity.Netcode;
 using UnityEngine;
-public class KnightBoss_EnemyController : EnemyController
+public class Spider_EnemyController : EnemyController
 {
 
     [SerializeField] private float attackPower;
@@ -19,7 +19,7 @@ public class KnightBoss_EnemyController : EnemyController
     {
         base.Start();
         OnEnemyAttack_Local += NormalAttack;
-        // OnEnemyHit_Local += OnEnemyHit_HitAnimation;
+        OnEnemyHit_Local += OnEnemyHit_HitAnimation;
 
     }
 
