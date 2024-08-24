@@ -56,6 +56,10 @@ public class CharacterSelectReady : NetworkBehaviour
         {
             // Debug with one player
             NetworkManager.SceneManager.OnLoadEventCompleted += OnNetworkManagerOnLoadEventCompleted;
+            
+            SetActiveTextChat();
+            SetActivePing();
+
             Loader.LoadNetworkString(GetStageName());
             return;
         }
@@ -65,13 +69,22 @@ public class CharacterSelectReady : NetworkBehaviour
         if (allClientsReady && GameMultiplayerManager.Instance.GetPlayerDataNetworkList().Count == 3)
         {
             NetworkManager.SceneManager.OnLoadEventCompleted += OnNetworkManagerOnLoadEventCompleted;
+
+            SetActiveTextChat();
+            SetActivePing();
+
             Loader.LoadNetworkString(GetStageName());
         }
     }
     private string GetStageName(){
         return GameLobbyManager.Instance.GetLobby().Data["StageId"].Value;
     }
-
+    private void SetActiveTextChat(){
+        ChatManager.Instance.gameObject.SetActive(ChatManager.Instance.isActive.Value);
+    }
+    private void SetActivePing(){
+        PingMenuManager.Instance.gameObject.SetActive(PingMenuManager.Instance.isActive.Value);
+    }
     private void OnNetworkManagerOnLoadEventCompleted(string sceneName, LoadSceneMode loadSceneMode, List<ulong> clientsCompleted, List<ulong> clientsTimedOut)
     {
         foreach (ulong clientId in clientsCompleted)

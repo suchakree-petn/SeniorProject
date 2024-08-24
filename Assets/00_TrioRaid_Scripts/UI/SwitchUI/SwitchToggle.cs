@@ -1,22 +1,18 @@
-﻿using UnityEngine ;
+using UnityEngine ;
 using UnityEngine.UI ;
 using DG.Tweening ;
 
 public class SwitchToggle : MonoBehaviour {
    [SerializeField] RectTransform uiHandleRectTransform ;
+   [SerializeField] Toggle toggle ;
    [SerializeField] Color backgroundActiveColor ;
    [SerializeField] Color handleActiveColor ;
 
    Image backgroundImage, handleImage ;
-
    Color backgroundDefaultColor, handleDefaultColor ;
-
-   Toggle toggle ;
-
    Vector2 handlePosition ;
 
    void Awake ( ) {
-      toggle = GetComponent <Toggle> ( ) ;
 
       handlePosition = uiHandleRectTransform.anchoredPosition ;
 
@@ -27,10 +23,7 @@ public class SwitchToggle : MonoBehaviour {
       handleDefaultColor = handleImage.color ;
 
       toggle.onValueChanged.AddListener (OnSwitch) ;
-
-      if (toggle.isOn)
-         // OnSwitch (true) ;
-         toggle.isOn = false;
+      if ( toggle.isOn ) {toggle.isOn = false;}
    }
 
    void OnSwitch (bool on) {

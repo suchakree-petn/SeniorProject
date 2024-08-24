@@ -9,6 +9,7 @@ using UnityEngine.UI;
 
 public class PingMenuManager : NetworkSingleton<PingMenuManager>
 {
+    public NetworkVariable<bool> isActive = new NetworkVariable<bool>(true);
     [SerializeField] private GameObject pingMenuRootObject;
     [SerializeField] private Transform CursorRootObject;
     [SerializeField] private Transform HighlightRootObject;
@@ -30,17 +31,6 @@ public class PingMenuManager : NetworkSingleton<PingMenuManager>
     [SerializeField] private GameObject pingObjectPrefab;
     [SerializeField] private GameObject pingObjectParent;
     [SerializeField] private GameObject cancelTextGameObject;
-    [SerializeField] string toggleTagName = "TogglePing";
-    [SerializeField] public Toggle ToggleActive{
-        get
-        {
-            if(!toggle){
-                toggle = GameObject.FindGameObjectWithTag(toggleTagName).GetComponent<Toggle>();
-            }
-            return toggle;
-        }
-    }
-    Toggle toggle;
 
     float freeXSpeed = 0, freeYSpeed = 0, focusXSpeed = 0, focusYSpeed = 0, delayShowMenu;
     int selectedItem;
@@ -243,13 +233,6 @@ public class PingMenuManager : NetworkSingleton<PingMenuManager>
     [ServerRpc(RequireOwnership = false)]
     public void ActivePingServerRpc(bool active)
     {
-        ActivePingClientRpc(active);
+        isActive.Value = active;
     }
-    [ClientRpc]
-    void ActivePingClientRpc(bool active)
-    {
-        ToggleActive.isOn = active;
-        // PingMenuManager.Instance.gameObject.SetActive(active);
-    }
-
 }

@@ -16,7 +16,7 @@ public class CastleArenaBossGateManager : MonoBehaviour
             gateControllerBoss.CloseGate();
             gameObject.SetActive(false);
         }else if(timer<=3){
-            timer++;
+            timer += Time.deltaTime;
         }
         Debug.Log(boss.Count);
     }

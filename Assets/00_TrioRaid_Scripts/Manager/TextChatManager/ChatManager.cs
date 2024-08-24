@@ -8,6 +8,7 @@ using UnityEngine.UI;
 
 public class ChatManager : NetworkSingleton<ChatManager>
 {
+    public NetworkVariable<bool> isActive = new NetworkVariable<bool>(true);
     [SerializeField] ChatMessage chatMessagePrefab;
     [SerializeField] CanvasGroup chatContent;
     [SerializeField] TMP_InputField chatInput;
@@ -16,17 +17,6 @@ public class ChatManager : NetworkSingleton<ChatManager>
     [SerializeField] GameObject childScrollbar;
     [SerializeField] GameObject chatInputGameObject;
     [SerializeField] ScrollRect scrollRect;
-    [SerializeField] string toggleTagName = "ToggleTextChat";
-    [SerializeField] public Toggle ToggleActive{
-        get
-        {
-            if(!toggle){
-                toggle = GameObject.FindGameObjectWithTag(toggleTagName).GetComponent<Toggle>();
-            }
-            return toggle;
-        }
-    }
-    Toggle toggle;
     public bool isUsingChat = false;
     public Action OnOpenChat;
     public Action OnCloseChat;
@@ -41,6 +31,7 @@ public class ChatManager : NetworkSingleton<ChatManager>
     }
     void Update()
     {
+        Debug.Log(isActive.Value);
         if (PlayerManager.Instance != null)
         {
             if (Input.GetKeyDown(KeyCode.Return) && !isUsingChat)
@@ -127,12 +118,7 @@ public class ChatManager : NetworkSingleton<ChatManager>
     [ServerRpc(RequireOwnership = false)]
     public void ActiveTextChatServerRpc(bool active)
     {
-        ActiveTextChatClientRpc(active);
+        isActive.Value = active;
     }
-    [ClientRpc]
-    void ActiveTextChatClientRpc(bool active)
-    {
-        ToggleActive.isOn = active;
-        // ChatManager.Instance.gameObject.SetActive(active);
-    }
+   
 }

@@ -20,11 +20,12 @@ public class CastleArenaPlayerGateManager : MonoBehaviour
             gateControllerPlayer.CloseGate();
             gateControllerBoss.OpenGate();
             if(NetworkManager.Singleton.IsServer){
+            Map4Manager.Instance.DestroyBossIdleClientRpc();
             EnemyManager.Instance.Spawn(2005,bossSpawn.position);
         }
             gameObject.SetActive(false);
         }else if(timer<=3){
-            timer++;
+            timer += Time.deltaTime;
         }
         Debug.Log(players.Count);
     }
