@@ -5,6 +5,7 @@ using Cinemachine;
 using TMPro;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PingMenuManager : NetworkSingleton<PingMenuManager>
@@ -71,7 +72,7 @@ public class PingMenuManager : NetworkSingleton<PingMenuManager>
                     {
                         selectedItem = 7;
                     }
-                    CreatePingManagerServerRpc(hit.point, NetworkManager.LocalClientId,selectedItem);
+                    CreatePingManagerServerRpc(hit.point, NetworkManager.LocalClientId, selectedItem);
                 }
             }
             if (Input.GetMouseButton(2))
@@ -157,12 +158,19 @@ public class PingMenuManager : NetworkSingleton<PingMenuManager>
     {
         CreatePing(position, clientId, classId, _selectedItem);
     }
-
+    void ResetPingParent()
+    {
+        int children = pingObjectParent.transform.childCount;
+        for (int i = 0; i < children; ++i)
+        {
+            Destroy(pingObjectParent.transform.GetChild(i).gameObject);
+        }
+    }
     void DeletePing(ulong LocalClientId)
     {
         int children = pingObjectParent.transform.childCount;
-        for (int i = 0; i < children; ++i){
-            Debug.Log("For loop: " + pingObjectParent.transform.GetChild(i).gameObject.name);
+        for (int i = 0; i < children; ++i)
+        {
             if (pingObjectParent.transform.GetChild(i).gameObject.GetComponent<PingObjectUI>().GetIDPing() == LocalClientId)
             {
                 Destroy(pingObjectParent.transform.GetChild(i).gameObject);
@@ -181,17 +189,6 @@ public class PingMenuManager : NetworkSingleton<PingMenuManager>
     }
     public void DeletePingInScene()
     {
-        // if (pingObjectParent.transform.childCount > 0)
-        // {
-        //     for (int i = 0; i < pingObjectParent.transform.childCount; i++)
-        //     {
-        //         GameObject pingObject = pingObjectParent.transform.GetChild(i).gameObject;
-        //         if (pingObject.GetComponent<PingObjectUI>().GetIDPing() == NetworkManager.LocalClientId)
-        //         {
-        //             DeletePingManagerServerRpc(i);
-        //         }
-        //     }
-        // }
         DeletePingManagerServerRpc(NetworkManager.LocalClientId);
     }
     void SetDefaultPointer()
@@ -228,5 +225,17 @@ public class PingMenuManager : NetworkSingleton<PingMenuManager>
     public void ActivePingServerRpc(bool active)
     {
         isActive.Value = active;
+    }
+    void SetDefaultParentPing(Scene scene, LoadSceneMode mode)
+    {
+        ResetPingParent();
+    }
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += SetDefaultParentPing;
+    }
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= SetDefaultParentPing;
     }
 }
