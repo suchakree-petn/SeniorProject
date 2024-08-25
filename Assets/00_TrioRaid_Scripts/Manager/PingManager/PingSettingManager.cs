@@ -10,9 +10,9 @@ public class PingSettingManager : MonoBehaviour
     private void Awake() {
         if(NetworkManager.Singleton.IsServer){
             PingMenuManager.Instance.isActive.Value = false;
+            togglePing.onValueChanged.AddListener (PingMenuManager.Instance.ActivePingServerRpc) ;
         }
-        togglePing.isOn = PingMenuManager.Instance.gameObject.activeSelf;
-        togglePing.onValueChanged.AddListener (PingMenuManager.Instance.ActivePingServerRpc) ;
+        togglePing.isOn = PingMenuManager.Instance.isActive.Value;
     }
     
     private void Update() {

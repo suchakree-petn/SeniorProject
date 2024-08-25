@@ -10,9 +10,9 @@ public class TextChatSettingManager : MonoBehaviour
     private void Awake() {
         if(NetworkManager.Singleton.IsServer){
             ChatManager.Instance.isActive.Value = false;
+            toggleTextChat.onValueChanged.AddListener (ChatManager.Instance.ActiveTextChatServerRpc) ;
         }
-        toggleTextChat.isOn = ChatManager.Instance.gameObject.activeSelf;
-        toggleTextChat.onValueChanged.AddListener (ChatManager.Instance.ActiveTextChatServerRpc) ;
+        toggleTextChat.isOn = ChatManager.Instance.isActive.Value;
     }
 
     private void Update() {

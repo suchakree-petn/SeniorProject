@@ -115,7 +115,7 @@ public class ChatManager : NetworkSingleton<ChatManager>
         string package = playerName + " : " + message;
         AddMessage(package);
     }
-    [ServerRpc(RequireOwnership = false)]
+    [ServerRpc]
     public void ActiveTextChatServerRpc(bool active)
     {
         isActive.Value = active;

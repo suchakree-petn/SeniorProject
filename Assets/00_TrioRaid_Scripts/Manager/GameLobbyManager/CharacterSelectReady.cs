@@ -57,8 +57,8 @@ public class CharacterSelectReady : NetworkBehaviour
             // Debug with one player
             NetworkManager.SceneManager.OnLoadEventCompleted += OnNetworkManagerOnLoadEventCompleted;
             
-            SetActiveTextChat();
-            SetActivePing();
+            SetActiveTextChatServerRpc();
+            SetActivePingServerRpc();
 
             Loader.LoadNetworkString(GetStageName());
             return;
@@ -70,8 +70,8 @@ public class CharacterSelectReady : NetworkBehaviour
         {
             NetworkManager.SceneManager.OnLoadEventCompleted += OnNetworkManagerOnLoadEventCompleted;
 
-            SetActiveTextChat();
-            SetActivePing();
+            SetActiveTextChatServerRpc();
+            SetActivePingServerRpc();
 
             Loader.LoadNetworkString(GetStageName());
         }
@@ -85,6 +85,23 @@ public class CharacterSelectReady : NetworkBehaviour
     private void SetActivePing(){
         PingMenuManager.Instance.gameObject.SetActive(PingMenuManager.Instance.isActive.Value);
     }
+    [ServerRpc(RequireOwnership = false)]
+    private void SetActiveTextChatServerRpc(){
+        SetActiveTextChatClientRpc();
+    }
+    [ClientRpc]
+    private void SetActiveTextChatClientRpc(){
+        SetActiveTextChat();
+    }
+    [ServerRpc(RequireOwnership = false)]
+    private void SetActivePingServerRpc(){
+        SetActivePingClientRpc();
+    }
+    [ClientRpc]
+    private void SetActivePingClientRpc(){
+        SetActivePing();
+    }
+
     private void OnNetworkManagerOnLoadEventCompleted(string sceneName, LoadSceneMode loadSceneMode, List<ulong> clientsCompleted, List<ulong> clientsTimedOut)
     {
         foreach (ulong clientId in clientsCompleted)

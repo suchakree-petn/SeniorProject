@@ -33,7 +33,7 @@ public class PingMenuManager : NetworkSingleton<PingMenuManager>
     [SerializeField] private GameObject cancelTextGameObject;
 
     float freeXSpeed = 0, freeYSpeed = 0, focusXSpeed = 0, focusYSpeed = 0, delayShowMenu;
-    int selectedItem;
+    int selectedItem = 0;
     bool isMouseMove, isUsePing;
     protected override void InitAfterAwake()
     {
@@ -71,7 +71,7 @@ public class PingMenuManager : NetworkSingleton<PingMenuManager>
                     {
                         selectedItem = 7;
                     }
-                    CreatePingManagerServerRpc(hit.point, NetworkManager.LocalClientId);
+                    CreatePingManagerServerRpc(hit.point, NetworkManager.LocalClientId,selectedItem);
                 }
             }
             if (Input.GetMouseButton(2))
@@ -140,65 +140,59 @@ public class PingMenuManager : NetworkSingleton<PingMenuManager>
             }
         }
     }
-    void CreatePing(Vector3 position, ulong clientId, int classId)
+    void CreatePing(Vector3 position, ulong clientId, int classId, int _selectedItem)
     {
         GameObject pingGameObject = Instantiate(pingObjectPrefab, pingObjectParent.transform);
-        pingGameObject.GetComponent<PingObjectUI>().SetPingUI(listPingSprite[selectedItem], clientId, classId, listdetail[selectedItem]);
+        pingGameObject.GetComponent<PingObjectUI>().SetPingUI(listPingSprite[_selectedItem], clientId, classId, listdetail[_selectedItem]);
         pingGameObject.transform.position = position;
     }
     [ServerRpc(RequireOwnership = false)]
-    void CreatePingManagerServerRpc(Vector3 position, ulong clientId)
+    void CreatePingManagerServerRpc(Vector3 position, ulong clientId, int _selectedItem)
     {
         PlayerData playerData = GameMultiplayerManager.Instance.GetPlayerDataFromClientId(clientId);
-        CreatePingMessageClientRpc(position, clientId, playerData.classId);
+        CreatePingMessageClientRpc(position, clientId, playerData.classId, _selectedItem);
     }
     [ClientRpc]
-    void CreatePingMessageClientRpc(Vector3 position, ulong clientId, int classId)
+    void CreatePingMessageClientRpc(Vector3 position, ulong clientId, int classId, int _selectedItem)
     {
-        CreatePing(position, clientId, classId);
+        CreatePing(position, clientId, classId, _selectedItem);
     }
 
-    void DeletePing(int index)
+    void DeletePing(ulong LocalClientId)
     {
-        // List<GameObject> gameObjects = pingObjectParent.transform;
         int children = pingObjectParent.transform.childCount;
-        for (int i = 0; i < children; ++i)
-            // print("For loop: " + pingObjectParent.transform.GetChild(i));
-            if((int)pingObjectParent.transform.GetChild(i).gameObject.GetComponent<PingObjectUI>().GetIDPing() == index){
+        for (int i = 0; i < children; ++i){
+            Debug.Log("For loop: " + pingObjectParent.transform.GetChild(i).gameObject.name);
+            if (pingObjectParent.transform.GetChild(i).gameObject.GetComponent<PingObjectUI>().GetIDPing() == LocalClientId)
+            {
                 Destroy(pingObjectParent.transform.GetChild(i).gameObject);
             }
-    
-        // foreach (GameObject gameObject in pingObjectParent.transform){
-        //     // gameObjects.Add(gameObject);
-        //     if((int)gameObject.GetComponent<PingObjectUI>().GetIDPing() == index){
-        //         Destroy(gameObject);
-        //     }
-        // }
-        // Destroy(pingObjectParent.transform.GetChild);
+        }
     }
     [ServerRpc(RequireOwnership = false)]
-    void DeletePingManagerServerRpc(int index)
+    void DeletePingManagerServerRpc(ulong LocalClientId)
     {
-        DeletePingMessageClientRpc(index);
+        DeletePingMessageClientRpc(LocalClientId);
     }
     [ClientRpc]
-    void DeletePingMessageClientRpc(int index)
+    void DeletePingMessageClientRpc(ulong LocalClientId)
     {
-        DeletePing(index);
+        DeletePing(LocalClientId);
     }
     public void DeletePingInScene()
     {
-        if (pingObjectParent.transform.childCount > 0)
-        {
-            for (int i = 0; i < pingObjectParent.transform.childCount; i++)
-            {
-                GameObject pingObject = pingObjectParent.transform.GetChild(i).gameObject;
-                if (pingObject.GetComponent<PingObjectUI>().GetIDPing() == NetworkManager.LocalClientId)
-                {
-                    DeletePingManagerServerRpc(i);
-                }
-            }
-        }
+        // if (pingObjectParent.transform.childCount > 0)
+        // {
+        //     for (int i = 0; i < pingObjectParent.transform.childCount; i++)
+        //     {
+        //         GameObject pingObject = pingObjectParent.transform.GetChild(i).gameObject;
+        //         if (pingObject.GetComponent<PingObjectUI>().GetIDPing() == NetworkManager.LocalClientId)
+        //         {
+        //             DeletePingManagerServerRpc(i);
+        //         }
+        //     }
+        // }
+        DeletePingManagerServerRpc(NetworkManager.LocalClientId);
     }
     void SetDefaultPointer()
     {
@@ -230,7 +224,7 @@ public class PingMenuManager : NetworkSingleton<PingMenuManager>
             PlayerManager.Instance.LocalPlayerController.GetMouseMovement().CanCameraMove = false;
         }
     }
-    [ServerRpc(RequireOwnership = false)]
+    [ServerRpc]
     public void ActivePingServerRpc(bool active)
     {
         isActive.Value = active;
