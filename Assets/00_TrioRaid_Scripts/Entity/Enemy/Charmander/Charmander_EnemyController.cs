@@ -1,20 +1,42 @@
 using System.Collections;
 using Unity.Netcode;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Charmander_EnemyController : EnemyController
 {
+    [SerializeField] private EnemyCharacterData DefaultData;
+    [SerializeField] private EnemyCharacterData FuriousData;
     [SerializeField] private float attackPower;
     [SerializeField] private float attackPower_Multiplier;
     [SerializeField] private float attackRange;
     [SerializeField] private float attackTimeInterval;
     [SerializeField] private bool isReadyToAttack;
-    [SerializeField] private bool isFinishAttack;    
+    [SerializeField] private bool isFinishAttack;
     [SerializeField] private Transform attackPointTransform;
+    [SerializeField] private float furiousCooldownTime = 45;
+    [SerializeField] private float currentFuriousCooldown = 0;
+    [SerializeField] private float furiousHPRatio = 40f;
+    [SerializeField] private SkinnedMeshRenderer skinnedMeshRenderer;
+    [SerializeField] private Material materialDefault;
+    [SerializeField] private Material materialFurious;
+    [SerializeField] private AnimationClip aCScream, aCBasicAttack, aCClawAttack, aCHornAttack;
+    [SerializeField] private LineRenderer lineRenderer;
+    
+    bool isScream = false;
+    bool isFurious = false;
+
     protected override void Start()
     {
         base.Start();
+        SetDrawLine();
         OnEnemyAttack_Local += NormalAttack;
+    }
+    void OnDrawGizmosSelected()
+    {
+        // Draw a yellow sphere at the transform's position
+        Gizmos.color = Color.red;
+        Gizmos.DrawSphere(attackPointTransform.position, attackRange);
     }
 
     // Update is called once per frame
@@ -22,12 +44,26 @@ public class Charmander_EnemyController : EnemyController
     {
         base.Update();
         if (!IsServer || !IsSpawned) return;
-        if (Vector3.Distance(transform.position, target.position) > attackRange + 2 && isFinishAttack && CanMove)
+        StartFuriousMode();
+        StunAnimation();
+        if (isFurious && target != null)
         {
-            if (!IsTaunted)
+            DrawLine();
+        }
+        if (Vector3.Distance(attackPointTransform.position, target.position) > attackRange && isFinishAttack && CanMove)
+        {
+            if (!isFurious)
             {
-                target = PlayerManager.Instance.GetClosestPlayerFrom(transform.position);
+                if (!IsTaunted)
+                {
+                    target = PlayerManager.Instance.GetClosestPlayerFrom(transform.position);
+                }
             }
+            else
+            {
+
+            }
+
             agent.isStopped = false;
             animator.SetFloat("VelocityZ", Mathf.Lerp(animator.GetFloat("VelocityZ"), 1, Time.deltaTime * 5));
         }
@@ -39,19 +75,20 @@ public class Charmander_EnemyController : EnemyController
             // Attack
             animator.SetFloat("VelocityZ", Mathf.Lerp(animator.GetFloat("VelocityZ"), 0, Time.deltaTime * 10));
             if (!isReadyToAttack || IsStun) return;
-            StartAttackCooldown(attackTimeInterval);
-            networkAnimator.SetTrigger("Attack");
+            
+            AttackAnimation();
             
         }
     }
-    void NormalAttack(){
+    void NormalAttack()
+    {
         RaycastHit[] hits = Physics.SphereCastAll(attackPointTransform.position, attackRange, attackPointTransform.forward, attackRange, EnemyCharacterData.TargetLayer);
         foreach (RaycastHit hit in hits)
         {
             if (hit.collider.transform.root.TryGetComponent(out PlayerController playerController) && hit.collider.isTrigger)
             {
                 // Debug.Log("Spider hit " + hit.collider.transform.root.name);
-                AttackDamage attackDamage = new(attackPower_Multiplier, attackPower, DamageType.Melee, false);
+                AttackDamage attackDamage = new(attackPower_Multiplier, EnemyCharacterData.GetAttack(), DamageType.Melee, false);
                 playerController.GetComponent<IDamageable>().TakeDamage_ClientRpc(attackDamage);
             }
         }
@@ -61,24 +98,91 @@ public class Charmander_EnemyController : EnemyController
     {
         base.OnNetworkSpawn();
     }
-    void BasicAttack(){
-        
+    void ChangeEnemyData(EnemyCharacterData data){
+        _enemyCharacterData = data;
     }
-    void ClawAttack(){
+    void StunAnimation(){
+        animator.SetBool("Stun", IsStun);
+    }
+    void AttackAnimation(){
+        float randomAttack = Random.Range(0, 3);
+        if(randomAttack < 1){
+            BasicAttack();
+        }else if(randomAttack < 2){
+            ClawAttack();
+        }else if(randomAttack <= 3){
+            HornAttack();
+        }
+    }
+    void BasicAttack()
+    {
+        StartAttackCooldown(aCBasicAttack.length + 0.5f);
+        attackPower_Multiplier = 1.2f;
+        networkAnimator.SetTrigger("BasicAttack");
+    }
+    void ClawAttack()
+    {
+        StartAttackCooldown(aCClawAttack.length + 0.5f);
+        attackPower_Multiplier = 1.5f;
+        networkAnimator.SetTrigger("ClawAttack");
+    }
+    void HornAttack()
+    {
+        StartAttackCooldown(aCHornAttack.length+0.5f);
+        attackPower_Multiplier = 1.0f;
+        networkAnimator.SetTrigger("HornAttack");
+    }
+    void StartFuriousMode()
+    {
+        if (!isFurious && enemyHealth.CurrentHealth < enemyHealth.MaxHp * furiousHPRatio / 100f && currentFuriousCooldown <= 0)
+        {
+            ChangeEnemyData(FuriousData);
+            StartScream(aCScream.length+0.5f);
+            IsStun = false;
+            stunImmunity = true;
+            isFurious = true;
+            currentFuriousCooldown = furiousCooldownTime;
+            skinnedMeshRenderer.material = materialFurious;
+        }
+        else if (!isFurious)
+        {
+            if (currentFuriousCooldown > 0)
+            {
+                currentFuriousCooldown -= Time.deltaTime;
+            }
+        }
+    }
+    private void StartScream(float sec)
+    {
+        networkAnimator.SetTrigger("Scream");
+        StartCoroutine(WaitForScream(sec));
+    }
+    private IEnumerator WaitForScream(float sec)
+    {
+        StopMoving();
+        yield return new WaitForSeconds(sec);
+        Moving();
 
     }
-    void HornAttack(){
+    void SetDrawLine()
+    {
+        lineRenderer.startWidth = 0.1f;
+        lineRenderer.endWidth = 0.1f;
 
+        lineRenderer.startColor = Color.red;
+        lineRenderer.endColor = Color.red;
+
+        lineRenderer.useWorldSpace = true;
+    }
+    void DrawLine()
+    {
+        lineRenderer.SetPosition(0, transform.position);
+        lineRenderer.SetPosition(1, target.position);
     }
     private void OnEnemyHit_HitAnimation()
     {
         animator.SetTrigger("Hit");
     }
-
-    // private void OnDrawGizmos()
-    // {
-    //     Gizmos.DrawWireSphere(attackPointTransform.position, attackRange);
-    // }
     private void StartAttackCooldown(float sec)
     {
         StartCoroutine(WaitForWeaponCooldown(sec));
@@ -90,7 +194,6 @@ public class Charmander_EnemyController : EnemyController
         yield return new WaitForSeconds(sec);
         isReadyToAttack = true;
         isFinishAttack = true;
-
     }
 
     protected override void OnEnable()

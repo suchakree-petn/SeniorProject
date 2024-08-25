@@ -25,6 +25,7 @@ public class EnemyController : NetworkBehaviour, IDamageable
     public bool CanMove = true;
     public bool IsTaunted = false;
     public bool IsStun = false;
+    public bool stunImmunity = false;
     public bool IsDead => enemyHealth.IsDead;
     private float delayEnemySpawn = 1;
 
@@ -218,15 +219,21 @@ public class EnemyController : NetworkBehaviour, IDamageable
     [ServerRpc(RequireOwnership = false)]
     public void StartStun_ServerRpc()
     {
-        StopMoving();
-        IsStun = true;
+        if (!stunImmunity)
+        {
+            StopMoving();
+            IsStun = true;
+        }
     }
 
     [ServerRpc(RequireOwnership = false)]
     public void FinishStun_ServerRpc()
     {
-        Moving();
-        IsStun = false;
+        if (!stunImmunity)
+        {
+            Moving();
+            IsStun = false;
+        }
     }
     public void Moving()
     {

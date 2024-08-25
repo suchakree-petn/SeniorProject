@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43a0dacbe09ad9240bad84328a404ebf, type: 3}
+  m_Name: EnemyCharacterData_Charmander
+  m_EditorClassIdentifier: 
+  Name: Charmander
+  Level: 1
+  TargetLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  MoveSpeed: 30
+  HpBase: 30000
+  HpBonus: 0
+  AttackBase: 300
+  AttackBonus: 0
+  DefenseBase: 100
+  DefenseBonus: 0

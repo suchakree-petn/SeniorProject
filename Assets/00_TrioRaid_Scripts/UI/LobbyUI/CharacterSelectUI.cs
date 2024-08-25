@@ -1,4 +1,6 @@
+using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class CharacterSelectUI : MonoBehaviour
@@ -15,10 +17,12 @@ public class CharacterSelectUI : MonoBehaviour
             if (GameLobbyManager.Instance.IsLobbyHost())
             {
                 GameLobbyManager.Instance.DeleteLobby();
+                BackToMenu();
             }
             else
             {
                 GameLobbyManager.Instance.LeaveLobby();
+                BackToMenu();
             }
 
         });
@@ -28,5 +32,14 @@ public class CharacterSelectUI : MonoBehaviour
             readyButton.interactable = false;
         });
     }
+    private void BackToMenu()
+    {
+        if (NetworkManager.Singleton.IsServer)
+        {
+            NetworkManager.Singleton.Shutdown();
+        }
+        Destroy(GameMultiplayerManager.Instance.gameObject);
+        SceneManager.LoadScene("Thanva_MainMenu_UserDataPersistence");
 
+    }
 }

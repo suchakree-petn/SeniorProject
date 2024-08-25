@@ -52,8 +52,11 @@ public class TankAbility_GroundSmash : PlayerAbility
                 {
                     AttackDamage attackDamage = playerController.GetTank_PlayerWeapon().SwordWeaponData.GetDamage(AbilityData.DamageMultiplier, playerController.PlayerCharacterData, (long)NetworkManager.LocalClientId);
                     damageable.TakeDamage(attackDamage);
-                    SpawnStunVFX(enemyController.NetworkObject);
-                    SpawnStunVFX_ServerRpc(enemyController.NetworkObject);
+                    if (!enemyController.stunImmunity)
+                    {
+                        SpawnStunVFX(enemyController.NetworkObject);
+                        SpawnStunVFX_ServerRpc(enemyController.NetworkObject);
+                    }
                 }
             }
         }
