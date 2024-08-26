@@ -378,7 +378,7 @@ PrefabInstance:
     - target: {fileID: 8964699346016857801, guid: 58437a38aec03b4478d7fdb505663dec,
         type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 352418138
+      value: 2007371242
       objectReference: {fileID: 0}
     - target: {fileID: 9006563807303963375, guid: 58437a38aec03b4478d7fdb505663dec,
         type: 3}
@@ -519,7 +519,7 @@ MonoBehaviour:
     type: 2}
   agent: {fileID: 6001819275899621731}
   behaviourTreeInstance: {fileID: 1851742019605905526}
-  target: {fileID: 0}
+  Target: {fileID: 0}
   CanMove: 1
   IsTaunted: 0
   IsStun: 0
@@ -535,7 +535,7 @@ MonoBehaviour:
   attackPower: 190
   attackPower_Multiplier: 1
   attackRange: 1.67
-  attackTimeInterval: 3
+  attackTimeInterval: 2
   isReadyToAttack: 1
   isFinishAttack: 1
   attackPointTransform: {fileID: 8778368229035554971}
@@ -567,8 +567,8 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: -1372625422
   m_Radius: 1.42
-  m_Speed: 5
-  m_Acceleration: 8
+  m_Speed: 6.5
+  m_Acceleration: 12
   avoidancePriority: 50
   m_AngularSpeed: 120
   m_StoppingDistance: 0

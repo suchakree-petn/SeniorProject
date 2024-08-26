@@ -21,7 +21,7 @@ public class EnemyController : NetworkBehaviour, IDamageable
     [SerializeField] protected NavMeshPath path;
     [SerializeField] protected BehaviourTreeInstance behaviourTreeInstance;
 
-    public Transform target;
+    public Transform Target;
     public bool CanMove = true;
     public bool IsTaunted = false;
     public bool IsStun = false;
@@ -67,7 +67,7 @@ public class EnemyController : NetworkBehaviour, IDamageable
     public override void OnNetworkSpawn()
     {
         if (!IsOwner || !IsServer) return;
-        target = PlayerManager.Instance.GetClosestPlayerFrom(transform.position);
+        Target = PlayerManager.Instance.GetClosestPlayerFrom(transform.position);
         CanMove = true;
     }
 
@@ -88,7 +88,7 @@ public class EnemyController : NetworkBehaviour, IDamageable
         if (!agent.isStopped)
         {
             path = new();
-            agent.CalculatePath(target.position, path);
+            agent.CalculatePath(Target.position, path);
             agent.SetPath(path);
         }
         else
@@ -107,7 +107,7 @@ public class EnemyController : NetworkBehaviour, IDamageable
         Vector3 direction = agent.velocity.normalized;
         if (agent.isStopped)
         {
-            direction = (target.position - transform.position).normalized;
+            direction = (Target.position - transform.position).normalized;
         }
         else if (direction != Vector3.zero && CanMove)
         {
@@ -202,7 +202,7 @@ public class EnemyController : NetworkBehaviour, IDamageable
     {
         if (tauntTarget.TryGet(out NetworkObject networkObject))
         {
-            target = networkObject.transform;
+            Target = networkObject.transform;
             IsTaunted = true;
         }
 
@@ -211,7 +211,7 @@ public class EnemyController : NetworkBehaviour, IDamageable
     [ServerRpc(RequireOwnership = false)]
     public void FinishTaunt_ServerRpc()
     {
-        target = PlayerManager.Instance.GetClosestPlayerFrom(transform.position);
+        Target = PlayerManager.Instance.GetClosestPlayerFrom(transform.position);
         IsTaunted = false;
     }
 
