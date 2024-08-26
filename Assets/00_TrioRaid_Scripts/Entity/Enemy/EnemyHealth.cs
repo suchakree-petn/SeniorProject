@@ -41,6 +41,11 @@ public class EnemyHealth : EntityHealth
     }
     private void OnEnable()
     {
+        if (enemyHealth_UI)
+        {
+            enemyHealth_UI.gameObject.SetActive(true);
+        }
+
         InitHp(enemyController.EnemyCharacterData);
 
         currentHealth.OnValueChanged += (prev, newValue) =>

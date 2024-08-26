@@ -36,9 +36,9 @@ public class BalistaController : NetworkBehaviour
 
     private void Start()
     {
-        text_interactButton.SetText("<color=#ffa500ff> F </color> Repair");
+        text_interactButton.SetText("<color=#ffa500ff> F </color> เพื่อซ่อม");
 
-        OnRepairSuccess += ()=> text_interactButton.SetText("<color=#ffa500ff> F </color> Use Balista");
+        OnRepairSuccess += ()=> text_interactButton.SetText("<color=#ffa500ff> F </color> เพื่อใช้งาน Balista");
     }
 
     private void Update()

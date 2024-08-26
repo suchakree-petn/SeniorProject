@@ -18,9 +18,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   MoveSpeed: 30
-  HpBase: 15000
+  HpBase: 6000
   HpBonus: 0
   AttackBase: 300
   AttackBonus: 0
-  DefenseBase: 100
+  DefenseBase: 50
   DefenseBonus: 0

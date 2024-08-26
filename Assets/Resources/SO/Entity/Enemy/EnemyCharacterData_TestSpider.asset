@@ -22,5 +22,5 @@ MonoBehaviour:
   HpBonus: 1
   AttackBase: 210
   AttackBonus: 0
-  DefenseBase: 100
+  DefenseBase: 50
   DefenseBonus: 0

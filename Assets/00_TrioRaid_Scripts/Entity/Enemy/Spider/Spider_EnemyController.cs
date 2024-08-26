@@ -29,11 +29,11 @@ public class Spider_EnemyController : EnemyController
     {
         base.Update();
         if (!IsServer || !IsSpawned) return;
-        if (Vector3.Distance(transform.position, target.position) > attackRange + 2 && isFinishAttack && CanMove)
+        if (Vector3.Distance(transform.position, Target.position) > attackRange + 2 && isFinishAttack && CanMove)
         {
             if (!IsTaunted)
             {
-                target = PlayerManager.Instance.GetClosestPlayerFrom(transform.position);
+                Target = PlayerManager.Instance.GetClosestPlayerFrom(transform.position);
             }
             agent.isStopped = false;
             animator.SetFloat("VelocityZ", Mathf.Lerp(animator.GetFloat("VelocityZ"), 1, Time.deltaTime * 5));

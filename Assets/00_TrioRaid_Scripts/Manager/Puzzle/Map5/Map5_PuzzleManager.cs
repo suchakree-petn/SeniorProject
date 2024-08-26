@@ -16,8 +16,12 @@ public class Map5_PuzzleManager : NetworkSingleton<Map5_PuzzleManager>
 
     [FoldoutGroup("Reference")]
     [SerializeField] private CinemachineVirtualCamera bossCam;
+
     [FoldoutGroup("Reference")]
-    [SerializeField] private Transform bossSpawn;
+    [SerializeField] private RedDragon_Fly_EnemyController bossController;
+
+    [FoldoutGroup("Reference")]
+    // [SerializeField] private BrokenBalistaController balistaController;
 
     protected override void InitAfterAwake()
     {
@@ -25,22 +29,22 @@ public class Map5_PuzzleManager : NetworkSingleton<Map5_PuzzleManager>
 
     private void Start()
     {
-        OnStateChanged_Local += SpawnBoss_ServerRpc;
+        OnStateChanged_Local += SpawnBoss;
 
     }
 
-    [ServerRpc(RequireOwnership = false)]
-    private void SpawnBoss_ServerRpc(Map5_GameState newState)
+    // [ServerRpc(RequireOwnership = false)]
+    private void SpawnBoss(Map5_GameState newState)
     {
         if (newState != Map5_GameState.Phase2_RepairBalista)
         {
             return;
         }
-        if (NetworkManager.IsServer)
-        {
-            EnemyManager.Instance.Spawn(2004);
-            PanCameraToBoss_ClientRpc();
-        }
+
+        // bossController.Target = balistaController.transform;
+        // boss.SetActive(true);
+        PanCameraToBoss();
+
     }
 
     public override void OnNetworkSpawn()
@@ -64,6 +68,11 @@ public class Map5_PuzzleManager : NetworkSingleton<Map5_PuzzleManager>
 
     [ClientRpc]
     private void PanCameraToBoss_ClientRpc()
+    {
+        PanCameraToBoss();
+    }
+
+    private void PanCameraToBoss()
     {
         bossCam.Priority = 1000;
         Sequence sequence = DOTween.Sequence();
