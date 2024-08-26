@@ -28,6 +28,7 @@ public class Charmander_EnemyController : EnemyController
     [SerializeField] private Material materialFurious;
     [SerializeField] private AnimationClip aCScream, aCBasicAttack, aCClawAttack, aCHornAttack, aCHit;
     [SerializeField] private LineRenderer lineRenderer;
+    [SerializeField] private Transform target;
 
     bool isScream = false;
     bool isFurious = false;
