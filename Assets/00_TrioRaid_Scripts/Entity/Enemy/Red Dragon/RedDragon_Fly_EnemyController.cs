@@ -1,40 +1,47 @@
 using System.Collections;
+using Sirenix.OdinInspector;
 using Unity.Netcode;
 using UnityEngine;
-public class Spider_EnemyController : EnemyController
+public class RedDragon_Fly_EnemyController : EnemyController
 {
 
-    [SerializeField] private float attackPower;
+    [FoldoutGroup("RedDragon_Fly Config")]
     [SerializeField] private float attackPower_Multiplier;
+    [FoldoutGroup("RedDragon_Fly Config")]
     [SerializeField] private float attackRange;
+    [FoldoutGroup("RedDragon_Fly Config")]
     [SerializeField] private float attackTimeInterval;
+    [FoldoutGroup("RedDragon_Fly Config")]
     [SerializeField] private bool isReadyToAttack;
+    [FoldoutGroup("RedDragon_Fly Config")]
     [SerializeField] private bool isFinishAttack;
 
-
-    [Header("Spider Reference")]
+    [FoldoutGroup("RedDragon_Fly Reference")]
     [SerializeField] private Transform attackPointTransform;
 
     protected override void Start()
     {
         base.Start();
         OnEnemyAttack_Local += NormalAttack;
-        OnEnemyHit_Local += OnEnemyHit_HitAnimation;
+        // OnEnemyHit_Local += OnEnemyHit_HitAnimation;
+
+        Target = null;
+        gameObject.SetActive(false);
 
     }
 
-
+    public override void OnNetworkSpawn()
+    {
+        if (!IsOwner || !IsServer) return;
+    }
 
     protected override void Update()
     {
         base.Update();
         if (!IsServer || !IsSpawned) return;
-        if (Vector3.Distance(transform.position, Target.position) > attackRange + 2 && isFinishAttack && CanMove)
+
+        if (Target && Vector3.Distance(transform.position, Target.position) > attackRange && isFinishAttack)
         {
-            if (!IsTaunted)
-            {
-                Target = PlayerManager.Instance.GetClosestPlayerFrom(transform.position);
-            }
             agent.isStopped = false;
             animator.SetFloat("VelocityZ", Mathf.Lerp(animator.GetFloat("VelocityZ"), 1, Time.deltaTime * 5));
         }
@@ -42,13 +49,12 @@ public class Spider_EnemyController : EnemyController
         {
             agent.isStopped = true;
 
-            if (!CanMove) return;
             // Attack
             animator.SetFloat("VelocityZ", Mathf.Lerp(animator.GetFloat("VelocityZ"), 0, Time.deltaTime * 10));
             if (!isReadyToAttack || IsStun) return;
             StartAttackCooldown(attackTimeInterval);
             networkAnimator.SetTrigger("Attack");
-            
+
         }
     }
 
@@ -59,23 +65,22 @@ public class Spider_EnemyController : EnemyController
         {
             if (hit.collider.transform.root.TryGetComponent(out PlayerController playerController) && hit.collider.isTrigger)
             {
-                // Debug.Log("Spider hit " + hit.collider.transform.root.name);
-                AttackDamage attackDamage = new(attackPower_Multiplier, attackPower, DamageType.Melee, false);
+                AttackDamage attackDamage = new(attackPower_Multiplier, EnemyCharacterData.AttackBase, DamageType.Melee, false);
                 playerController.GetComponent<IDamageable>().TakeDamage_ClientRpc(attackDamage);
             }
         }
 
     }
 
-    private void OnEnemyHit_HitAnimation()
+    private void OnDrawGizmos()
     {
-        animator.SetTrigger("Hit");
-    }
+        if (Target)
+        {
+            Vector3 dir = (Target.position - attackPointTransform.position).normalized;
+            Debug.DrawLine(attackPointTransform.position, dir * attackRange);
 
-    // private void OnDrawGizmos()
-    // {
-    //     Gizmos.DrawWireSphere(attackPointTransform.position, attackRange);
-    // }
+        }
+    }
     private void StartAttackCooldown(float sec)
     {
         StartCoroutine(WaitForWeaponCooldown(sec));
@@ -98,25 +103,13 @@ public class Spider_EnemyController : EnemyController
     [ClientRpc]
     public override void TakeDamage_ClientRpc(AttackDamage damage)
     {
-        if (!IsOwner)
-        {
-            Debug.Log($"Not owner on take damage");
-            return;
-        }
-        base.TakeDamage_ClientRpc(damage);
 
     }
 
     [ServerRpc(RequireOwnership = false)]
     public override void TakeDamage_ServerRpc(AttackDamage damage)
     {
-        base.TakeDamage_ServerRpc(damage);
 
-        if (enemyHealth.CurrentHealth <= 0)
-        {
-            networkAnimator.SetTrigger("Death");
-            StartCoroutine(DelayDestroy(4f));
-        }
     }
 
 }

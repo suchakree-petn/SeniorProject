@@ -11774,8 +11774,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.00015888178, y: -0.15242754, z: 0.0006551107, w: 0.98831445}
-  m_LocalPosition: {x: -118.359985, y: 0.16998291, z: -92.38}
+  m_LocalRotation: {x: 0.0016669245, y: -0.70791423, z: 0.0016707473, w: 0.7062945}
+  m_LocalPosition: {x: -151.45546, y: 0.8813009, z: 3.5884094}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -44628,7 +44628,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 496004, guid: 0a5ef1aaf47f03547983772b8f1f3a80, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 6.2414
+      value: 6.475
       objectReference: {fileID: 0}
     - target: {fileID: 496004, guid: 0a5ef1aaf47f03547983772b8f1f3a80, type: 3}
       propertyPath: m_LocalPosition.z
@@ -59768,7 +59768,7 @@ MonoBehaviour:
       Data: 
     - Name: $v
       Entry: 5
-      Data: true
+      Data: false
     - Name: 
       Entry: 8
       Data: 
@@ -59792,7 +59792,7 @@ MonoBehaviour:
       Data: 
     - Name: $v
       Entry: 5
-      Data: true
+      Data: false
     - Name: 
       Entry: 8
       Data: 
@@ -59816,7 +59816,7 @@ MonoBehaviour:
       Data: 
     - Name: $v
       Entry: 5
-      Data: true
+      Data: false
     - Name: 
       Entry: 8
       Data: 
@@ -59840,7 +59840,7 @@ MonoBehaviour:
       Data: 
     - Name: $v
       Entry: 5
-      Data: true
+      Data: false
     - Name: 
       Entry: 8
       Data: 
@@ -59864,7 +59864,7 @@ MonoBehaviour:
       Data: 
     - Name: $v
       Entry: 5
-      Data: true
+      Data: false
     - Name: 
       Entry: 8
       Data: 

@@ -2090,7 +2090,7 @@ MonoBehaviour:
     type: 2}
   agent: {fileID: 6001819275899621731}
   behaviourTreeInstance: {fileID: 1851742019605905526}
-  target: {fileID: 1081591575635147786}
+  Target: {fileID: 0}
   CanMove: 1
   IsTaunted: 0
   IsStun: 0
@@ -2105,7 +2105,7 @@ MonoBehaviour:
   mesh_parent: {fileID: 8598420571638919186}
   attackPower_Multiplier: 1
   attackRange: 2
-  attackTimeInterval: 3
+  attackTimeInterval: 1.1
   isReadyToAttack: 1
   isFinishAttack: 1
   attackPointTransform: {fileID: 8778368229035554971}
