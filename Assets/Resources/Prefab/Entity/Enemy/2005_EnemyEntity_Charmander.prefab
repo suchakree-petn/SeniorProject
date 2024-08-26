@@ -2795,7 +2795,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 1171406058
+  GlobalObjectIdHash: 2047636051
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
   ActiveSceneSynchronization: 0
@@ -2845,13 +2845,20 @@ MonoBehaviour:
   furiousCooldownTime: 45
   currentFuriousCooldown: 0
   furiousHPRatio: 40
+  furiousMaxPoint: 20
+  FuriousPoint: 0
+  furiousPointRegenPerSec: 5
+  furiousPointDelayRegen: 3
+  furiousStunTime: 3
+  isRegen: 0
   skinnedMeshRenderer: {fileID: 1765888159009429129}
   materialDefault: {fileID: 2100000, guid: 61380815b26848c48aa35d9f4b03566c, type: 2}
-  materialFurious: {fileID: 2100000, guid: 8a2d1f9276d746a42925272a2372ca11, type: 2}
+  materialFurious: {fileID: 2100000, guid: c8a62388590d5d7489762d58bc383a7c, type: 2}
   aCScream: {fileID: 7400000, guid: 24c24c6ac85c1f54e966c56edcb224f0, type: 3}
   aCBasicAttack: {fileID: 7400000, guid: 04fd4f814b1efb94a81e638d426232a1, type: 2}
   aCClawAttack: {fileID: 7400000, guid: fe2971a75747e29498b74667c8baa3fd, type: 2}
   aCHornAttack: {fileID: 7400000, guid: a9836c6adbf93e54095de23bf784b970, type: 2}
+  aCHit: {fileID: 7400000, guid: a814a14820249a74d9c9bad7b4bfef9d, type: 3}
   lineRenderer: {fileID: 3509205634011118978}
 --- !u!114 &1006318132928324522
 MonoBehaviour:
@@ -3111,8 +3118,8 @@ LineRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 1, b: 1, a: 1}
-      key1: {r: 1, g: 1, b: 1, a: 1}
+      key0: {r: 1, g: 0, b: 0, a: 1}
+      key1: {r: 1, g: 0, b: 0, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -3136,7 +3143,7 @@ LineRenderer:
       atime6: 0
       atime7: 0
       m_Mode: 0
-      m_ColorSpace: -1
+      m_ColorSpace: 0
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
     numCornerVertices: 0

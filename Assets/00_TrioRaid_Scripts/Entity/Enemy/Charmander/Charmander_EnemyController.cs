@@ -1,6 +1,5 @@
 using System.Collections;
 using Unity.Netcode;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Charmander_EnemyController : EnemyController
@@ -17,12 +16,19 @@ public class Charmander_EnemyController : EnemyController
     [SerializeField] private float furiousCooldownTime = 45;
     [SerializeField] private float currentFuriousCooldown = 0;
     [SerializeField] private float furiousHPRatio = 40f;
+    [SerializeField] private float furiousMaxPoint = 20f;
+    public float FuriousPoint = 0f;
+    [SerializeField] private float furiousPointRegenPerSec = 5f;
+    [SerializeField] private float furiousPointDelayRegen = 3f;
+    [SerializeField] private float furiousStunTime = 3f;
+    [SerializeField] private bool isRegen;
+    [SerializeField] private float regenPoint;
     [SerializeField] private SkinnedMeshRenderer skinnedMeshRenderer;
     [SerializeField] private Material materialDefault;
     [SerializeField] private Material materialFurious;
-    [SerializeField] private AnimationClip aCScream, aCBasicAttack, aCClawAttack, aCHornAttack;
+    [SerializeField] private AnimationClip aCScream, aCBasicAttack, aCClawAttack, aCHornAttack, aCHit;
     [SerializeField] private LineRenderer lineRenderer;
-    
+
     bool isScream = false;
     bool isFurious = false;
 
@@ -44,6 +50,20 @@ public class Charmander_EnemyController : EnemyController
     {
         base.Update();
         if (!IsServer || !IsSpawned) return;
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            BallistaHit();
+        }
+        if (isRegen && FuriousPoint < furiousMaxPoint && regenPoint > 0)
+        {
+            FuriousPoint += Time.deltaTime * furiousPointRegenPerSec;
+            regenPoint -= Time.deltaTime * furiousPointRegenPerSec;
+        }
+        else if (FuriousPoint > 20f || regenPoint < 0)
+        {
+            FuriousPoint = 20;
+            regenPoint = 0;
+        }
         StartFuriousMode();
         StunAnimation();
         if (isFurious && target != null)
@@ -59,10 +79,6 @@ public class Charmander_EnemyController : EnemyController
                     target = PlayerManager.Instance.GetClosestPlayerFrom(transform.position);
                 }
             }
-            else
-            {
-
-            }
 
             agent.isStopped = false;
             animator.SetFloat("VelocityZ", Mathf.Lerp(animator.GetFloat("VelocityZ"), 1, Time.deltaTime * 5));
@@ -75,9 +91,9 @@ public class Charmander_EnemyController : EnemyController
             // Attack
             animator.SetFloat("VelocityZ", Mathf.Lerp(animator.GetFloat("VelocityZ"), 0, Time.deltaTime * 10));
             if (!isReadyToAttack || IsStun) return;
-            
+
             AttackAnimation();
-            
+
         }
     }
     void NormalAttack()
@@ -98,19 +114,27 @@ public class Charmander_EnemyController : EnemyController
     {
         base.OnNetworkSpawn();
     }
-    void ChangeEnemyData(EnemyCharacterData data){
+    void ChangeEnemyData(EnemyCharacterData data)
+    {
         _enemyCharacterData = data;
     }
-    void StunAnimation(){
+    void StunAnimation()
+    {
         animator.SetBool("Stun", IsStun);
     }
-    void AttackAnimation(){
+    void AttackAnimation()
+    {
         float randomAttack = Random.Range(0, 3);
-        if(randomAttack < 1){
+        if (randomAttack < 1)
+        {
             BasicAttack();
-        }else if(randomAttack < 2){
+        }
+        else if (randomAttack < 2)
+        {
             ClawAttack();
-        }else if(randomAttack <= 3){
+        }
+        else if (randomAttack <= 3)
+        {
             HornAttack();
         }
     }
@@ -128,7 +152,7 @@ public class Charmander_EnemyController : EnemyController
     }
     void HornAttack()
     {
-        StartAttackCooldown(aCHornAttack.length+0.5f);
+        StartAttackCooldown(aCHornAttack.length + 0.5f);
         attackPower_Multiplier = 1.0f;
         networkAnimator.SetTrigger("HornAttack");
     }
@@ -136,13 +160,7 @@ public class Charmander_EnemyController : EnemyController
     {
         if (!isFurious && enemyHealth.CurrentHealth < enemyHealth.MaxHp * furiousHPRatio / 100f && currentFuriousCooldown <= 0)
         {
-            ChangeEnemyData(FuriousData);
-            StartScream(aCScream.length+0.5f);
-            IsStun = false;
-            stunImmunity = true;
-            isFurious = true;
-            currentFuriousCooldown = furiousCooldownTime;
-            skinnedMeshRenderer.material = materialFurious;
+            FuriousModeServerRpc();
         }
         else if (!isFurious)
         {
@@ -152,17 +170,133 @@ public class Charmander_EnemyController : EnemyController
             }
         }
     }
+    [ServerRpc(RequireOwnership = false)]
+    void FuriousModeServerRpc()
+    {
+        ChangeEnemyData(FuriousData);
+        StartScream(aCScream.length + 0.5f);
+        IsStun = false;
+        stunImmunity = true;
+        isFurious = true;
+        FuriousPoint = furiousMaxPoint;
+        currentFuriousCooldown = furiousCooldownTime;
+        skinnedMeshRenderer.material = materialFurious;
+    }
+    [ClientRpc]
+    void FuriousModeClientRpc()
+    {
+        ChangeEnemyData(FuriousData);
+        StartScream(aCScream.length + 0.5f);
+        IsStun = false;
+        stunImmunity = true;
+        isFurious = true;
+        FuriousPoint = furiousMaxPoint;
+        currentFuriousCooldown = furiousCooldownTime;
+        skinnedMeshRenderer.material = materialFurious;
+    }
     private void StartScream(float sec)
     {
         networkAnimator.SetTrigger("Scream");
-        StartCoroutine(WaitForScream(sec));
+        if (_delayStunCoroutine == null)
+        {
+            _delayStunCoroutine = StartCoroutine(WaitForStop(sec));
+        }
+        else
+        {
+            StopCoroutine(_delayStunCoroutine);
+            _delayStunCoroutine = StartCoroutine(WaitForStop(sec));
+        }
     }
-    private IEnumerator WaitForScream(float sec)
+    private IEnumerator WaitForStop(float sec)
     {
         StopMoving();
         yield return new WaitForSeconds(sec);
         Moving();
 
+    }
+    Coroutine _delayFuriousRegenCoroutine;
+    Coroutine _delayStunCoroutine;
+    public void BallistaHit()
+    {
+        if (isFurious)
+        {
+            FuriousPoint -= 10f;
+            regenPoint += 10f;
+            FuriousPointRegen();
+            OnEnemyHit_HitAnimation(aCHit.length);
+            if (FuriousPoint <= 0)
+            {
+                FuriousPoint = 0;
+                ReturnToDefaultModeServerRpc();
+
+            }
+        }
+    }
+    [ServerRpc(RequireOwnership = false)]
+    void ReturnToDefaultModeServerRpc()
+    {
+        ReturnToDefaultModeClientRpc();
+    }
+    [ClientRpc]
+    void ReturnToDefaultModeClientRpc()
+    {
+        ChangeEnemyData(DefaultData);
+        stunImmunity = false;
+        isFurious = false;
+        skinnedMeshRenderer.material = materialDefault;
+        FuriousStun();
+    }
+
+    private void OnEnemyHit_HitAnimation(float sec)
+    {
+        animator.SetTrigger("Hit");
+        if (_delayStunCoroutine == null)
+        {
+            _delayStunCoroutine = StartCoroutine(WaitForStop(sec));
+        }
+        else
+        {
+            StopCoroutine(_delayStunCoroutine);
+            _delayStunCoroutine = StartCoroutine(WaitForStop(sec));
+        }
+    }
+    void FuriousPointRegen()
+    {
+        if (_delayFuriousRegenCoroutine == null)
+        {
+            _delayFuriousRegenCoroutine = StartCoroutine(DelayFuriousPointRegen());
+        }
+        else
+        {
+            StopCoroutine(_delayFuriousRegenCoroutine);
+            _delayFuriousRegenCoroutine = StartCoroutine(DelayFuriousPointRegen());
+        }
+    }
+    void FuriousStun()
+    {
+        if (_delayStunCoroutine == null)
+        {
+            _delayStunCoroutine = StartCoroutine(StartFuriousStun());
+        }
+        else
+        {
+            StopCoroutine(_delayStunCoroutine);
+            _delayStunCoroutine = StartCoroutine(StartFuriousStun());
+        }
+    }
+    IEnumerator StartFuriousStun()
+    {
+        StopMoving();
+        IsStun = true;
+        yield return new WaitForSeconds(furiousStunTime + 0.5f);
+        Moving();
+        IsStun = false;
+    }
+    IEnumerator DelayFuriousPointRegen()
+    {
+        isRegen = false;
+        yield return new WaitForSeconds(furiousPointDelayRegen);
+        isRegen = true;
     }
     void SetDrawLine()
     {
@@ -178,10 +312,6 @@ public class Charmander_EnemyController : EnemyController
     {
         lineRenderer.SetPosition(0, transform.position);
         lineRenderer.SetPosition(1, target.position);
-    }
-    private void OnEnemyHit_HitAnimation()
-    {
-        animator.SetTrigger("Hit");
     }
     private void StartAttackCooldown(float sec)
     {
