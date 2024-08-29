@@ -1457,6 +1457,8 @@ SkinnedMeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 61380815b26848c48aa35d9f4b03566c, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2794,7 +2796,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 2047636051
+  GlobalObjectIdHash: 3738436807
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
   ActiveSceneSynchronization: 0
@@ -2818,7 +2820,7 @@ MonoBehaviour:
     type: 2}
   agent: {fileID: 7757813327958647808}
   behaviourTreeInstance: {fileID: 156370707760911442}
-  target: {fileID: 0}
+  Target: {fileID: 0}
   CanMove: 1
   IsTaunted: 0
   IsStun: 0
@@ -2956,7 +2958,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8d0727d5ae3244e3b569694d3912374, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TransitionStateInfoList: []
+  TransitionStateInfoList:
+  - IsCrossFadeExit: 0
+    Layer: 0
+    OriginatingState: -453240694
+    DestinationState: -1155614474
+    TransitionDuration: 0.25
+    TriggerNameHash: 1080829965
+    TransitionIndex: 0
   m_Animator: {fileID: 7635041984249596996}
 --- !u!114 &156370707760911442
 MonoBehaviour:

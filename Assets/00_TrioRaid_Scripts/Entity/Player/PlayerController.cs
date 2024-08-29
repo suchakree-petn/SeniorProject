@@ -32,22 +32,31 @@ public class PlayerController : NetworkBehaviour, IDamageable
     public PlayerAnimation PlayerAnimation;
     [SerializeField] protected PlayerHealth playerHealth;
     [SerializeField] private List<Renderer> meshRenderer_character;
+    private OutlineController outlineController;
+
+    private void Awake()
+    {
+        outlineController = GetComponent<OutlineController>();
+        meshRenderer_character = GetComponentsInChildren<Renderer>().ToList();
+    }
 
     protected virtual void Start()
     {
+
         if (IsLocalPlayer)
         {
-            meshRenderer_character = transform.GetComponentsInChildren<Renderer>().ToList();
-            foreach (Renderer characterMesh in meshRenderer_character)
-            {
-                characterMesh.gameObject.layer = 0;
-            }
-
             Camera.main.GetComponent<AudioListener>().enabled = false;
             gameObject.AddComponent(typeof(AudioListener));
+            outlineController.HideOutline();
+
+        }
+        else
+        {
+            outlineController.ShowOutline();
         }
 
         OnPlayerTakeDamage += PlayerUIManager.Instance.FullScreen_Player_Hit;
+
     }
 
     public override void OnNetworkSpawn()

@@ -2314,6 +2314,7 @@ GameObject:
   - component: {fileID: 8894094430919120413}
   - component: {fileID: 1181320640378452299}
   - component: {fileID: 5008188015997448279}
+  - component: {fileID: 1789858997324167608}
   m_Layer: 10
   m_Name: PT_Priest_StPatrick
   m_TagString: Untagged
@@ -2357,6 +2358,8 @@ SkinnedMeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 22afcda8ed8075e4da06a1fca79e9d3e, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2472,6 +2475,24 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8903896015828011107}
   m_Mesh: {fileID: -8596126587521788999, guid: 400ff1074cbaaa640ac7bd5f12bb4fcf, type: 3}
+--- !u!114 &1789858997324167608
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8903896015828011107}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 0, g: 0.7869562, b: 0.87058824, a: 1}
+  outlineWidth: 6.8
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &9089594751630565615
 GameObject:
   m_ObjectHideFlags: 0
@@ -2577,17 +2598,17 @@ PrefabInstance:
     - target: {fileID: 4421562747518347658, guid: 8468fa4c8e09695459a2f7572471e55b,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.2270384
+      value: 0.37317765
       objectReference: {fileID: 0}
     - target: {fileID: 4421562747518347658, guid: 8468fa4c8e09695459a2f7572471e55b,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.74
+      value: -1.8912692
       objectReference: {fileID: 0}
     - target: {fileID: 4421562747518347658, guid: 8468fa4c8e09695459a2f7572471e55b,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.0773058
+      value: -42.564865
       objectReference: {fileID: 0}
     - target: {fileID: 4421562747518347658, guid: 8468fa4c8e09695459a2f7572471e55b,
         type: 3}
@@ -2697,7 +2718,7 @@ PrefabInstance:
     - target: {fileID: 8174493298335311036, guid: 8468fa4c8e09695459a2f7572471e55b,
         type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 2331542165
+      value: 1270051229
       objectReference: {fileID: 0}
     - target: {fileID: 8251370818320174555, guid: 8468fa4c8e09695459a2f7572471e55b,
         type: 3}
@@ -2814,6 +2835,16 @@ PrefabInstance:
       propertyPath: playerMovementConfig.DyingMovingPenaltyPercentage
       value: 50
       objectReference: {fileID: 0}
+    - target: {fileID: 8771259761716148572, guid: 8468fa4c8e09695459a2f7572471e55b,
+        type: 3}
+      propertyPath: outlines.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8771259761716148572, guid: 8468fa4c8e09695459a2f7572471e55b,
+        type: 3}
+      propertyPath: outlines.Array.data[0]
+      value: 
+      objectReference: {fileID: 1789858997324167608}
     m_RemovedComponents:
     - {fileID: -3906203105981109117, guid: 8468fa4c8e09695459a2f7572471e55b, type: 3}
     - {fileID: 3472561861059167791, guid: 8468fa4c8e09695459a2f7572471e55b, type: 3}

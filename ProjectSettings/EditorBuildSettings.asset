@@ -47,4 +47,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/00_TrioRaid_Scenes/Thanva/InGame_Map_4_CastleArena.unity
     guid: d9700c932fda80a4796b331d662a4052
+  - enabled: 1
+    path: Assets/00_TrioRaid_Scenes/Tutor/InGame_Map_5_Repair.unity
+    guid: d774775184262c440b68cacef7f64dd3
   m_configObjects: {}

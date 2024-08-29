@@ -40,16 +40,14 @@ public class RepairStationController : NetworkBehaviour
 
     [FoldoutGroup("Reference")]
     [SerializeField] private Collider triggerCol;
-
-    [FoldoutGroup("Reference")]
-    [SerializeField] private Outline[] outlines;
+    private OutlineController outlineController;
 
     private void Awake()
     {
         collectingPlayer = new();
         originalCollectButtonText = collectButtonText.text;
         triggerCol = GetComponent<Collider>();
-        outlines = transform.GetComponentsInChildren<Outline>();
+        outlineController = GetComponent<OutlineController>();
     }
 
     private void OnEnable()
@@ -57,7 +55,7 @@ public class RepairStationController : NetworkBehaviour
         Map5_PuzzleManager.Instance.OnStateChanged_Local += CheckEnable;
         Map5_PuzzleManager.Instance.OnStateChanged_Local += CheckShowOutline;
     }
-    
+
     private void OnDisable()
     {
         Map5_PuzzleManager.Instance.OnStateChanged_Local -= CheckEnable;
@@ -71,32 +69,20 @@ public class RepairStationController : NetworkBehaviour
         collectProgress.OnValueChanged += ProgressBar;
     }
 
+
+
     private void CheckShowOutline(Map5_GameState state)
     {
         if (state == Map5_GameState.Phase2_RepairBalista)
         {
-            ShowOutline();
+            outlineController.ShowOutline();
         }
         else
         {
-            HideOutline();
-        }
-    }
-    private void ShowOutline()
-    {
-        foreach (var outline in outlines)
-        {
-            outline.enabled = true;
+            outlineController.HideOutline();
         }
     }
 
-    private void HideOutline()
-    {
-        foreach (var outline in outlines)
-        {
-            outline.enabled = false;
-        }
-    }
 
     private void CheckEnable(Map5_GameState newState)
     {

@@ -178,6 +178,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Character_Knight_01_Orange
       objectReference: {fileID: 0}
+    - target: {fileID: 169982, guid: 360c73b9bf9a34d4c84bc0581d0499eb, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 404970, guid: 360c73b9bf9a34d4c84bc0581d0499eb, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.513327
@@ -1378,10 +1382,50 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2382442, guid: 360c73b9bf9a34d4c84bc0581d0499eb, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2382442, guid: 360c73b9bf9a34d4c84bc0581d0499eb, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2382442, guid: 360c73b9bf9a34d4c84bc0581d0499eb, type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2382442, guid: 360c73b9bf9a34d4c84bc0581d0499eb, type: 3}
+      propertyPath: m_Materials.Array.data[3]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2382442, guid: 360c73b9bf9a34d4c84bc0581d0499eb, type: 3}
+      propertyPath: m_Materials.Array.data[4]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 13778430, guid: 360c73b9bf9a34d4c84bc0581d0499eb, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 13778430, guid: 360c73b9bf9a34d4c84bc0581d0499eb, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 0ef86617bcad58f49ad9b6d3bb2c3d0c, type: 2}
+    - target: {fileID: 13778430, guid: 360c73b9bf9a34d4c84bc0581d0499eb, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 13778430, guid: 360c73b9bf9a34d4c84bc0581d0499eb, type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 13778430, guid: 360c73b9bf9a34d4c84bc0581d0499eb, type: 3}
+      propertyPath: m_Materials.Array.data[3]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 13778430, guid: 360c73b9bf9a34d4c84bc0581d0499eb, type: 3}
+      propertyPath: m_Materials.Array.data[4]
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 9590444, guid: 360c73b9bf9a34d4c84bc0581d0499eb, type: 3}
     m_RemovedGameObjects: []
@@ -1419,8 +1463,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outlineMode: 0
-  outlineColor: {r: 0.7283019, g: 0, b: 0, a: 1}
-  outlineWidth: 4.5
+  outlineColor: {r: 0.87169814, g: 0, b: 0, a: 1}
+  outlineWidth: 5.5
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -1443,8 +1487,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outlineMode: 0
-  outlineColor: {r: 0.7283019, g: 0, b: 0, a: 1}
-  outlineWidth: 4.5
+  outlineColor: {r: 0.87169814, g: 0, b: 0, a: 1}
+  outlineWidth: 5.5
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -1534,6 +1578,26 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2377326, guid: cae05c44a8fcea14c960084a876c07c3, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2377326, guid: cae05c44a8fcea14c960084a876c07c3, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2377326, guid: cae05c44a8fcea14c960084a876c07c3, type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2377326, guid: cae05c44a8fcea14c960084a876c07c3, type: 3}
+      propertyPath: m_Materials.Array.data[3]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2377326, guid: cae05c44a8fcea14c960084a876c07c3, type: 3}
+      propertyPath: m_Materials.Array.data[4]
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 64370003151808260, guid: cae05c44a8fcea14c960084a876c07c3, type: 3}
     m_RemovedGameObjects: []
@@ -1569,8 +1633,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outlineMode: 0
-  outlineColor: {r: 0.7283019, g: 0, b: 0, a: 1}
-  outlineWidth: 4.5
+  outlineColor: {r: 0.87169814, g: 0, b: 0, a: 1}
+  outlineWidth: 5.5
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -1662,6 +1726,26 @@ PrefabInstance:
       propertyPath: m_RenderMode
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3021168559055143192, guid: 58437a38aec03b4478d7fdb505663dec,
+        type: 3}
+      propertyPath: outlines.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3021168559055143192, guid: 58437a38aec03b4478d7fdb505663dec,
+        type: 3}
+      propertyPath: outlines.Array.data[0]
+      value: 
+      objectReference: {fileID: 3338893940029192836}
+    - target: {fileID: 3021168559055143192, guid: 58437a38aec03b4478d7fdb505663dec,
+        type: 3}
+      propertyPath: outlines.Array.data[1]
+      value: 
+      objectReference: {fileID: 5898426616723090493}
+    - target: {fileID: 3021168559055143192, guid: 58437a38aec03b4478d7fdb505663dec,
+        type: 3}
+      propertyPath: outlines.Array.data[2]
+      value: 
+      objectReference: {fileID: 7828146969648748972}
     - target: {fileID: 3257062118021569489, guid: 58437a38aec03b4478d7fdb505663dec,
         type: 3}
       propertyPath: m_BlockingMask.m_Bits

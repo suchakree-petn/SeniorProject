@@ -145,7 +145,7 @@ PrefabInstance:
     - target: {fileID: 585376683152959535, guid: 5134e637dc0b31c4fad23fac8e303af9,
         type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 48180919
+      value: 3751314663
       objectReference: {fileID: 0}
     - target: {fileID: 637845534637835907, guid: 5134e637dc0b31c4fad23fac8e303af9,
         type: 3}
@@ -175,17 +175,17 @@ PrefabInstance:
     - target: {fileID: 1081591575635147786, guid: 5134e637dc0b31c4fad23fac8e303af9,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 41.741123
       objectReference: {fileID: 0}
     - target: {fileID: 1081591575635147786, guid: 5134e637dc0b31c4fad23fac8e303af9,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -5.083055
       objectReference: {fileID: 0}
     - target: {fileID: 1081591575635147786, guid: 5134e637dc0b31c4fad23fac8e303af9,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 0.03300762
       objectReference: {fileID: 0}
     - target: {fileID: 1081591575635147786, guid: 5134e637dc0b31c4fad23fac8e303af9,
         type: 3}
@@ -484,6 +484,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 403
       objectReference: {fileID: 0}
+    - target: {fileID: 7660171543293030674, guid: 5134e637dc0b31c4fad23fac8e303af9,
+        type: 3}
+      propertyPath: m_RigLayers.Array.data[0].m_Rig
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 9113855609132630883, guid: 5134e637dc0b31c4fad23fac8e303af9,
         type: 3}
       propertyPath: m_FillAmount
@@ -494,7 +499,8 @@ PrefabInstance:
       propertyPath: m_PreserveAspect
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: -8185543706805310715, guid: 5134e637dc0b31c4fad23fac8e303af9, type: 3}
     m_RemovedGameObjects:
     - {fileID: 5481085263205109613, guid: 5134e637dc0b31c4fad23fac8e303af9, type: 3}
     m_AddedGameObjects:
@@ -605,6 +611,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 822506101897779541, guid: 740728f854d793848a530ac50ca86174,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5453822063880102248, guid: 740728f854d793848a530ac50ca86174,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9082710849249269872, guid: 740728f854d793848a530ac50ca86174,
         type: 3}
       propertyPath: m_Layer
@@ -612,6 +628,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 957358266527930445, guid: 740728f854d793848a530ac50ca86174, type: 3}
+    - {fileID: 3235581998236077202, guid: 740728f854d793848a530ac50ca86174, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
