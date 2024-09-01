@@ -19,8 +19,6 @@ namespace FIMSpace.Basics
         /// <summary> Just multiplier for rotation </summary>
         public float MouseSensitivity = 5f;
 
-        public bool NeedRMB = true;
-
         /// <summary> Variables controlling turbo speed on shift key </summary>
         private float turboModeMultiply = 5f;
 
@@ -47,7 +45,6 @@ namespace FIMSpace.Basics
 
         void Update()
         {
-
             // Detecting key movement factors
             float f = Input.GetAxis("Vertical");
             float r = Input.GetAxis("Horizontal");
@@ -68,14 +65,11 @@ namespace FIMSpace.Basics
             forward *= turbo;
             right *= turbo;
 
-            if (Cursor.lockState != CursorLockMode.None)
+            // Movement to sides with pressed rmb
+            if (Input.GetMouseButton(1))
             {
-                // Rotation with pressed rmb
-                if (Input.GetMouseButton(1) || !NeedRMB )
-                {
-                    rotation.x -= (Input.GetAxis("Mouse Y") * 1f * MouseSensitivity);
-                    rotation.y += (Input.GetAxis("Mouse X") * 1f * MouseSensitivity);
-                }
+                rotation.x -= (Input.GetAxis("Mouse Y") * 1f * MouseSensitivity);
+                rotation.y += (Input.GetAxis("Mouse X") * 1f * MouseSensitivity);
             }
 
             // Lerping speed variables for smooth effect
@@ -118,11 +112,8 @@ namespace FIMSpace.Basics
             }
             else
             {
-                if (NeedRMB)
-                {
-                    Cursor.lockState = CursorLockMode.None;
-                    Cursor.visible = true;
-                }
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
             }
         }
     }

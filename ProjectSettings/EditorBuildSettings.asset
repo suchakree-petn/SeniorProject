@@ -50,4 +50,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/00_TrioRaid_Scenes/Tutor/InGame_Map_5_Repair.unity
     guid: d774775184262c440b68cacef7f64dd3
+  - enabled: 1
+    path: Assets/00_TrioRaid_Scenes/Tutor/Tutor_TestScene.unity
+    guid: 0366b5c870099d247a8fd6b2af13aea9
   m_configObjects: {}

@@ -10,19 +10,13 @@ public partial class Archer_PlayerController : PlayerController
 
     protected override void Start()
     {
-        if (!IsOwner) return;
-
         base.Start();
-        AbilityUIManager.Instance.OnSetAbilityIcon_E?.Invoke(ArcherAbility_ArrowManiac.AbilityData.Icon);
-        AbilityUIManager.Instance.OnSetAbilityIcon_Q?.Invoke(ArcherAbility_VineTrap.archerAbilityData.Icon);
-
     }
 
     protected override void Update()
     {
         if (!IsOwner) return;
         base.Update();
-        // ArcherAnimation();
     }
     protected override void LateUpdate()
     {
@@ -36,10 +30,9 @@ public partial class Archer_PlayerController : PlayerController
 
         if (!IsOwner) return;
         base.OnNetworkSpawn();
-        PlayerInputManager playerInputManager = PlayerInputManager.Instance;
-        playerInputManager.Attack.performed += archer_playerWeapon.UseWeapon;
-        playerInputManager.Attack.canceled += archer_playerWeapon.UseWeapon;
 
+        AbilityUIManager.Instance.OnSetAbilityIcon_E?.Invoke(ArcherAbility_ArrowManiac.AbilityData.Icon);
+        AbilityUIManager.Instance.OnSetAbilityIcon_Q?.Invoke(ArcherAbility_VineTrap.archerAbilityData.Icon);
     }
 
     public override void OnNetworkDespawn()
@@ -47,9 +40,7 @@ public partial class Archer_PlayerController : PlayerController
 
         if (!IsOwner) return;
         base.OnNetworkDespawn();
-        PlayerInputManager playerInputManager = PlayerInputManager.Instance;
-        playerInputManager.Attack.performed -= archer_playerWeapon.UseWeapon;
-        playerInputManager.Attack.canceled -= archer_playerWeapon.UseWeapon;
+
 
     }
 
@@ -112,14 +103,17 @@ public partial class Archer_PlayerController : PlayerController
     protected override void OnEnable()
     {
         base.OnEnable();
-        if (!IsOwner) return;
-
+        PlayerInputManager playerInputManager = PlayerInputManager.Instance;
+        playerInputManager.Attack.performed += archer_playerWeapon.UseWeapon;
+        playerInputManager.Attack.canceled += archer_playerWeapon.UseWeapon;
     }
 
     protected override void OnDisable()
     {
 
         base.OnDisable();
-        if (!IsOwner) return;
+        PlayerInputManager playerInputManager = PlayerInputManager.Instance;
+        playerInputManager.Attack.performed -= archer_playerWeapon.UseWeapon;
+        playerInputManager.Attack.canceled -= archer_playerWeapon.UseWeapon;
     }
 }

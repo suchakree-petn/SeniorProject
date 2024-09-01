@@ -1,0 +1,2236 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!181963792 &2655988077585873504
+Preset:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: LegsAnimator
+  m_TargetType:
+    m_NativeTypeID: 114
+    m_ManagedTypePPtr: {fileID: 11500000, guid: 5f3505aa6d98bd4418e0744d5ab56fdd,
+      type: 3}
+    m_ManagedTypeFallback: 
+  m_Properties:
+  - target: {fileID: 0}
+    propertyPath: m_Enabled
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_EditorHideFlags
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_EditorClassIdentifier
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: Mecanim
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: GroundedParameter
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: MovingParameter
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: User_IsMovingMecanim_NotMovingFloat_Threshold
+    value: 0.1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: Rigidbody
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: UseRigidbodyVelocityForIsMoving
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: UseRaycastsForIsGrounded
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: SlidingParameter
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: SpineBone
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: ChestBone
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: RagdolledParameter
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: SwingHelper
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: GluingFloorLevel
+    value: 0.05
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: GluingFloorLevelUseOnMoving
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: GluingFloorLevelOnMoving
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: StepPointsOverlapRadius
+    value: 0.43
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: UseStepPointsOverlapRadiusOnMoving
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: StepPointsOverlapRadiusOnMoving
+    value: 0.7
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: MotionInfluence.AdvancedInfluence
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: MotionInfluence.AxisMotionInfluence.x
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: MotionInfluence.AxisMotionInfluence.y
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: MotionInfluence.AxisMotionInfluence.z
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: MotionInfluence.AxisMotionInfluenceBackwards.x
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: MotionInfluence.AxisMotionInfluenceBackwards.y
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: MotionInfluence.AxisMotionInfluenceBackwards.z
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: Event_OnStep.m_PersistentCalls.m_Calls.Array.size
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: EventExecuteSooner
+    value: 0.05
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: SendOnMovingGlue
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: SendOnStopping
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: StepEventOnLanding
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: StepInfoReceiver
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: ExtraPelvisOffset.x
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: ExtraPelvisOffset.y
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: ExtraPelvisOffset.z
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: ReposeGluingAfter
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: GlueOnlyOnIdle
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: LocalWorldUp
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: DisableCustomModules
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: CustomModules.Array.size
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: CustomModules.Array.data[0].Enabled
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: CustomModules.Array.data[0].Parent
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: CustomModules.Array.data[0].ModuleReference
+    value: 
+    objectReference: {fileID: 11400000, guid: 7d9bd86d54a7a594cb1793f9533e2e00, type: 2}
+  - target: {fileID: 0}
+    propertyPath: CustomModules.Array.data[0].customStringList.Array.size
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: CustomModules.Array.data[0].customObjectList.Array.size
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: CustomModules.Array.data[0].variables.Array.size
+    value: 4
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: CustomModules.Array.data[0].variables.Array.data[0].VariableName
+    value: Rotation Power
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: CustomModules.Array.data[0].variables.Array.data[0].Tooltip
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: CustomModules.Array.data[0].variables.Array.data[0]._value.x
+    value: 0.4
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: CustomModules.Array.data[0].variables.Array.data[0]._value.y
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: CustomModules.Array.data[0].variables.Array.data[0]._value.z
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: CustomModules.Array.data[0].variables.Array.data[0]._value.w
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: CustomModules.Array.data[0].variables.Array.data[0]._string
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: CustomModules.Array.data[0].variables.Array.data[0]._curve.m_Curve.Array.size
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: CustomModules.Array.data[0].variables.Array.data[0]._curve.m_PreInfinity
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: CustomModules.Array.data[0].variables.Array.data[0]._curve.m_PostInfinity
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: CustomModules.Array.data[0].variables.Array.data[0]._curve.m_RotationOrder
+    value: 4
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: CustomModules.Array.data[0].variables.Array.data[0]._uObject
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: CustomModules.Array.data[0].variables.Array.data[0].VariableType
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: CustomModules.Array.data[0].variables.Array.data[0]._rangeHelper.x
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: CustomModules.Array.data[0].variables.Array.data[0]._rangeHelper.y
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: CustomModules.Array.data[0].variables.Array.data[0]._rangeHelper.z
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: CustomModules.Array.data[0].variables.Array.data[0]._rangeHelper.w
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: CustomModules.Array.data[0].variables.Array.data[1].VariableName
+    value: Compensate Spine
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: CustomModules.Array.data[0].variables.Array.data[1].Tooltip
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: CustomModules.Array.data[0].variables.Array.data[1]._value.x
+    value: 0.5
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: CustomModules.Array.data[0].variables.Array.data[1]._value.y
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: CustomModules.Array.data[0].variables.Array.data[1]._value.z
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: CustomModules.Array.data[0].variables.Array.data[1]._value.w
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: CustomModules.Array.data[0].variables.Array.data[1]._string
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: CustomModules.Array.data[0].variables.Array.data[1]._curve.m_Curve.Array.size
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: CustomModules.Array.data[0].variables.Array.data[1]._curve.m_PreInfinity
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: CustomModules.Array.data[0].variables.Array.data[1]._curve.m_PostInfinity
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: CustomModules.Array.data[0].variables.Array.data[1]._curve.m_RotationOrder
+    value: 4
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: CustomModules.Array.data[0].variables.Array.data[1]._uObject
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: CustomModules.Array.data[0].variables.Array.data[1].VariableType
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: CustomModules.Array.data[0].variables.Array.data[1]._rangeHelper.x
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: CustomModules.Array.data[0].variables.Array.data[1]._rangeHelper.y
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: CustomModules.Array.data[0].variables.Array.data[1]._rangeHelper.z
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: CustomModules.Array.data[0].variables.Array.data[1]._rangeHelper.w
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: CustomModules.Array.data[0].variables.Array.data[2].VariableName
+    value: Side Multiplier
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: CustomModules.Array.data[0].variables.Array.data[2].Tooltip
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: CustomModules.Array.data[0].variables.Array.data[2]._value.x
+    value: -1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: CustomModules.Array.data[0].variables.Array.data[2]._value.y
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: CustomModules.Array.data[0].variables.Array.data[2]._value.z
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: CustomModules.Array.data[0].variables.Array.data[2]._value.w
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: CustomModules.Array.data[0].variables.Array.data[2]._string
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: CustomModules.Array.data[0].variables.Array.data[2]._curve.m_Curve.Array.size
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: CustomModules.Array.data[0].variables.Array.data[2]._curve.m_PreInfinity
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: CustomModules.Array.data[0].variables.Array.data[2]._curve.m_PostInfinity
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: CustomModules.Array.data[0].variables.Array.data[2]._curve.m_RotationOrder
+    value: 4
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: CustomModules.Array.data[0].variables.Array.data[2]._uObject
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: CustomModules.Array.data[0].variables.Array.data[2].VariableType
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: CustomModules.Array.data[0].variables.Array.data[2]._rangeHelper.x
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: CustomModules.Array.data[0].variables.Array.data[2]._rangeHelper.y
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: CustomModules.Array.data[0].variables.Array.data[2]._rangeHelper.z
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: CustomModules.Array.data[0].variables.Array.data[2]._rangeHelper.w
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: CustomModules.Array.data[0].variables.Array.data[3].VariableName
+    value: Forward Multiplier
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: CustomModules.Array.data[0].variables.Array.data[3].Tooltip
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: CustomModules.Array.data[0].variables.Array.data[3]._value.x
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: CustomModules.Array.data[0].variables.Array.data[3]._value.y
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: CustomModules.Array.data[0].variables.Array.data[3]._value.z
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: CustomModules.Array.data[0].variables.Array.data[3]._value.w
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: CustomModules.Array.data[0].variables.Array.data[3]._string
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: CustomModules.Array.data[0].variables.Array.data[3]._curve.m_Curve.Array.size
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: CustomModules.Array.data[0].variables.Array.data[3]._curve.m_PreInfinity
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: CustomModules.Array.data[0].variables.Array.data[3]._curve.m_PostInfinity
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: CustomModules.Array.data[0].variables.Array.data[3]._curve.m_RotationOrder
+    value: 4
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: CustomModules.Array.data[0].variables.Array.data[3]._uObject
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: CustomModules.Array.data[0].variables.Array.data[3].VariableType
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: CustomModules.Array.data[0].variables.Array.data[3]._rangeHelper.x
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: CustomModules.Array.data[0].variables.Array.data[3]._rangeHelper.y
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: CustomModules.Array.data[0].variables.Array.data[3]._rangeHelper.z
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: CustomModules.Array.data[0].variables.Array.data[3]._rangeHelper.w
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: ImpulsesPowerMultiplier
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: ImpulsesDurationMultiplier
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: ImpulsesDampUpPushes
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: DebugPushHipsImpulse.OptionalName
+    value: Impulse
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: DebugPushHipsImpulse.PowerMultiplier
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: DebugPushHipsImpulse.ImpulseDuration
+    value: 0.6
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: DebugPushHipsImpulse.WorldTranslation.x
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: DebugPushHipsImpulse.WorldTranslation.y
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: DebugPushHipsImpulse.WorldTranslation.z
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: DebugPushHipsImpulse.LocalTranslation.x
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: DebugPushHipsImpulse.LocalTranslation.y
+    value: -1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: DebugPushHipsImpulse.LocalTranslation.z
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: DebugPushHipsImpulse.HipsRotate.x
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: DebugPushHipsImpulse.HipsRotate.y
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: DebugPushHipsImpulse.HipsRotate.z
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: DebugPushHipsImpulse.InheritElasticness
+    value: 0.75
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: DebugPushHipsImpulse.ImpulseCurve.m_Curve.Array.size
+    value: 3
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: DebugPushHipsImpulse.ImpulseCurve.m_Curve.Array.data[0].time
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: DebugPushHipsImpulse.ImpulseCurve.m_Curve.Array.data[0].value
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: DebugPushHipsImpulse.ImpulseCurve.m_Curve.Array.data[0].inSlope
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: DebugPushHipsImpulse.ImpulseCurve.m_Curve.Array.data[0].outSlope
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: DebugPushHipsImpulse.ImpulseCurve.m_Curve.Array.data[0].tangentMode
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: DebugPushHipsImpulse.ImpulseCurve.m_Curve.Array.data[0].weightedMode
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: DebugPushHipsImpulse.ImpulseCurve.m_Curve.Array.data[0].inWeight
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: DebugPushHipsImpulse.ImpulseCurve.m_Curve.Array.data[0].outWeight
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: DebugPushHipsImpulse.ImpulseCurve.m_Curve.Array.data[1].time
+    value: 0.2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: DebugPushHipsImpulse.ImpulseCurve.m_Curve.Array.data[1].value
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: DebugPushHipsImpulse.ImpulseCurve.m_Curve.Array.data[1].inSlope
+    value: 3.4375
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: DebugPushHipsImpulse.ImpulseCurve.m_Curve.Array.data[1].outSlope
+    value: 3.4375
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: DebugPushHipsImpulse.ImpulseCurve.m_Curve.Array.data[1].tangentMode
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: DebugPushHipsImpulse.ImpulseCurve.m_Curve.Array.data[1].weightedMode
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: DebugPushHipsImpulse.ImpulseCurve.m_Curve.Array.data[1].inWeight
+    value: 0.33333334
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: DebugPushHipsImpulse.ImpulseCurve.m_Curve.Array.data[1].outWeight
+    value: 0.33333334
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: DebugPushHipsImpulse.ImpulseCurve.m_Curve.Array.data[2].time
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: DebugPushHipsImpulse.ImpulseCurve.m_Curve.Array.data[2].value
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: DebugPushHipsImpulse.ImpulseCurve.m_Curve.Array.data[2].inSlope
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: DebugPushHipsImpulse.ImpulseCurve.m_Curve.Array.data[2].outSlope
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: DebugPushHipsImpulse.ImpulseCurve.m_Curve.Array.data[2].tangentMode
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: DebugPushHipsImpulse.ImpulseCurve.m_Curve.Array.data[2].weightedMode
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: DebugPushHipsImpulse.ImpulseCurve.m_Curve.Array.data[2].inWeight
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: DebugPushHipsImpulse.ImpulseCurve.m_Curve.Array.data[2].outWeight
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: DebugPushHipsImpulse.ImpulseCurve.m_PreInfinity
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: DebugPushHipsImpulse.ImpulseCurve.m_PostInfinity
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: DebugPushHipsImpulse.ImpulseCurve.m_RotationOrder
+    value: 4
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: DebugPushHipsImpulse.YAxisMultiplyCurve.m_Curve.Array.size
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: DebugPushHipsImpulse.YAxisMultiplyCurve.m_Curve.Array.data[0].time
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: DebugPushHipsImpulse.YAxisMultiplyCurve.m_Curve.Array.data[0].value
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: DebugPushHipsImpulse.YAxisMultiplyCurve.m_Curve.Array.data[0].inSlope
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: DebugPushHipsImpulse.YAxisMultiplyCurve.m_Curve.Array.data[0].outSlope
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: DebugPushHipsImpulse.YAxisMultiplyCurve.m_Curve.Array.data[0].tangentMode
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: DebugPushHipsImpulse.YAxisMultiplyCurve.m_Curve.Array.data[0].weightedMode
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: DebugPushHipsImpulse.YAxisMultiplyCurve.m_Curve.Array.data[0].inWeight
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: DebugPushHipsImpulse.YAxisMultiplyCurve.m_Curve.Array.data[0].outWeight
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: DebugPushHipsImpulse.YAxisMultiplyCurve.m_Curve.Array.data[1].time
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: DebugPushHipsImpulse.YAxisMultiplyCurve.m_Curve.Array.data[1].value
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: DebugPushHipsImpulse.YAxisMultiplyCurve.m_Curve.Array.data[1].inSlope
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: DebugPushHipsImpulse.YAxisMultiplyCurve.m_Curve.Array.data[1].outSlope
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: DebugPushHipsImpulse.YAxisMultiplyCurve.m_Curve.Array.data[1].tangentMode
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: DebugPushHipsImpulse.YAxisMultiplyCurve.m_Curve.Array.data[1].weightedMode
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: DebugPushHipsImpulse.YAxisMultiplyCurve.m_Curve.Array.data[1].inWeight
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: DebugPushHipsImpulse.YAxisMultiplyCurve.m_Curve.Array.data[1].outWeight
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: DebugPushHipsImpulse.YAxisMultiplyCurve.m_PreInfinity
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: DebugPushHipsImpulse.YAxisMultiplyCurve.m_PostInfinity
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: DebugPushHipsImpulse.YAxisMultiplyCurve.m_RotationOrder
+    value: 4
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: DebugPushHipsImpulse.AlignWithDesiredMoveDirection
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: UseHips
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: HipsHeightStepBlend
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: HipsHeightStepSpeed
+    value: 0.7
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: HipsAdjustStyle
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: StabilizeCenterOfMass
+    value: 0.47673115
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: AnimationIsStablePose
+    value: 0.75
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: StabilizingSpeed
+    value: 0.375
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: PushHipsOnLegMove
+    value: 0.356
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: NormalizePush
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: PushReactionSpeed
+    value: 0.3
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: PushYBlend
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: HipsStretchPreventer
+    value: 0.15
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: StretchPreventerSpeed
+    value: 0.8
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: StabilizeOnIsMoving
+    value: 0.5
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _Hips_Modules_ExtraWOffset.x
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _Hips_Modules_ExtraWOffset.y
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _Hips_Modules_ExtraWOffset.z
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _Hips_Modules_ExtraRotOffset.x
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _Hips_Modules_ExtraRotOffset.y
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _Hips_Modules_ExtraRotOffset.z
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: ExtraHipsHubs.Array.size
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: HipsHubsHandling
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: HipsHubsBlend
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: HubsBackBonesBlend.m_Curve.Array.size
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: HubsBackBonesBlend.m_Curve.Array.data[0].time
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: HubsBackBonesBlend.m_Curve.Array.data[0].value
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: HubsBackBonesBlend.m_Curve.Array.data[0].inSlope
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: HubsBackBonesBlend.m_Curve.Array.data[0].outSlope
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: HubsBackBonesBlend.m_Curve.Array.data[0].tangentMode
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: HubsBackBonesBlend.m_Curve.Array.data[0].weightedMode
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: HubsBackBonesBlend.m_Curve.Array.data[0].inWeight
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: HubsBackBonesBlend.m_Curve.Array.data[0].outWeight
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: HubsBackBonesBlend.m_Curve.Array.data[1].time
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: HubsBackBonesBlend.m_Curve.Array.data[1].value
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: HubsBackBonesBlend.m_Curve.Array.data[1].inSlope
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: HubsBackBonesBlend.m_Curve.Array.data[1].outSlope
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: HubsBackBonesBlend.m_Curve.Array.data[1].tangentMode
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: HubsBackBonesBlend.m_Curve.Array.data[1].weightedMode
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: HubsBackBonesBlend.m_Curve.Array.data[1].inWeight
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: HubsBackBonesBlend.m_Curve.Array.data[1].outWeight
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: HubsBackBonesBlend.m_PreInfinity
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: HubsBackBonesBlend.m_PostInfinity
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: HubsBackBonesBlend.m_RotationOrder
+    value: 4
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: HubBackBonesElasticity
+    value: 0.1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: HipsSetup.HipsElasticityBlend
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: HipsSetup.HipsMuscle.DesiredPosition.x
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: HipsSetup.HipsMuscle.DesiredPosition.y
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: HipsSetup.HipsMuscle.DesiredPosition.z
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: HipsSetup.HipsMuscle.Acceleration
+    value: 10000
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: HipsSetup.HipsMuscle.AccelerationLimit
+    value: 5000
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: HipsSetup.HipsMuscle.Damping
+    value: 10
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: HipsSetup.HipsMuscle.BrakePower
+    value: 0.2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: HipsSetup.HipsRotElasticityBlend
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: HipsSetup.HipsRotMuscle.DesiredRotation.x
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: HipsSetup.HipsRotMuscle.DesiredRotation.y
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: HipsSetup.HipsRotMuscle.DesiredRotation.z
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: HipsSetup.HipsRotMuscle.DesiredRotation.w
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: HipsSetup.HipsRotMuscle.Acceleration
+    value: 5000
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: HipsSetup.HipsRotMuscle.AccelerationLimit
+    value: 1000
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: HipsSetup.HipsRotMuscle.Damping
+    value: 10
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: HipsSetup.HipsRotMuscle.BrakePower
+    value: 0.2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: StabilityAlgorithm
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: Legs.Array.size
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: Legs.Array.data[0].G_CustomForceAttach
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: Legs.Array.data[0].G_CustomForceNOTDetach
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: Legs.Array.data[0].G_CustomForceDetach
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: Legs.Array.data[0].G_CustomForceNOTAttach
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: Legs.Array.data[0].Owner
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: Legs.Array.data[0].LegBlendWeight
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: Legs.Array.data[0].LegMoveSpeedMultiplier
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: Legs.Array.data[0].LegRaiseMultiplier
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: Legs.Array.data[0].GlueThresholdMultiplier
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: Legs.Array.data[0].GluePointOffset.x
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: Legs.Array.data[0].GluePointOffset.y
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: Legs.Array.data[0].LegStretchMultiplier
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: Legs.Array.data[0].CustomLegAnimating
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: Legs.Array.data[0].FootPitchOffset
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: Legs.Array.data[0].BoneStart
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: Legs.Array.data[0].BoneMid
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: Legs.Array.data[0].BoneEnd
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: Legs.Array.data[0].Side
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: Legs.Array.data[0].OppositeLegIndex
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: Legs.Array.data[0].RaycastPrecision
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: Legs.Array.data[0].UseFeet
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: Legs.Array.data[0].BoneFeet
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: Legs.Array.data[0].FeetSensitivity
+    value: 0.5
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: Legs.Array.data[0].InverseHint
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: Legs.Array.data[0].AnkleToHeel.x
+    value: 0.028959481
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: Legs.Array.data[0].AnkleToHeel.y
+    value: 0.047573034
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: Legs.Array.data[0].AnkleToHeel.z
+    value: 0.0000000052386895
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: Legs.Array.data[0].AnkleToFeetEnd.x
+    value: 0.1348381
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: Legs.Array.data[0].AnkleToFeetEnd.y
+    value: -0.016879246
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: Legs.Array.data[0].AnkleToFeetEnd.z
+    value: 0.0000000037252903
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: Legs.Array.data[0].AnkleRight.x
+    value: 0.00000004773027
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: Legs.Array.data[0].AnkleRight.y
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: Legs.Array.data[0].AnkleRight.z
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: Legs.Array.data[0].AnkleUp.x
+    value: -0.51997256
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: Legs.Array.data[0].AnkleUp.y
+    value: -0.854183
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: Legs.Array.data[0].AnkleUp.z
+    value: -0.000000013038516
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: Legs.Array.data[0].AnkleForward.x
+    value: 0.85418296
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: Legs.Array.data[0].AnkleForward.y
+    value: -0.51997256
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: Legs.Array.data[0].AnkleForward.z
+    value: -0.000000014901158
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: Legs.Array.data[0].FootMiddlePosition
+    value: 0.5
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: Legs.Array.data[0].AnkleYawCorrection
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: Legs.Array.data[0]._FinalIKPos.x
+    value: -48.223423
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: Legs.Array.data[0]._FinalIKPos.y
+    value: -2.3069465
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: Legs.Array.data[0]._FinalIKPos.z
+    value: 0.8153339
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: Legs.Array.data[1].G_CustomForceAttach
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: Legs.Array.data[1].G_CustomForceNOTDetach
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: Legs.Array.data[1].G_CustomForceDetach
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: Legs.Array.data[1].G_CustomForceNOTAttach
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: Legs.Array.data[1].Owner
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: Legs.Array.data[1].LegBlendWeight
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: Legs.Array.data[1].LegMoveSpeedMultiplier
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: Legs.Array.data[1].LegRaiseMultiplier
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: Legs.Array.data[1].GlueThresholdMultiplier
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: Legs.Array.data[1].GluePointOffset.x
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: Legs.Array.data[1].GluePointOffset.y
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: Legs.Array.data[1].LegStretchMultiplier
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: Legs.Array.data[1].CustomLegAnimating
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: Legs.Array.data[1].FootPitchOffset
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: Legs.Array.data[1].BoneStart
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: Legs.Array.data[1].BoneMid
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: Legs.Array.data[1].BoneEnd
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: Legs.Array.data[1].Side
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: Legs.Array.data[1].OppositeLegIndex
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: Legs.Array.data[1].RaycastPrecision
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: Legs.Array.data[1].UseFeet
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: Legs.Array.data[1].BoneFeet
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: Legs.Array.data[1].FeetSensitivity
+    value: 0.5
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: Legs.Array.data[1].InverseHint
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: Legs.Array.data[1].AnkleToHeel.x
+    value: -0.028959557
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: Legs.Array.data[1].AnkleToHeel.y
+    value: -0.047573194
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: Legs.Array.data[1].AnkleToHeel.z
+    value: -5.529728e-10
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: Legs.Array.data[1].AnkleToFeetEnd.x
+    value: -0.13483822
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: Legs.Array.data[1].AnkleToFeetEnd.y
+    value: 0.016879097
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: Legs.Array.data[1].AnkleToFeetEnd.z
+    value: -0.0000000055879354
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: Legs.Array.data[1].AnkleRight.x
+    value: 0.000000045867626
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: Legs.Array.data[1].AnkleRight.y
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: Legs.Array.data[1].AnkleRight.z
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: Legs.Array.data[1].AnkleUp.x
+    value: 0.5199725
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: Legs.Array.data[1].AnkleUp.y
+    value: 0.854183
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: Legs.Array.data[1].AnkleUp.z
+    value: -0.000000026542686
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: Legs.Array.data[1].AnkleForward.x
+    value: -0.85418296
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: Legs.Array.data[1].AnkleForward.y
+    value: 0.5199726
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: Legs.Array.data[1].AnkleForward.z
+    value: -0.000000104308114
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: Legs.Array.data[1].FootMiddlePosition
+    value: 0.5
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: Legs.Array.data[1].AnkleYawCorrection
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: Legs.Array.data[1]._FinalIKPos.x
+    value: -48.669624
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: Legs.Array.data[1]._FinalIKPos.y
+    value: -2.3089008
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: Legs.Array.data[1]._FinalIKPos.z
+    value: 0.18394019
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.StepMoveDuration
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.MoveToGoalCurve.m_Curve.Array.size
+    value: 3
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.MoveToGoalCurve.m_Curve.Array.data[0].time
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.MoveToGoalCurve.m_Curve.Array.data[0].value
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.MoveToGoalCurve.m_Curve.Array.data[0].inSlope
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.MoveToGoalCurve.m_Curve.Array.data[0].outSlope
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.MoveToGoalCurve.m_Curve.Array.data[0].tangentMode
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.MoveToGoalCurve.m_Curve.Array.data[0].weightedMode
+    value: 3
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.MoveToGoalCurve.m_Curve.Array.data[0].inWeight
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.MoveToGoalCurve.m_Curve.Array.data[0].outWeight
+    value: 0.1842105
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.MoveToGoalCurve.m_Curve.Array.data[1].time
+    value: 0.4885197
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.MoveToGoalCurve.m_Curve.Array.data[1].value
+    value: 0.8972011
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.MoveToGoalCurve.m_Curve.Array.data[1].inSlope
+    value: 1.38764
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.MoveToGoalCurve.m_Curve.Array.data[1].outSlope
+    value: 1.38764
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.MoveToGoalCurve.m_Curve.Array.data[1].tangentMode
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.MoveToGoalCurve.m_Curve.Array.data[1].weightedMode
+    value: 3
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.MoveToGoalCurve.m_Curve.Array.data[1].inWeight
+    value: 0.3333333
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.MoveToGoalCurve.m_Curve.Array.data[1].outWeight
+    value: 0.3333333
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.MoveToGoalCurve.m_Curve.Array.data[2].time
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.MoveToGoalCurve.m_Curve.Array.data[2].value
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.MoveToGoalCurve.m_Curve.Array.data[2].inSlope
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.MoveToGoalCurve.m_Curve.Array.data[2].outSlope
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.MoveToGoalCurve.m_Curve.Array.data[2].tangentMode
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.MoveToGoalCurve.m_Curve.Array.data[2].weightedMode
+    value: 3
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.MoveToGoalCurve.m_Curve.Array.data[2].inWeight
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.MoveToGoalCurve.m_Curve.Array.data[2].outWeight
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.MoveToGoalCurve.m_PreInfinity
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.MoveToGoalCurve.m_PostInfinity
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.MoveToGoalCurve.m_RotationOrder
+    value: 4
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.SpherizeTrack.m_Curve.Array.size
+    value: 3
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.SpherizeTrack.m_Curve.Array.data[0].time
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.SpherizeTrack.m_Curve.Array.data[0].value
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.SpherizeTrack.m_Curve.Array.data[0].inSlope
+    value: 0.6958197
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.SpherizeTrack.m_Curve.Array.data[0].outSlope
+    value: 0.6958197
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.SpherizeTrack.m_Curve.Array.data[0].tangentMode
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.SpherizeTrack.m_Curve.Array.data[0].weightedMode
+    value: 3
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.SpherizeTrack.m_Curve.Array.data[0].inWeight
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.SpherizeTrack.m_Curve.Array.data[0].outWeight
+    value: 0.460011
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.SpherizeTrack.m_Curve.Array.data[1].time
+    value: 0.4
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.SpherizeTrack.m_Curve.Array.data[1].value
+    value: 0.3
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.SpherizeTrack.m_Curve.Array.data[1].inSlope
+    value: -0.04204308
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.SpherizeTrack.m_Curve.Array.data[1].outSlope
+    value: -0.04204308
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.SpherizeTrack.m_Curve.Array.data[1].tangentMode
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.SpherizeTrack.m_Curve.Array.data[1].weightedMode
+    value: 3
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.SpherizeTrack.m_Curve.Array.data[1].inWeight
+    value: 0.333
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.SpherizeTrack.m_Curve.Array.data[1].outWeight
+    value: 0.3410656
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.SpherizeTrack.m_Curve.Array.data[2].time
+    value: 0.85
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.SpherizeTrack.m_Curve.Array.data[2].value
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.SpherizeTrack.m_Curve.Array.data[2].inSlope
+    value: -0.2721428
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.SpherizeTrack.m_Curve.Array.data[2].outSlope
+    value: -0.2721428
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.SpherizeTrack.m_Curve.Array.data[2].tangentMode
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.SpherizeTrack.m_Curve.Array.data[2].weightedMode
+    value: 3
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.SpherizeTrack.m_Curve.Array.data[2].inWeight
+    value: 0.3953607
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.SpherizeTrack.m_Curve.Array.data[2].outWeight
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.SpherizeTrack.m_PreInfinity
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.SpherizeTrack.m_PostInfinity
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.SpherizeTrack.m_RotationOrder
+    value: 4
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.SpherizePower
+    value: 0.3
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.MinFootRaise
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.MaxFootRaise
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.RaiseYAxisCurve.m_Curve.Array.size
+    value: 3
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.RaiseYAxisCurve.m_Curve.Array.data[0].time
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.RaiseYAxisCurve.m_Curve.Array.data[0].value
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.RaiseYAxisCurve.m_Curve.Array.data[0].inSlope
+    value: 0.58523107
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.RaiseYAxisCurve.m_Curve.Array.data[0].outSlope
+    value: 0.58523107
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.RaiseYAxisCurve.m_Curve.Array.data[0].tangentMode
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.RaiseYAxisCurve.m_Curve.Array.data[0].weightedMode
+    value: 3
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.RaiseYAxisCurve.m_Curve.Array.data[0].inWeight
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.RaiseYAxisCurve.m_Curve.Array.data[0].outWeight
+    value: 0.28564584
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.RaiseYAxisCurve.m_Curve.Array.data[1].time
+    value: 0.5017869
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.RaiseYAxisCurve.m_Curve.Array.data[1].value
+    value: 0.49622393
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.RaiseYAxisCurve.m_Curve.Array.data[1].inSlope
+    value: 0.007271338
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.RaiseYAxisCurve.m_Curve.Array.data[1].outSlope
+    value: 0.007271338
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.RaiseYAxisCurve.m_Curve.Array.data[1].tangentMode
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.RaiseYAxisCurve.m_Curve.Array.data[1].weightedMode
+    value: 3
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.RaiseYAxisCurve.m_Curve.Array.data[1].inWeight
+    value: 0.6082786
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.RaiseYAxisCurve.m_Curve.Array.data[1].outWeight
+    value: 0.7938928
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.RaiseYAxisCurve.m_Curve.Array.data[2].time
+    value: 0.9110107
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.RaiseYAxisCurve.m_Curve.Array.data[2].value
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.RaiseYAxisCurve.m_Curve.Array.data[2].inSlope
+    value: -0.6216068
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.RaiseYAxisCurve.m_Curve.Array.data[2].outSlope
+    value: -0.6216068
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.RaiseYAxisCurve.m_Curve.Array.data[2].tangentMode
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.RaiseYAxisCurve.m_Curve.Array.data[2].weightedMode
+    value: 3
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.RaiseYAxisCurve.m_Curve.Array.data[2].inWeight
+    value: 0.34458074
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.RaiseYAxisCurve.m_Curve.Array.data[2].outWeight
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.RaiseYAxisCurve.m_PreInfinity
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.RaiseYAxisCurve.m_PostInfinity
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.RaiseYAxisCurve.m_RotationOrder
+    value: 4
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.AllowSpeedups
+    value: 0.4
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.AllowDetachBefore
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.PushHipsOnMoveCurve.m_Curve.Array.size
+    value: 4
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.PushHipsOnMoveCurve.m_Curve.Array.data[0].time
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.PushHipsOnMoveCurve.m_Curve.Array.data[0].value
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.PushHipsOnMoveCurve.m_Curve.Array.data[0].inSlope
+    value: 5.630541
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.PushHipsOnMoveCurve.m_Curve.Array.data[0].outSlope
+    value: 5.630541
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.PushHipsOnMoveCurve.m_Curve.Array.data[0].tangentMode
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.PushHipsOnMoveCurve.m_Curve.Array.data[0].weightedMode
+    value: 3
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.PushHipsOnMoveCurve.m_Curve.Array.data[0].inWeight
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.PushHipsOnMoveCurve.m_Curve.Array.data[0].outWeight
+    value: 0.198735
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.PushHipsOnMoveCurve.m_Curve.Array.data[1].time
+    value: 0.383
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.PushHipsOnMoveCurve.m_Curve.Array.data[1].value
+    value: 0.3733972
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.PushHipsOnMoveCurve.m_Curve.Array.data[1].inSlope
+    value: -0.1664574
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.PushHipsOnMoveCurve.m_Curve.Array.data[1].outSlope
+    value: -0.1664574
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.PushHipsOnMoveCurve.m_Curve.Array.data[1].tangentMode
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.PushHipsOnMoveCurve.m_Curve.Array.data[1].weightedMode
+    value: 3
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.PushHipsOnMoveCurve.m_Curve.Array.data[1].inWeight
+    value: 0.333
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.PushHipsOnMoveCurve.m_Curve.Array.data[1].outWeight
+    value: 0.2940554
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.PushHipsOnMoveCurve.m_Curve.Array.data[2].time
+    value: 0.7075226
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.PushHipsOnMoveCurve.m_Curve.Array.data[2].value
+    value: 0.1460427
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.PushHipsOnMoveCurve.m_Curve.Array.data[2].inSlope
+    value: -1.565806
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.PushHipsOnMoveCurve.m_Curve.Array.data[2].outSlope
+    value: -1.565806
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.PushHipsOnMoveCurve.m_Curve.Array.data[2].tangentMode
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.PushHipsOnMoveCurve.m_Curve.Array.data[2].weightedMode
+    value: 3
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.PushHipsOnMoveCurve.m_Curve.Array.data[2].inWeight
+    value: 0.3605607
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.PushHipsOnMoveCurve.m_Curve.Array.data[2].outWeight
+    value: 0.3446763
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.PushHipsOnMoveCurve.m_Curve.Array.data[3].time
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.PushHipsOnMoveCurve.m_Curve.Array.data[3].value
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.PushHipsOnMoveCurve.m_Curve.Array.data[3].inSlope
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.PushHipsOnMoveCurve.m_Curve.Array.data[3].outSlope
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.PushHipsOnMoveCurve.m_Curve.Array.data[3].tangentMode
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.PushHipsOnMoveCurve.m_Curve.Array.data[3].weightedMode
+    value: 3
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.PushHipsOnMoveCurve.m_Curve.Array.data[3].inWeight
+    value: 0.09374858
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.PushHipsOnMoveCurve.m_Curve.Array.data[3].outWeight
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.PushHipsOnMoveCurve.m_PreInfinity
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.PushHipsOnMoveCurve.m_PostInfinity
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.PushHipsOnMoveCurve.m_RotationOrder
+    value: 4
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.FootRotationCurve.m_Curve.Array.size
+    value: 4
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.FootRotationCurve.m_Curve.Array.data[0].time
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.FootRotationCurve.m_Curve.Array.data[0].value
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.FootRotationCurve.m_Curve.Array.data[0].inSlope
+    value: 0.5764588
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.FootRotationCurve.m_Curve.Array.data[0].outSlope
+    value: 0.5764588
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.FootRotationCurve.m_Curve.Array.data[0].tangentMode
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.FootRotationCurve.m_Curve.Array.data[0].weightedMode
+    value: 3
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.FootRotationCurve.m_Curve.Array.data[0].inWeight
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.FootRotationCurve.m_Curve.Array.data[0].outWeight
+    value: 0.4956417
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.FootRotationCurve.m_Curve.Array.data[1].time
+    value: 0.4378169
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.FootRotationCurve.m_Curve.Array.data[1].value
+    value: 0.2035736
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.FootRotationCurve.m_Curve.Array.data[1].inSlope
+    value: -0.2411275
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.FootRotationCurve.m_Curve.Array.data[1].outSlope
+    value: -0.2411275
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.FootRotationCurve.m_Curve.Array.data[1].tangentMode
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.FootRotationCurve.m_Curve.Array.data[1].weightedMode
+    value: 3
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.FootRotationCurve.m_Curve.Array.data[1].inWeight
+    value: 0.3333333
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.FootRotationCurve.m_Curve.Array.data[1].outWeight
+    value: 0.4033037
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.FootRotationCurve.m_Curve.Array.data[2].time
+    value: 0.7841034
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.FootRotationCurve.m_Curve.Array.data[2].value
+    value: -0.1339308
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.FootRotationCurve.m_Curve.Array.data[2].inSlope
+    value: 0.3331003
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.FootRotationCurve.m_Curve.Array.data[2].outSlope
+    value: 0.3331003
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.FootRotationCurve.m_Curve.Array.data[2].tangentMode
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.FootRotationCurve.m_Curve.Array.data[2].weightedMode
+    value: 3
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.FootRotationCurve.m_Curve.Array.data[2].inWeight
+    value: 0.3333333
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.FootRotationCurve.m_Curve.Array.data[2].outWeight
+    value: 0.3333333
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.FootRotationCurve.m_Curve.Array.data[3].time
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.FootRotationCurve.m_Curve.Array.data[3].value
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.FootRotationCurve.m_Curve.Array.data[3].inSlope
+    value: 0.3498169
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.FootRotationCurve.m_Curve.Array.data[3].outSlope
+    value: 0.3498169
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.FootRotationCurve.m_Curve.Array.data[3].tangentMode
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.FootRotationCurve.m_Curve.Array.data[3].weightedMode
+    value: 3
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.FootRotationCurve.m_Curve.Array.data[3].inWeight
+    value: 0.5534658
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.FootRotationCurve.m_Curve.Array.data[3].outWeight
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.FootRotationCurve.m_PreInfinity
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.FootRotationCurve.m_PostInfinity
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BaseLegAnimating.FootRotationCurve.m_RotationOrder
+    value: 4
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: UseGluing
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: MainGlueBlend
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: GlueRangeThreshold
+    value: 0.7
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: GlueFadeInSpeed
+    value: 0.933
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: AllowGlueBelowFoot
+    value: 0.666
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: GlueFadeOutSpeed
+    value: 0.308
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: UnglueOn
+    value: 30
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: AllowGlueDrag
+    value: 0.7
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: GlueMode
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnlyLocalAnimation
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: SmoothSuddenSteps
+    value: 0.85
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: LegElevateBlend
+    value: 0.7
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: LegElevateHeightLimit
+    value: 0.6
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: FootRotationBlend
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: FootAlignRapidity
+    value: 0.75
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: AnimateFeet
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: LimitFeetYaw
+    value: 90
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: AnimationFloorLevel
+    value: 0.001
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _Editor_Foldout_Setup_LegsList
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _Editor_EnsureCount
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _Editor_OnValidateTrigger
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _EditorAllowAutoUpdateFeetParams
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _EditorCategory
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _EditorSetupCategory
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _EditorMotionCategory
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _EditorExtraCategory
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: IKHintMode
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: LimitLegStretch
+    value: 1.019
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: FeetYOffset
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: FeetLengthAdjust
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: baseTransform
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: Hips
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: ScaleReferenceMode
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: finalScaleReference
+    value: 0.8762761
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: finalScaleReferenceSqrt
+    value: 4.8235
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: customScaleReferenceValue
+    value: 2.11
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: DelayedInitialization
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: Calibrate
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: AnimatePhysics
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: UnscaledDeltaTime
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: DisableIfInvisible
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: FadeOffAtDistance
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: GroundMask.m_Bits
+    value: 10240
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: RaycastHitTrigger
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: CastDistance
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: RaycastStartHeight
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: RaycastStartHeightMul
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: RaycastStyle
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: RaycastShape
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: SpherecastRealign
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: SpherecastResize
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: NoRaycastGroundBehaviour
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: ZeroStepsOnNoRaycast
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: NoRaycast_KeepAttachedUntilStretch
+    value: 1.1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BodyStepDown
+    value: 0.5
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: MaxBodyStepUp
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: UngroundFadeSpeed
+    value: 0.1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: IsMovingFadeSpeed
+    value: 0.4
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: LegsAnimatorBlend
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _Editor_DefaultModuleOnStart
+    value: 
+    objectReference: {fileID: 11400000, guid: 7d9bd86d54a7a594cb1793f9533e2e00, type: 2}
+  - target: {fileID: 0}
+    propertyPath: _Editor_LegHelperModule
+    value: 
+    objectReference: {fileID: 11400000, guid: 0645fbea8059aec47aa6ae9d2c93c1d4, type: 2}
+  m_ExcludedProperties: []

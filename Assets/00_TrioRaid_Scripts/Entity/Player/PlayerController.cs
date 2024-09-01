@@ -1,11 +1,10 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using Cinemachine;
 using QFSW.QC;
 using Sirenix.OdinInspector;
 using Unity.Netcode;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -22,27 +21,47 @@ public class PlayerController : NetworkBehaviour, IDamageable
     public Action OnPlayerTakeDamage;
     public bool IsDead;
     public bool IsGrounded => playerMovement.IsGrouded;
+    public bool IsMoving => playerMovement.IsMoving;
 
-    [Header("Reference")]
+    [FoldoutGroup("Reference"), InlineEditor]
     [SerializeField] protected PlayerMovement playerMovement;
+
+    [FoldoutGroup("Reference"), InlineEditor]
     [SerializeField] protected MouseMovement mouseMovement;
+
+    [FoldoutGroup("Reference"), InlineEditor]
     [SerializeField] protected PlayerWeapon playerWeapon;
+
+    [FoldoutGroup("Reference"), InlineEditor]
     [SerializeField] protected PlayerAbility playerAbilityE;
+
+    [FoldoutGroup("Reference"), InlineEditor]
     [SerializeField] protected PlayerAbility playerAbilityQ;
+
+    [FoldoutGroup("Reference"), InlineEditor]
     public PlayerAnimation PlayerAnimation;
+
+    [FoldoutGroup("Reference"), InlineEditor]
     [SerializeField] protected PlayerHealth playerHealth;
-    [SerializeField] private List<Renderer> meshRenderer_character;
+
+    private Renderer[] meshRenderer_character;
     private OutlineController outlineController;
 
     private void Awake()
     {
         outlineController = GetComponent<OutlineController>();
-        meshRenderer_character = GetComponentsInChildren<Renderer>().ToList();
+        meshRenderer_character = GetComponentsInChildren<Renderer>();
     }
 
     protected virtual void Start()
     {
+        OnPlayerTakeDamage += PlayerUIManager.Instance.FullScreen_Player_Hit;
 
+    }
+
+    public override void OnNetworkSpawn()
+    {
+        Debug.Log("spawn");
         if (IsLocalPlayer)
         {
             Camera.main.GetComponent<AudioListener>().enabled = false;
@@ -54,27 +73,6 @@ public class PlayerController : NetworkBehaviour, IDamageable
         {
             outlineController.ShowOutline();
         }
-
-        OnPlayerTakeDamage += PlayerUIManager.Instance.FullScreen_Player_Hit;
-
-    }
-
-    public override void OnNetworkSpawn()
-    {
-        Debug.Log("spawn");
-        InitPlayerCharacter();
-
-        PlayerInputManager playerInputManager = PlayerInputManager.Instance;
-        playerInputManager.InitPlayerActions();
-        playerInputManager.JumpAction.performed += playerMovement.PlayerJump;
-        playerInputManager.RunAction.performed += playerMovement.PlayerRun;
-        playerInputManager.MovementAction.canceled += playerMovement.PlayerStopRun;
-
-        playerInputManager.Look.performed += mouseMovement.SetLook;
-        playerInputManager.Look.canceled += mouseMovement.SetLook;
-        playerInputManager.SwitchViewMode.canceled += SwitchViewMode;
-
-
     }
 
     protected virtual void InitPlayerCharacter()
@@ -91,33 +89,26 @@ public class PlayerController : NetworkBehaviour, IDamageable
     public override void OnNetworkDespawn()
     {
         Debug.Log("Despawn");
-        PlayerInputManager playerInputManager = PlayerInputManager.Instance;
-
-        playerInputManager.JumpAction.performed -= playerMovement.PlayerJump;
-        playerInputManager.RunAction.performed -= playerMovement.PlayerRun;
-        playerInputManager.MovementAction.canceled -= playerMovement.PlayerStopRun;
-
-        playerInputManager.Look.performed -= mouseMovement.SetLook;
-        playerInputManager.Look.canceled -= mouseMovement.SetLook;
-        // playerInputManager.SwitchViewMode.performed -= SwitchViewMode;
-        playerInputManager.SwitchViewMode.canceled -= SwitchViewMode;
-
-
     }
     protected virtual void Update()
     {
-
         // Test spawn enemy entity
         if (Input.GetKeyDown(KeyCode.T) && IsOwner)
         {
             EnemyManager.Instance.Spawn(2001, transform.position);
         }
 
+#if UNITY_EDITOR
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            EditorApplication.isPaused = !EditorApplication.isPaused;
+        }
+#endif
     }
 
     protected virtual void FixedUpdate()
     {
-        if (!IsOwner) return;
+        if (IsSpawned && !IsOwner) return;
 
         playerMovement.ApplyGravity();
         playerMovement.MoveCharactor();
@@ -349,13 +340,37 @@ public class PlayerController : NetworkBehaviour, IDamageable
     }
     protected virtual void OnEnable()
     {
+
         playerHealth.InitHp(PlayerCharacterData);
 
         OnPlayerDie += PlayerController_OnPlayerDie;
+
+        InitPlayerCharacter();
+
+        PlayerInputManager playerInputManager = PlayerInputManager.Instance;
+        playerInputManager.InitPlayerActions();
+        playerInputManager.JumpAction.performed += playerMovement.PlayerJump;
+        playerInputManager.RunAction.performed += playerMovement.PlayerRun;
+        playerInputManager.MovementAction.canceled += playerMovement.PlayerStopRun;
+
+        playerInputManager.Look.performed += mouseMovement.SetLook;
+        playerInputManager.Look.canceled += mouseMovement.SetLook;
+        playerInputManager.SwitchViewMode.canceled += SwitchViewMode;
     }
     protected virtual void OnDisable()
     {
         OnPlayerDie -= PlayerController_OnPlayerDie;
+
+        PlayerInputManager playerInputManager = PlayerInputManager.Instance;
+
+        playerInputManager.JumpAction.performed -= playerMovement.PlayerJump;
+        playerInputManager.RunAction.performed -= playerMovement.PlayerRun;
+        playerInputManager.MovementAction.canceled -= playerMovement.PlayerStopRun;
+
+        playerInputManager.Look.performed -= mouseMovement.SetLook;
+        playerInputManager.Look.canceled -= mouseMovement.SetLook;
+        // playerInputManager.SwitchViewMode.performed -= SwitchViewMode;
+        playerInputManager.SwitchViewMode.canceled -= SwitchViewMode;
     }
 
 

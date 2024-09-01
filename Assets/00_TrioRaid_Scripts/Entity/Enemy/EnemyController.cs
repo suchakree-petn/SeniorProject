@@ -73,8 +73,7 @@ public class EnemyController : NetworkBehaviour, IDamageable
 
     public override void OnNetworkSpawn()
     {
-        if (!IsOwner || !IsServer) return;
-        Target = PlayerManager.Instance.GetClosestPlayerFrom(transform.position);
+        if (!IsSpawned || !IsServer) return;
         CanMove = true;
     }
 
@@ -84,6 +83,11 @@ public class EnemyController : NetworkBehaviour, IDamageable
 
     protected virtual void Update()
     {
+
+        if (!Target && IsSpawned)
+        {
+            Target = PlayerManager.Instance.GetClosestPlayerFrom(transform.position);
+        }
         delayEnemySpawn -= Time.deltaTime;
     }
 

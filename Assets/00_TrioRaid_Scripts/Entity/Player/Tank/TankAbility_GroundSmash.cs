@@ -33,10 +33,13 @@ public class TankAbility_GroundSmash : PlayerAbility
 
         playerController.SetCanPlayerMove(false);
         playerController.PlayerAnimation.SetLayerWeight(1, 0);
+        playerController.GetTank_PlayerWeapon().IsReadyToUse = false;
 
         yield return new WaitForSeconds(AbilityData.StopMoveDuration);
 
         playerController.PlayerAnimation.SetLayerWeight(1, 1);
+        playerController.GetTank_PlayerWeapon().IsReadyToUse = true;
+
         Vector3 origin = transform.position + (transform.forward * AbilityData.PositionOffsetX);
         RaycastHit[] hits = Physics.BoxCastAll(origin, new(AbilityData.Radius, 2, AbilityData.Radius), transform.forward);
         List<EnemyController> enemyControllers = new();

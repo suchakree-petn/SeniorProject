@@ -45,7 +45,26 @@ public partial class PlayerManager : NetworkSingleton<PlayerManager>
     }
     public Dictionary<ulong, PlayerCharacterData> PlayerCharacterDatas { get; private set; } = new();
 
-    public Dictionary<ulong, GameObject> PlayerGameObjects { get; private set; } = new();
+    Dictionary<ulong, GameObject> playerGameObjects = new();
+
+    public Dictionary<ulong, GameObject> PlayerGameObjects
+    {
+        get
+        {
+            foreach (KeyValuePair<ulong, NetworkClient> client in NetworkManager.ConnectedClients)
+            {
+                if (!playerGameObjects.ContainsKey(client.Key))
+                {
+                    playerGameObjects.Add(client.Key, client.Value.PlayerObject.gameObject);
+                }
+            }
+            return playerGameObjects;
+        }
+        private set
+        {
+            playerGameObjects = value;
+        }
+    }
     public Dictionary<PlayerRole, GameObject> PlayerGameObjectsByRole { get; private set; } = new();
 
     private Dictionary<ulong, Vector3> playerPos;
@@ -86,11 +105,10 @@ public partial class PlayerManager : NetworkSingleton<PlayerManager>
     {
         if (IsServer)
         {
+            this.NetworkManager.OnClientConnectedCallback += (clientId) => Debug.Log("Connected" + clientId);
             OnClientConnect += PlayerManager_OnClientConnectedHandler;
             NetworkManager.OnClientDisconnectCallback += PlayerManager_OnClientDisconnectHandler;
-            // PlayerManager_OnServerStartedHandler();
         }
-
     }
     public override void OnNetworkDespawn()
     {
@@ -165,10 +183,6 @@ public partial class PlayerManager : NetworkSingleton<PlayerManager>
         OnAfterClientConnect_ClientRpc(clientId);
     }
 
-    private void PlayerManager_OnServerStartedHandler()
-    {
-        PlayerManager_OnClientConnectedHandler(0);
-    }
 
     [ClientRpc]
     private void OnAfterClientConnect_ClientRpc(ulong clientId)
@@ -193,6 +207,7 @@ public partial class PlayerManager : NetworkSingleton<PlayerManager>
     {
         float closestDistant = float.MaxValue;
         ulong clientId = default;
+
         foreach (NetworkClient item in NetworkManager.ConnectedClientsList)
         {
             PlayerController playerController = item.PlayerObject.GetComponent<PlayerController>();
@@ -206,6 +221,7 @@ public partial class PlayerManager : NetworkSingleton<PlayerManager>
             }
         }
         return PlayerGameObjects[clientId].transform;
+
     }
     [ServerRpc(RequireOwnership = false)]
     public void SwitchPlayerCharacter_ServerRpc(ulong charId, ServerRpcParams serverRpcParams = default)

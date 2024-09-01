@@ -187,8 +187,6 @@ public class Outline : MonoBehaviour
     // Retrieve or generate smooth normals
     LoadSmoothNormals();
 
-    // Apply material properties immediately
-    needsUpdate = true;
 
     foreach (var renderer in renderers)
     {
@@ -369,6 +367,7 @@ public class Outline : MonoBehaviour
 
   void UpdateMaterialProperties()
   {
+    if(!outlineFillMaterial) return;
 
     // Apply properties according to mode
     outlineFillMaterial.SetColor("_OutlineColor", outlineColor);

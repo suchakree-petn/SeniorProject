@@ -1,4 +1,6 @@
 using System;
+using FIMSpace.FProceduralAnimation;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -6,22 +8,34 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private PlayerMovementConfig playerMovementConfig;
     public PlayerMovementConfig PlayerMovementConfig => playerMovementConfig;
+    [SerializeField, ReadOnlyGUI] private bool isMoving;
     [SerializeField, ReadOnlyGUI] private bool isGrounded;
     [SerializeField, ReadOnlyGUI] private bool isOnSlope;
     [SerializeField, ReadOnlyGUI] private bool isRunning;
     private bool IsDying => playerController.IsDead;
     [ReadOnlyGUI] public bool CanMove;
     public bool IsGrouded => isGrounded;
+    public bool IsMoving => isMoving;
     [SerializeField, ReadOnlyGUI] private Vector3 moveDirection = Vector3.zero;
     public Rigidbody PlayerRigidbody => playerRb;
 
     private PlayerCameraMode playerCameraMode;
     private RaycastHit slopeHit;
 
-    [Header("Reference")]
+    [FoldoutGroup("Reference")]
     [SerializeField] private Transform groundCheck;
+
+    [FoldoutGroup("Reference")]
     [SerializeField] private Rigidbody playerRb;
+
+    [FoldoutGroup("Reference")]
     [SerializeField] private PlayerController playerController;
+
+    [FoldoutGroup("Reference"), InlineEditor]
+    [SerializeField] protected LegsAnimator legsAnimator;
+
+    public InputAction MovementAction;
+    // InputAction jumpAction;
 
     private void OnDrawGizmos()
     {
@@ -33,6 +47,23 @@ public class PlayerMovement : MonoBehaviour
         // Draw a line that check isOnSlope
         Debug.DrawLine(groundCheck.position, groundCheck.position + Vector3.down * playerMovementConfig.groundDistance, Color.blue);
     }
+
+    private void Start()
+    {
+        legsAnimator.enabled = false;
+
+        MovementAction = PlayerInputManager.Instance.MovementAction;
+        // jumpAction = PlayerInputManager.Instance.JumpAction;
+
+
+        MovementAction.performed += DisableLegAnimator;
+        MovementAction.canceled += EnableLegAnimator;
+
+        MovementAction.performed += (ctx) => isMoving = true;
+        MovementAction.canceled += (ctx) => isMoving = false;
+
+    }
+
     void Update()
     {
         MoveSpeedCalc();
@@ -46,6 +77,23 @@ public class PlayerMovement : MonoBehaviour
     {
         // ApplyGravity();
     }
+
+    private void EnableLegAnimator(InputAction.CallbackContext callbackContext)
+    {
+        if (legsAnimator)
+        {
+            legsAnimator.enabled = true;
+        }
+    }
+
+    private void DisableLegAnimator(InputAction.CallbackContext callbackContext)
+    {
+        if (legsAnimator)
+        {
+            legsAnimator.enabled = false;
+        }
+    }
+
     public void ApplyGravity()
     {
         if (!isGrounded && !isOnSlope)
@@ -112,8 +160,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void MovementProcess()
     {
-        InputAction movementAction = PlayerInputManager.Instance.MovementAction;
-        Vector2 movementInput = movementAction.ReadValue<Vector2>();
+        Vector2 movementInput = MovementAction.ReadValue<Vector2>();
         Transform mainCamTransform = Camera.main.transform;
         switch (playerCameraMode)
         {
@@ -140,8 +187,7 @@ public class PlayerMovement : MonoBehaviour
     }
     public void MoveCharactorThirdPerson()
     {
-        InputAction movementAction = PlayerInputManager.Instance.MovementAction;
-        if (movementAction.IsPressed() && playerCameraMode == PlayerCameraMode.ThirdPerson)
+        if (MovementAction.IsPressed() && playerCameraMode == PlayerCameraMode.ThirdPerson)
         {
             Vector3 moveDirOnPlane = Vector3.ProjectOnPlane(moveDirection, Vector3.up);
             Quaternion targetRotation = Quaternion.LookRotation(moveDirOnPlane, Vector3.up);
@@ -210,7 +256,6 @@ public class PlayerMovement : MonoBehaviour
     {
         if (context.performed && isGrounded && CanMove && !IsDying)
         {
-            Debug.Log(playerRb.GetInstanceID());
             playerRb.velocity = new(playerRb.velocity.x, 0, playerRb.velocity.z);
             playerRb.AddForce(transform.up * playerMovementConfig.jumpPower, ForceMode.Impulse);
 

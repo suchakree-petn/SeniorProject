@@ -26,7 +26,12 @@ public class MouseMovement : MonoBehaviour
     private void Awake()
     {
 
+    }
+
+    private void Start()
+    {
         SettingManager.Instance.dataPersistenceInGameSetting.OnLoadSuccess += InitCameraSensitive;
+
     }
     private void Update()
     {
@@ -228,7 +233,8 @@ public class MouseMovement : MonoBehaviour
     // {
     //     SaveCameraSensitive();
     // }
-    private void OnDisable() {
+    private void OnDisable()
+    {
         UnLockMouseCursor();
     }
     private void SaveCameraSensitive()
@@ -240,18 +246,18 @@ public class MouseMovement : MonoBehaviour
         SettingManager.Instance.dataPersistenceInGameSetting.SaveData();
     }
 
-// #if UNITY_EDITOR
-//     public void OnValidate()
-//     {
-//         if (CameraManager.Instance != null)
-//         {
-//             CameraManager.Instance.GetThirdPersonCamera().m_XAxis.m_MaxSpeed = mouseMovementConfig.ThirdPerson_X_Axis_Sensitive;
-//             CameraManager.Instance.GetThirdPersonCamera().m_YAxis.m_MaxSpeed = mouseMovementConfig.ThirdPerson_Y_Axis_Sensitive;
-//         }
+    // #if UNITY_EDITOR
+    //     public void OnValidate()
+    //     {
+    //         if (CameraManager.Instance != null)
+    //         {
+    //             CameraManager.Instance.GetThirdPersonCamera().m_XAxis.m_MaxSpeed = mouseMovementConfig.ThirdPerson_X_Axis_Sensitive;
+    //             CameraManager.Instance.GetThirdPersonCamera().m_YAxis.m_MaxSpeed = mouseMovementConfig.ThirdPerson_Y_Axis_Sensitive;
+    //         }
 
 
-//     }
-// #endif
+    //     }
+    // #endif
 }
 public enum PlayerCameraMode
 {

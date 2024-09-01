@@ -14,11 +14,9 @@ public partial class Caster_PlayerController : PlayerController
 
     protected override void Start()
     {
-        // if (!IsOwner) return;
 
         base.Start();
-        AbilityUIManager.Instance.OnSetAbilityIcon_E?.Invoke(casterAbility_BlessingShield.AbilityData.Icon);
-        AbilityUIManager.Instance.OnSetAbilityIcon_Q?.Invoke(casterAbility_PowerUp.AbilityData.Icon);
+
     }
 
     protected override void Update()
@@ -57,8 +55,8 @@ public partial class Caster_PlayerController : PlayerController
         if (!IsOwner) return;
 
         base.OnNetworkSpawn();
-        PlayerInputManager playerInputManager = PlayerInputManager.Instance;
-        playerInputManager.Attack.performed += caster_playerWeapon.UseWeapon;
+        AbilityUIManager.Instance.OnSetAbilityIcon_E?.Invoke(casterAbility_BlessingShield.AbilityData.Icon);
+        AbilityUIManager.Instance.OnSetAbilityIcon_Q?.Invoke(casterAbility_PowerUp.AbilityData.Icon);
 
     }
 
@@ -67,8 +65,7 @@ public partial class Caster_PlayerController : PlayerController
         if (!IsOwner) return;
 
         base.OnNetworkDespawn();
-        PlayerInputManager playerInputManager = PlayerInputManager.Instance;
-        playerInputManager.Attack.performed -= caster_playerWeapon.UseWeapon;
+
 
     }
 
@@ -121,16 +118,17 @@ public partial class Caster_PlayerController : PlayerController
     {
         caster_playerWeapon.OnUseWeapon += HealOrbAnimation;
 
-        if (!IsOwner) return;
         base.OnEnable();
-
+        PlayerInputManager playerInputManager = PlayerInputManager.Instance;
+        playerInputManager.Attack.performed += caster_playerWeapon.UseWeapon;
     }
 
     protected override void OnDisable()
     {
         caster_playerWeapon.OnUseWeapon -= HealOrbAnimation;
 
-        if (!IsOwner) return;
         base.OnDisable();
+        PlayerInputManager playerInputManager = PlayerInputManager.Instance;
+        playerInputManager.Attack.performed -= caster_playerWeapon.UseWeapon;
     }
 }
