@@ -954,7 +954,33 @@ MonoBehaviour:
         m_RotationOrder: 4
       _uObject: {fileID: 0}
       VariableType: 0
-      _rangeHelper: {x: 0, y: 0, z: 0, w: 0}
+      _rangeHelper: {x: -2, y: 2, z: 0, w: 0}
+    - VariableName: Side Multiplier
+      Tooltip: 
+      _value: {x: -1, y: 0, z: 0, w: 0}
+      _string: 
+      _curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      _uObject: {fileID: 0}
+      VariableType: 0
+      _rangeHelper: {x: -1, y: 1, z: 0, w: 0}
+    - VariableName: Forward Multiplier
+      Tooltip: 
+      _value: {x: 1, y: 0, z: 0, w: 0}
+      _string: 
+      _curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      _uObject: {fileID: 0}
+      VariableType: 0
+      _rangeHelper: {x: 0, y: 1, z: 0, w: 0}
   - Enabled: 1
     Parent: {fileID: 2247804272705032944}
     ModuleReference: {fileID: 11400000, guid: 0645fbea8059aec47aa6ae9d2c93c1d4, type: 2}
@@ -1726,7 +1752,7 @@ MonoBehaviour:
   _EditorCategory: 1
   _EditorSetupCategory: 2
   _EditorMotionCategory: 3
-  _EditorExtraCategory: 2
+  _EditorExtraCategory: 1
   IKHintMode: 0
   LimitLegStretch: 0.99
   FeetYOffset: 0
@@ -1734,7 +1760,7 @@ MonoBehaviour:
   baseTransform: {fileID: 0}
   Hips: {fileID: 5632494256258147792}
   ScaleReferenceMode: 3
-  finalScaleReference: 1.7290916
+  finalScaleReference: 1.7290921
   finalScaleReferenceSqrt: 0.1
   customScaleReferenceValue: 0.5
   DelayedInitialization: 0
@@ -2141,17 +2167,17 @@ PrefabInstance:
     - target: {fileID: 8895800849975720684, guid: 58437a38aec03b4478d7fdb505663dec,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.85
+      value: 3.0875788
       objectReference: {fileID: 0}
     - target: {fileID: 8895800849975720684, guid: 58437a38aec03b4478d7fdb505663dec,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 14.02
+      value: 16.872934
       objectReference: {fileID: 0}
     - target: {fileID: 8895800849975720684, guid: 58437a38aec03b4478d7fdb505663dec,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -16.84
+      value: -10.788748
       objectReference: {fileID: 0}
     - target: {fileID: 8895800849975720684, guid: 58437a38aec03b4478d7fdb505663dec,
         type: 3}
