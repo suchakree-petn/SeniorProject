@@ -549,6 +549,38 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1877921087236491326}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2663327617202795927
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2197252620196438646}
+  m_Layer: 0
+  m_Name: Root
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2197252620196438646
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2663327617202795927}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 4241077119913454163}
+  m_Father: {fileID: 2520368745964760646}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2753622325769472098
 GameObject:
   m_ObjectHideFlags: 0
@@ -922,14 +954,14 @@ Transform:
   m_GameObject: {fileID: 3652319992522817751}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.58495057, z: 0.04346047}
+  m_LocalPosition: {x: 0, y: 0.58495057, z: 0.04346037}
   m_LocalScale: {x: 2.3320699, y: 2.3320699, z: 2.3320699}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 646506058711175787}
   - {fileID: 5473066749417643905}
   - {fileID: 5465255729636208184}
-  m_Father: {fileID: 2520368745964760646}
+  m_Father: {fileID: 2197252620196438646}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3854864192600642135
 GameObject:
@@ -2314,6 +2346,7 @@ GameObject:
   - component: {fileID: 8894094430919120413}
   - component: {fileID: 1181320640378452299}
   - component: {fileID: 5008188015997448279}
+  - component: {fileID: 1789858997324167608}
   m_Layer: 10
   m_Name: PT_Priest_StPatrick
   m_TagString: Untagged
@@ -2357,6 +2390,8 @@ SkinnedMeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 22afcda8ed8075e4da06a1fca79e9d3e, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2472,6 +2507,24 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8903896015828011107}
   m_Mesh: {fileID: -8596126587521788999, guid: 400ff1074cbaaa640ac7bd5f12bb4fcf, type: 3}
+--- !u!114 &1789858997324167608
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8903896015828011107}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 0, g: 0.7869562, b: 0.87058824, a: 1}
+  outlineWidth: 6.8
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &9089594751630565615
 GameObject:
   m_ObjectHideFlags: 0
@@ -2577,17 +2630,17 @@ PrefabInstance:
     - target: {fileID: 4421562747518347658, guid: 8468fa4c8e09695459a2f7572471e55b,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.2270384
+      value: -0.16281599
       objectReference: {fileID: 0}
     - target: {fileID: 4421562747518347658, guid: 8468fa4c8e09695459a2f7572471e55b,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.74
+      value: -0.08
       objectReference: {fileID: 0}
     - target: {fileID: 4421562747518347658, guid: 8468fa4c8e09695459a2f7572471e55b,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.0773058
+      value: 2.5651593
       objectReference: {fileID: 0}
     - target: {fileID: 4421562747518347658, guid: 8468fa4c8e09695459a2f7572471e55b,
         type: 3}
@@ -2623,6 +2676,206 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6412093241050012600, guid: 8468fa4c8e09695459a2f7572471e55b,
+        type: 3}
+      propertyPath: Hips
+      value: 
+      objectReference: {fileID: 4241077119913454163}
+    - target: {fileID: 6412093241050012600, guid: 8468fa4c8e09695459a2f7572471e55b,
+        type: 3}
+      propertyPath: SpineBone
+      value: 
+      objectReference: {fileID: 5465255729636208184}
+    - target: {fileID: 6412093241050012600, guid: 8468fa4c8e09695459a2f7572471e55b,
+        type: 3}
+      propertyPath: finalScaleReference
+      value: 0.58495057
+      objectReference: {fileID: 0}
+    - target: {fileID: 6412093241050012600, guid: 8468fa4c8e09695459a2f7572471e55b,
+        type: 3}
+      propertyPath: _Editor_OnValidateTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6412093241050012600, guid: 8468fa4c8e09695459a2f7572471e55b,
+        type: 3}
+      propertyPath: Legs.Array.data[0].BoneEnd
+      value: 
+      objectReference: {fileID: 9219005397206288547}
+    - target: {fileID: 6412093241050012600, guid: 8468fa4c8e09695459a2f7572471e55b,
+        type: 3}
+      propertyPath: Legs.Array.data[0].BoneMid
+      value: 
+      objectReference: {fileID: 6793382662548335968}
+    - target: {fileID: 6412093241050012600, guid: 8468fa4c8e09695459a2f7572471e55b,
+        type: 3}
+      propertyPath: Legs.Array.data[1].BoneEnd
+      value: 
+      objectReference: {fileID: 8834794677445685691}
+    - target: {fileID: 6412093241050012600, guid: 8468fa4c8e09695459a2f7572471e55b,
+        type: 3}
+      propertyPath: Legs.Array.data[1].BoneMid
+      value: 
+      objectReference: {fileID: 4919994855887010847}
+    - target: {fileID: 6412093241050012600, guid: 8468fa4c8e09695459a2f7572471e55b,
+        type: 3}
+      propertyPath: Legs.Array.data[0].AnkleUp.x
+      value: -0.012920677
+      objectReference: {fileID: 0}
+    - target: {fileID: 6412093241050012600, guid: 8468fa4c8e09695459a2f7572471e55b,
+        type: 3}
+      propertyPath: Legs.Array.data[0].AnkleUp.y
+      value: -0.5441235
+      objectReference: {fileID: 0}
+    - target: {fileID: 6412093241050012600, guid: 8468fa4c8e09695459a2f7572471e55b,
+        type: 3}
+      propertyPath: Legs.Array.data[0].AnkleUp.z
+      value: 0.83890575
+      objectReference: {fileID: 0}
+    - target: {fileID: 6412093241050012600, guid: 8468fa4c8e09695459a2f7572471e55b,
+        type: 3}
+      propertyPath: Legs.Array.data[0].BoneStart
+      value: 
+      objectReference: {fileID: 646506058711175787}
+    - target: {fileID: 6412093241050012600, guid: 8468fa4c8e09695459a2f7572471e55b,
+        type: 3}
+      propertyPath: Legs.Array.data[1].AnkleUp.x
+      value: 0.012917751
+      objectReference: {fileID: 0}
+    - target: {fileID: 6412093241050012600, guid: 8468fa4c8e09695459a2f7572471e55b,
+        type: 3}
+      propertyPath: Legs.Array.data[1].AnkleUp.y
+      value: -0.55713296
+      objectReference: {fileID: 0}
+    - target: {fileID: 6412093241050012600, guid: 8468fa4c8e09695459a2f7572471e55b,
+        type: 3}
+      propertyPath: Legs.Array.data[1].AnkleUp.z
+      value: 0.83032286
+      objectReference: {fileID: 0}
+    - target: {fileID: 6412093241050012600, guid: 8468fa4c8e09695459a2f7572471e55b,
+        type: 3}
+      propertyPath: Legs.Array.data[1].BoneStart
+      value: 
+      objectReference: {fileID: 5473066749417643905}
+    - target: {fileID: 6412093241050012600, guid: 8468fa4c8e09695459a2f7572471e55b,
+        type: 3}
+      propertyPath: Legs.Array.data[0].AnkleRight.x
+      value: -0.9999155
+      objectReference: {fileID: 0}
+    - target: {fileID: 6412093241050012600, guid: 8468fa4c8e09695459a2f7572471e55b,
+        type: 3}
+      propertyPath: Legs.Array.data[0].AnkleRight.y
+      value: 0.005741746
+      objectReference: {fileID: 0}
+    - target: {fileID: 6412093241050012600, guid: 8468fa4c8e09695459a2f7572471e55b,
+        type: 3}
+      propertyPath: Legs.Array.data[0].AnkleRight.z
+      value: -0.011676362
+      objectReference: {fileID: 0}
+    - target: {fileID: 6412093241050012600, guid: 8468fa4c8e09695459a2f7572471e55b,
+        type: 3}
+      propertyPath: Legs.Array.data[1].AnkleRight.x
+      value: -0.9999155
+      objectReference: {fileID: 0}
+    - target: {fileID: 6412093241050012600, guid: 8468fa4c8e09695459a2f7572471e55b,
+        type: 3}
+      propertyPath: Legs.Array.data[1].AnkleRight.y
+      value: -0.0058793137
+      objectReference: {fileID: 0}
+    - target: {fileID: 6412093241050012600, guid: 8468fa4c8e09695459a2f7572471e55b,
+        type: 3}
+      propertyPath: Legs.Array.data[1].AnkleRight.z
+      value: 0.011611271
+      objectReference: {fileID: 0}
+    - target: {fileID: 6412093241050012600, guid: 8468fa4c8e09695459a2f7572471e55b,
+        type: 3}
+      propertyPath: Legs.Array.data[0].AnkleToHeel.x
+      value: -0.008668923
+      objectReference: {fileID: 0}
+    - target: {fileID: 6412093241050012600, guid: 8468fa4c8e09695459a2f7572471e55b,
+        type: 3}
+      propertyPath: Legs.Array.data[0].AnkleToHeel.y
+      value: -0.36507124
+      objectReference: {fileID: 0}
+    - target: {fileID: 6412093241050012600, guid: 8468fa4c8e09695459a2f7572471e55b,
+        type: 3}
+      propertyPath: Legs.Array.data[0].AnkleToHeel.z
+      value: 0.5628501
+      objectReference: {fileID: 0}
+    - target: {fileID: 6412093241050012600, guid: 8468fa4c8e09695459a2f7572471e55b,
+        type: 3}
+      propertyPath: Legs.Array.data[1].AnkleToHeel.x
+      value: 0.008666966
+      objectReference: {fileID: 0}
+    - target: {fileID: 6412093241050012600, guid: 8468fa4c8e09695459a2f7572471e55b,
+        type: 3}
+      propertyPath: Legs.Array.data[1].AnkleToHeel.y
+      value: -0.37379944
+      objectReference: {fileID: 0}
+    - target: {fileID: 6412093241050012600, guid: 8468fa4c8e09695459a2f7572471e55b,
+        type: 3}
+      propertyPath: Legs.Array.data[1].AnkleToHeel.z
+      value: 0.5570919
+      objectReference: {fileID: 0}
+    - target: {fileID: 6412093241050012600, guid: 8468fa4c8e09695459a2f7572471e55b,
+        type: 3}
+      propertyPath: Legs.Array.data[0].AnkleForward.x
+      value: -0.001536598
+      objectReference: {fileID: 0}
+    - target: {fileID: 6412093241050012600, guid: 8468fa4c8e09695459a2f7572471e55b,
+        type: 3}
+      propertyPath: Legs.Array.data[0].AnkleForward.y
+      value: 0.8389855
+      objectReference: {fileID: 0}
+    - target: {fileID: 6412093241050012600, guid: 8468fa4c8e09695459a2f7572471e55b,
+        type: 3}
+      propertyPath: Legs.Array.data[0].AnkleForward.z
+      value: 0.54415154
+      objectReference: {fileID: 0}
+    - target: {fileID: 6412093241050012600, guid: 8468fa4c8e09695459a2f7572471e55b,
+        type: 3}
+      propertyPath: Legs.Array.data[1].AnkleForward.x
+      value: 0.0015872928
+      objectReference: {fileID: 0}
+    - target: {fileID: 6412093241050012600, guid: 8468fa4c8e09695459a2f7572471e55b,
+        type: 3}
+      propertyPath: Legs.Array.data[1].AnkleForward.y
+      value: 0.8304025
+      objectReference: {fileID: 0}
+    - target: {fileID: 6412093241050012600, guid: 8468fa4c8e09695459a2f7572471e55b,
+        type: 3}
+      propertyPath: Legs.Array.data[1].AnkleForward.z
+      value: 0.5571618
+      objectReference: {fileID: 0}
+    - target: {fileID: 6412093241050012600, guid: 8468fa4c8e09695459a2f7572471e55b,
+        type: 3}
+      propertyPath: Legs.Array.data[0].AnkleToFeetEnd.x
+      value: -0.0086910175
+      objectReference: {fileID: 0}
+    - target: {fileID: 6412093241050012600, guid: 8468fa4c8e09695459a2f7572471e55b,
+        type: 3}
+      propertyPath: Legs.Array.data[0].AnkleToFeetEnd.y
+      value: -0.35300806
+      objectReference: {fileID: 0}
+    - target: {fileID: 6412093241050012600, guid: 8468fa4c8e09695459a2f7572471e55b,
+        type: 3}
+      propertyPath: Legs.Array.data[0].AnkleToFeetEnd.z
+      value: 0.5706742
+      objectReference: {fileID: 0}
+    - target: {fileID: 6412093241050012600, guid: 8468fa4c8e09695459a2f7572471e55b,
+        type: 3}
+      propertyPath: Legs.Array.data[1].AnkleToFeetEnd.x
+      value: 0.008689789
+      objectReference: {fileID: 0}
+    - target: {fileID: 6412093241050012600, guid: 8468fa4c8e09695459a2f7572471e55b,
+        type: 3}
+      propertyPath: Legs.Array.data[1].AnkleToFeetEnd.y
+      value: -0.36185965
+      objectReference: {fileID: 0}
+    - target: {fileID: 6412093241050012600, guid: 8468fa4c8e09695459a2f7572471e55b,
+        type: 3}
+      propertyPath: Legs.Array.data[1].AnkleToFeetEnd.z
+      value: 0.565103
       objectReference: {fileID: 0}
     - target: {fileID: 7454716787649179170, guid: 8468fa4c8e09695459a2f7572471e55b,
         type: 3}
@@ -2796,6 +3049,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8562730884081978089, guid: 8468fa4c8e09695459a2f7572471e55b,
         type: 3}
+      propertyPath: legsAnimator
+      value: 
+      objectReference: {fileID: 5053496412480661923}
+    - target: {fileID: 8562730884081978089, guid: 8468fa4c8e09695459a2f7572471e55b,
+        type: 3}
       propertyPath: playerController
       value: 
       objectReference: {fileID: 7802546280471116810}
@@ -2814,6 +3072,16 @@ PrefabInstance:
       propertyPath: playerMovementConfig.DyingMovingPenaltyPercentage
       value: 50
       objectReference: {fileID: 0}
+    - target: {fileID: 8771259761716148572, guid: 8468fa4c8e09695459a2f7572471e55b,
+        type: 3}
+      propertyPath: outlines.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8771259761716148572, guid: 8468fa4c8e09695459a2f7572471e55b,
+        type: 3}
+      propertyPath: outlines.Array.data[0]
+      value: 
+      objectReference: {fileID: 1789858997324167608}
     m_RemovedComponents:
     - {fileID: -3906203105981109117, guid: 8468fa4c8e09695459a2f7572471e55b, type: 3}
     - {fileID: 3472561861059167791, guid: 8468fa4c8e09695459a2f7572471e55b, type: 3}
@@ -2835,7 +3103,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 134936832183649871, guid: 8468fa4c8e09695459a2f7572471e55b,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 4241077119913454163}
+      addedObject: {fileID: 2197252620196438646}
     - targetCorrespondingSourceObject: {fileID: 134936832183649871, guid: 8468fa4c8e09695459a2f7572471e55b,
         type: 3}
       insertIndex: -1
@@ -2857,6 +3125,10 @@ PrefabInstance:
         type: 3}
       insertIndex: 5
       addedObject: {fileID: 4086381456720999541}
+    - targetCorrespondingSourceObject: {fileID: 762433222362275061, guid: 8468fa4c8e09695459a2f7572471e55b,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5053496412480661923}
   m_SourcePrefab: {fileID: 100100000, guid: 8468fa4c8e09695459a2f7572471e55b, type: 3}
 --- !u!114 &831939996720355351 stripped
 MonoBehaviour:
@@ -2894,6 +3166,534 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2532503277423405065}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &3004453635440096508 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 762433222362275061, guid: 8468fa4c8e09695459a2f7572471e55b,
+    type: 3}
+  m_PrefabInstance: {fileID: 2532503277423405065}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5053496412480661923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3004453635440096508}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f3505aa6d98bd4418e0744d5ab56fdd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Mecanim: {fileID: 4147964975896881451}
+  GroundedParameter: IsGrounded
+  MovingParameter: IsMoving
+  User_IsMovingMecanim_NotMovingFloat_Threshold: 0.1
+  Rigidbody: {fileID: 3265230538087751398}
+  UseRigidbodyVelocityForIsMoving: 1
+  UseRaycastsForIsGrounded: 0
+  SlidingParameter: 
+  SpineBone: {fileID: 5465255729636208184}
+  ChestBone: {fileID: 0}
+  RagdolledParameter: 
+  SwingHelper: 1
+  GluingFloorLevel: 0.05
+  GluingFloorLevelUseOnMoving: 0
+  GluingFloorLevelOnMoving: 0
+  StepPointsOverlapRadius: 0.43
+  UseStepPointsOverlapRadiusOnMoving: 0
+  StepPointsOverlapRadiusOnMoving: 0
+  MotionInfluence:
+    AdvancedInfluence: 0
+    AxisMotionInfluence: {x: 0, y: 1, z: 1}
+    AxisMotionInfluenceBackwards: {x: 1, y: 1, z: 1}
+  Event_OnStep:
+    m_PersistentCalls:
+      m_Calls: []
+  EventExecuteSooner: 0.05
+  SendOnMovingGlue: 0
+  SendOnStopping: 0
+  StepEventOnLanding: 0
+  StepInfoReceiver: {fileID: 0}
+  ExtraPelvisOffset: {x: 0, y: 0, z: 0}
+  ReposeGluingAfter: 0
+  GlueOnlyOnIdle: 0
+  LocalWorldUp: 1
+  DisableCustomModules: 0
+  CustomModules:
+  - Enabled: 1
+    Parent: {fileID: 5053496412480661923}
+    ModuleReference: {fileID: 11400000, guid: 7d9bd86d54a7a594cb1793f9533e2e00, type: 2}
+    customStringList: []
+    customObjectList: []
+    variables: []
+  ImpulsesPowerMultiplier: 1
+  ImpulsesDurationMultiplier: 1
+  ImpulsesDampUpPushes: 0
+  DebugPushHipsImpulse:
+    OptionalName: Impulse
+    PowerMultiplier: 1
+    ImpulseDuration: 0.6
+    WorldTranslation: {x: 0, y: 0, z: 0}
+    LocalTranslation: {x: 0, y: -1, z: 0}
+    HipsRotate: {x: 0, y: 0, z: 0}
+    InheritElasticness: 0.75
+    ImpulseCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 0.2
+        value: 1
+        inSlope: 3.4375
+        outSlope: 3.4375
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    YAxisMultiplyCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    AlignWithDesiredMoveDirection: 0
+  UseHips: 1
+  HipsHeightStepBlend: 1
+  HipsHeightStepSpeed: 0.7
+  HipsAdjustStyle: 0
+  StabilizeCenterOfMass: 0.45
+  AnimationIsStablePose: 0.75
+  StabilizingSpeed: 0.375
+  PushHipsOnLegMove: 0.1
+  NormalizePush: 0
+  PushReactionSpeed: 0.3
+  PushYBlend: 1
+  HipsStretchPreventer: 0.15
+  StretchPreventerSpeed: 0.8
+  StabilizeOnIsMoving: 0.5
+  _Hips_Modules_ExtraWOffset: {x: 0, y: 0, z: 0}
+  _Hips_Modules_ExtraRotOffset: {x: 0, y: 0, z: 0}
+  ExtraHipsHubs: []
+  HipsHubsHandling: 1
+  HipsHubsBlend: 1
+  HubsBackBonesBlend:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  HubBackBonesElasticity: 0.1
+  HipsSetup:
+    HipsElasticityBlend: 1
+    HipsMuscle:
+      DesiredPosition: {x: 0, y: 0, z: 0}
+      Acceleration: 10000
+      AccelerationLimit: 5000
+      Damping: 10
+      BrakePower: 0.2
+    HipsRotElasticityBlend: 0
+    HipsRotMuscle:
+      DesiredRotation: {x: 0, y: 0, z: 0, w: 0}
+      Acceleration: 5000
+      AccelerationLimit: 1000
+      Damping: 10
+      BrakePower: 0.2
+  StabilityAlgorithm: 1
+  Legs:
+  - G_CustomForceAttach: 0
+    G_CustomForceNOTDetach: 0
+    G_CustomForceDetach: 0
+    G_CustomForceNOTAttach: 0
+    Owner: {fileID: 5053496412480661923}
+    LegBlendWeight: 1
+    LegMoveSpeedMultiplier: 1
+    LegRaiseMultiplier: 1
+    GlueThresholdMultiplier: 1
+    GluePointOffset: {x: 0, y: 0}
+    LegStretchMultiplier: 1
+    CustomLegAnimating: {fileID: 0}
+    FootPitchOffset: 0
+    BoneStart: {fileID: 646506058711175787}
+    BoneMid: {fileID: 6793382662548335968}
+    BoneEnd: {fileID: 9219005397206288547}
+    Side: 1
+    OppositeLegIndex: 1
+    RaycastPrecision: 0
+    UseFeet: 0
+    BoneFeet: {fileID: 0}
+    FeetSensitivity: 0.5
+    InverseHint: 0
+    AnkleToHeel: {x: -0.008668914, y: -0.36507094, z: 0.5628503}
+    AnkleToFeetEnd: {x: -0.008726729, y: -0.33350465, z: 0.5833237}
+    AnkleRight: {x: -0.9999155, y: 0.005741746, z: -0.011676362}
+    AnkleUp: {x: -0.012920677, y: -0.5441235, z: 0.83890575}
+    AnkleForward: {x: -0.001536598, y: 0.8389855, z: 0.54415154}
+    FootMiddlePosition: 0.5
+    AnkleYawCorrection: 0
+    _FinalIKPos: {x: 0, y: 0, z: 0}
+  - G_CustomForceAttach: 0
+    G_CustomForceNOTDetach: 0
+    G_CustomForceDetach: 0
+    G_CustomForceNOTAttach: 0
+    Owner: {fileID: 5053496412480661923}
+    LegBlendWeight: 1
+    LegMoveSpeedMultiplier: 1
+    LegRaiseMultiplier: 1
+    GlueThresholdMultiplier: 1
+    GluePointOffset: {x: 0, y: 0}
+    LegStretchMultiplier: 1
+    CustomLegAnimating: {fileID: 0}
+    FootPitchOffset: 0
+    BoneStart: {fileID: 5473066749417643905}
+    BoneMid: {fileID: 4919994855887010847}
+    BoneEnd: {fileID: 8834794677445685691}
+    Side: 2
+    OppositeLegIndex: 0
+    RaycastPrecision: 0
+    UseFeet: 0
+    BoneFeet: {fileID: 0}
+    FeetSensitivity: 0.5
+    InverseHint: 0
+    AnkleToHeel: {x: 0.008666959, y: -0.3737995, z: 0.5570919}
+    AnkleToFeetEnd: {x: 0.008726681, y: -0.34255618, z: 0.5780547}
+    AnkleRight: {x: -0.9999155, y: -0.0058793137, z: 0.011611271}
+    AnkleUp: {x: 0.012917751, y: -0.55713296, z: 0.83032286}
+    AnkleForward: {x: 0.0015872928, y: 0.8304025, z: 0.5571618}
+    FootMiddlePosition: 0.5
+    AnkleYawCorrection: 0
+    _FinalIKPos: {x: 0, y: 0, z: 0}
+  BaseLegAnimating:
+    StepMoveDuration: 0.41
+    MoveToGoalCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 3
+        inWeight: 0
+        outWeight: 0.1842105
+      - serializedVersion: 3
+        time: 0.4885197
+        value: 0.8972011
+        inSlope: 1.38764
+        outSlope: 1.38764
+        tangentMode: 0
+        weightedMode: 3
+        inWeight: 0.3333333
+        outWeight: 0.3333333
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 3
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    SpherizeTrack:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0.6958197
+        outSlope: 0.6958197
+        tangentMode: 0
+        weightedMode: 3
+        inWeight: 0
+        outWeight: 0.460011
+      - serializedVersion: 3
+        time: 0.4
+        value: 0.3
+        inSlope: -0.04204308
+        outSlope: -0.04204308
+        tangentMode: 0
+        weightedMode: 3
+        inWeight: 0.333
+        outWeight: 0.3410656
+      - serializedVersion: 3
+        time: 0.85
+        value: 0
+        inSlope: -0.2721428
+        outSlope: -0.2721428
+        tangentMode: 0
+        weightedMode: 3
+        inWeight: 0.3953607
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    SpherizePower: 0.3
+    MinFootRaise: 0.165
+    MaxFootRaise: 0.467
+    RaiseYAxisCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0.8504464
+        outSlope: 0.8504464
+        tangentMode: 0
+        weightedMode: 3
+        inWeight: 0
+        outWeight: 0.6517575
+      - serializedVersion: 3
+        time: 0.2731183
+        value: 0.45
+        inSlope: 0.9770691
+        outSlope: 0.9770691
+        tangentMode: 0
+        weightedMode: 3
+        inWeight: 0.3333333
+        outWeight: 0.3387407
+      - serializedVersion: 3
+        time: 0.505118
+        value: 0.5
+        inSlope: -0.2710344
+        outSlope: -0.2710344
+        tangentMode: 0
+        weightedMode: 3
+        inWeight: 0.3333333
+        outWeight: 0.3333333
+      - serializedVersion: 3
+        time: 0.9110107
+        value: 0
+        inSlope: -0.1500788
+        outSlope: -0.1500788
+        tangentMode: 0
+        weightedMode: 3
+        inWeight: 0.5409704
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    AllowSpeedups: 0.4
+    AllowDetachBefore: 1
+    PushHipsOnMoveCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 5.630541
+        outSlope: 5.630541
+        tangentMode: 0
+        weightedMode: 3
+        inWeight: 0
+        outWeight: 0.198735
+      - serializedVersion: 3
+        time: 0.383
+        value: 0.3733972
+        inSlope: -0.1664574
+        outSlope: -0.1664574
+        tangentMode: 0
+        weightedMode: 3
+        inWeight: 0.333
+        outWeight: 0.2940554
+      - serializedVersion: 3
+        time: 0.7075226
+        value: 0.1460427
+        inSlope: -1.565806
+        outSlope: -1.565806
+        tangentMode: 0
+        weightedMode: 3
+        inWeight: 0.3605607
+        outWeight: 0.3446763
+      - serializedVersion: 3
+        time: 1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 3
+        inWeight: 0.09374858
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    FootRotationCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0.5764588
+        outSlope: 0.5764588
+        tangentMode: 0
+        weightedMode: 3
+        inWeight: 0
+        outWeight: 0.4956417
+      - serializedVersion: 3
+        time: 0.4378169
+        value: 0.2035736
+        inSlope: -0.2411275
+        outSlope: -0.2411275
+        tangentMode: 0
+        weightedMode: 3
+        inWeight: 0.3333333
+        outWeight: 0.4033037
+      - serializedVersion: 3
+        time: 0.7841034
+        value: -0.1339308
+        inSlope: 0.3331003
+        outSlope: 0.3331003
+        tangentMode: 0
+        weightedMode: 3
+        inWeight: 0.3333333
+        outWeight: 0.3333333
+      - serializedVersion: 3
+        time: 1
+        value: 0
+        inSlope: 0.3498169
+        outSlope: 0.3498169
+        tangentMode: 0
+        weightedMode: 3
+        inWeight: 0.5534658
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+  UseGluing: 1
+  MainGlueBlend: 1
+  GlueRangeThreshold: 0.375
+  GlueFadeInSpeed: 0.85
+  AllowGlueBelowFoot: 0.2
+  GlueFadeOutSpeed: 0.5
+  UnglueOn: 10.451405
+  AllowGlueDrag: 0.7
+  GlueMode: 2
+  OnlyLocalAnimation: 0
+  SmoothSuddenSteps: 0.85
+  LegElevateBlend: 0.7
+  LegElevateHeightLimit: 0.6
+  FootRotationBlend: 1
+  FootAlignRapidity: 0.75
+  AnimateFeet: 1
+  LimitFeetYaw: 30
+  AnimationFloorLevel: 0.001
+  _Editor_Foldout_Setup_LegsList: 1
+  _Editor_EnsureCount: 0
+  _Editor_OnValidateTrigger: 1
+  _EditorAllowAutoUpdateFeetParams: 1
+  _EditorCategory: 0
+  _EditorSetupCategory: 0
+  _EditorMotionCategory: 2
+  _EditorExtraCategory: 2
+  IKHintMode: 0
+  LimitLegStretch: 1.019
+  FeetYOffset: 0
+  FeetLengthAdjust: 0
+  baseTransform: {fileID: 0}
+  Hips: {fileID: 4241077119913454163}
+  ScaleReferenceMode: 0
+  finalScaleReference: 0.58495057
+  finalScaleReferenceSqrt: 0.1
+  customScaleReferenceValue: 2.11
+  DelayedInitialization: 0
+  Calibrate: 1
+  AnimatePhysics: 0
+  UnscaledDeltaTime: 0
+  DisableIfInvisible: {fileID: 0}
+  FadeOffAtDistance: 0
+  GroundMask:
+    serializedVersion: 2
+    m_Bits: 10240
+  RaycastHitTrigger: 1
+  CastDistance: 1
+  RaycastStartHeight: 0
+  RaycastStartHeightMul: 1
+  RaycastStyle: 0
+  RaycastShape: 0
+  SpherecastRealign: 0
+  SpherecastResize: 1
+  NoRaycastGroundBehaviour: 0
+  ZeroStepsOnNoRaycast: 0
+  NoRaycast_KeepAttachedUntilStretch: 1.1
+  BodyStepDown: 0.5
+  MaxBodyStepUp: 0
+  UngroundFadeSpeed: 0.1
+  IsMovingFadeSpeed: 0.4
+  LegsAnimatorBlend: 1
+  _Editor_DefaultModuleOnStart: {fileID: 11400000, guid: 7d9bd86d54a7a594cb1793f9533e2e00,
+    type: 2}
+  _Editor_LegHelperModule: {fileID: 11400000, guid: 0645fbea8059aec47aa6ae9d2c93c1d4,
+    type: 2}
+--- !u!54 &3265230538087751398 stripped
+Rigidbody:
+  m_CorrespondingSourceObject: {fileID: 1041791184314300143, guid: 8468fa4c8e09695459a2f7572471e55b,
+    type: 3}
+  m_PrefabInstance: {fileID: 2532503277423405065}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &4147964975896881451 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 1924667045707628834, guid: 8468fa4c8e09695459a2f7572471e55b,
+    type: 3}
+  m_PrefabInstance: {fileID: 2532503277423405065}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &5938101958819870438 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8164219173163491055, guid: 8468fa4c8e09695459a2f7572471e55b,
@@ -2924,8 +3724,6 @@ MonoBehaviour:
   playerAbilityQ: {fileID: 3070919574868137117}
   PlayerAnimation: {fileID: 8920344854508572487}
   playerHealth: {fileID: 1673985521950328931}
-  meshRenderer_character:
-  - {fileID: 0}
   caster_playerWeapon: {fileID: 4086381456720999541}
   casterAbility_BlessingShield: {fileID: 4375989519964650209}
   casterAbility_PowerUp: {fileID: 3070919574868137117}

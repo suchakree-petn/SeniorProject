@@ -12,6 +12,8 @@ public class Map5_PuzzleManager : NetworkSingleton<Map5_PuzzleManager>
     [EnumToggleButtons]
     [SerializeField] private Map5_GameState currentState = Map5_GameState.Phase1_Idle;
     [SerializeField] private float delayPanBossCamToPlayer = 3;
+    public RedDragon_Fly_EnemyController BossController => bossController;
+    public Broken_BalistaController Broken_BalistaController => broken_BalistaController;
 
 
     [FoldoutGroup("Reference")]
@@ -21,7 +23,7 @@ public class Map5_PuzzleManager : NetworkSingleton<Map5_PuzzleManager>
     [SerializeField] private RedDragon_Fly_EnemyController bossController;
 
     [FoldoutGroup("Reference")]
-    // [SerializeField] private BrokenBalistaController balistaController;
+    [SerializeField] private Broken_BalistaController broken_BalistaController;
 
     protected override void InitAfterAwake()
     {

@@ -25,8 +25,8 @@ public class RedDragon_Fly_EnemyController : EnemyController
         OnEnemyAttack_Local += NormalAttack;
         // OnEnemyHit_Local += OnEnemyHit_HitAnimation;
 
-        Target = null;
-        gameObject.SetActive(false);
+        // Target = null;
+        // gameObject.SetActive(false);
 
     }
 

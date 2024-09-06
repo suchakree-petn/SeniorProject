@@ -145,7 +145,7 @@ PrefabInstance:
     - target: {fileID: 585376683152959535, guid: 5134e637dc0b31c4fad23fac8e303af9,
         type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 48180919
+      value: 2284238053
       objectReference: {fileID: 0}
     - target: {fileID: 637845534637835907, guid: 5134e637dc0b31c4fad23fac8e303af9,
         type: 3}
@@ -175,17 +175,17 @@ PrefabInstance:
     - target: {fileID: 1081591575635147786, guid: 5134e637dc0b31c4fad23fac8e303af9,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -38.7
       objectReference: {fileID: 0}
     - target: {fileID: 1081591575635147786, guid: 5134e637dc0b31c4fad23fac8e303af9,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -6.2
       objectReference: {fileID: 0}
     - target: {fileID: 1081591575635147786, guid: 5134e637dc0b31c4fad23fac8e303af9,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -32.8
       objectReference: {fileID: 0}
     - target: {fileID: 1081591575635147786, guid: 5134e637dc0b31c4fad23fac8e303af9,
         type: 3}
@@ -402,12 +402,12 @@ PrefabInstance:
     - target: {fileID: 6001819275899621731, guid: 5134e637dc0b31c4fad23fac8e303af9,
         type: 3}
       propertyPath: m_Height
-      value: 2.45
+      value: 2.05
       objectReference: {fileID: 0}
     - target: {fileID: 6001819275899621731, guid: 5134e637dc0b31c4fad23fac8e303af9,
         type: 3}
       propertyPath: m_Radius
-      value: 1.9
+      value: 0.91
       objectReference: {fileID: 0}
     - target: {fileID: 6001819275899621731, guid: 5134e637dc0b31c4fad23fac8e303af9,
         type: 3}
@@ -464,6 +464,11 @@ PrefabInstance:
       propertyPath: TransitionStateInfoList.Array.data[1].TransitionDuration
       value: 0.25
       objectReference: {fileID: 0}
+    - target: {fileID: 6745256168184973310, guid: 5134e637dc0b31c4fad23fac8e303af9,
+        type: 3}
+      propertyPath: outlines.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7557614475561441946, guid: 5134e637dc0b31c4fad23fac8e303af9,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -484,6 +489,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 403
       objectReference: {fileID: 0}
+    - target: {fileID: 7660171543293030674, guid: 5134e637dc0b31c4fad23fac8e303af9,
+        type: 3}
+      propertyPath: m_RigLayers.Array.data[0].m_Rig
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 9113855609132630883, guid: 5134e637dc0b31c4fad23fac8e303af9,
         type: 3}
       propertyPath: m_FillAmount
@@ -494,7 +504,8 @@ PrefabInstance:
       propertyPath: m_PreserveAspect
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: -8185543706805310715, guid: 5134e637dc0b31c4fad23fac8e303af9, type: 3}
     m_RemovedGameObjects:
     - {fileID: 5481085263205109613, guid: 5134e637dc0b31c4fad23fac8e303af9, type: 3}
     m_AddedGameObjects:
@@ -530,6 +541,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09d4cba9778751040a19e238c7289fd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &1988781550969284046 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5443892900808637861, guid: 5134e637dc0b31c4fad23fac8e303af9,
+    type: 3}
+  m_PrefabInstance: {fileID: 5770524581545105515}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2830156659082733689 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8598420571638919186, guid: 5134e637dc0b31c4fad23fac8e303af9,
@@ -605,6 +622,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 822506101897779541, guid: 740728f854d793848a530ac50ca86174,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2137578508600275907, guid: 740728f854d793848a530ac50ca86174,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 4874126678125670354, guid: b332d0a35f177a846a778e57e5d319a8,
+        type: 3}
+    - target: {fileID: 5453822063880102248, guid: 740728f854d793848a530ac50ca86174,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9082710849249269872, guid: 740728f854d793848a530ac50ca86174,
         type: 3}
       propertyPath: m_Layer
@@ -612,19 +645,1343 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 957358266527930445, guid: 740728f854d793848a530ac50ca86174, type: 3}
+    - {fileID: 3235581998236077202, guid: 740728f854d793848a530ac50ca86174, type: 3}
+    - {fileID: 5453822063880102248, guid: 740728f854d793848a530ac50ca86174, type: 3}
+    - {fileID: 957358266527930445, guid: 740728f854d793848a530ac50ca86174, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 110427889724667761, guid: 740728f854d793848a530ac50ca86174,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8382142605214664989}
+    - targetCorrespondingSourceObject: {fileID: 5351252319949662122, guid: 740728f854d793848a530ac50ca86174,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6712617262989783731}
   m_SourcePrefab: {fileID: 100100000, guid: 740728f854d793848a530ac50ca86174, type: 3}
+--- !u!4 &144680325495516512 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8302044721615231378, guid: 740728f854d793848a530ac50ca86174,
+    type: 3}
+  m_PrefabInstance: {fileID: 8157365059764204786}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &294329193912701714 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8440135593594988512, guid: 740728f854d793848a530ac50ca86174,
+    type: 3}
+  m_PrefabInstance: {fileID: 8157365059764204786}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &309714916443043253 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8464687428162519367, guid: 740728f854d793848a530ac50ca86174,
+    type: 3}
+  m_PrefabInstance: {fileID: 8157365059764204786}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &661389622942422238 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8654073602077974572, guid: 740728f854d793848a530ac50ca86174,
+    type: 3}
+  m_PrefabInstance: {fileID: 8157365059764204786}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &735825728326621165 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8863899717796225823, guid: 740728f854d793848a530ac50ca86174,
+    type: 3}
+  m_PrefabInstance: {fileID: 8157365059764204786}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &840995147961949668 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8835808400084625686, guid: 740728f854d793848a530ac50ca86174,
+    type: 3}
+  m_PrefabInstance: {fileID: 8157365059764204786}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &848366714366459142 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8859364716447681012, guid: 740728f854d793848a530ac50ca86174,
+    type: 3}
+  m_PrefabInstance: {fileID: 8157365059764204786}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &961787336716448193 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8965607142696305971, guid: 740728f854d793848a530ac50ca86174,
+    type: 3}
+  m_PrefabInstance: {fileID: 8157365059764204786}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1096781713368640642 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 9082710849249269872, guid: 740728f854d793848a530ac50ca86174,
     type: 3}
   m_PrefabInstance: {fileID: 8157365059764204786}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &1144093938627947433 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 9139047385999417179, guid: 740728f854d793848a530ac50ca86174,
+    type: 3}
+  m_PrefabInstance: {fileID: 8157365059764204786}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1178097303555449154 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7020470855786894768, guid: 740728f854d793848a530ac50ca86174,
+    type: 3}
+  m_PrefabInstance: {fileID: 8157365059764204786}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1452770894415511592 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7286137152906491098, guid: 740728f854d793848a530ac50ca86174,
+    type: 3}
+  m_PrefabInstance: {fileID: 8157365059764204786}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1486583924728686353 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7319933212660061155, guid: 740728f854d793848a530ac50ca86174,
+    type: 3}
+  m_PrefabInstance: {fileID: 8157365059764204786}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1520734784327106505 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7218835310577716027, guid: 740728f854d793848a530ac50ca86174,
+    type: 3}
+  m_PrefabInstance: {fileID: 8157365059764204786}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1562558410296459370 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7249558264951125144, guid: 740728f854d793848a530ac50ca86174,
+    type: 3}
+  m_PrefabInstance: {fileID: 8157365059764204786}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2324336408040592821 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5869733928153768263, guid: 740728f854d793848a530ac50ca86174,
+    type: 3}
+  m_PrefabInstance: {fileID: 8157365059764204786}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2524196344360936712 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5923209322041741818, guid: 740728f854d793848a530ac50ca86174,
+    type: 3}
+  m_PrefabInstance: {fileID: 8157365059764204786}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2765892522041828596 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6293398765329698822, guid: 740728f854d793848a530ac50ca86174,
+    type: 3}
+  m_PrefabInstance: {fileID: 8157365059764204786}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &3462787272313589975 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4700213059976913957, guid: 740728f854d793848a530ac50ca86174,
+    type: 3}
+  m_PrefabInstance: {fileID: 8157365059764204786}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &3778971914147180982 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4991486619837400388, guid: 740728f854d793848a530ac50ca86174,
+    type: 3}
+  m_PrefabInstance: {fileID: 8157365059764204786}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &3832027829187115364 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4907464870912740758, guid: 740728f854d793848a530ac50ca86174,
+    type: 3}
+  m_PrefabInstance: {fileID: 8157365059764204786}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &3893021548240303757 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5130165355265671807, guid: 740728f854d793848a530ac50ca86174,
+    type: 3}
+  m_PrefabInstance: {fileID: 8157365059764204786}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &3925057136180767451 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5137572422840950313, guid: 740728f854d793848a530ac50ca86174,
+    type: 3}
+  m_PrefabInstance: {fileID: 8157365059764204786}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &4085523846209943737 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5298056184896851019, guid: 740728f854d793848a530ac50ca86174,
+    type: 3}
+  m_PrefabInstance: {fileID: 8157365059764204786}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &4187907646287602467 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5416325797762881489, guid: 740728f854d793848a530ac50ca86174,
+    type: 3}
+  m_PrefabInstance: {fileID: 8157365059764204786}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &4277616498774901315 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5362078273884501681, guid: 740728f854d793848a530ac50ca86174,
+    type: 3}
+  m_PrefabInstance: {fileID: 8157365059764204786}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4285104605302887256 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5351252319949662122, guid: 740728f854d793848a530ac50ca86174,
+    type: 3}
+  m_PrefabInstance: {fileID: 8157365059764204786}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6712617262989783731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4285104605302887256}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2d8418b0b9634b1892b0268dd9c2743, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boneShape: 1
+  drawBones: 1
+  drawTripods: 0
+  boneSize: 1
+  tripodSize: 1
+  boneColor: {r: 0, g: 0, b: 1, a: 0.5}
+  m_Transforms:
+  - {fileID: 4615094542609523752}
+  - {fileID: 5643626759323582130}
+  - {fileID: 7981064556925482625}
+  - {fileID: 8357186837509890159}
+  - {fileID: 1144093938627947433}
+  - {fileID: 8252424615950936382}
+  - {fileID: 2324336408040592821}
+  - {fileID: 1486583924728686353}
+  - {fileID: 961787336716448193}
+  - {fileID: 6366964073963226014}
+  - {fileID: 7243042891855634864}
+  - {fileID: 6027420683231162014}
+  - {fileID: 7406890454559559414}
+  - {fileID: 661389622942422238}
+  - {fileID: 7417358527079731205}
+  - {fileID: 6538912748630045443}
+  - {fileID: 4828147289230423475}
+  - {fileID: 7378284936804751020}
+  - {fileID: 4298591171434137210}
+  - {fileID: 1452770894415511592}
+  - {fileID: 5183896249293289611}
+  - {fileID: 848366714366459142}
+  - {fileID: 1520734784327106505}
+  - {fileID: 309714916443043253}
+  - {fileID: 5455828095919187810}
+  - {fileID: 294329193912701714}
+  - {fileID: 5715873971314523224}
+  - {fileID: 5319984974603186674}
+  - {fileID: 5241304844697884289}
+  - {fileID: 3462787272313589975}
+  - {fileID: 4085523846209943737}
+  - {fileID: 3832027829187115364}
+  - {fileID: 5465771665294625799}
+  - {fileID: 3925057136180767451}
+  - {fileID: 7177386232958846628}
+  - {fileID: 8227392899348739386}
+  - {fileID: 7349069554441847842}
+  - {fileID: 840995147961949668}
+  - {fileID: 1562558410296459370}
+  - {fileID: 8692921810463427418}
+  - {fileID: 4277616498774901315}
+  - {fileID: 735825728326621165}
+  - {fileID: 4527137710414858489}
+  - {fileID: 1178097303555449154}
+  - {fileID: 8778916344061880368}
+  - {fileID: 144680325495516512}
+  - {fileID: 6617815352147695635}
+  - {fileID: 6762322724733762414}
+  - {fileID: 8205324701661518957}
+  - {fileID: 3893021548240303757}
+  - {fileID: 2765892522041828596}
+  - {fileID: 6970353758474348832}
+  - {fileID: 7626477948081669162}
+  - {fileID: 4909127111809283368}
+  - {fileID: 2524196344360936712}
+  - {fileID: 3778971914147180982}
+  - {fileID: 4187907646287602467}
+  - {fileID: 6113968973131945314}
+  - {fileID: 4467186132118653964}
+--- !u!4 &4298591171434137210 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5373746156136034952, guid: 740728f854d793848a530ac50ca86174,
+    type: 3}
+  m_PrefabInstance: {fileID: 8157365059764204786}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &4467186132118653964 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5533351997229922558, guid: 740728f854d793848a530ac50ca86174,
+    type: 3}
+  m_PrefabInstance: {fileID: 8157365059764204786}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &4527137710414858489 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5757666917705858059, guid: 740728f854d793848a530ac50ca86174,
+    type: 3}
+  m_PrefabInstance: {fileID: 8157365059764204786}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &4615094542609523752 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3546818101577781466, guid: 740728f854d793848a530ac50ca86174,
+    type: 3}
+  m_PrefabInstance: {fileID: 8157365059764204786}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &4828147289230423475 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3618024565708783937, guid: 740728f854d793848a530ac50ca86174,
+    type: 3}
+  m_PrefabInstance: {fileID: 8157365059764204786}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &4909127111809283368 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3824806590658904538, guid: 740728f854d793848a530ac50ca86174,
+    type: 3}
+  m_PrefabInstance: {fileID: 8157365059764204786}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &5183896249293289611 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3946330168602561657, guid: 740728f854d793848a530ac50ca86174,
+    type: 3}
+  m_PrefabInstance: {fileID: 8157365059764204786}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &5241304844697884289 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4145584012467757683, guid: 740728f854d793848a530ac50ca86174,
+    type: 3}
+  m_PrefabInstance: {fileID: 8157365059764204786}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &5319984974603186674 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4098463027778471168, guid: 740728f854d793848a530ac50ca86174,
+    type: 3}
+  m_PrefabInstance: {fileID: 8157365059764204786}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &5455828095919187810 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4215992615771198352, guid: 740728f854d793848a530ac50ca86174,
+    type: 3}
+  m_PrefabInstance: {fileID: 8157365059764204786}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &5465771665294625799 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4246500907319408885, guid: 740728f854d793848a530ac50ca86174,
+    type: 3}
+  m_PrefabInstance: {fileID: 8157365059764204786}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &5643626759323582130 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4568612579679881792, guid: 740728f854d793848a530ac50ca86174,
+    type: 3}
+  m_PrefabInstance: {fileID: 8157365059764204786}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &5715873971314523224 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4496304757144012970, guid: 740728f854d793848a530ac50ca86174,
+    type: 3}
+  m_PrefabInstance: {fileID: 8157365059764204786}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &6027420683231162014 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2490907722732034668, guid: 740728f854d793848a530ac50ca86174,
+    type: 3}
+  m_PrefabInstance: {fileID: 8157365059764204786}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &6113968973131945314 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2733093634817106320, guid: 740728f854d793848a530ac50ca86174,
+    type: 3}
+  m_PrefabInstance: {fileID: 8157365059764204786}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &6366964073963226014 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2983855042344073068, guid: 740728f854d793848a530ac50ca86174,
+    type: 3}
+  m_PrefabInstance: {fileID: 8157365059764204786}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &6538912748630045443 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3137367152205514737, guid: 740728f854d793848a530ac50ca86174,
+    type: 3}
+  m_PrefabInstance: {fileID: 8157365059764204786}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &6617815352147695635 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3090591178686360801, guid: 740728f854d793848a530ac50ca86174,
+    type: 3}
+  m_PrefabInstance: {fileID: 8157365059764204786}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &6762322724733762414 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3237051283926093724, guid: 740728f854d793848a530ac50ca86174,
+    type: 3}
+  m_PrefabInstance: {fileID: 8157365059764204786}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &6970353758474348832 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1265339548267814354, guid: 740728f854d793848a530ac50ca86174,
+    type: 3}
+  m_PrefabInstance: {fileID: 8157365059764204786}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &7177386232958846628 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1346570298130379350, guid: 740728f854d793848a530ac50ca86174,
+    type: 3}
+  m_PrefabInstance: {fileID: 8157365059764204786}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &7243042891855634864 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1562957359021856066, guid: 740728f854d793848a530ac50ca86174,
+    type: 3}
+  m_PrefabInstance: {fileID: 8157365059764204786}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &7349069554441847842 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1497987423442350288, guid: 740728f854d793848a530ac50ca86174,
+    type: 3}
+  m_PrefabInstance: {fileID: 8157365059764204786}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &7378284936804751020 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1679885832002036318, guid: 740728f854d793848a530ac50ca86174,
+    type: 3}
+  m_PrefabInstance: {fileID: 8157365059764204786}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &7406890454559559414 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1728898391803214340, guid: 740728f854d793848a530ac50ca86174,
+    type: 3}
+  m_PrefabInstance: {fileID: 8157365059764204786}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &7417358527079731205 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1718976502221038839, guid: 740728f854d793848a530ac50ca86174,
+    type: 3}
+  m_PrefabInstance: {fileID: 8157365059764204786}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &7626477948081669162 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1793128660080767192, guid: 740728f854d793848a530ac50ca86174,
+    type: 3}
+  m_PrefabInstance: {fileID: 8157365059764204786}
+  m_PrefabAsset: {fileID: 0}
 --- !u!137 &7826970388445611825 stripped
 SkinnedMeshRenderer:
   m_CorrespondingSourceObject: {fileID: 2137578508600275907, guid: 740728f854d793848a530ac50ca86174,
+    type: 3}
+  m_PrefabInstance: {fileID: 8157365059764204786}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &7981064556925482625 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2303212568160584307, guid: 740728f854d793848a530ac50ca86174,
+    type: 3}
+  m_PrefabInstance: {fileID: 8157365059764204786}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8123536988482044803 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 110427889724667761, guid: 740728f854d793848a530ac50ca86174,
+    type: 3}
+  m_PrefabInstance: {fileID: 8157365059764204786}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8382142605214664989
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8123536988482044803}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f3505aa6d98bd4418e0744d5ab56fdd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Mecanim: {fileID: 1988781550969284046}
+  GroundedParameter: 
+  MovingParameter: 
+  User_IsMovingMecanim_NotMovingFloat_Threshold: 0.1
+  Rigidbody: {fileID: 0}
+  UseRigidbodyVelocityForIsMoving: 0
+  UseRaycastsForIsGrounded: 0
+  SlidingParameter: 
+  SpineBone: {fileID: 0}
+  ChestBone: {fileID: 0}
+  RagdolledParameter: 
+  SwingHelper: 0
+  GluingFloorLevel: 0.05
+  GluingFloorLevelUseOnMoving: 0
+  GluingFloorLevelOnMoving: 0
+  StepPointsOverlapRadius: 0
+  UseStepPointsOverlapRadiusOnMoving: 0
+  StepPointsOverlapRadiusOnMoving: 0
+  MotionInfluence:
+    AdvancedInfluence: 0
+    AxisMotionInfluence: {x: 0, y: 1, z: 1}
+    AxisMotionInfluenceBackwards: {x: 1, y: 1, z: 1}
+  Event_OnStep:
+    m_PersistentCalls:
+      m_Calls: []
+  EventExecuteSooner: 0.05
+  SendOnMovingGlue: 0
+  SendOnStopping: 0
+  StepEventOnLanding: 0
+  StepInfoReceiver: {fileID: 0}
+  ExtraPelvisOffset: {x: 0, y: 0, z: 0}
+  ReposeGluingAfter: 0
+  GlueOnlyOnIdle: 0
+  LocalWorldUp: 1
+  DisableCustomModules: 0
+  CustomModules:
+  - Enabled: 1
+    Parent: {fileID: 8382142605214664989}
+    ModuleReference: {fileID: 11400000, guid: 7d9bd86d54a7a594cb1793f9533e2e00, type: 2}
+    customStringList: []
+    customObjectList: []
+    variables:
+    - VariableName: Rotation Power
+      Tooltip: 
+      _value: {x: -0.25, y: 0, z: 0, w: 0}
+      _string: 
+      _curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      _uObject: {fileID: 0}
+      VariableType: 0
+      _rangeHelper: {x: 0, y: 0, z: 0, w: 0}
+  - Enabled: 1
+    Parent: {fileID: 8382142605214664989}
+    ModuleReference: {fileID: 11400000, guid: 0645fbea8059aec47aa6ae9d2c93c1d4, type: 2}
+    customStringList: []
+    customObjectList: []
+    variables: []
+  - Enabled: 1
+    Parent: {fileID: 8382142605214664989}
+    ModuleReference: {fileID: 11400000, guid: fc8dd9a1771bc6641a62a074a5cb6e47, type: 2}
+    customStringList: []
+    customObjectList: []
+    variables:
+    - VariableName: Matrix Blend
+      Tooltip: 
+      _value: {x: 1, y: 0, z: 0, w: 0}
+      _string: 
+      _curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      _uObject: {fileID: 0}
+      VariableType: 0
+      _rangeHelper: {x: 0, y: 1, z: 0, w: 0}
+    - VariableName: Aligning Speed
+      Tooltip: 
+      _value: {x: 0.7, y: 0, z: 0, w: 0}
+      _string: 
+      _curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      _uObject: {fileID: 0}
+      VariableType: 0
+      _rangeHelper: {x: 0, y: 1, z: 0, w: 0}
+    - VariableName: Rotate Hips
+      Tooltip: 
+      _value: {x: 1, y: 0, z: 0, w: 0}
+      _string: 
+      _curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      _uObject: {fileID: 0}
+      VariableType: 0
+      _rangeHelper: {x: 0, y: 1, z: 0, w: 0}
+    - VariableName: Rotation Axis Blend
+      Tooltip: 'Giving possibility for locking alignment rotation to target axes.
+
+        X
+        = Forward/Back lean  Z = Sides Lean,
+
+        set axis value 0 to disable
+        adjustement leaning for the axis.'
+      _value: {x: 1, y: 1, z: 1, w: 0}
+      _string: 
+      _curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      _uObject: {fileID: 0}
+      VariableType: 3
+      _rangeHelper: {x: 0, y: 0, z: 0, w: 0}
+  - Enabled: 1
+    Parent: {fileID: 8382142605214664989}
+    ModuleReference: {fileID: 11400000, guid: 60110ab23d4a6e24ba70bc59b3c853ca, type: 2}
+    customStringList: []
+    customObjectList: []
+    variables:
+    - VariableName: Adjust Power
+      Tooltip: 
+      _value: {x: 1, y: 0, z: 0, w: 0}
+      _string: 
+      _curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      _uObject: {fileID: 0}
+      VariableType: 0
+      _rangeHelper: {x: 0, y: 2, z: 0, w: 0}
+    - VariableName: Adjusting Speed
+      Tooltip: 
+      _value: {x: 1, y: 0, z: 0, w: 0}
+      _string: 
+      _curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      _uObject: {fileID: 0}
+      VariableType: 0
+      _rangeHelper: {x: 0, y: 1, z: 0, w: 0}
+  - Enabled: 1
+    Parent: {fileID: 8382142605214664989}
+    ModuleReference: {fileID: 11400000, guid: c261eeb190ed9e04ba45cc1ef730d734, type: 2}
+    customStringList:
+    - 0
+    - 1
+    - 0
+    - 0
+    - 0
+    - 1
+    - 0
+    - 0
+    customObjectList: []
+    variables:
+    - VariableName: Fade Speed
+      Tooltip: 
+      _value: {x: 0.75, y: 0, z: 0, w: 0}
+      _string: 
+      _curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      _uObject: {fileID: 0}
+      VariableType: 0
+      _rangeHelper: {x: 0, y: 1, z: 0, w: 0}
+    - VariableName: Idle Glue During Fade
+      Tooltip: Switch to idle glue mode during the fade - it can make possible slow-steps-moving
+        when static animation is being played!
+      _value: {x: 0, y: 0, z: 0, w: 0}
+      _string: 
+      _curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      _uObject: {fileID: 0}
+      VariableType: 1
+      _rangeHelper: {x: 0, y: 0, z: 0, w: 0}
+    - VariableName: Animation State Tag
+      Tooltip: 
+      _value: {x: 0, y: 0, z: 0, w: 0}
+      _string: Attack
+      _curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      _uObject: {fileID: 0}
+      VariableType: 4
+      _rangeHelper: {x: 0, y: 0, z: 0, w: 0}
+    - VariableName: Animation State Name
+      Tooltip: 
+      _value: {x: 0, y: 0, z: 0, w: 0}
+      _string: 
+      _curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      _uObject: {fileID: 0}
+      VariableType: 4
+      _rangeHelper: {x: 0, y: 0, z: 0, w: 0}
+  ImpulsesPowerMultiplier: 1
+  ImpulsesDurationMultiplier: 1
+  ImpulsesDampUpPushes: 0
+  DebugPushHipsImpulse:
+    OptionalName: Impulse
+    PowerMultiplier: 1
+    ImpulseDuration: 0.6
+    WorldTranslation: {x: 0, y: 0, z: 0}
+    LocalTranslation: {x: 0, y: -1, z: 0}
+    HipsRotate: {x: 0, y: 0, z: 0}
+    InheritElasticness: 0.75
+    ImpulseCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 0.2
+        value: 1
+        inSlope: 3.4375
+        outSlope: 3.4375
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    YAxisMultiplyCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    AlignWithDesiredMoveDirection: 0
+  UseHips: 1
+  HipsHeightStepBlend: 1
+  HipsHeightStepSpeed: 0.7
+  HipsAdjustStyle: 0
+  StabilizeCenterOfMass: 1
+  AnimationIsStablePose: 0.75
+  StabilizingSpeed: 0.375
+  PushHipsOnLegMove: 0.11
+  NormalizePush: 1
+  PushReactionSpeed: 0.3
+  PushYBlend: 1
+  HipsStretchPreventer: 0.15
+  StretchPreventerSpeed: 0.8
+  StabilizeOnIsMoving: 0.5
+  _Hips_Modules_ExtraWOffset: {x: 0, y: 0, z: 0}
+  _Hips_Modules_ExtraRotOffset: {x: 0, y: 0, z: 0}
+  ExtraHipsHubs: []
+  HipsHubsHandling: 1
+  HipsHubsBlend: 1
+  HubsBackBonesBlend:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  HubBackBonesElasticity: 0.1
+  HipsSetup:
+    HipsElasticityBlend: 1
+    HipsMuscle:
+      DesiredPosition: {x: 0, y: 0, z: 0}
+      Acceleration: 10000
+      AccelerationLimit: 5000
+      Damping: 10
+      BrakePower: 0.2
+    HipsRotElasticityBlend: 0
+    HipsRotMuscle:
+      DesiredRotation: {x: 0, y: 0, z: 0, w: 0}
+      Acceleration: 5000
+      AccelerationLimit: 1000
+      Damping: 10
+      BrakePower: 0.2
+  StabilityAlgorithm: 1
+  Legs:
+  - G_CustomForceAttach: 0
+    G_CustomForceNOTDetach: 0
+    G_CustomForceDetach: 0
+    G_CustomForceNOTAttach: 0
+    Owner: {fileID: 8382142605214664989}
+    LegBlendWeight: 1
+    LegMoveSpeedMultiplier: 0.8630511
+    LegRaiseMultiplier: 0.8760767
+    GlueThresholdMultiplier: 0.96311694
+    GluePointOffset: {x: 0, y: 0}
+    LegStretchMultiplier: 1
+    CustomLegAnimating: {fileID: 0}
+    FootPitchOffset: 0
+    BoneStart: {fileID: 3925057136180767451}
+    BoneMid: {fileID: 7177386232958846628}
+    BoneEnd: {fileID: 7349069554441847842}
+    Side: 2
+    OppositeLegIndex: 2
+    RaycastPrecision: 0
+    UseFeet: 0
+    BoneFeet: {fileID: 0}
+    FeetSensitivity: 0.5
+    InverseHint: 0
+    AnkleToHeel: {x: 0.00003252301, y: 0.00041699223, z: -0.0002211397}
+    AnkleToFeetEnd: {x: 0.0016701906, y: 0.0015725093, z: 0.002198547}
+    AnkleRight: {x: -0.85064566, y: 0.2965762, z: 0.43410173}
+    AnkleUp: {x: -0.06874961, y: -0.8813577, z: 0.46742076}
+    AnkleForward: {x: 0.52122486, y: 0.367765, z: 0.7701127}
+    FootMiddlePosition: 0.5
+    AnkleYawCorrection: 0
+    _FinalIKPos: {x: 0, y: 0, z: 0}
+  - G_CustomForceAttach: 0
+    G_CustomForceNOTDetach: 0
+    G_CustomForceDetach: 0
+    G_CustomForceNOTAttach: 0
+    Owner: {fileID: 8382142605214664989}
+    LegBlendWeight: 1
+    LegMoveSpeedMultiplier: 0.9213178
+    LegRaiseMultiplier: 0.9106009
+    GlueThresholdMultiplier: 0.9847248
+    GluePointOffset: {x: 0, y: 0}
+    LegStretchMultiplier: 1
+    CustomLegAnimating: {fileID: 0}
+    FootPitchOffset: 0
+    BoneStart: {fileID: 661389622942422238}
+    BoneMid: {fileID: 7417358527079731205}
+    BoneEnd: {fileID: 4828147289230423475}
+    Side: 1
+    OppositeLegIndex: 5
+    RaycastPrecision: 0
+    UseFeet: 0
+    BoneFeet: {fileID: 0}
+    FeetSensitivity: 0.5
+    InverseHint: 0
+    AnkleToHeel: {x: -0.000039294206, y: 0.0004859129, z: -0.00025790077}
+    AnkleToFeetEnd: {x: -0.0021369124, y: 0.0014479505, z: 0.0018743508}
+    AnkleRight: {x: -0.7410922, y: -0.36053756, z: -0.5663878}
+    AnkleUp: {x: 0.07125077, y: -0.88105685, z: 0.46761367}
+    AnkleForward: {x: -0.667612, y: 0.30618924, z: 0.6786329}
+    FootMiddlePosition: 0.5
+    AnkleYawCorrection: 0
+    _FinalIKPos: {x: 0, y: 0, z: 0}
+  - G_CustomForceAttach: 0
+    G_CustomForceNOTDetach: 0
+    G_CustomForceDetach: 0
+    G_CustomForceNOTAttach: 0
+    Owner: {fileID: 8382142605214664989}
+    LegBlendWeight: 1
+    LegMoveSpeedMultiplier: 0.9377858
+    LegRaiseMultiplier: 0.99426824
+    GlueThresholdMultiplier: 0.98875487
+    GluePointOffset: {x: 0, y: 0}
+    LegStretchMultiplier: 1
+    CustomLegAnimating: {fileID: 0}
+    FootPitchOffset: 0
+    BoneStart: {fileID: 7378284936804751020}
+    BoneMid: {fileID: 4298591171434137210}
+    BoneEnd: {fileID: 5183896249293289611}
+    Side: 1
+    OppositeLegIndex: 0
+    RaycastPrecision: 0
+    UseFeet: 0
+    BoneFeet: {fileID: 0}
+    FeetSensitivity: 0.5
+    InverseHint: 0
+    AnkleToHeel: {x: 0.000012284547, y: 0.00037076697, z: -0.00016073861}
+    AnkleToFeetEnd: {x: -0.0015102272, y: 0.0015063584, z: 0.00234214}
+    AnkleRight: {x: -0.8742224, y: -0.16845298, z: -0.4553668}
+    AnkleUp: {x: -0.030391693, y: -0.9170589, z: 0.39759246}
+    AnkleForward: {x: -0.48457384, y: 0.36142355, z: 0.79659367}
+    FootMiddlePosition: 0.5
+    AnkleYawCorrection: 0
+    _FinalIKPos: {x: 0, y: 0, z: 0}
+  - G_CustomForceAttach: 0
+    G_CustomForceNOTDetach: 0
+    G_CustomForceDetach: 0
+    G_CustomForceNOTAttach: 0
+    Owner: {fileID: 8382142605214664989}
+    LegBlendWeight: 1
+    LegMoveSpeedMultiplier: 0.833686
+    LegRaiseMultiplier: 0.9220369
+    GlueThresholdMultiplier: 0.9051482
+    GluePointOffset: {x: 0, y: 0}
+    LegStretchMultiplier: 1
+    CustomLegAnimating: {fileID: 0}
+    FootPitchOffset: 0
+    BoneStart: {fileID: 848366714366459142}
+    BoneMid: {fileID: 1520734784327106505}
+    BoneEnd: {fileID: 5455828095919187810}
+    Side: 1
+    OppositeLegIndex: 6
+    RaycastPrecision: 0
+    UseFeet: 0
+    BoneFeet: {fileID: 0}
+    FeetSensitivity: 0.5
+    InverseHint: 0
+    AnkleToHeel: {x: -0.000001287081, y: 0.00016309507, z: -0.00004141391}
+    AnkleToFeetEnd: {x: -0.001777144, y: 0.00078778435, z: 0.0024741513}
+    AnkleRight: {x: -0.8249146, y: -0.14523274, z: -0.5462816}
+    AnkleUp: {x: 0.0076672435, y: -0.96921587, z: 0.24609458}
+    AnkleForward: {x: -0.5652056, y: 0.19881839, z: 0.80063355}
+    FootMiddlePosition: 0.5
+    AnkleYawCorrection: 0
+    _FinalIKPos: {x: 0, y: 0, z: 0}
+  - G_CustomForceAttach: 0
+    G_CustomForceNOTDetach: 0
+    G_CustomForceDetach: 0
+    G_CustomForceNOTAttach: 0
+    Owner: {fileID: 8382142605214664989}
+    LegBlendWeight: 1
+    LegMoveSpeedMultiplier: 0.90751076
+    LegRaiseMultiplier: 0.96610105
+    GlueThresholdMultiplier: 0.8947299
+    GluePointOffset: {x: 0, y: 0}
+    LegStretchMultiplier: 1
+    CustomLegAnimating: {fileID: 0}
+    FootPitchOffset: 0
+    BoneStart: {fileID: 294329193912701714}
+    BoneMid: {fileID: 5715873971314523224}
+    BoneEnd: {fileID: 5241304844697884289}
+    Side: 1
+    OppositeLegIndex: 7
+    RaycastPrecision: 0
+    UseFeet: 0
+    BoneFeet: {fileID: 0}
+    FeetSensitivity: 0.5
+    InverseHint: 0
+    AnkleToHeel: {x: -0.00006626047, y: 0.00042178947, z: -0.000052274318}
+    AnkleToFeetEnd: {x: -0.002116817, y: 0.0003946768, z: 0.0023281544}
+    AnkleRight: {x: -0.74184656, y: -0.19602913, z: -0.6412771}
+    AnkleUp: {x: 0.15405166, y: -0.9805604, z: 0.12153214}
+    AnkleForward: {x: -0.6526346, y: -0.008631781, z: 0.7576239}
+    FootMiddlePosition: 0.5
+    AnkleYawCorrection: 0
+    _FinalIKPos: {x: 0, y: 0, z: 0}
+  - G_CustomForceAttach: 0
+    G_CustomForceNOTDetach: 0
+    G_CustomForceDetach: 0
+    G_CustomForceNOTAttach: 0
+    Owner: {fileID: 8382142605214664989}
+    LegBlendWeight: 1
+    LegMoveSpeedMultiplier: 0.94201595
+    LegRaiseMultiplier: 0.8063395
+    GlueThresholdMultiplier: 0.9052397
+    GluePointOffset: {x: 0, y: 0}
+    LegStretchMultiplier: 1
+    CustomLegAnimating: {fileID: 0}
+    FootPitchOffset: 0
+    BoneStart: {fileID: 3462787272313589975}
+    BoneMid: {fileID: 4085523846209943737}
+    BoneEnd: {fileID: 5465771665294625799}
+    Side: 2
+    OppositeLegIndex: 1
+    RaycastPrecision: 0
+    UseFeet: 0
+    BoneFeet: {fileID: 0}
+    FeetSensitivity: 0.5
+    InverseHint: 0
+    AnkleToHeel: {x: 0.000004180229, y: 0.00027730782, z: -0.00005169329}
+    AnkleToFeetEnd: {x: 0.002027327, y: 0.00068837125, z: 0.0023168158}
+    AnkleRight: {x: -0.7649577, y: 0.12915745, z: 0.63099766}
+    AnkleUp: {x: -0.014809638, y: -0.9829558, z: 0.18324494}
+    AnkleForward: {x: 0.64391017, y: 0.13082969, z: 0.75383234}
+    FootMiddlePosition: 0.5
+    AnkleYawCorrection: 0
+    _FinalIKPos: {x: 0, y: 0, z: 0}
+  - G_CustomForceAttach: 0
+    G_CustomForceNOTDetach: 0
+    G_CustomForceDetach: 0
+    G_CustomForceNOTAttach: 0
+    Owner: {fileID: 8382142605214664989}
+    LegBlendWeight: 1
+    LegMoveSpeedMultiplier: 0.83380145
+    LegRaiseMultiplier: 0.8430642
+    GlueThresholdMultiplier: 0.96311766
+    GluePointOffset: {x: 0, y: 0}
+    LegStretchMultiplier: 1
+    CustomLegAnimating: {fileID: 0}
+    FootPitchOffset: 0
+    BoneStart: {fileID: 840995147961949668}
+    BoneMid: {fileID: 1562558410296459370}
+    BoneEnd: {fileID: 4277616498774901315}
+    Side: 2
+    OppositeLegIndex: 3
+    RaycastPrecision: 0
+    UseFeet: 0
+    BoneFeet: {fileID: 0}
+    FeetSensitivity: 0.5
+    InverseHint: 0
+    AnkleToHeel: {x: 0.000055513057, y: 0.0004627686, z: -0.00015292034}
+    AnkleToFeetEnd: {x: 0.0020494484, y: 0.0010056663, z: 0.0022138183}
+    AnkleRight: {x: -0.7644987, y: 0.28308165, z: 0.5791429}
+    AnkleUp: {x: -0.113167375, y: -0.94340336, z: 0.3117431}
+    AnkleForward: {x: 0.634614, y: 0.17278698, z: 0.75326616}
+    FootMiddlePosition: 0.5
+    AnkleYawCorrection: 0
+    _FinalIKPos: {x: 0, y: 0, z: 0}
+  - G_CustomForceAttach: 0
+    G_CustomForceNOTDetach: 0
+    G_CustomForceDetach: 0
+    G_CustomForceNOTAttach: 0
+    Owner: {fileID: 8382142605214664989}
+    LegBlendWeight: 1
+    LegMoveSpeedMultiplier: 0.9182081
+    LegRaiseMultiplier: 0.9979854
+    GlueThresholdMultiplier: 0.9327146
+    GluePointOffset: {x: 0, y: 0}
+    LegStretchMultiplier: 1
+    CustomLegAnimating: {fileID: 0}
+    FootPitchOffset: 0
+    BoneStart: {fileID: 735825728326621165}
+    BoneMid: {fileID: 4527137710414858489}
+    BoneEnd: {fileID: 8778916344061880368}
+    Side: 2
+    OppositeLegIndex: 4
+    RaycastPrecision: 0
+    UseFeet: 0
+    BoneFeet: {fileID: 0}
+    FeetSensitivity: 0.5
+    InverseHint: 0
+    AnkleToHeel: {x: 0.000015743002, y: 0.00049427245, z: 0.0000015238713}
+    AnkleToFeetEnd: {x: 0.0021795274, y: 0.00041832775, z: 0.0022784064}
+    AnkleRight: {x: -0.7243725, y: 0.020935357, z: 0.68909097}
+    AnkleUp: {x: -0.031829327, y: -0.9994889, z: -0.0030932128}
+    AnkleForward: {x: 0.6886738, y: -0.024173945, z: 0.7246684}
+    FootMiddlePosition: 0.5
+    AnkleYawCorrection: 0
+    _FinalIKPos: {x: 0, y: 0, z: 0}
+  BaseLegAnimating:
+    StepMoveDuration: 0.25
+    MoveToGoalCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 3
+        inWeight: 0
+        outWeight: 0.1842105
+      - serializedVersion: 3
+        time: 0.46184734
+        value: 0.74404866
+        inSlope: 1.38764
+        outSlope: 1.38764
+        tangentMode: 0
+        weightedMode: 3
+        inWeight: 0.3333333
+        outWeight: 0.3333333
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 3
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    SpherizeTrack:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: -0.625
+        outSlope: -0.625
+        tangentMode: 0
+        weightedMode: 3
+        inWeight: 0
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.4
+        value: -0.25
+        inSlope: -0.625
+        outSlope: -0.625
+        tangentMode: 0
+        weightedMode: 3
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.85
+        value: 0
+        inSlope: 0.5555555
+        outSlope: 0.5555555
+        tangentMode: 0
+        weightedMode: 3
+        inWeight: 0.33333334
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    SpherizePower: 0.1
+    MinFootRaise: 0.2
+    MaxFootRaise: 0.365
+    RaiseYAxisCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0.8504464
+        outSlope: 0.8504464
+        tangentMode: 0
+        weightedMode: 3
+        inWeight: 0
+        outWeight: 0.6517575
+      - serializedVersion: 3
+        time: 0.5943514
+        value: 0.7946472
+        inSlope: -0.2710344
+        outSlope: -0.2710344
+        tangentMode: 0
+        weightedMode: 3
+        inWeight: 0.3333333
+        outWeight: 0.3333333
+      - serializedVersion: 3
+        time: 1
+        value: 0
+        inSlope: -0.1500788
+        outSlope: -0.1500788
+        tangentMode: 0
+        weightedMode: 3
+        inWeight: 0.5409704
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    AllowSpeedups: 0.4
+    AllowDetachBefore: 0.95
+    PushHipsOnMoveCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 5.630541
+        outSlope: 5.630541
+        tangentMode: 0
+        weightedMode: 3
+        inWeight: 0
+        outWeight: 0.198735
+      - serializedVersion: 3
+        time: 0.320017
+        value: 0.654645
+        inSlope: -0.1664574
+        outSlope: -0.1664574
+        tangentMode: 0
+        weightedMode: 3
+        inWeight: 0.333
+        outWeight: 0.2940554
+      - serializedVersion: 3
+        time: 0.6681702
+        value: 0.2174691
+        inSlope: -1.565806
+        outSlope: -1.565806
+        tangentMode: 0
+        weightedMode: 3
+        inWeight: 0.3605607
+        outWeight: 0.3446763
+      - serializedVersion: 3
+        time: 1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 3
+        inWeight: 0.09374858
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    FootRotationCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0.5764588
+        outSlope: 0.5764588
+        tangentMode: 0
+        weightedMode: 3
+        inWeight: 0
+        outWeight: 0.4956417
+      - serializedVersion: 3
+        time: 0.4378169
+        value: 0.2035736
+        inSlope: -0.2411275
+        outSlope: -0.2411275
+        tangentMode: 0
+        weightedMode: 3
+        inWeight: 0.3333333
+        outWeight: 0.4033037
+      - serializedVersion: 3
+        time: 0.7841034
+        value: -0.1339308
+        inSlope: 0.3331003
+        outSlope: 0.3331003
+        tangentMode: 0
+        weightedMode: 3
+        inWeight: 0.3333333
+        outWeight: 0.3333333
+      - serializedVersion: 3
+        time: 1
+        value: 0
+        inSlope: 0.3498169
+        outSlope: 0.3498169
+        tangentMode: 0
+        weightedMode: 3
+        inWeight: 0.5534658
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+  UseGluing: 1
+  MainGlueBlend: 1
+  GlueRangeThreshold: 0.25
+  GlueFadeInSpeed: 0.85
+  AllowGlueBelowFoot: 0.2
+  GlueFadeOutSpeed: 0.109
+  UnglueOn: 30
+  AllowGlueDrag: 0.9
+  GlueMode: 2
+  OnlyLocalAnimation: 0
+  SmoothSuddenSteps: 0
+  LegElevateBlend: 0
+  LegElevateHeightLimit: 0.6
+  FootRotationBlend: 1
+  FootAlignRapidity: 0.75
+  AnimateFeet: 0
+  LimitFeetYaw: 30
+  AnimationFloorLevel: 0.001
+  _Editor_Foldout_Setup_LegsList: 1
+  _Editor_EnsureCount: 0
+  _Editor_OnValidateTrigger: 1
+  _EditorAllowAutoUpdateFeetParams: 1
+  _EditorCategory: 1
+  _EditorSetupCategory: 0
+  _EditorMotionCategory: 1
+  _EditorExtraCategory: 0
+  IKHintMode: 0
+  LimitLegStretch: 0.99
+  FeetYOffset: 0
+  FeetLengthAdjust: 0
+  baseTransform: {fileID: 0}
+  Hips: {fileID: 8252424615950936382}
+  ScaleReferenceMode: 3
+  finalScaleReference: 2.0946484
+  finalScaleReferenceSqrt: 0.1
+  customScaleReferenceValue: 0.5
+  DelayedInitialization: 0
+  Calibrate: 1
+  AnimatePhysics: 0
+  UnscaledDeltaTime: 0
+  DisableIfInvisible: {fileID: 0}
+  FadeOffAtDistance: 0
+  GroundMask:
+    serializedVersion: 2
+    m_Bits: 10240
+  RaycastHitTrigger: 1
+  CastDistance: 1
+  RaycastStartHeight: 0
+  RaycastStartHeightMul: 1
+  RaycastStyle: 3
+  RaycastShape: 0
+  SpherecastRealign: 0
+  SpherecastResize: 1
+  NoRaycastGroundBehaviour: 0
+  ZeroStepsOnNoRaycast: 0
+  NoRaycast_KeepAttachedUntilStretch: 1.1
+  BodyStepDown: 0.5
+  MaxBodyStepUp: 0
+  UngroundFadeSpeed: 0.1
+  IsMovingFadeSpeed: 0.4
+  LegsAnimatorBlend: 1
+  _Editor_DefaultModuleOnStart: {fileID: 11400000, guid: 7d9bd86d54a7a594cb1793f9533e2e00,
+    type: 2}
+  _Editor_LegHelperModule: {fileID: 11400000, guid: 0645fbea8059aec47aa6ae9d2c93c1d4,
+    type: 2}
+--- !u!4 &8205324701661518957 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 66396323811190943, guid: 740728f854d793848a530ac50ca86174,
+    type: 3}
+  m_PrefabInstance: {fileID: 8157365059764204786}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8227392899348739386 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 223308669405430216, guid: 740728f854d793848a530ac50ca86174,
+    type: 3}
+  m_PrefabInstance: {fileID: 8157365059764204786}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8252424615950936382 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 266354743710604748, guid: 740728f854d793848a530ac50ca86174,
+    type: 3}
+  m_PrefabInstance: {fileID: 8157365059764204786}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8357186837509890159 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 202232537525081245, guid: 740728f854d793848a530ac50ca86174,
+    type: 3}
+  m_PrefabInstance: {fileID: 8157365059764204786}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8692921810463427418 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 691230083457138600, guid: 740728f854d793848a530ac50ca86174,
+    type: 3}
+  m_PrefabInstance: {fileID: 8157365059764204786}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8778916344061880368 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 639565760192076994, guid: 740728f854d793848a530ac50ca86174,
     type: 3}
   m_PrefabInstance: {fileID: 8157365059764204786}
   m_PrefabAsset: {fileID: 0}

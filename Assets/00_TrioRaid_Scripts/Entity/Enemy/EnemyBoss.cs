@@ -5,8 +5,10 @@ public class EnemyBoss : MonoBehaviour
 {
     private void OnDestroy()
     {
-        PlayerManager.Instance.LocalPlayerController.GetMouseMovement().UnLockMouseCursor();
+        if (PlayerManager.Instance)
+            PlayerManager.Instance.LocalPlayerController.GetMouseMovement().UnLockMouseCursor();
 
-        PlayerUIManager.Instance.ShowResultUI();
+        if (PlayerUIManager.Instance)
+            PlayerUIManager.Instance.ShowResultUI();
     }
 }

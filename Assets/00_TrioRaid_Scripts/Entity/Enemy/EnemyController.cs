@@ -49,26 +49,32 @@ public class EnemyController : NetworkBehaviour, IDamageable
     [SerializeField] private Transform mesh_parent;
     [FoldoutGroup("Reference")]
     private Material dissolveMaterial;
+    private OutlineController outlineController;
 
     protected virtual void Awake()
     {
         dissolveMaterial = mesh.material;
-        if (!IsOwner) return;
+        outlineController = GetComponent<OutlineController>();
+
+
     }
 
     protected virtual void Start()
     {
         // OnEnemyDead_Local += () => enemyHealth.GetEnemyHealth_UI().gameObject.SetActive(false);
         OnEnemyDead_Local += () => collideHitBox.enabled = false;
+        OnEnemyDead_Local += outlineController.ShowOutline;
         OnEnemyHit_Local += OnEnemyHit_Shaking;
+
+        outlineController.ShowOutline();
+
     }
 
 
 
     public override void OnNetworkSpawn()
     {
-        if (!IsOwner || !IsServer) return;
-        Target = PlayerManager.Instance.GetClosestPlayerFrom(transform.position);
+        if (!IsSpawned || !IsServer) return;
         CanMove = true;
     }
 
@@ -78,6 +84,11 @@ public class EnemyController : NetworkBehaviour, IDamageable
 
     protected virtual void Update()
     {
+
+        if (!Target && IsSpawned)
+        {
+            Target = PlayerManager.Instance.GetClosestPlayerFrom(transform.position);
+        }
         delayEnemySpawn -= Time.deltaTime;
     }
 

@@ -712,6 +712,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: -9096503597814934226}
+    - targetCorrespondingSourceObject: {fileID: 712881128543300860, guid: b116f61db08cf6f49b80c75bfc0b419c,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3021168559055143192}
   m_SourcePrefab: {fileID: 100100000, guid: b116f61db08cf6f49b80c75bfc0b419c, type: 3}
 --- !u!136 &3376350037253982338 stripped
 CapsuleCollider:
@@ -760,7 +764,7 @@ MonoBehaviour:
   _enemyCharacterData: {fileID: 0}
   agent: {fileID: 0}
   behaviourTreeInstance: {fileID: 0}
-  target: {fileID: 0}
+  Target: {fileID: 0}
   CanMove: 1
   IsTaunted: 0
   IsStun: 0
@@ -858,6 +862,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6c0be61502bb534f922ebb746851216, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3021168559055143192
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3991757503176248713}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9f72c32cc78ebd4fba37d2634b037ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 0.87169814, g: 0, b: 0, a: 1}
+  outlineWidth: 5.5
+  outlines: []
 --- !u!4 &4592054655671717637 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 88799522247470704, guid: b116f61db08cf6f49b80c75bfc0b419c,

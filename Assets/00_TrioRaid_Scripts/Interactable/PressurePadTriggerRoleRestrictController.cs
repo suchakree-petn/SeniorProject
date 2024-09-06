@@ -27,11 +27,13 @@ public class PressurePadTriggerRoleRestrictController : PressurePadTriggerContro
 
     private Vector3 originRoleIconLocalPosition;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         originRoleIconLocalPosition = transform.localPosition;
     }
 
+ 
     protected override void OnTriggerEnter(Collider other)
     {
         if (!other.transform.root.TryGetComponent(out PlayerController playerController)) return;

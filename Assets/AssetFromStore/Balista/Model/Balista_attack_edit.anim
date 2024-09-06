@@ -1276,6 +1276,24 @@ AnimationClip:
         inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       - serializedVersion: 3
+        time: 0.53333336
+        value: {x: 0.026647316, y: -1097.69, z: 1.1037624}
+        inSlope: {x: -0.008020923, y: 4.862888, z: -8.699996}
+        outSlope: {x: -0.008020923, y: 4.862888, z: -8.699996}
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
+        outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
+      - serializedVersion: 3
+        time: 1.2666667
+        value: {x: 0.00013562113, y: -1097.69, z: -27.652843}
+        inSlope: {x: -0.008020935, y: 4.862888, z: -8.701516}
+        outSlope: {x: -0.008020935, y: 4.862888, z: -8.701516}
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
+        outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
+      - serializedVersion: 3
         time: 1.3
         value: {x: 0, y: 13.4, z: -27.8}
         inSlope: {x: -7.357093e-16, y: 0.0006891532, z: -0.0016524361}
@@ -7482,6 +7500,24 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
+        time: 0.53333336
+        value: -1097.69
+        inSlope: 4.862888
+        outSlope: 4.862888
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 1.2666667
+        value: -1097.69
+        inSlope: 4.862888
+        outSlope: 4.862888
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
         time: 1.3
         value: 13.4
         inSlope: 0.0006891532
@@ -13390,4 +13426,11 @@ AnimationClip:
     flags: 0
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
-  m_Events: []
+  m_Events:
+  - time: 0.5
+    functionName: AnimationEventHandler_OnFire
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0

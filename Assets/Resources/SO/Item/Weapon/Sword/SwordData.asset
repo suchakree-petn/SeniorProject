@@ -16,7 +16,7 @@ MonoBehaviour:
   AttackPoint: 100
   WeaponType: 0
   IsCriticalable: 0
-  AttackTimeInterval: 0.1
+  AttackTimeInterval: 0.3
   NA_Combo_1_DamageMultiplier: 0.8
   NA_Combo_2_DamageMultiplier: 1.2
   NA_Combo_3_DamageMultiplier: 1.7

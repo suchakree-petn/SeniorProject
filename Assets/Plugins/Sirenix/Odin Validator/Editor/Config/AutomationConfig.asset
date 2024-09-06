@@ -14,20 +14,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   OnPlayMode: 0
   OnPlayModeIfWarnings: 0
-  OnPlayModeIfErrors: 3
+  OnPlayModeIfErrors: 1
   OnPlayModeAlwaysCompleteValidationFully: 0
   OnPlayModeFlashScreen: 0
   OnPlayModeSetup:
     Profile: 0
-    ProfileAsset: {fileID: 0}
-  OnBuild: 0
+    ProfileAsset: {fileID: 11400000, guid: 5b885273efff3314c9613480186de6d8, type: 2}
+  OnBuild: 1
   OnBuildIfWarnings: 0
   OnBuildIfErrors: 3
   OnBuildAlwaysCompleteValidationFully: 0
   OnBuildFlashScreen: 0
   OnBuildSetup:
     Profile: 0
-    ProfileAsset: {fileID: 0}
+    ProfileAsset: {fileID: 11400000, guid: 5b885273efff3314c9613480186de6d8, type: 2}
   OnProjectStartup: 0
   OnProjectStartupIfWarnings: 0
   OnProjectStartupIfErrors: 1
@@ -35,4 +35,4 @@ MonoBehaviour:
   OnProjectStartupFlashScreen: 0
   OnProjectStartupSetup:
     Profile: 0
-    ProfileAsset: {fileID: 0}
+    ProfileAsset: {fileID: 11400000, guid: 5b885273efff3314c9613480186de6d8, type: 2}

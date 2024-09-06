@@ -1,49 +1,87 @@
 using System;
 using Cinemachine;
-using DG.Tweening;
 using Gamekit3D;
+using Sirenix.OdinInspector;
 using TMPro;
 using Unity.Netcode;
+using Unity.Netcode.Components;
 using UnityEngine;
 
 public class BalistaController : NetworkBehaviour
 {
-    [Header("Broken")]
-    public Action OnRepairSuccess;
+    public Action OnFire_Local;
 
-    [SerializeField] private NetworkVariable<float> repairProgress = new(0);
-    public float RepairProgress => repairProgress.Value;
-    public float RepairMaxProgress = 100;
-    public bool IsRepaired => RepairProgress >= RepairMaxProgress;
-
-
-    [Header("Completed")]
+    [Header("Config")]
     [SerializeField] private NetworkVariable<bool> isInUse = new(false);
     public bool IsInUse => isInUse.Value;
-    public float RotateSpeed = 10;
-    public float MaxCameraPitch = 60;
+    [SerializeField] float rotateSpeed = 10;
+    [SerializeField] float maxCameraPitch = 60;
+    [SerializeField] float minCameraPitch = 10;
     float cameraPitch;
+    [SerializeField] float arrowSpeed = 10;
+    [SerializeField] float fireCooldown = 1;
+    float _fireCooldown;
+    [SerializeField] float firePointOffset = 1;
+
+
 
     public PlayerController UsingPlayer;
 
-    [Header("Refererence")]
+    [FoldoutGroup("Refererence")]
     [SerializeField] private TextMeshPro text_interactButton;
+
+
+    [FoldoutGroup("Refererence")]
     [SerializeField] private InteractOnButton use_interactButton;
+
+    [FoldoutGroup("Refererence")]
     [SerializeField] private InteractOnButton exit_interactButton;
+
+    [FoldoutGroup("Refererence")]
     [SerializeField] private Transform povTransform;
+
+    [FoldoutGroup("Refererence")]
     [SerializeField] private CinemachineVirtualCamera povCam;
-    [SerializeField] private Animator animator;
+
+    [FoldoutGroup("Refererence")]
+    [SerializeField] private NetworkAnimator networkAnimator;
+
+    [FoldoutGroup("Refererence")]
+    [SerializeField] private GameObject balista;
+
+    [FoldoutGroup("Refererence")]
+    [SerializeField] private GameObject stackBalista;
+
+    [FoldoutGroup("Refererence")]
+    [SerializeField] private Transform arrow_prf;
 
     private void Start()
     {
-        text_interactButton.SetText("<color=#ffa500ff> F </color> เพื่อซ่อม");
-
-        OnRepairSuccess += ()=> text_interactButton.SetText("<color=#ffa500ff> F </color> เพื่อใช้งาน Balista");
+        OnFire_Local += FireBalista;
     }
+
 
     private void Update()
     {
-        animator.SetFloat("RepairProgress", RepairProgress / RepairMaxProgress);
+        if (Input.GetMouseButtonUp(0))
+        {
+            if (UsingPlayer.OwnerClientId == NetworkManager.LocalClientId && IsInUse && _fireCooldown <= 0)
+            {
+                // Fire animation
+                networkAnimator.SetTrigger("Shoot");
+
+                _fireCooldown = fireCooldown;
+            }
+        }
+
+        if (_fireCooldown > 0)
+        {
+            _fireCooldown -= Time.deltaTime;
+        }
+        else
+        {
+            _fireCooldown = 0;
+        }
     }
 
     private void LateUpdate()
@@ -52,11 +90,11 @@ public class BalistaController : NetworkBehaviour
 
         Vector2 moveVector = PlayerInputManager.Instance.MovementAction.ReadValue<Vector2>();
 
-        moveVector *= RotateSpeed;
+        moveVector *= rotateSpeed;
 
-        float eulerAngleX = povTransform.eulerAngles.x + moveVector.y;
+        // float eulerAngleX = povTransform.eulerAngles.x + moveVector.y;
         cameraPitch -= moveVector.y;
-        cameraPitch = Mathf.Clamp(cameraPitch, -MaxCameraPitch, 0);
+        cameraPitch = Mathf.Clamp(cameraPitch, -maxCameraPitch, minCameraPitch);
         povTransform.localRotation = Quaternion.Euler(cameraPitch, 90, 0);
 
         transform.rotation = Quaternion.Euler(0, transform.eulerAngles.y + moveVector.x, 0);
@@ -80,16 +118,58 @@ public class BalistaController : NetworkBehaviour
         exit_interactButton.OnButtonPress.RemoveListener(ExitBalista);
     }
 
-    public void AddProgress(float value)
+    private void FireBalista()
     {
-        text_interactButton.SetText("<color=#ffa500ff> F </color> Repair");
 
+        SpawnArrow(arrow_prf);
+
+        FireBalista_ServerRpc();
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    private void FireBalista_ServerRpc()
+    {
+        FireBalista_ClientRpc();
+    }
+
+    [ClientRpc]
+    private void FireBalista_ClientRpc()
+    {
+        if (UsingPlayer.OwnerClientId == NetworkManager.LocalClientId) return;
+
+        SpawnArrow(arrow_prf);
+    }
+
+    private void SpawnArrow(Transform arrow_prf)
+    {
+        Transform camTransform = Camera.main.transform;
+
+        Transform arrow = Instantiate(arrow_prf, camTransform.position + (camTransform.forward * firePointOffset), Quaternion.identity);
+        arrow.forward = camTransform.forward;
+
+        LaunchArrow(arrow);
+    }
+
+    private void LaunchArrow(Transform arrow)
+    {
+        Rigidbody rigidbody = arrow.GetComponent<Rigidbody>();
+        rigidbody.AddForce(arrow.forward * arrowSpeed, ForceMode.Impulse);
+    }
+
+    public void AnimationEventHandler_OnFire()
+    {
+        if (UsingPlayer.OwnerClientId != NetworkManager.LocalClientId) return;
+
+        OnFire_Local?.Invoke();
     }
 
     private void ExitBalista()
     {
         if (IsInUse)
         {
+            balista.SetActive(true);
+            stackBalista.SetActive(false);
+
             povCam.Priority = -int.MaxValue;
 
             ShowInteractText();
@@ -110,6 +190,9 @@ public class BalistaController : NetworkBehaviour
     {
         if (!IsInUse)
         {
+            balista.SetActive(false);
+            stackBalista.SetActive(true);
+
             povCam.Priority = int.MaxValue;
 
             HideInteractText();

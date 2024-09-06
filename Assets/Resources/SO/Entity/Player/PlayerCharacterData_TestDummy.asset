@@ -16,7 +16,7 @@ MonoBehaviour:
   Level: 10
   TargetLayer:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 16383
   MoveSpeed: 0
   HpBase: 918.2
   HpBonus: 3.04

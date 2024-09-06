@@ -11,14 +11,30 @@ public class PressurePadTriggerController : NetworkBehaviour
     [SerializeField] private LayerMask layers;
     [SerializeField] private float coolDown;
 
-    [FoldoutGroup("Event")]
-    public UnityEvent OnEnter_Local;
-    [FoldoutGroup("Event")]
-    public UnityEvent OnExit_Local;
+    private Animator animator;
 
-    // [Header("Reference")]
 
     private float lastExitTime;
+
+    protected virtual void Awake()
+    {
+        animator = GetComponent<Animator>();
+    }
+
+    protected virtual void Start()
+    {
+        isInUse.OnValueChanged += (prevValue, newValue) =>
+        {
+            if (newValue)
+            {
+                animator.SetTrigger("Triggered");
+            }
+            else
+            {
+                animator.SetTrigger("Deactivate");
+            }
+        };
+    }
 
     protected virtual void OnTriggerEnter(Collider other)
     {
@@ -26,7 +42,6 @@ public class PressurePadTriggerController : NetworkBehaviour
         if (!other.transform.root.TryGetComponent(out PlayerController _)) return;
         if (!other.isTrigger) return;
 
-        OnEnter_Local?.Invoke();
 
         if (!IsServer) return;
 
@@ -44,8 +59,6 @@ public class PressurePadTriggerController : NetworkBehaviour
         if (!IsInUse) return;
         if (!other.transform.root.TryGetComponent(out PlayerController _)) return;
         if (!other.isTrigger) return;
-
-        OnExit_Local?.Invoke();
 
         if (!IsServer) return;
 

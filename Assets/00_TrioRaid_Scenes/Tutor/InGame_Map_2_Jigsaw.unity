@@ -68180,7 +68180,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_CollideAgainst:
     serializedVersion: 2
-    m_Bits: 2048
+    m_Bits: 8192
   m_IgnoreTag: CollideHitbox
   m_TransparentLayers:
     serializedVersion: 2

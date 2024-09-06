@@ -1,22 +1,28 @@
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public partial class Tank_PlayerController : PlayerController
 {
-    [Header("Tank Reference")]
+    [FoldoutGroup("Tank Config"), InlineEditor]
     public GameObject LockEnemyTarget;
+    [FoldoutGroup("Tank Config")]
     [SerializeField] private float moveWhileComboMaxDistance;
+    [FoldoutGroup("Tank Config")]
     [SerializeField] private float moveWhileComboDuration;
+
+    [FoldoutGroup("Tank Reference"), InlineEditor]
     [SerializeField] protected Tank_PlayerWeapon tank_playerWeapon;
+    [FoldoutGroup("Tank Reference"), InlineEditor]
     [SerializeField] protected TankAbility_BarbarianShout tankAbility_BarbarianShout;
+    [FoldoutGroup("Tank Reference"), InlineEditor]
     [SerializeField] protected TankAbility_GroundSmash tankAbility_GroundSmash;
 
     protected override void Start()
     {
         base.Start();
-        AbilityUIManager.Instance.OnSetAbilityIcon_E?.Invoke(tankAbility_GroundSmash.AbilityData.Icon);
-        AbilityUIManager.Instance.OnSetAbilityIcon_Q?.Invoke(tankAbility_BarbarianShout.AbilityData.Icon);
+
     }
 
     protected override void Update()
@@ -78,10 +84,8 @@ public partial class Tank_PlayerController : PlayerController
         if (!IsOwner) return;
 
         base.OnNetworkSpawn();
-        PlayerInputManager playerInputManager = PlayerInputManager.Instance;
-        playerInputManager.Attack.performed += LockTarget;
-        playerInputManager.Attack.performed += tank_playerWeapon.UseWeapon;
-        playerInputManager.Attack.canceled += tank_playerWeapon.UseWeapon;
+        AbilityUIManager.Instance.OnSetAbilityIcon_E?.Invoke(tankAbility_GroundSmash.AbilityData.Icon);
+        AbilityUIManager.Instance.OnSetAbilityIcon_Q?.Invoke(tankAbility_BarbarianShout.AbilityData.Icon);
 
     }
 
@@ -91,10 +95,7 @@ public partial class Tank_PlayerController : PlayerController
         if (!IsOwner) return;
 
         base.OnNetworkDespawn();
-        PlayerInputManager playerInputManager = PlayerInputManager.Instance;
-        playerInputManager.Attack.performed -= LockTarget;
-        playerInputManager.Attack.performed -= tank_playerWeapon.UseWeapon;
-        playerInputManager.Attack.canceled -= tank_playerWeapon.UseWeapon;
+
 
     }
     private void MoveToLockTargetWhenAttack()
@@ -297,12 +298,22 @@ public partial class Tank_PlayerController : PlayerController
     protected override void OnEnable()
     {
         base.OnEnable();
+
         OnPlayerCameraModeChanged += SetWeaponHolderPosition;
+
+        PlayerInputManager playerInputManager = PlayerInputManager.Instance;
+        playerInputManager.Attack.performed += LockTarget;
+        playerInputManager.Attack.performed += tank_playerWeapon.UseWeapon;
     }
 
     protected override void OnDisable()
     {
         base.OnDisable();
+
         OnPlayerCameraModeChanged -= SetWeaponHolderPosition;
+
+        PlayerInputManager playerInputManager = PlayerInputManager.Instance;
+        playerInputManager.Attack.performed -= LockTarget;
+        playerInputManager.Attack.performed -= tank_playerWeapon.UseWeapon;
     }
 }
