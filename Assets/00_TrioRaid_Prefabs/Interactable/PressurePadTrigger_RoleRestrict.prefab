@@ -382,7 +382,7 @@ PrefabInstance:
     - target: {fileID: 3756969721759678342, guid: 5602b4250760b414ea4897f82e54406f,
         type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 891969401
+      value: 3794988459
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -3170398251235948022, guid: 5602b4250760b414ea4897f82e54406f, type: 3}
@@ -422,38 +422,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   coolDown: 2
-  OnEnter_Local:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 174149632205064052, guid: 5602b4250760b414ea4897f82e54406f,
-          type: 3}
-        m_TargetAssemblyTypeName: Unity.Netcode.Components.NetworkAnimator, Unity.Netcode.Components
-        m_MethodName: SetTrigger
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Triggered
-          m_BoolArgument: 0
-        m_CallState: 2
-  OnExit_Local:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 174149632205064052, guid: 5602b4250760b414ea4897f82e54406f,
-          type: 3}
-        m_TargetAssemblyTypeName: Unity.Netcode.Components.NetworkAnimator, Unity.Netcode.Components
-        m_MethodName: SetTrigger
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Deactivate
-          m_BoolArgument: 0
-        m_CallState: 2
   RestrictRole: 0
   roleIcon: {fileID: 4780375400878757139}
   tankIcon: {fileID: 214461903, guid: e6c754a4d66ab27408be1a826ebacdb3, type: 3}

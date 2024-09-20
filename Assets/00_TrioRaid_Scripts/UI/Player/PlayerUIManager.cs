@@ -7,46 +7,35 @@ using UnityEngine.UI;
 
 public class PlayerUIManager : NetworkSingleton<PlayerUIManager>
 {
-    [SerializeField] private float FS_Hit_Intensity = 0.1f;
-    [SerializeField] private float FS_Hit_Duration = 0.3f;
-    [SerializeField] private float fadeDuration = 4;
+    [FoldoutGroup("Hit FS Config")][SerializeField] float FS_Hit_Intensity = 0.1f;
+    [FoldoutGroup("Hit FS Config")][SerializeField] float FS_Hit_Duration = 0.3f;
+    [FoldoutGroup("Hit FS Config")][SerializeField] float fadeDuration = 4;
 
-    [Header("In Game Reference")]
-    public GameObject PlayerCanvas;
-    [SerializeField] private GameObject crossHair;
-    [SerializeField] private GameObject lockTarget;
-    [SerializeField] private GameObject respawnCountdownUI;
-    [SerializeField] private TextMeshProUGUI respawnCountdownUI_text;
-    [SerializeField] private GameObject resultUI;
-    [SerializeField] private Material fullScreen_Hit;
+    [FoldoutGroup("Respawn Config")][SerializeField] float respawnCountdown = 10;
+    [FoldoutGroup("Respawn Config")][SerializeField] float _respawnCountdown;
+    [FoldoutGroup("Respawn Config")][SerializeField] bool isShowRespawnUI;
 
-    public float RespawnCountdown = 10;
-    private float respawnCountdown;
-    private bool isShowRespawnUI;
+    [FoldoutGroup("Reference UI")][SerializeField] GameObject playerCanvas;
+    [FoldoutGroup("Reference UI")][SerializeField] GameObject crossHair;
+    [FoldoutGroup("Reference UI")][SerializeField] GameObject lockTarget;
+    [FoldoutGroup("Reference UI")][SerializeField] GameObject respawnCountdownUI;
+    [FoldoutGroup("Reference UI")][SerializeField] TextMeshProUGUI respawnCountdownUI_text;
+    [FoldoutGroup("Reference UI")][SerializeField] GameObject resultUI;
+    [FoldoutGroup("Reference UI")][SerializeField] Material fullScreen_Hit;
+    [FoldoutGroup("Reference UI")][SerializeField] Image fadeScreen;
 
-    [FoldoutGroup("Reference select UI")]
-    [SerializeField] private GameObject selectCharacterMenu;
-    [FoldoutGroup("Reference select UI")]
-    [SerializeField] private TMP_Dropdown selectCharacterDropdown;
-    [FoldoutGroup("Reference select UI")]
-    [SerializeField] private Button selectCharacterButton_Host;
-    [FoldoutGroup("Reference select UI")]
-    [SerializeField] private Button selectCharacterButton_Client;
-    [FoldoutGroup("Reference select UI")]
-    [SerializeField] private Image fadeScreen;
 
 
     private void Update()
     {
         if (isShowRespawnUI)
         {
-            respawnCountdown -= Time.deltaTime;
-            respawnCountdownUI_text.text = "Respawn in: " + (int)respawnCountdown;
+            _respawnCountdown -= Time.deltaTime;
+            respawnCountdownUI_text.text = "Respawn in: " + (int)_respawnCountdown;
         }
     }
     public void SetSelectCharacter(ulong clientId)
     {
-        // Debug.Log("Dropdown Value: " + selectCharacterDropdown.value);
         Debug.Log("Id Value: " + clientId);
         ulong PLAYER_CHAR_ID;
         int playerDataIndex = GameMultiplayerManager.Instance.GetPlayerDataIndexFromClientId(clientId);
@@ -75,20 +64,11 @@ public class PlayerUIManager : NetworkSingleton<PlayerUIManager>
     }
     protected override void InitAfterAwake()
     {
-        selectCharacterButton_Host.onClick.AddListener(() =>
-        {
-            NetworkManager.Singleton.StartHost();
-        });
 
-        selectCharacterButton_Client.onClick.AddListener(() =>
-        {
-            NetworkManager.Singleton.StartClient();
-        });
     }
 
     public override void OnNetworkSpawn()
     {
-        // PlayerManager.Instance.OnAfterClientConnect += SetSelectCharacter;
 
     }
 
@@ -97,7 +77,6 @@ public class PlayerUIManager : NetworkSingleton<PlayerUIManager>
     public override void OnNetworkDespawn()
     {
 
-        // PlayerManager.Instance.OnAfterClientConnect -= SetSelectCharacter;
 
     }
     public void SetPlayerCrossHairState(bool isActive)
@@ -119,7 +98,7 @@ public class PlayerUIManager : NetworkSingleton<PlayerUIManager>
     public void ShowRespawnCountdown()
     {
         isShowRespawnUI = true;
-        respawnCountdown = RespawnCountdown;
+        _respawnCountdown = respawnCountdown;
         respawnCountdownUI.SetActive(true);
     }
     public void HideRespawnCountdown()

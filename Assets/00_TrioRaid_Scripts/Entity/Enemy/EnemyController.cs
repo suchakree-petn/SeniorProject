@@ -7,6 +7,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using DG.Tweening;
 using Sirenix.OdinInspector;
+using FIMSpace.FProceduralAnimation;
 
 public class EnemyController : NetworkBehaviour, IDamageable
 {
@@ -14,55 +15,46 @@ public class EnemyController : NetworkBehaviour, IDamageable
     public Action OnEnemyHit_Local;
     public Action OnEnemyAttack_Local;
 
-    [SerializeField] protected EnemyCharacterData _enemyCharacterData;
+    [FoldoutGroup("Config"),SerializeField] protected EnemyCharacterData _enemyCharacterData;
     public EnemyCharacterData EnemyCharacterData => _enemyCharacterData;
 
-    [SerializeField] protected NavMeshAgent agent;
-    [SerializeField] protected NavMeshPath path;
-    [SerializeField] protected BehaviourTreeInstance behaviourTreeInstance;
+    [FoldoutGroup("Config")] public Transform Target;
+    [FoldoutGroup("Config")] public bool CanMove = true;
+    [FoldoutGroup("Config")] public bool IsTaunted = false;
+    [FoldoutGroup("Config")] public bool IsStun = false;
+    [FoldoutGroup("Config")] public bool IsDead => enemyHealth.IsDead;
+    [FoldoutGroup("Config")] private float delayEnemySpawn = 1;
 
-    public Transform Target;
-    public bool CanMove = true;
-    public bool IsTaunted = false;
-    public bool IsStun = false;
-    public bool IsDead => enemyHealth.IsDead;
-    private float delayEnemySpawn = 1;
+    [FoldoutGroup("AI")][InlineEditor,SerializeField] protected NavMeshAgent agent;
+    [FoldoutGroup("AI")][SerializeField] protected NavMeshPath path;
+    [FoldoutGroup("AI")][InlineEditor,SerializeField] protected BehaviourTreeInstance behaviourTreeInstance;
 
-    [FoldoutGroup("Reference")]
-    public EnemyHealth enemyHealth;
-    [FoldoutGroup("Reference")]
-    public Rigidbody enemyRb;
-    [FoldoutGroup("Reference")]
-    public NetworkAnimator networkAnimator;
-    [FoldoutGroup("Reference")]
-    public Animator animator;
-    [FoldoutGroup("Reference")]
-    public Collider hitBox;
-    [FoldoutGroup("Reference")]
-    public Collider collideHitBox;
-    [FoldoutGroup("Reference")]
-    public Collider critHitBox;
-    [FoldoutGroup("Reference")]
-    [SerializeField] private Renderer mesh;
-    [FoldoutGroup("Reference")]
-    [SerializeField] private Transform mesh_parent;
-    [FoldoutGroup("Reference")]
-    private Material dissolveMaterial;
-    private OutlineController outlineController;
+    [FoldoutGroup("Reference")][InlineEditor,SerializeField] protected EnemyHealth enemyHealth;
+    [FoldoutGroup("Reference")][InlineEditor,SerializeField] protected Rigidbody enemyRb;
+    [FoldoutGroup("Reference")][InlineEditor,SerializeField] protected NetworkAnimator networkAnimator;
+    [FoldoutGroup("Reference")][InlineEditor,SerializeField] protected Animator animator;
+    [FoldoutGroup("Reference")][InlineEditor,SerializeField] protected LegsAnimator legsAnimator;
+
+    [FoldoutGroup("Collider")][InlineEditor,SerializeField] protected Collider hitBox;
+    [FoldoutGroup("Collider")][InlineEditor,SerializeField] protected Collider collideHitBox;
+    [FoldoutGroup("Collider")][InlineEditor,SerializeField] protected Collider critHitBox;
+
+    [FoldoutGroup("Mesh & Material")][InlineEditor,SerializeField] protected Renderer mesh;
+    [FoldoutGroup("Mesh & Material")][InlineEditor,SerializeField] protected Transform mesh_parent;
+    [FoldoutGroup("Mesh & Material")][InlineEditor,SerializeField] protected Material dissolveMaterial;
+    protected OutlineController outlineController;
 
     protected virtual void Awake()
     {
         dissolveMaterial = mesh.material;
         outlineController = GetComponent<OutlineController>();
-
-
     }
 
     protected virtual void Start()
     {
         // OnEnemyDead_Local += () => enemyHealth.GetEnemyHealth_UI().gameObject.SetActive(false);
         OnEnemyDead_Local += () => collideHitBox.enabled = false;
-        OnEnemyDead_Local += outlineController.ShowOutline;
+        OnEnemyDead_Local += outlineController.HideOutline;
         OnEnemyHit_Local += OnEnemyHit_Shaking;
 
         outlineController.ShowOutline();

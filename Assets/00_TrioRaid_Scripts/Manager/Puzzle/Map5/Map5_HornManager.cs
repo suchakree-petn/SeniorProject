@@ -1,13 +1,32 @@
+using System;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
 public class Map5_HornManager : NetworkSingleton<Map5_HornManager>
 {
-    private static bool isFirstTimeActivated = false;
-    public List<HornController> CurrentActiveHorns = new();
+    public Action<ulong> OnHornActive_Server; // send hornId
+    public Action<ulong> OnHornInActive_Server; // send hornId
 
-    [SerializeField] private List<HornController> horns = new();
+    [SerializeField] bool isFirstTimeActivated = false;
 
+    public Dictionary<ulong, HornController> ActiveHorns = new();
+
+
+    private bool IsHasSomeHornActive
+    {
+        get
+        {
+            foreach (KeyValuePair<ulong, HornController> horn in ActiveHorns)
+            {
+                if (horn.Value.IsActive)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+    }
 
     protected override void InitAfterAwake()
     {
@@ -16,57 +35,113 @@ public class Map5_HornManager : NetworkSingleton<Map5_HornManager>
 
     private void Start()
     {
-        foreach (var horn in horns)
-        {
-            horn.isActive.OnValueChanged += CheckFirstTimeActivated;
-            horn.isActive.OnValueChanged += OnUsingHornValueChanged;
-        }
+        OnHornActive_Server += CheckFirstTimeActivated;
+
+        OnHornInActive_Server += OnHornInActiveHandler;
     }
 
-    private void OnUsingHornValueChanged(bool notActive, bool isActive)
+    private void OnHornActiveHandler(ulong hornId)
+    {
+        ProvokeDragon(hornId);
+    }
+
+    private void OnHornInActiveHandler(ulong hornId)
+    {
+        StopProvokeDragon();
+    }
+
+    private void ProvokeDragon(ulong hornId)
     {
         RedDragon_Fly_EnemyController redDragon_Fly_EnemyController = Map5_PuzzleManager.Instance.BossController;
         Map5_PuzzleManager map5_PuzzleManager = Map5_PuzzleManager.Instance;
 
-        if (isActive)
+
+        Transform closestHornTransform = ActiveHorns[hornId].transform;
+
+        foreach (KeyValuePair<ulong, HornController> horn in ActiveHorns)
         {
+            HornController hornController = horn.Value;
+            if (!hornController.IsActive) continue;
+
             float closestDistance = float.MaxValue;
-            int hornIndex = 0;
 
-            foreach (var horn in CurrentActiveHorns)
+            float distance = Vector3.Distance(hornController.transform.position, redDragon_Fly_EnemyController.transform.position);
+
+            if (distance < closestDistance)
             {
-                float distance = Vector3.Distance(horn.transform.position, redDragon_Fly_EnemyController.transform.position);
 
-                if (distance < closestDistance)
-                {
-                    closestDistance = distance;
-                    hornIndex = CurrentActiveHorns.IndexOf(horn);
-                }
+                closestDistance = distance;
+                closestHornTransform = hornController.transform;
             }
-            map5_PuzzleManager.BossController.Target = CurrentActiveHorns[hornIndex].transform;
         }
-        else
+        map5_PuzzleManager.BossController.MovingTo(closestHornTransform);
+
+    }
+
+    private void StopProvokeDragon()
+    {
+        if (!IsHasSomeHornActive)
         {
-            map5_PuzzleManager.BossController.Target = map5_PuzzleManager.Broken_BalistaController.transform;
+            Map5_PuzzleManager map5_PuzzleManager = Map5_PuzzleManager.Instance;
+
+            map5_PuzzleManager.BossController.MovingTo(map5_PuzzleManager.Broken_BalistaController.transform);
         }
     }
 
-    private void CheckFirstTimeActivated(bool prevValue, bool newValue)
+    private void CheckFirstTimeActivated(ulong hornId)
     {
-        if (isFirstTimeActivated)
+        Debug.Log("Check first time trigger");
+        if (!isFirstTimeActivated)
         {
-            foreach (var horn in horns)
-            {
-                horn.isActive.OnValueChanged -= CheckFirstTimeActivated;
-            }
+            OnHornActive_Server -= CheckFirstTimeActivated;
 
-            isFirstTimeActivated = false;
+            isFirstTimeActivated = true;
 
             if (IsServer)
             {
                 Map5_PuzzleManager.Instance.SetState_ServerRpc(Map5_GameState.Phase2_RepairBalista);
+                OnHornActive_Server += OnHornActiveHandler;
+                Map5_PuzzleManager.Instance.BossController.OnActiveBoss += () => ProvokeDragon(hornId);
             }
         }
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    public void UseHorn_ServerRpc(ulong hornId)
+    {
+        HornController hornController = ActiveHorns[hornId];
+
+
+        if (!hornController.IsActive)
+        {
+            ActiveHorns[hornId].IsActive = true;
+            OnHornActive_Server?.Invoke(hornId);
+        }
+        else
+        {
+            Debug.Log("Already active");
+        }
+
+
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    public void StopUseHorn_ServerRpc(ulong hornId)
+    {
+        HornController hornController = ActiveHorns[hornId];
+
+
+        if (hornController.IsActive)
+        {
+            ActiveHorns[hornId].IsActive = false;
+            OnHornInActive_Server?.Invoke(hornId);
+        }
+        else
+        {
+            Debug.Log("Already inactive");
+        }
+
+
     }
 }
 

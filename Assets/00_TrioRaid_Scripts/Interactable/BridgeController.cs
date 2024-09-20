@@ -66,14 +66,18 @@ public class BridgeController : NetworkBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!other.transform.root.TryGetComponent(out PlayerController _)) return;
+        if (!other.isTrigger) return;
+        if (!other.transform.root.TryGetComponent(out PlayerController playerController)) return;
+        if (!playerController.IsLocalPlayer) return;
 
         canvas.SetActive(true);
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (!other.transform.root.TryGetComponent(out PlayerController _)) return;
+        if (!other.isTrigger) return;
+        if (!other.transform.root.TryGetComponent(out PlayerController playerController)) return;
+        if (!playerController.IsLocalPlayer) return;
 
         StopRepairBridge();
         canvas.SetActive(false);
@@ -81,7 +85,9 @@ public class BridgeController : NetworkBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (!other.transform.root.TryGetComponent(out PlayerController _)) return;
+        if (!other.isTrigger) return;
+        if (!other.transform.root.TryGetComponent(out PlayerController playerController)) return;
+        if (!playerController.IsLocalPlayer) return;
 
         if (Input.GetKeyDown(KeyCode.F) && !IsRepaired)
         {

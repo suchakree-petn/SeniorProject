@@ -2,63 +2,127 @@ using System;
 using Cinemachine;
 using DG.Tweening;
 using Gamekit3D;
+using Sirenix.OdinInspector;
 using TMPro;
 using Unity.Netcode;
 using UnityEngine;
 
 public class Broken_BalistaController : NetworkBehaviour
 {
-    [Header("Broken")]
-    public Action OnRepairSuccess;
 
-    [SerializeField] private NetworkVariable<float> repairProgress = new(0);
+
+    [FoldoutGroup("Config")] public Action OnRepairSuccess;
+
+    [FoldoutGroup("Config")][SerializeField] NetworkVariable<float> repairProgress = new(0);
     public float RepairProgress => repairProgress.Value;
-    public float RepairMaxProgress = 100;
+
+    [FoldoutGroup("Config")][SerializeField] float RepairMaxProgress = 100;
     public bool IsRepaired => RepairProgress >= RepairMaxProgress;
 
 
-    [Header("Refererence")]
-    [SerializeField] private TextMeshPro text_interactButton;
-    [SerializeField] private InteractOnButton use_interactButton;
-    [SerializeField] private InteractOnButton exit_interactButton;
-    [SerializeField] private Animator animator;
+    [FoldoutGroup("Reference")][SerializeField] TextMeshProUGUI interactButton;
+    [FoldoutGroup("Reference")][SerializeField] Animator animator;
+
+    Canvas canvas;
+    OutlineController outlineController;
+
+    private void Awake()
+    {
+        outlineController = GetComponent<OutlineController>();
+
+    }
 
     private void Start()
     {
-        text_interactButton.SetText("<color=#ffa500ff> F </color> เพื่อซ่อม");
+        canvas = interactButton.transform.parent.GetComponent<Canvas>();
+        canvas.gameObject.SetActive(true);
+        interactButton.gameObject.SetActive(false);
 
     }
+
 
     private void Update()
     {
         animator.SetFloat("RepairProgress", RepairProgress / RepairMaxProgress);
+
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            StartUsing();
+        }
+
+        if (Input.GetKeyUp(KeyCode.F))
+        {
+
+            StopUsing();
+        }
     }
 
-   
 
     private void OnEnable()
     {
-        use_interactButton.OnEnter.AddListener(ShowInteractText);
-        use_interactButton.OnExit.AddListener(HideInteractText);
 
     }
 
     private void OnDisable()
     {
-        use_interactButton.OnEnter.RemoveListener(ShowInteractText);
-        use_interactButton.OnExit.RemoveListener(HideInteractText);
 
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (!other.transform.root.TryGetComponent(out PlayerController player)) return;
+
+        if (!player.IsLocalPlayer) return;
+
+        ShowInteractText();
+
+
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (!other.transform.root.TryGetComponent(out PlayerController player)) return;
+
+        if (!player.IsLocalPlayer) return;
+
+        interactButton.gameObject.SetActive(false);
+
+        HideInteractText();
+
+
+
+    }
+
+    private void StopUsing()
+    {
+
+    }
+
+    private void StartUsing()
+    {
+
+    }
 
 
     private void HideInteractText()
     {
-        text_interactButton.gameObject.SetActive(false);
+        interactButton.gameObject.SetActive(false);
     }
 
     private void ShowInteractText()
     {
-        text_interactButton.gameObject.SetActive(true);
+        interactButton.gameObject.SetActive(true);
+    }
+
+    private void CheckShowOutline(Map5_GameState state)
+    {
+        if (state == Map5_GameState.Phase2_RepairBalista)
+        {
+            outlineController.ShowOutline();
+        }
+        else
+        {
+            outlineController.HideOutline();
+        }
     }
 }

@@ -145,7 +145,7 @@ PrefabInstance:
     - target: {fileID: 585376683152959535, guid: 5134e637dc0b31c4fad23fac8e303af9,
         type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 2284238053
+      value: 3751314663
       objectReference: {fileID: 0}
     - target: {fileID: 637845534637835907, guid: 5134e637dc0b31c4fad23fac8e303af9,
         type: 3}
@@ -232,6 +232,11 @@ PrefabInstance:
       propertyPath: mesh
       value: 
       objectReference: {fileID: 7826970388445611825}
+    - target: {fileID: 1610829594644378783, guid: 5134e637dc0b31c4fad23fac8e303af9,
+        type: 3}
+      propertyPath: legsAnimator
+      value: 
+      objectReference: {fileID: 8382142605214664989}
     - target: {fileID: 1610829594644378783, guid: 5134e637dc0b31c4fad23fac8e303af9,
         type: 3}
       propertyPath: attackTimeInterval
@@ -328,27 +333,6 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 30
       objectReference: {fileID: 0}
-    - target: {fileID: 5023896876588504443, guid: 5134e637dc0b31c4fad23fac8e303af9,
-        type: 3}
-      propertyPath: mesh
-      value: 
-      objectReference: {fileID: 1096781713368640642}
-    - target: {fileID: 5023896876588504443, guid: 5134e637dc0b31c4fad23fac8e303af9,
-        type: 3}
-      propertyPath: attackPower
-      value: 250
-      objectReference: {fileID: 0}
-    - target: {fileID: 5023896876588504443, guid: 5134e637dc0b31c4fad23fac8e303af9,
-        type: 3}
-      propertyPath: attackRange
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 5023896876588504443, guid: 5134e637dc0b31c4fad23fac8e303af9,
-        type: 3}
-      propertyPath: _enemyCharacterData
-      value: 
-      objectReference: {fileID: 11400000, guid: 9ffef7c5a1d911344a86814c82ed8611,
-        type: 2}
     - target: {fileID: 5443892900808637861, guid: 5134e637dc0b31c4fad23fac8e303af9,
         type: 3}
       propertyPath: m_Controller
@@ -488,11 +472,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 403
-      objectReference: {fileID: 0}
-    - target: {fileID: 7660171543293030674, guid: 5134e637dc0b31c4fad23fac8e303af9,
-        type: 3}
-      propertyPath: m_RigLayers.Array.data[0].m_Rig
-      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 9113855609132630883, guid: 5134e637dc0b31c4fad23fac8e303af9,
         type: 3}
@@ -705,12 +684,6 @@ Transform:
 --- !u!4 &961787336716448193 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8965607142696305971, guid: 740728f854d793848a530ac50ca86174,
-    type: 3}
-  m_PrefabInstance: {fileID: 8157365059764204786}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1096781713368640642 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 9082710849249269872, guid: 740728f854d793848a530ac50ca86174,
     type: 3}
   m_PrefabInstance: {fileID: 8157365059764204786}
   m_PrefabAsset: {fileID: 0}

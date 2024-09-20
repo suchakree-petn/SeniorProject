@@ -1,7 +1,4 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using DG.Tweening;
 using Sirenix.OdinInspector;
 using TMPro;
 using Unity.Netcode;
@@ -11,36 +8,29 @@ using UnityEngine.UI;
 [SelectionBase]
 public class RepairStationController : NetworkBehaviour
 {
-    private NetworkVariable<bool> isCollected = new(false);
-    [ShowInInspector] public bool IsCollected => isCollected.Value;
+    NetworkVariable<bool> isAllCollected = new(false);
+    [FoldoutGroup("Config")][ShowInInspector] public bool IsAllCollected => isAllCollected.Value;
 
-    private NetworkVariable<float> collectProgress = new(0);
-    [ShowInInspector] public float CollectProgress => collectProgress.Value;
+    [FoldoutGroup("Config")][ShowInInspector] float collectProgress;
+    [FoldoutGroup("Config")][ShowInInspector] public float CollectProgress => collectProgress;
 
-    [SerializeField] private float maxCollectProgress = 100;
+    [FoldoutGroup("Config")][SerializeField] float maxCollectProgress = 100;
 
-    [ShowInInspector] private NetworkList<ulong> collectingPlayer;
+    [FoldoutGroup("Config")][ShowInInspector] NetworkList<ulong> collectingPlayer;
 
-    [Min(0)]
-    [SerializeField] private float collectingSpeed = 1;
+    [FoldoutGroup("Config")][Min(0)][SerializeField] float collectingSpeed = 1;
+    [FoldoutGroup("Config")][SerializeField] int progressRewardAmount = 5;
+    [FoldoutGroup("Config")][SerializeField] NetworkVariable<int> remainingProgressRewardAmount = new(20);
+    int RemainingProgressRewardAmount => remainingProgressRewardAmount.Value;
 
-    [SerializeField] private float progressReward = 30;
 
-
-
-    [FoldoutGroup("Reference")]
-    [SerializeField] private GameObject canvas;
-
-    [FoldoutGroup("Reference")]
-    [SerializeField] private Slider progressSlider;
-
-    [FoldoutGroup("Reference")]
-    [SerializeField] private TextMeshProUGUI collectButtonText;
-    private string originalCollectButtonText;
-
-    [FoldoutGroup("Reference")]
-    [SerializeField] private Collider triggerCol;
-    private OutlineController outlineController;
+    [FoldoutGroup("Reference")][SerializeField] GameObject canvas;
+    [FoldoutGroup("Reference")][SerializeField] List<GameObject> woods;
+    [FoldoutGroup("Reference")][SerializeField] Slider progressSlider;
+    [FoldoutGroup("Reference")][SerializeField] TextMeshProUGUI collectButtonText;
+    string originalCollectButtonText;
+    [FoldoutGroup("Reference")][SerializeField] Collider triggerCol;
+    OutlineController outlineController;
 
     private void Awake()
     {
@@ -50,52 +40,29 @@ public class RepairStationController : NetworkBehaviour
         outlineController = GetComponent<OutlineController>();
     }
 
+    private void Start()
+    {
+        outlineController.HideOutline();
+        
+        isAllCollected.OnValueChanged += CheckEnableRepairStation;
+    }
+
     private void OnEnable()
     {
-        Map5_PuzzleManager.Instance.OnStateChanged_Local += CheckEnable;
-        Map5_PuzzleManager.Instance.OnStateChanged_Local += CheckShowOutline;
+        Map5_PuzzleManager.Instance.OnStateChanged_Local += CheckEnableOnStateChanged;
     }
 
     private void OnDisable()
     {
-        Map5_PuzzleManager.Instance.OnStateChanged_Local -= CheckEnable;
-        Map5_PuzzleManager.Instance.OnStateChanged_Local -= CheckShowOutline;
+        Map5_PuzzleManager.Instance.OnStateChanged_Local -= CheckEnableOnStateChanged;
     }
 
 
 
     public override void OnNetworkSpawn()
     {
-        collectProgress.OnValueChanged += ProgressBar;
     }
 
-
-
-    private void CheckShowOutline(Map5_GameState state)
-    {
-        if (state == Map5_GameState.Phase2_RepairBalista)
-        {
-            outlineController.ShowOutline();
-        }
-        else
-        {
-            outlineController.HideOutline();
-        }
-    }
-
-
-    private void CheckEnable(Map5_GameState newState)
-    {
-        if (newState == Map5_GameState.Phase2_RepairBalista)
-        {
-            triggerCol.enabled = false;
-        }
-    }
-
-    private void ProgressBar(float previousValue, float newValue)
-    {
-        progressSlider.value = newValue / maxCollectProgress;
-    }
 
 
     private void OnTriggerEnter(Collider other)
@@ -117,20 +84,78 @@ public class RepairStationController : NetworkBehaviour
     {
         if (!other.transform.root.TryGetComponent(out PlayerController _)) return;
 
-        if (Input.GetKeyDown(KeyCode.F) && !IsCollected)
+        if (Input.GetKeyDown(KeyCode.F) && !IsAllCollected)
         {
             StartCollecting();
         }
 
-        if (Input.GetKey(KeyCode.F) && !IsCollected)
+        if (Input.GetKey(KeyCode.F) && !IsAllCollected)
         {
             Collecting();
         }
 
-        if (Input.GetKeyUp(KeyCode.F) && !IsCollected)
+        if (Input.GetKeyUp(KeyCode.F) && !IsAllCollected)
         {
             StopCollecting();
         }
+    }
+
+
+
+
+    private void CheckEnableRepairStation(bool prevValue, bool newValue)
+    {
+        if (newValue)
+        {
+            EnableRepairStation();
+        }
+        else
+        {
+            DisableRepairStation();
+        }
+    }
+
+    private void CheckEnableOnStateChanged(Map5_GameState newState)
+    {
+        if (newState == Map5_GameState.Phase2_RepairBalista)
+        {
+            EnableRepairStation();
+        }
+        else
+        {
+            DisableRepairStation();
+        }
+    }
+
+
+    public void EnableRepairStation()
+    {
+        triggerCol.enabled = true;
+
+        outlineController.ShowOutline();
+
+        foreach (GameObject wood in woods)
+        {
+            wood.SetActive(true);
+        }
+        canvas.SetActive(true);
+
+    }
+
+    public void DisableRepairStation()
+    {
+        triggerCol.enabled = false;
+
+        outlineController.HideOutline();
+
+        foreach (GameObject wood in woods)
+        {
+            wood.SetActive(false);
+        }
+
+        StopCollecting();
+        canvas.SetActive(false);
+
     }
 
     public void StartCollecting()
@@ -165,36 +190,54 @@ public class RepairStationController : NetworkBehaviour
 
     public void Collecting()
     {
-        Collecting_ServerRpc();
+        UpdateProgress(Time.deltaTime * collectingSpeed);
+        UpdateProgressBar(CollectProgress);
     }
 
-    [ServerRpc(RequireOwnership = false)]
-    private void Collecting_ServerRpc()
+    private void UpdateProgressBar(float progress)
     {
-        UpdateProgress(Time.deltaTime * collectingSpeed * collectingPlayer.Count);
+        progressSlider.value = progress / maxCollectProgress;
     }
+
 
     private void UpdateProgress(float progress)
     {
-        collectProgress.Value += progress;
+        collectProgress += progress;
+
+        CheckCollectingProgress();
+    }
+
+    private void CheckCollectingProgress()
+    {
+        // finish collected
 
         if (CollectProgress >= maxCollectProgress)
         {
-            collectProgress.Value = maxCollectProgress;
-            isCollected.Value = true;
-            // finish collected
-            GiveRewardProgress_ServerRpc();
+            collectProgress = 0;
+
+            GiveRewardProgress_ServerRpc(NetworkManager.LocalClientId);
+
+            if (RemainingProgressRewardAmount <= 0)
+            {
+                remainingProgressRewardAmount.Value = 0;
+                isAllCollected.Value = true;
+                DisableRepairStation();
+            }
         }
     }
 
     [ServerRpc(RequireOwnership = false)]
-    private void GiveRewardProgress_ServerRpc()
+    private void GiveRewardProgress_ServerRpc(ulong clientId)
     {
-        GiveRewardProgress_ClientRpc();
+        remainingProgressRewardAmount.Value -= progressRewardAmount;
+        GiveRewardProgress_ClientRpc(clientId);
     }
 
     [ClientRpc]
-    private void GiveRewardProgress_ClientRpc()
+    private void GiveRewardProgress_ClientRpc(ulong clientId)
     {
+        if (clientId != NetworkManager.Singleton.LocalClientId) return;
+
+        Map5_ProgressInventoryManager.Instance.GetProgess(progressRewardAmount);
     }
 }

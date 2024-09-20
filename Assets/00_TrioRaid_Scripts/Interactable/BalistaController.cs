@@ -28,7 +28,7 @@ public class BalistaController : NetworkBehaviour
     public PlayerController UsingPlayer;
 
     [FoldoutGroup("Refererence")]
-    [SerializeField] private TextMeshPro text_interactButton;
+    [SerializeField] private TextMeshProUGUI text_interactButton;
 
 
     [FoldoutGroup("Refererence")]

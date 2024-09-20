@@ -2170,23 +2170,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 201c2c8177a6bd549b60cdec26cd4bf7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyCharacterData: {fileID: 11400000, guid: 59ce0259e2a44c245a77d31bad7b9c1c,
-    type: 2}
-  agent: {fileID: 6001819275899621731}
-  behaviourTreeInstance: {fileID: 1851742019605905526}
+  _enemyCharacterData: {fileID: 0}
   Target: {fileID: 0}
   CanMove: 1
   IsTaunted: 0
   IsStun: 0
+  agent: {fileID: 6001819275899621731}
+  behaviourTreeInstance: {fileID: 1851742019605905526}
   enemyHealth: {fileID: 7289086918844434345}
   enemyRb: {fileID: 3435360099078161397}
   networkAnimator: {fileID: 6322938050345439138}
   animator: {fileID: 5443892900808637861}
+  legsAnimator: {fileID: 0}
   hitBox: {fileID: 6154986747110004965}
   collideHitBox: {fileID: 3471851548167439380}
   critHitBox: {fileID: 6202138957216897403}
   mesh: {fileID: 5723096145795959967}
   mesh_parent: {fileID: 8598420571638919186}
+  dissolveMaterial: {fileID: 0}
   attackPower_Multiplier: 1
   attackRange: 2
   attackTimeInterval: 1.1

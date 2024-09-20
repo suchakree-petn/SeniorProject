@@ -1,0 +1,1193 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1185338651503798749
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8363339400850856992}
+  m_Layer: 0
+  m_Name: BurningFire
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8363339400850856992
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1185338651503798749}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 17.71, y: 3.2, z: -33.93}
+  m_LocalScale: {x: 0.58421963, y: 0.58421963, z: 0.58421963}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2000949467482749659}
+  - {fileID: 6629812575326950035}
+  - {fileID: 1129222702105445362}
+  - {fileID: 7918383692541930239}
+  - {fileID: 3772106558199193566}
+  - {fileID: 2527904652906115381}
+  - {fileID: 2590589842082584106}
+  - {fileID: 6104754444851778544}
+  - {fileID: 3546415473752094854}
+  - {fileID: 5599787439120939725}
+  - {fileID: 8940832952708691110}
+  - {fileID: 6982872994770087078}
+  - {fileID: 80668152679122585}
+  - {fileID: 8656132232086743552}
+  - {fileID: 7197111739363769868}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &395408765954484168
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8363339400850856992}
+    m_Modifications:
+    - target: {fileID: 6509824304943191841, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_BoundingSphereOverride.w
+      value: -5.114201e-25
+      objectReference: {fileID: 0}
+    - target: {fileID: 6509824304943191841, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_BoundingSphereOverride.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6509824304943191841, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_BoundingSphereOverride.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 22.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -7.87
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1.829998
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7322005265652512350, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_Name
+      value: FireGroundWithSmoke (10)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4c89cff2d3e50a04cbe36d6e3d72b928, type: 3}
+--- !u!4 &6982872994770087078 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+    type: 3}
+  m_PrefabInstance: {fileID: 395408765954484168}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &465459754272601442
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8363339400850856992}
+    m_Modifications:
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7322005265652512350, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_Name
+      value: FireGroundWithSmoke (13)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4c89cff2d3e50a04cbe36d6e3d72b928, type: 3}
+--- !u!4 &7197111739363769868 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+    type: 3}
+  m_PrefabInstance: {fileID: 465459754272601442}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &609995664785383825
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8363339400850856992}
+    m_Modifications:
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 8.320002
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.27999997
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -9.579998
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7322005265652512350, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_Name
+      value: FireGroundWithSmoke (2)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4c89cff2d3e50a04cbe36d6e3d72b928, type: 3}
+--- !u!4 &7918383692541930239 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+    type: 3}
+  m_PrefabInstance: {fileID: 609995664785383825}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1837710419082641352
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8363339400850856992}
+    m_Modifications:
+    - target: {fileID: 6509824304943191841, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_BoundingSphereOverride.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6509824304943191841, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_BoundingSphereOverride.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6509824304943191841, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_BoundingSphereOverride.y
+      value: NaN
+      objectReference: {fileID: 0}
+    - target: {fileID: 6509824304943191841, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_BoundingSphereOverride.z
+      value: 0.111328125
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 12.140001
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -7.87
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 5.5300007
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7322005265652512350, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_Name
+      value: FireGroundWithSmoke (9)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4c89cff2d3e50a04cbe36d6e3d72b928, type: 3}
+--- !u!4 &8940832952708691110 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+    type: 3}
+  m_PrefabInstance: {fileID: 1837710419082641352}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &2140372795747230062
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8363339400850856992}
+    m_Modifications:
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.3900013
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -7.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -24.900002
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7322005265652512350, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_Name
+      value: FireGroundWithSmoke (12)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4c89cff2d3e50a04cbe36d6e3d72b928, type: 3}
+--- !u!4 &8656132232086743552 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+    type: 3}
+  m_PrefabInstance: {fileID: 2140372795747230062}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &2892035338434638243
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8363339400850856992}
+    m_Modifications:
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -10.589999
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -7.49
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -3.7399979
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7322005265652512350, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_Name
+      value: FireGroundWithSmoke (8)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4c89cff2d3e50a04cbe36d6e3d72b928, type: 3}
+--- !u!4 &5599787439120939725 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+    type: 3}
+  m_PrefabInstance: {fileID: 2892035338434638243}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &3543367544815098014
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8363339400850856992}
+    m_Modifications:
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.3499985
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -4.54
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -12.549999
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7322005265652512350, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_Name
+      value: FireGroundWithSmoke (6)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4c89cff2d3e50a04cbe36d6e3d72b928, type: 3}
+--- !u!4 &6104754444851778544 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+    type: 3}
+  m_PrefabInstance: {fileID: 3543367544815098014}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &4149276205519821309
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8363339400850856992}
+    m_Modifications:
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 6.3200016
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.27999997
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -2.8199997
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7322005265652512350, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_Name
+      value: FireGroundWithSmoke
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4c89cff2d3e50a04cbe36d6e3d72b928, type: 3}
+--- !u!4 &6629812575326950035 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+    type: 3}
+  m_PrefabInstance: {fileID: 4149276205519821309}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &5073160312701312324
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8363339400850856992}
+    m_Modifications:
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 4.1100006
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.27999997
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -17.400002
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7322005265652512350, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_Name
+      value: FireGroundWithSmoke (5)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4c89cff2d3e50a04cbe36d6e3d72b928, type: 3}
+--- !u!4 &2590589842082584106 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+    type: 3}
+  m_PrefabInstance: {fileID: 5073160312701312324}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &5080069399000136283
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8363339400850856992}
+    m_Modifications:
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 9.070002
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.27999997
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -15.040001
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7322005265652512350, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_Name
+      value: FireGroundWithSmoke (4)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4c89cff2d3e50a04cbe36d6e3d72b928, type: 3}
+--- !u!4 &2527904652906115381 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+    type: 3}
+  m_PrefabInstance: {fileID: 5080069399000136283}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &5894601947269878960
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8363339400850856992}
+    m_Modifications:
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 12.400002
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.27999997
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -7.450001
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7322005265652512350, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_Name
+      value: FireGroundWithSmoke (3)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4c89cff2d3e50a04cbe36d6e3d72b928, type: 3}
+--- !u!4 &3772106558199193566 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+    type: 3}
+  m_PrefabInstance: {fileID: 5894601947269878960}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &6098865405802820584
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8363339400850856992}
+    m_Modifications:
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -6.919999
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -7.49
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -13.98
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7322005265652512350, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_Name
+      value: FireGroundWithSmoke (7)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4c89cff2d3e50a04cbe36d6e3d72b928, type: 3}
+--- !u!4 &3546415473752094854 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+    type: 3}
+  m_PrefabInstance: {fileID: 6098865405802820584}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &7244731118813629943
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8363339400850856992}
+    m_Modifications:
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.0700016
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -7.49
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 6.66
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7322005265652512350, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_Name
+      value: FireGroundWithSmoke (11)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4c89cff2d3e50a04cbe36d6e3d72b928, type: 3}
+--- !u!4 &80668152679122585 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+    type: 3}
+  m_PrefabInstance: {fileID: 7244731118813629943}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &7655888194620606620
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8363339400850856992}
+    m_Modifications:
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 10.220001
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.27999997
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -2.2399979
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7322005265652512350, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_Name
+      value: FireGroundWithSmoke (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4c89cff2d3e50a04cbe36d6e3d72b928, type: 3}
+--- !u!4 &1129222702105445362 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+    type: 3}
+  m_PrefabInstance: {fileID: 7655888194620606620}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &9101826665594122677
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8363339400850856992}
+    m_Modifications:
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2.0800018
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.27999997
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -7.9799995
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7322005265652512350, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+        type: 3}
+      propertyPath: m_Name
+      value: FireGroundWithSmoke
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4c89cff2d3e50a04cbe36d6e3d72b928, type: 3}
+--- !u!4 &2000949467482749659 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7319725779413797742, guid: 4c89cff2d3e50a04cbe36d6e3d72b928,
+    type: 3}
+  m_PrefabInstance: {fileID: 9101826665594122677}
+  m_PrefabAsset: {fileID: 0}

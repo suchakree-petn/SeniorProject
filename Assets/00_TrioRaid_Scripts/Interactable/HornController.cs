@@ -1,90 +1,135 @@
 using Sirenix.OdinInspector;
-using Unity.Netcode;
+using TMPro;
 using UnityEngine;
 
 [SelectionBase]
-public class HornController : NetworkBehaviour
+public class HornController : MonoBehaviour
 {
-    public NetworkVariable<bool> isActive = new(false);
-    public bool IsActive => isActive.Value;
+    [SerializeField] ulong hornId;
+    public ulong HornId => hornId;
+    public bool IsActive;
 
+    [SerializeField] PlayerController usingPlayer;
 
-    [FoldoutGroup("Reference")]
-    [SerializeField] private GameObject worldSpacecanvas;
+    [FoldoutGroup("Config")][SerializeField] private string interact_text;
+    [FoldoutGroup("Config")][SerializeField] private string using_text;
 
-    [FoldoutGroup("Reference")]
-    [SerializeField] private GameObject overlayCanvas;
+    [FoldoutGroup("Reference")][SerializeField] private TextMeshProUGUI interactButton;
+    Canvas canvas;
 
-
-    private void OnTriggerEnter(Collider other)
+    private void Awake()
     {
-        if (!other.transform.root.TryGetComponent(out PlayerController _)) return;
+        canvas = interactButton.transform.parent.GetComponent<Canvas>();
+        canvas.gameObject.SetActive(true);
+        interactButton.gameObject.SetActive(true);
 
-        worldSpacecanvas.SetActive(true);
+        interactButton.text = "";
     }
 
-    private void OnTriggerExit(Collider other)
+
+    private void Start()
     {
-        if (!other.transform.root.TryGetComponent(out PlayerController _)) return;
-
-        worldSpacecanvas.SetActive(false);
-        StopUsing_ServerRpc();
-
+        Map5_HornManager.Instance.ActiveHorns.Add(hornId, this);
     }
 
-    private void OnTriggerStay(Collider other)
+    private void Update()
     {
-        if (!other.transform.root.TryGetComponent(out PlayerController _)) return;
-
-        if (Input.GetKeyDown(KeyCode.F) && !IsActive)
+        if (Input.GetKeyDown(KeyCode.F) && usingPlayer)
         {
             StartUsing();
         }
 
-        if (Input.GetKeyUp(KeyCode.F) && IsActive)
+        if (Input.GetKeyUp(KeyCode.F) && usingPlayer)
         {
+
             StopUsing();
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (!other.transform.root.TryGetComponent(out PlayerController player)) return;
+
+        if (!player.IsLocalPlayer) return;
+
+        interactButton.text = interact_text;
+
+
+        usingPlayer = player;
+
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (!other.transform.root.TryGetComponent(out PlayerController player)) return;
+
+        if (!player.IsLocalPlayer) return;
+
+        interactButton.text = "";
+
+        StopUsing();
+
+        usingPlayer = null;
+
+
+    }
+
+
+
     public void StartUsing()
     {
-        overlayCanvas.SetActive(true);
-        StartUsing_ServerRpc();
+        // IsActive = true;
+        interactButton.text = using_text;
+
+        // StartUsing_ServerRpc();
+        Map5_HornManager.Instance.UseHorn_ServerRpc(hornId);
+
 
     }
-
     public void StopUsing()
     {
-        overlayCanvas.SetActive(false);
-        StopUsing_ServerRpc();
-    }
+        // IsActive = false;
 
-    [ServerRpc(RequireOwnership = false)]
-    public void StartUsing_ServerRpc()
-    {
-        isActive.Value = true;
-        StartUsing_ClientRpc();
-    }
+        if (usingPlayer)
+        {
+            interactButton.text = interact_text;
+        }
+        else
+        {
+            interactButton.text = "";
+        }
+        // StopUsing_ServerRpc();
 
-    [ServerRpc(RequireOwnership = false)]
-    public void StopUsing_ServerRpc()
-    {
-        isActive.Value = false;
-        StopUsing_ClientRpc();
+        Map5_HornManager.Instance.StopUseHorn_ServerRpc(hornId);
+
 
     }
 
-    [ClientRpc]
-    public void StartUsing_ClientRpc()
-    {
-        Map5_HornManager.Instance.CurrentActiveHorns.Add(this);
-    }
+    // [ServerRpc(RequireOwnership = false)]
+    // public void StartUsing_ServerRpc()
+    // {
+    //     isActive.Value = true;
+    //     StartUsing_ClientRpc();
+    // }
 
-    [ClientRpc]
-    public void StopUsing_ClientRpc()
-    {
-        Map5_HornManager.Instance.CurrentActiveHorns.Remove(this);
-    }
+    // [ServerRpc(RequireOwnership = false)]
+    // public void StopUsing_ServerRpc()
+    // {
+    //     isActive.Value = false;
+    //     StopUsing_ClientRpc();
+
+    // }
+
+    // [ClientRpc]
+    // public void StartUsing_ClientRpc()
+    // {
+    //     Map5_HornManager.Instance.CurrentActiveHorns.Add(this);
+    // }
+
+    // [ClientRpc]
+    // public void StopUsing_ClientRpc()
+    // {
+    //     Map5_HornManager.Instance.CurrentActiveHorns.Remove(this);
+    // }
 
 }

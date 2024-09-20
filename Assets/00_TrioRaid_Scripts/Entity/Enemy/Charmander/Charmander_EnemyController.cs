@@ -40,7 +40,7 @@ public class Charmander_EnemyController : EnemyController
             animator.SetFloat("VelocityZ", Mathf.Lerp(animator.GetFloat("VelocityZ"), 0, Time.deltaTime * 10));
             if (!isReadyToAttack || IsStun) return;
             StartAttackCooldown(attackTimeInterval);
-            networkAnimator.SetTrigger("Attack");
+            animator.SetTrigger("Attack");
             
         }
     }
@@ -117,7 +117,7 @@ public class Charmander_EnemyController : EnemyController
 
         if (enemyHealth.CurrentHealth <= 0)
         {
-            networkAnimator.SetTrigger("Death");
+            animator.SetTrigger("Death");
             StartCoroutine(DelayDestroy(4f));
         }
     }

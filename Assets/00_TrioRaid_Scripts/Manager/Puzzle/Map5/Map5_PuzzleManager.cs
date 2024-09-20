@@ -8,9 +8,12 @@ using UnityEngine;
 public class Map5_PuzzleManager : NetworkSingleton<Map5_PuzzleManager>
 {
     public Action<Map5_GameState> OnStateChanged_Local;
+    public Action OnFinishPanBossCamera_Local;
 
     [EnumToggleButtons]
     [SerializeField] private Map5_GameState currentState = Map5_GameState.Phase1_Idle;
+    public Map5_GameState CurrentState => currentState;
+
     [SerializeField] private float delayPanBossCamToPlayer = 3;
     public RedDragon_Fly_EnemyController BossController => bossController;
     public Broken_BalistaController Broken_BalistaController => broken_BalistaController;
@@ -35,7 +38,6 @@ public class Map5_PuzzleManager : NetworkSingleton<Map5_PuzzleManager>
 
     }
 
-    // [ServerRpc(RequireOwnership = false)]
     private void SpawnBoss(Map5_GameState newState)
     {
         if (newState != Map5_GameState.Phase2_RepairBalista)
@@ -43,8 +45,7 @@ public class Map5_PuzzleManager : NetworkSingleton<Map5_PuzzleManager>
             return;
         }
 
-        // bossController.Target = balistaController.transform;
-        // boss.SetActive(true);
+        bossController.ActiveBoss();
         PanCameraToBoss();
 
     }
@@ -86,6 +87,7 @@ public class Map5_PuzzleManager : NetworkSingleton<Map5_PuzzleManager>
         sequence.OnComplete(() =>
         {
             bossCam.Priority = 0;
+            OnFinishPanBossCamera_Local?.Invoke();
         });
         sequence.Play();
     }

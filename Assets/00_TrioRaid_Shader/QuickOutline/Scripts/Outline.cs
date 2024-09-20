@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Sirenix.OdinInspector;
+using UnityEditor;
 using UnityEngine;
 
 [DisallowMultipleComponent]
@@ -97,6 +98,12 @@ public class Outline : MonoBehaviour
     // Cache renderers
     renderers = GetComponentsInChildren<Renderer>();
 
+    // init first mat to clear all instance
+    foreach (Renderer renderer in renderers)
+    {
+      renderer.sharedMaterial = renderer.material;
+    }
+
     // Instantiate outline materials
     outlineMaskMaterial = Instantiate(Resources.Load<Material>(@"Materials/OutlineMask"));
     outlineFillMaterial = Instantiate(Resources.Load<Material>(@"Materials/OutlineFill"));
@@ -130,8 +137,10 @@ public class Outline : MonoBehaviour
 
   void OnValidate()
   {
-
-    UpdateOutlineInEditor();
+#if UNITY_EDITOR
+    if (!EditorApplication.isPlaying)
+      UpdateOutlineInEditor();
+#endif
 
     // Update material properties
     needsUpdate = true;
@@ -152,8 +161,6 @@ public class Outline : MonoBehaviour
 
   public void UpdateOutlineInEditor()
   {
-#if UNITY_EDITOR
-
     // Cache renderers
     renderers = GetComponentsInChildren<Renderer>();
 
@@ -200,7 +207,6 @@ public class Outline : MonoBehaviour
       renderer.materials = materials.ToArray();
     }
     UpdateMaterialProperties();
-#endif
   }
 
   void Update()
@@ -367,7 +373,7 @@ public class Outline : MonoBehaviour
 
   void UpdateMaterialProperties()
   {
-    if(!outlineFillMaterial) return;
+    if (!outlineFillMaterial) return;
 
     // Apply properties according to mode
     outlineFillMaterial.SetColor("_OutlineColor", outlineColor);
@@ -408,29 +414,63 @@ public class Outline : MonoBehaviour
 
   public void RemoveOutline()
   {
-#if UNITY_EDITOR
-    foreach (var renderer in renderers)
+
+    if (!EditorApplication.isPlaying)
     {
+      foreach (var renderer in renderers)
+      {
 
-      // Remove outline shaders
-      var materials = renderer.sharedMaterials.ToList();
+        // Remove outline shaders
+        var materials = renderer.sharedMaterials.ToList();
 
-      materials.Remove(outlineMaskMaterial);
-      materials.Remove(outlineFillMaterial);
+        materials.Remove(outlineMaskMaterial);
+        materials.Remove(outlineFillMaterial);
 
-      DestroyImmediate(outlineMaskMaterial);
-      DestroyImmediate(outlineFillMaterial);
+        DestroyImmediate(outlineMaskMaterial);
+        DestroyImmediate(outlineFillMaterial);
 
-      renderer.materials = materials.ToArray();
+        renderer.materials = materials.ToArray();
+
+        return;
+      }
     }
-#endif
+    enabled = false;
+
+    // foreach (var renderer in renderers)
+    // {
+
+    //   // Remove outline shaders
+    //   var materials = renderer.sharedMaterials.ToList();
+
+    //   materials.Remove(outlineMaskMaterial);
+    //   materials.Remove(outlineFillMaterial);
+
+    //   renderer.materials = materials.ToArray();
+    // }
   }
 
   public void CreateOutline()
   {
-#if UNITY_EDITOR
-    UpdateOutlineInEditor();
+    if (!EditorApplication.isPlaying)
+    {
+      UpdateOutlineInEditor();
+      return;
+    }
+    enabled = true;
 
-#endif
+    // foreach (var renderer in renderers)
+    // {
+
+    //   // Append outline shaders
+    //   var materials = renderer.sharedMaterials.ToList();
+
+    //   materials.Add(outlineMaskMaterial);
+    //   materials.Add(outlineFillMaterial);
+
+    //   renderer.materials = materials.ToArray();
+    // }
+
+
+
   }
 }

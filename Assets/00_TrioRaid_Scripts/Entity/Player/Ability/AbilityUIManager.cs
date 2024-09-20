@@ -25,6 +25,7 @@ public class AbilityUIManager : NetworkSingleton<AbilityUIManager>
     public Action<float> OnUseAbility_Q;
     protected override void InitAfterAwake()
     {
+        
     }
 
     private void Update()
