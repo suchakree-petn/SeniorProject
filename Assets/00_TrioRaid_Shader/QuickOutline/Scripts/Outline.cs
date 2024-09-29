@@ -120,27 +120,27 @@ public class Outline : MonoBehaviour
 
   void OnEnable()
   {
-    foreach (var renderer in renderers)
-    {
+    // foreach (var renderer in renderers)
+    // {
 
-      // Append outline shaders
-      var materials = renderer.sharedMaterials.ToList();
+    //   // Append outline shaders
+    //   var materials = renderer.sharedMaterials.ToList();
 
-      materials.Add(outlineMaskMaterial);
-      materials.Add(outlineFillMaterial);
+    //   materials.Add(outlineMaskMaterial);
+    //   materials.Add(outlineFillMaterial);
 
-      renderer.materials = materials.ToArray();
-    }
+    //   renderer.materials = materials.ToArray();
+    // }
 
 
   }
 
   void OnValidate()
   {
-#if UNITY_EDITOR
-    if (!EditorApplication.isPlaying)
-      UpdateOutlineInEditor();
-#endif
+    // #if UNITY_EDITOR
+    //     if (!EditorApplication.isPlaying)
+    //       UpdateOutlineInEditor();
+    // #endif
 
     // Update material properties
     needsUpdate = true;
@@ -435,32 +435,40 @@ public class Outline : MonoBehaviour
       }
     }
     #endif
-    enabled = false;
 
-    // foreach (var renderer in renderers)
-    // {
+    foreach (var renderer in renderers)
+    {
 
-    //   // Remove outline shaders
-    //   var materials = renderer.sharedMaterials.ToList();
+      // Remove outline shaders
+      List<Material> materials = new();
 
-    //   materials.Remove(outlineMaskMaterial);
-    //   materials.Remove(outlineFillMaterial);
-
-    //   renderer.materials = materials.ToArray();
-    // }
+      Material mainMat = renderer.material;
+      materials.Add(mainMat);
+      renderer.materials = materials.ToArray();
+    }
   }
 
   public void CreateOutline()
   {
     #if UNITY_EDITOR
-
     if (!EditorApplication.isPlaying)
     {
       UpdateOutlineInEditor();
       return;
     }
     #endif
-    enabled = true;
+
+    foreach (var renderer in renderers)
+    {
+
+      // Append outline shaders
+      var materials = renderer.sharedMaterials.ToList();
+
+      materials.Add(outlineMaskMaterial);
+      materials.Add(outlineFillMaterial);
+
+      renderer.materials = materials.ToArray();
+    }
 
     // foreach (var renderer in renderers)
     // {

@@ -1,6 +1,5 @@
 using Sirenix.OdinInspector;
 using Sirenix.Utilities;
-using Unity.Netcode;
 using UnityEditor;
 using UnityEngine;
 using static Outline;
@@ -35,8 +34,7 @@ public class OutlineController : MonoBehaviour
 
     private void OnValidate()
     {
-#if UNITY_EDITOR
-
+        #if UNITY_EDITOR
         if (!EditorApplication.isPlaying)
         {
             outlines = transform.GetComponentsInChildren<Outline>();
@@ -55,7 +53,9 @@ public class OutlineController : MonoBehaviour
             }
             return;
         }
+        #endif
 
+#if UNITY_EDITOR
         foreach (Outline outline in outlines)
         {
             outline.OutlineMode = outlineMode;
@@ -71,13 +71,10 @@ public class OutlineController : MonoBehaviour
     [Button, GUIColor(0, 1, 0)]
     public void ShowOutline()
     {
-        Debug.Log("show");
-
         isShowing = true;
         foreach (var outline in outlines)
         {
             outline.CreateOutline();
-            outline.enabled = true;
         }
     }
 
@@ -85,13 +82,11 @@ public class OutlineController : MonoBehaviour
     [Button, GUIColor(1, 0, 0)]
     public void HideOutline()
     {
-        Debug.Log("hide");
         isShowing = false;
 
         foreach (var outline in outlines)
         {
             outline.RemoveOutline();
-            outline.enabled = false;
         }
     }
 }

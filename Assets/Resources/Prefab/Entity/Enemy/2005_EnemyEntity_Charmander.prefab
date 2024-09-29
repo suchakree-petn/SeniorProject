@@ -2755,7 +2755,6 @@ GameObject:
   - component: {fileID: 2119845993919739851}
   - component: {fileID: 7635041984249596996}
   - component: {fileID: 7418779615016986859}
-  - component: {fileID: 156370707760911442}
   - component: {fileID: 7757813327958647808}
   - component: {fileID: 446162938135614838}
   m_Layer: 0
@@ -2796,7 +2795,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3738436807
+  GlobalObjectIdHash: 2047636051
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
   ActiveSceneSynchronization: 0
@@ -2822,7 +2821,6 @@ MonoBehaviour:
   IsTaunted: 0
   IsStun: 0
   agent: {fileID: 7757813327958647808}
-  behaviourTreeInstance: {fileID: 156370707760911442}
   enemyHealth: {fileID: 1006318132928324522}
   enemyRb: {fileID: 5148732729470986230}
   networkAnimator: {fileID: 7418779615016986859}
@@ -2968,24 +2966,6 @@ MonoBehaviour:
     TriggerNameHash: 1080829965
     TransitionIndex: 0
   m_Animator: {fileID: 7635041984249596996}
---- !u!114 &156370707760911442
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3155929134167846764}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58c6f9b140a52a14881ec09eaebb66eb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  behaviourTree: {fileID: 11400000, guid: a302f0fda59c4d849ac7174274a4d953, type: 2}
-  validate: 1
-  blackboardOverrides: []
-  references:
-    version: 2
-    RefIds: []
 --- !u!195 &7757813327958647808
 NavMeshAgent:
   m_ObjectHideFlags: 0
