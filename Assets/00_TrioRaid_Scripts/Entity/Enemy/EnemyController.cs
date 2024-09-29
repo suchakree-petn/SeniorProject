@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using TheKiwiCoder;
 using Unity.Netcode;
 using Unity.Netcode.Components;
 using UnityEngine;
@@ -27,7 +26,6 @@ public class EnemyController : NetworkBehaviour, IDamageable
 
     [FoldoutGroup("AI")][InlineEditor,SerializeField] protected NavMeshAgent agent;
     [FoldoutGroup("AI")][SerializeField] protected NavMeshPath path;
-    [FoldoutGroup("AI")][InlineEditor,SerializeField] protected BehaviourTreeInstance behaviourTreeInstance;
 
     [FoldoutGroup("Reference")][InlineEditor,SerializeField] protected EnemyHealth enemyHealth;
     [FoldoutGroup("Reference")][InlineEditor,SerializeField] protected Rigidbody enemyRb;

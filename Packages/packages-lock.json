@@ -10,13 +10,6 @@
       },
       "hash": "56b69dfe27d695bee44ce09f419003c3c4ca9731"
     },
-    "com.thekiwicoder.behaviourtreeditor": {
-      "version": "https://github.com/thekiwicoder0/UnityBehaviourTreeEditor.git",
-      "depth": 0,
-      "source": "git",
-      "dependencies": {},
-      "hash": "6f38f061f6bedca136a03632d577b8559074fd28"
-    },
     "com.unity.2d.sprite": {
       "version": "1.0.0",
       "depth": 0,

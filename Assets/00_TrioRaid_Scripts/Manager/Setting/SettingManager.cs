@@ -20,7 +20,7 @@ public partial class SettingManager : Singleton<SettingManager>
 
     private void Start()
     {
-        dataPersistenceInGameSetting.LoadData();
+        // dataPersistenceInGameSetting.LoadData();
     }
 
 
