@@ -27,9 +27,6 @@ EditorBuildSettings:
     path: Assets/00_TrioRaid_Scenes/Thanva/InGame_Map_1.unity
     guid: 1876c624b9bfbea4ca9bceb4bf70505d
   - enabled: 1
-    path: Assets/00_TrioRaid_Scenes/Tutor/Tutor_Map_Tester.unity
-    guid: 4738472301c279b40b3e31fb5b8bacd4
-  - enabled: 1
     path: Assets/00_TrioRaid_Scenes/Thanva/InLobby.unity
     guid: 677f306f9f1d7ec49bc2a9f458257f44
   - enabled: 1

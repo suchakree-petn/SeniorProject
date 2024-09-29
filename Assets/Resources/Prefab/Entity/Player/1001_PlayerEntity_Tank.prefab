@@ -665,6 +665,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8771259761716148572, guid: 8468fa4c8e09695459a2f7572471e55b,
         type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8771259761716148572, guid: 8468fa4c8e09695459a2f7572471e55b,
+        type: 3}
       propertyPath: outlines.Array.size
       value: 4
       objectReference: {fileID: 0}

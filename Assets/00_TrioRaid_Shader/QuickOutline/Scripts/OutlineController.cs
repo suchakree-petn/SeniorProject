@@ -35,12 +35,17 @@ public class OutlineController : MonoBehaviour
 
     private void OnValidate()
     {
+#if UNITY_EDITOR
 
         if (!EditorApplication.isPlaying)
         {
+            outlines = transform.GetComponentsInChildren<Outline>();
+            if (outlines.Length == 0)
+            {
+                return;
+            }
             isShowing = outlines[0].enabled;
 
-            outlines = transform.GetComponentsInChildren<Outline>();
             foreach (Outline outline in outlines)
             {
                 outline.OutlineMode = outlineMode;
@@ -51,7 +56,6 @@ public class OutlineController : MonoBehaviour
             return;
         }
 
-#if UNITY_EDITOR
         foreach (Outline outline in outlines)
         {
             outline.OutlineMode = outlineMode;

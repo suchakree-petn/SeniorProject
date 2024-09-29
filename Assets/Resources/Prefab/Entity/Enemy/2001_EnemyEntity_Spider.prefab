@@ -1749,10 +1749,10 @@ MonoBehaviour:
   _Editor_EnsureCount: 0
   _Editor_OnValidateTrigger: 1
   _EditorAllowAutoUpdateFeetParams: 1
-  _EditorCategory: 1
+  _EditorCategory: 2
   _EditorSetupCategory: 2
   _EditorMotionCategory: 3
-  _EditorExtraCategory: 1
+  _EditorExtraCategory: 2
   IKHintMode: 0
   LimitLegStretch: 0.99
   FeetYOffset: 0
@@ -2218,6 +2218,11 @@ PrefabInstance:
         type: 3}
       propertyPath: GlobalObjectIdHash
       value: 2007371242
+      objectReference: {fileID: 0}
+    - target: {fileID: 8983761315126984805, guid: 58437a38aec03b4478d7fdb505663dec,
+        type: 3}
+      propertyPath: m_FillAmount
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9006563807303963375, guid: 58437a38aec03b4478d7fdb505663dec,
         type: 3}

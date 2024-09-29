@@ -2634,7 +2634,7 @@ PrefabInstance:
     - target: {fileID: 4421562747518347658, guid: 8468fa4c8e09695459a2f7572471e55b,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.02
+      value: -0.02
       objectReference: {fileID: 0}
     - target: {fileID: 4421562747518347658, guid: 8468fa4c8e09695459a2f7572471e55b,
         type: 3}
@@ -2644,12 +2644,12 @@ PrefabInstance:
     - target: {fileID: 4421562747518347658, guid: 8468fa4c8e09695459a2f7572471e55b,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.999625
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4421562747518347658, guid: 8468fa4c8e09695459a2f7572471e55b,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -9.313226e-10
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4421562747518347658, guid: 8468fa4c8e09695459a2f7572471e55b,
         type: 3}
@@ -2659,7 +2659,7 @@ PrefabInstance:
     - target: {fileID: 4421562747518347658, guid: 8468fa4c8e09695459a2f7572471e55b,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.027383525
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4421562747518347658, guid: 8468fa4c8e09695459a2f7572471e55b,
         type: 3}
@@ -2674,7 +2674,7 @@ PrefabInstance:
     - target: {fileID: 4421562747518347658, guid: 8468fa4c8e09695459a2f7572471e55b,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: -3.138
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7562533479194516452, guid: 8468fa4c8e09695459a2f7572471e55b,
         type: 3}
@@ -2724,7 +2724,7 @@ PrefabInstance:
     - target: {fileID: 8164219173163491055, guid: 8468fa4c8e09695459a2f7572471e55b,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8174493298335311036, guid: 8468fa4c8e09695459a2f7572471e55b,
         type: 3}
@@ -2808,6 +2808,7 @@ PrefabInstance:
     - {fileID: 6408107913954600782, guid: 8468fa4c8e09695459a2f7572471e55b, type: 3}
     - {fileID: 3755565199410241642, guid: 8468fa4c8e09695459a2f7572471e55b, type: 3}
     - {fileID: 1041791184314300143, guid: 8468fa4c8e09695459a2f7572471e55b, type: 3}
+    - {fileID: 8771259761716148572, guid: 8468fa4c8e09695459a2f7572471e55b, type: 3}
     m_RemovedGameObjects:
     - {fileID: 1459849899808360491, guid: 8468fa4c8e09695459a2f7572471e55b, type: 3}
     - {fileID: 474283459499458137, guid: 8468fa4c8e09695459a2f7572471e55b, type: 3}
