@@ -42129,9 +42129,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CarryToOtherScene: 0
   ActivatedPadCount: 0
-  EnemyWaveCount: 0
+  EnemyWaveCount: 2
   delayBossSpawn: 3
-  enemyCount: 18
+  enemyCount: 12
   aliveEnemyCount: 0
   gateController: {fileID: 2042709215}
   spawnPos:
